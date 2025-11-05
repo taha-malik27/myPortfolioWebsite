@@ -1,0 +1,145 @@
+Portfolio Website MVP — 3D Room + Simple Mode
+
+Overview
+- Goal: A lightweight, performant 3D “room” portfolio with a clean, accessible Simple mode. Both modes read from one data source.
+- Outcomes: Delightful first impression, clear content access, fast load, mobile accessibility.
+- Scope: 2–3 sprints to production on Vercel.
+
+Primary User Stories
+- As a visitor, I can orbit the camera (constrained) around a room and inspect hotspots.
+- On hover, I see subtle hints on interactive items; on click, I get a content panel.
+- I can toggle “Hints” to highlight interactive items.
+- I can switch between 3D Room and Simple mode; Simple mode mirrors the content.
+- On mobile/low-end devices, I get a performant experience (auto Simple mode if needed).
+
+Acceptance Criteria (MVP)
+- 3D Room loads within ~2–3s on desktop broadband; Simple mode <1s TTFB + fast render.
+- OrbitControls constrained: bounded azimuth/elevation; no panning; clamped distance.
+- Hover + click work on at least 3 named hotspots (projects, awards, hobby).
+- Info panel overlays display title, description, and links; keyboard and mouse accessible.
+- Mode toggle switches instantly and preserves data. Simple mode content matches 3D panels.
+- Hints toggle activates subtle highlights (outline/bloom or emissive pulse) on interactives.
+- Basic SEO present: title, meta description, Open Graph image.
+- Build deploys to Vercel; analytics integrated (Plausible/Umami). Optional Sentry hooked.
+
+Tech Stack
+- Core: Next.js (App Router) + React + TypeScript
+- 3D: react-three-fiber (R3F) + @react-three/drei
+- Effects: @react-three/postprocessing (low-intensity Bloom/Outline)
+- State: Zustand (mode, selected item, hover, hints)
+- UI/Styling: Tailwind CSS + shadcn/ui; Framer Motion for transitions
+- Assets: Blender → glTF (.glb) with Draco + KTX2; baked lightmaps
+- Analytics/Monitoring: Plausible or Umami; optional Sentry
+- Hosting: Vercel
+
+High-Level Architecture
+- app/room: 3D experience (Canvas, Scene, interactions, effects)
+- app/simple: content-first fallback (same data source)
+- components: toggles, overlays, cards
+- lib: content registry and Zustand store
+- public/models: Room.glb and props/*.glb (with named nodes)
+- public/textures: compressed textures (KTX2) and lightmaps
+
+Directory Layout (target)
+- app/
+  - room/
+    - page.tsx            // 3D entry
+    - RoomCanvas.tsx      // Canvas, camera, controls
+    - Scene.tsx           // GLB loading, interactivity bindings
+    - interactions.ts     // raycasting helpers (if needed beyond handlers)
+    - effects.tsx         // postprocessing (Outline/Bloom tied to hints)
+  - simple/
+    - page.tsx            // data-driven linear view
+- components/
+  - ModeToggle.tsx
+  - HintsToggle.tsx
+  - InfoPanel.tsx
+  - ProjectCard.tsx
+  - AwardCard.tsx
+  - HobbyCard.tsx
+- lib/
+  - content.ts           // canonical items registry
+  - store.ts             // Zustand store
+- public/
+  - models/
+    - Room.glb
+    - props/*.glb
+  - textures/
+
+Data Model (single source of truth)
+- Fields per item: id, name, kind (projects|awards|hobby), meshName, panelTitle, description?, links[]
+- Both 3D and Simple mode read from lib/content.ts.
+
+State Model (Zustand)
+- mode: "room" | "simple"
+- selected: string | null (id from ITEMS)
+- hover: string | null
+- hintsOn: boolean
+- actions: select(id), clearSelection(), setHover(id|null), toggleHints(), setMode(mode)
+
+Interaction Model
+- Camera: fixed pivot OrbitControls; min/max distance; limited polar/azimuth.
+- Hotspots: attach onPointerOver/out and onClick to named meshes (from GLB). Optionally use raycaster.
+- Hints: global Outline pass targeting interactive meshes or emissive pulse via useFrame when hintsOn.
+- Overlays: <Html> overlay or DOM side panel; keyboard reachable; ESC/close button.
+
+Performance Budget & Guidelines
+- GLBs: one room shell + big props combined to minimize draw calls; separate only truly dynamic items.
+- Compression: Draco meshes; KTX2 BasisU textures. Texture targets: 1024px baseline; upscale only as needed.
+- Lighting: baked lightmaps in Blender; at runtime use 0–1 ambient light; avoid dynamic shadows.
+- Postprocessing: very low-intensity bloom/outline; desktop only; disable on mobile.
+- Loading: Suspense + lazy-load heavy models; use <Preload /> for hero assets.
+- FPS guard: if device/GPU is weak or FPS < 30, auto-disable effects and/or switch to Simple mode.
+
+Accessibility
+- Keyboard focusable Mode toggle and InfoPanel close; ESC to close panel.
+- Ensure all content in overlays is accessible in DOM.
+- Simple mode provides full content parity for screen readers.
+
+Assets & Export Pipeline (Blender → GLB)
+- Name interactive nodes clearly (MonitorMesh, TrophyShelf, Dumbbells, etc.).
+- Create low-poly, invisible collision/interaction meshes if needed for hit targets.
+- Bake lightmaps; pack into UV2 channel; export with Draco; textures KTX2 (BasisU) compressed.
+- Validate with useGLTF; check node/material names match lib/content.ts meshName.
+
+MVP Sprints
+
+Sprint 1 — Foundations
+- Scaffold Next.js + TS + Tailwind + shadcn; install R3F, drei, postprocessing, Zustand, Framer Motion.
+- Create app/room with RoomCanvas, Scene, Effects; minimal ambient light and controls.
+- Import one Room.glb plus 2–3 props; name meshes for interactivity.
+- Implement constrained OrbitControls; attach hover/click to meshes.
+- Create lib/store.ts (mode, selected, hover, hints) and lib/content.ts with 3 items.
+- Build InfoPanel overlay (DOM) reading from ITEMS; ModeToggle.
+- Deliverables: Room loads, 3 hotspots interact, InfoPanel shows links, toggle mode works.
+
+Sprint 2 — Content & Hints
+- Fill out content for projects (monitor), awards (trophy shelf), hobby (weights/skis).
+- Implement Hints toggle wired to Outline/Bloom or emissive pulse.
+- Add app/simple/page.tsx that reads ITEMS and renders cards; share content.
+- Lazy-load heavy GLBs; add <Preload /> for hero models; defer effects on mobile.
+- Deliverables: Hints work, Simple mode mirrors content, improved loading UX.
+
+Sprint 3 — Polish & Performance
+- Set up Draco + KTX2 pipeline; reduce texture sizes; decimate meshes where needed.
+- Bake lightmaps; swap runtime lights for baked setup.
+- Add subtle postprocessing bloom; desktop only; guard via device checks.
+- Mobile fallbacks: detect weak devices/GPU; auto Simple mode under threshold.
+- Basic SEO + OG image; analytics (Plausible/Umami); optional Sentry.
+- Deliverables: Stable 60 FPS desktop, smooth mobile fallback, production deploy.
+
+Deployment
+- Vercel: preview deployments on PRs; production on main.
+- Environment: analytics domain, optional Sentry DSN.
+- Monitoring: track route loads, panel opens, mode toggles.
+
+Risks & Mitigations
+- Asset weight: enforce budgets; compress early; test on mid-tier laptops and mobile.
+- GLB naming drift: lock naming conventions; validate at load; log missing nodes.
+- Accessibility: ensure Simple mode parity; keyboard/ARIA for overlays and toggles.
+
+Definition of Done (MVP)
+- All Sprint 1–3 deliverables met; Lighthouse performance and accessibility pass on Simple mode.
+- 3D room interactive on desktop with FPS >= 50 on mid-tier hardware; mobile gets Simple mode.
+- Single source of truth data; content parity across modes; deployed on Vercel with analytics.
+
