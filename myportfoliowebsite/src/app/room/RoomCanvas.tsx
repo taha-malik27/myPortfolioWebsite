@@ -13,7 +13,7 @@ function RoomCanvas():JSX.Element{
 
 return (
 
-    <div id = "canvas-container" style={{width :"100vw", height : "100vh"}}>
+    <div id = "canvas-container" >
 
         {/*Cameria Position is 0 X (deadcenter), 2Y (above ground), 4.5 Z (closer to viewer). FOV is 45 degrees, shadows, antialiasing, and alpha/transparence enabled, 
         dpr or pixel level is limited from 1 (standard monitors) to 2 (retina displays)*/}
@@ -21,14 +21,14 @@ return (
                 dpr = {[1,2]}  
                 gl = {{antialias: true, alpha: true}}
                 shadows >
-
+            <color attach= "background" args = {["#d7d7d7"]} />
 
             <Suspense fallback = {null}>
                 
                 
                 <ambientLight intensity = {0.1} />
 
-
+                <mesh
 
 
                 <Scene />
@@ -55,3 +55,5 @@ return (
 )
 
 }
+
+export default RoomCanvas
