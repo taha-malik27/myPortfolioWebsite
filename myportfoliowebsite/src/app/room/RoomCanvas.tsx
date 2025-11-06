@@ -2,7 +2,6 @@
 
 import {Canvas} from "@react-three/fiber";
 import {Suspense} from "react";
-import { createRoot } from "react-dom/client";
 import { JSX } from "react";
 import Scene from "@/app/room/Scene"
 import Effects from "@/app/room/effects"
@@ -17,18 +16,18 @@ return (
 
         {/*Cameria Position is 0 X (deadcenter), 2Y (above ground), 4.5 Z (closer to viewer). FOV is 45 degrees, shadows, antialiasing, and alpha/transparence enabled, 
         dpr or pixel level is limited from 1 (standard monitors) to 2 (retina displays)*/}
-        <Canvas camera = {{position: [0, 2, 4.5] , fov:45}} 
+        <Canvas camera = {{position: [0, 20, 20] , fov:45}} 
                 dpr = {[1,2]}  
                 gl = {{antialias: true, alpha: true}}
-                shadows >
+                shadows
+                style={{width: "100vw", height: "100vh"}} >
+
             <color attach= "background" args = {["#d7d7d7"]} />
 
             <Suspense fallback = {null}>
                 
                 
-                <ambientLight intensity = {0.1} />
-
-                <mesh
+                <ambientLight intensity = {1} />
 
 
                 <Scene />
@@ -42,7 +41,7 @@ return (
                                 enableRotate = {true} 
                                 maxPolarAngle = {Math.PI * 0.45} 
                                 minDistance = {2}
-                                maxDistance = {5} />
+                                maxDistance = {30} />
 
 
                 {/* Preload all assets */}
