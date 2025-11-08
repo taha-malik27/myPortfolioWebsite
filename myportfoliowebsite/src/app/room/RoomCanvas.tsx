@@ -26,14 +26,11 @@ return (
 
             <Suspense fallback = {null}>
                 
-                
-                <ambientLight intensity = {1} />
-
+                <ambientLight intensity = {0.8} />
 
                 <Scene />
 
                 <Effects />
-
 
                 {/* OrbitControls for camera movement dictated by left mouse button and scroll wheel*/}
                 <OrbitControls enableZoom ={true} 
@@ -41,7 +38,8 @@ return (
                                 enableRotate = {true} 
                                 maxPolarAngle = {Math.PI * 0.45} 
                                 minDistance = {2}
-                                maxDistance = {30} />
+                                maxDistance = {30}
+                                enableDamping/>
 
 
                 {/* Preload all assets */}
