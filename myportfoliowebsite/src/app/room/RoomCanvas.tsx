@@ -26,7 +26,7 @@ return (
 
             <Suspense fallback = {null}>
                 
-                <ambientLight intensity = {0.8} />
+                <ambientLight intensity = {0.9} />
 
                 <Scene />
 
