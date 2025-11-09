@@ -6,15 +6,11 @@ function Effects() {
     return(
     
         <group>
-        <spotLight penumbra = {0.5} 
-        intensity={10}  
+      
+        <spotLight penumbra = {10} 
+        intensity={6000}  
         angle={1*Math.PI}
-        position={[-4,2.5,0]}  />
-    
-        <spotLight penumbra = {0.5} 
-        intensity={10}  
-        angle={1*Math.PI}
-        position={[4,2.5,0]}  />
+        position={[0,30,0]}  />
     
         </group>
     )

@@ -22,7 +22,7 @@ return (
                 shadows
                 style={{width: "100vw", height: "100vh"}} >
 
-            <color attach= "background" args = {["#d7d7d7"]} />
+            <color attach= "background" args = {["#fabb69"]} />
 
             <Suspense fallback = {null}>
                 
