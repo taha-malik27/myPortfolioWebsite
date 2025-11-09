@@ -2,7 +2,7 @@ import {JSX} from "react"
 import * as THREE from "three"
 import { RoundedBoxGeometry, useTexture } from "@react-three/drei"
 import { normalMap, roughness } from "three/tsl"
-import BedModel from "./Models";
+import {BedModel, ChairModel, CouchModel1, LampModel, TableModel} from "./Models";
 
 
 
@@ -110,6 +110,11 @@ function Scene(): JSX.Element {
             {/* Props and Models Below This Point */}
 
             <BedModel />
+            <LampModel/>
+            <ChairModel/>
+            <TableModel/>
+            <CouchModel1/>
+            
 
 
         </group>
