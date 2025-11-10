@@ -7,7 +7,7 @@ function Effects() {
     
         <group>
       
-        <ambientLight intensity = {0.5}/>
+        <ambientLight intensity = {0.8}/>
 
         <spotLight penumbra = {10} 
         intensity={500}  

@@ -423,6 +423,47 @@ export function WallArtModel3():JSX.Element{
     )
 }
 
+export function LaptopModel():JSX.Element{
+    const {scene:laptopModel} = useGLTF("models/laptopModel.glb", true)
+    return (
+        <primitive object = {laptopModel} 
+        position = {[-2.2,2.5,-6.75]} 
+        scale = {0.3}
+        rotation = {[0,Math.PI/1.6,0]}
+        castShadow
+        receiveShadow >
+      </primitive>
+    )
+}
+
+export function TrashCanModel():JSX.Element{
+    const {scene:trashCanModel} = useGLTF("models/trashCanModel.glb", true)
+    return (
+        <primitive object = {trashCanModel} 
+        position = {[1.7,0.41,-6.5]} 
+        scale = {0.4}
+        rotation = {[0,0,0]}
+        castShadow
+        receiveShadow >
+      </primitive>
+    )
+
+}
+
+export function WallPieceModel():JSX.Element{
+    const {scene:wallPieceModel} = useGLTF("models/wallPieceModel.glb", true)
+    return (
+        <primitive object = {wallPieceModel} 
+        position = {[-9.9,3.4,0]} 
+        scale = {1.2}
+        rotation = {[0,Math.PI/2,0]}
+        castShadow
+        receiveShadow >
+      </primitive>
+    )
+}
+
+
 useGLTF.preload('models/twinBedModel.glb')
 useGLTF.preload('models/chairModel.glb')
 useGLTF.preload('models/tableModel.glb')
@@ -439,4 +480,9 @@ useGLTF.preload('models/coffeeTableModel.glb')
 useGLTF.preload('models/tvModel.glb')
 useGLTF.preload('models/tvStandModel.glb')
 useGLTF.preload('models/clockModel.glb')
-
+useGLTF.preload('models/laptopModel.glb')
+useGLTF.preload('models/trashCanModel.glb')
+useGLTF.preload('models/paintingModel1.glb')
+useGLTF.preload('models/paintingModel2.glb')
+useGLTF.preload('models/paintingModel3.glb')
+useGLTF.preload('models/wallPieceModel.glb')

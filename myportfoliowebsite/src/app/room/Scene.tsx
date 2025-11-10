@@ -5,7 +5,7 @@ import { normalMap, roughness } from "three/tsl"
 import {BedModel, ChairModel, CouchModel, LampModel, TableModel, 
     ClosetModel, DrawerModel, CoffeeTableModel, TVModel, ControllerAndHeadphonesModel,
     CeilingLightsModel, TVStandModel, ClockModel, WallArtModel1, WallArtModel2, WallArtModel3,
-    PlayStationModel} from "./Models";
+    PlayStationModel, LaptopModel, TrashCanModel, WallPieceModel} from "./Models";
 
 
 
@@ -15,7 +15,7 @@ import {BedModel, ChairModel, CouchModel, LampModel, TableModel,
 
 function Scene(): JSX.Element {
     
-    // Initial texture for the Carpet
+    // Initialize the texture for the Carpet
 
     const carpetTexture = useTexture({
         map:"/textures/carpet/curly_teddy_natural_diff_4k.jpg",
@@ -43,6 +43,30 @@ function Scene(): JSX.Element {
     })
 
 
+    //Initialize the grass texture
+    const grassTexture = useTexture({
+        map: "/textures/grass/Poliigon_GrassPatchyGround_4585_BaseColor.jpg",
+        normalMap: "/textures/grass/Poliigon_GrassPatchyGround_4585_Normal.png",
+        roughnessMap: "/textures/grass/Poliigon_GrassPatchyGround_4585_Roughness.jpg",
+        displacementMap: "/textures/grass/Poliigon_GrassPatchyGround_4585_Displacement.jpg",
+        aoMap: "/textures/grass/Poliigon_GrassPatchyGround_4585_AmbientOcclusion.jpg",
+    });
+
+    grassTexture.map.colorSpace = THREE.SRGBColorSpace;
+
+    const grassMappings = [
+        grassTexture.map,
+        grassTexture.normalMap,
+        grassTexture.roughnessMap,
+        grassTexture.displacementMap,
+        grassTexture.aoMap
+    ] as THREE.Texture[];
+
+    grassMappings.forEach((mapping) => {
+        if (!mapping) return;
+        mapping.wrapS = mapping.wrapT = THREE.MirroredRepeatWrapping;
+        mapping.repeat.set(1, 1); // Larger repeat for the big grass area
+    });
 
 
     return (
@@ -64,7 +88,19 @@ function Scene(): JSX.Element {
                 />
             </mesh>
 
-
+            <mesh rotation = {[-Math.PI/2, 0, 0]} position={[0,0.2,0]} receiveShadow>
+                <RoundedBoxGeometry args={[1000,1000,0.2]} radius={0.1}/>
+                <meshPhysicalMaterial
+                map={grassTexture.map}
+                normalMap={grassTexture.normalMap}
+                roughnessMap={grassTexture.roughnessMap}
+                aoMap={grassTexture.aoMap}
+                displacementMap={grassTexture.displacementMap}
+                displacementScale={0.1}
+                metalness={0}
+                roughness={1}
+                />
+            </mesh>
 
 
             {/* Back wall */}
@@ -129,7 +165,9 @@ function Scene(): JSX.Element {
             <WallArtModel1/>
             <WallArtModel2/>
             <WallArtModel3/>
-
+            <LaptopModel/>
+            <TrashCanModel/>
+            <WallPieceModel/>
         </group>
     )
 }
