@@ -30,7 +30,7 @@ export function BedModel():JSX.Element {
         position = {[-6.8,1.8,-5.5]} 
         scale = {6}
         rotation = {[0,Math.PI/2,0]}
-        castShadown
+        castShadow
         recieveShadow/>
         
     )
@@ -46,7 +46,7 @@ export function LampModel():JSX.Element{
         position = {[9,2.65,6.7]} 
         scale = {4.5}
         rotation = {[0,-Math.PI/1.4,0]}
-        castShadown
+        castShadow
         recieveShadow/>
         
     )
@@ -62,11 +62,12 @@ export function TableModel():JSX.Element{
         position = {[-1.45,1.8,-6.5]} 
         scale = {0.8}
         rotation = {[0,Math.PI,0]}
-        castShadown
+        castShadow
         recieveShadow/>
     )
       
 }
+
 
 export function ChairModel():JSX.Element{
     const chairModel = useGLTF("models/chairModel.glb", true)
@@ -77,7 +78,7 @@ export function ChairModel():JSX.Element{
         position = {[-1.4,0.39,-5]} 
         scale = {0.6}
         rotation = {[0,0,0]}
-        castShadown
+        castShadow
         recieveShadow/>
         
     )
@@ -96,7 +97,7 @@ export function CouchModel():JSX.Element{
         position = {[1.8,1.35,-0.75]} 
         scale = {2.5}
         rotation = {[0,0,0]}
-        castShadown
+        castShadow
         recieveShadow/>
 
         
@@ -105,7 +106,7 @@ export function CouchModel():JSX.Element{
         position = {[6,1.35,-5.75]} 
         scale = {2.5}
         rotation = {[0,-Math.PI/2,0]}
-        castShadown
+        castShadow
         recieveShadow/>
 
         </group>
@@ -127,7 +128,7 @@ export function ClosetModel():JSX.Element{
                 position = {[-9,0.4,5]} 
                 scale = {2.8}
                 rotation = {[0,-Math.PI/2,0]}
-                castShadown
+                castShadow
                 recieveShadow/>
 
         )
@@ -147,12 +148,13 @@ export function DrawerModel():JSX.Element {
                 position = {[-9.2,0,0]} 
                 scale = {2.8}
                 rotation = {[0,Math.PI/2,0]}
-                castShadown
+                castShadow
                 recieveShadow/>
 
         )
 
 }
+
 
 export function CoffeeTableModel():JSX.Element {
 
@@ -165,12 +167,13 @@ export function CoffeeTableModel():JSX.Element {
                 position = {[5.5,0.5,-0.5]} 
                 scale = {2.8}
                 rotation = {[0,Math.PI,0]}
-                castShadown
+                castShadow
                 recieveShadow/>
 
         )
 
 }
+
 
 export function TVModel():JSX.Element {
 
@@ -187,7 +190,7 @@ export function TVModel():JSX.Element {
                 position = {[9.745,2.95,-0.5]} 
                 scale = {0.1}
                 rotation = {[0,0,0.2]}
-                castShadown
+                castShadow
                 recieveShadow/>
 
 
@@ -195,6 +198,29 @@ export function TVModel():JSX.Element {
         )
 
 }
+
+
+export function TVStandModel():JSX.Element{
+
+    const {scene:tvStandModel} = useGLTF("models/tvStandModel.glb", true)
+    
+      return(
+        
+    
+        <primitive object = {tvStandModel} 
+                
+                position = {[9,0.4,-0.3]} 
+                scale = {3.5}
+                rotation = {[0,-Math.PI/2,0]}
+                castShadow
+                recieveShadow/>
+
+
+      
+        )
+
+}
+
 
 export function ControllerAndHeadphonesModel():JSX.Element {
 
@@ -209,9 +235,8 @@ export function ControllerAndHeadphonesModel():JSX.Element {
               position = {[5.3,1.785,-0.53]} 
               scale = {4.5}
               rotation = {[0,-Math.PI/2,0]}
-              castShadown
-              recieveShadow >
-
+              castShadow
+              receiveShadow >
 
       </primitive>
       <primitive object = {headphoneModel} 
@@ -219,7 +244,7 @@ export function ControllerAndHeadphonesModel():JSX.Element {
               position = {[4.8,1.875,-0.05]} 
               scale = {0.25}
               rotation = {[Math.PI/2,-Math.PI/16,1]}
-              castShadown
+              castShadow
               recieveShadow/>
 
 
@@ -227,6 +252,23 @@ export function ControllerAndHeadphonesModel():JSX.Element {
       )
 
 }
+
+
+export function PlayStationModel():JSX.Element{
+    const {scene:playStationModel} = useGLTF("models/ps5Model.glb", true)
+    
+    
+    return (
+        <primitive object = {playStationModel} 
+        position = {[8.8,2.25,-2.4]} 
+        scale = {0.7}
+        rotation = {[0,Math.PI/9,0]}
+        castShadow
+        receiveShadow >
+      </primitive>
+    )
+}
+
 
 export function CeilingLightsModel():JSX.Element{
 
@@ -265,7 +307,7 @@ export function CeilingLightsModel():JSX.Element{
         position = {[5,7,0]} 
         scale = {1}
         rotation = {[0,Math.PI/2,0]}
-        castShadown
+        castShadow
         recieveShadow/>
 
 
@@ -297,7 +339,7 @@ export function CeilingLightsModel():JSX.Element{
         position = {[-5,7,0]} 
         scale = {1}
         rotation = {[0,Math.PI/2 + 1.2,0]}
-        castShadown
+        castShadow
         recieveShadow/>
 
         </group>
@@ -308,13 +350,93 @@ export function CeilingLightsModel():JSX.Element{
 }
 
 
+export function ClockModel():JSX.Element{
+    const {scene:clockModel} = useGLTF("models/clockModel.glb", true)
+    return (
+
+        <group>
+        <primitive object = {clockModel} 
+        position = {[9.88,4,1]} 
+        scale = {1}
+        rotation = {[0,-Math.PI,0]}
+        castShadow
+        recieveShadow/>
+
+
+        <mesh position = {[9.86,6.85,-0.25]} rotation = {[0,0,Math.PI/2]}>
+        <boxGeometry args={[0.4,0.1,0.05]}/>
+        <meshStandardMaterial color={"black"}/>
+        </mesh>
+
+        <mesh position = {[9.86,6.6,-0.35]} rotation = {[Math.PI/3,0,Math.PI/2]}>
+        <boxGeometry args={[0.3,0.1,0.03]}/>
+        <meshStandardMaterial color={"black"}/>
+        </mesh>
+
+        <mesh position = {[9.86,6.5,-0.115]} rotation = {[Math.PI/2+1,0,Math.PI/2]}>
+        <boxGeometry args={[0.4,0.1,0.01]}/>
+        <meshStandardMaterial color={"red"}/>
+        </mesh>
+        </group>
+    )
+
+}
+
+
+export function WallArtModel1():JSX.Element{
+
+    const {scene:paintingModel1} = useGLTF("models/paintingModel1.glb", true)
+    return (
+        <primitive object = {paintingModel1} 
+        position = {[4,5,-7.39]} 
+        scale = {27}
+        rotation = {[0,0,0]}
+        castShadow
+        recieveShadow/>
+    )
+
+}
+
+
+export function WallArtModel2():JSX.Element{
+    const {scene:paintingModel2} = useGLTF("models/paintingModel2.glb", true)
+    return (
+        <primitive object = {paintingModel2} 
+        position = {[6.1,4,-7.3]} 
+        scale = {27}
+        rotation = {[0,0,0]}
+        castShadow/>
+
+    )
+}
+
+
+export function WallArtModel3():JSX.Element{
+    const {scene:paintingModel3} = useGLTF("models/paintingModel3.glb", true)
+    return (
+        <primitive object = {paintingModel3} 
+        position = {[8.2,3,-7.3]} 
+        scale = {27}
+        rotation = {[0,0,0]}
+        castShadow/>
+
+    )
+}
 
 useGLTF.preload('models/twinBedModel.glb')
 useGLTF.preload('models/chairModel.glb')
 useGLTF.preload('models/tableModel.glb')
 useGLTF.preload('models/lampModel.glb')
-useGLTF.preload('models/couchModel.glb')
+useGLTF.preload('models/couchModelCenter.glb')
+useGLTF.preload('models/couchModelLeft.glb')
 useGLTF.preload('models/closetModel.glb')
 useGLTF.preload('models/drawerModel.glb')
 useGLTF.preload('models/headphoneModel.glb')
 useGLTF.preload('models/ps5ControllerModel.glb')
+useGLTF.preload('models/ceilingLightsModelRight.glb')
+useGLTF.preload('models/ceilingLightsModelLeft.glb')
+useGLTF.preload('models/coffeeTableModel.glb')
+useGLTF.preload('models/tvModel.glb')
+useGLTF.preload('models/tvStandModel.glb')
+useGLTF.preload('models/clockModel.glb')
+

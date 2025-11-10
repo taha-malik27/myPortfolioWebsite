@@ -12,8 +12,10 @@ function Effects() {
         <spotLight penumbra = {10} 
         intensity={500}  
         angle={1*Math.PI}
-        position={[0,50,0]}  />
-    
+        position={[0,50,0]} 
+        castShadow
+        />
+        
         <pointLight
         position={[-5,7,0]}
         distance={0}
@@ -25,6 +27,7 @@ function Effects() {
         distance={0}
         intensity={250}
         color = {"#fff4de"}
+        
         />
 
         <pointLight
@@ -32,6 +35,7 @@ function Effects() {
         distance={0}
         intensity={50}
         color = {"#f7c96d"}
+        
         />
 
 

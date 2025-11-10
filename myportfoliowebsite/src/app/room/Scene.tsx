@@ -4,7 +4,8 @@ import { RoundedBoxGeometry, useTexture } from "@react-three/drei"
 import { normalMap, roughness } from "three/tsl"
 import {BedModel, ChairModel, CouchModel, LampModel, TableModel, 
     ClosetModel, DrawerModel, CoffeeTableModel, TVModel, ControllerAndHeadphonesModel,
-    CeilingLightsModel} from "./Models";
+    CeilingLightsModel, TVStandModel, ClockModel, WallArtModel1, WallArtModel2, WallArtModel3,
+    PlayStationModel} from "./Models";
 
 
 
@@ -84,7 +85,7 @@ function Scene(): JSX.Element {
             {/* Right wall */}
             <mesh position = {[10,4,0]} rotation ={[0,-Math.PI/2,0]} castShadow receiveShadow>
                 <boxGeometry args={[15,7.5,0.2]}/>
-                <meshStandardMaterial color = "#fafce3b1e4b9" side={THREE.DoubleSide}/>
+                <meshStandardMaterial color = "#fce3b1" side={THREE.DoubleSide}/>
             </mesh>
             {/* Right Wall Siding */}
             <mesh position = {[9.9,0.5,0]} rotation ={[0,Math.PI/2,0]} castShadow receiveShadow>
@@ -120,9 +121,14 @@ function Scene(): JSX.Element {
             <DrawerModel/>
             <CoffeeTableModel/>
             <TVModel/>
+            <TVStandModel/>
             <ControllerAndHeadphonesModel/>
+            <PlayStationModel/>
             <CeilingLightsModel/>
-
+            <ClockModel/>
+            <WallArtModel1/>
+            <WallArtModel2/>
+            <WallArtModel3/>
 
         </group>
     )
