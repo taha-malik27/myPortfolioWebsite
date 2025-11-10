@@ -16,11 +16,11 @@ return (
 
         {/*Cameria Position is 0 X (deadcenter), 2Y (above ground), 4.5 Z (closer to viewer). FOV is 45 degrees, shadows, antialiasing, and alpha/transparence enabled, 
         dpr or pixel level is limited from 1 (standard monitors) to 2 (retina displays)*/}
-        <Canvas camera = {{position: [0, 20, 20] , fov:45}} 
+        <Canvas camera = {{position: [0, 25, 25] , fov:45}} 
                 dpr = {[1,2]}  
                 gl = {{antialias: true, alpha: true}}
                 shadows
-                style={{width: "100vw", height: "100vh"}} >
+                style={{height: "97.5vh", alignSelf:"center", justifyContent: "center"}} >
 
             <color attach= "background" args = {["#fabb69"]} />
 
@@ -37,8 +37,8 @@ return (
                                 zoomSpeed = {0.75}
                                 enableRotate = {true} 
                                 maxPolarAngle = {Math.PI * 0.45} 
-                                minDistance = {2}
-                                maxDistance = {30}
+                                minDistance = {5}
+                                maxDistance = {40}
                                 enableDamping/>
 
 

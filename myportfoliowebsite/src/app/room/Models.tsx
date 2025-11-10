@@ -1,8 +1,23 @@
-import React, { JSX } from "react";
+import React, { JSX, useRef, useEffect} from "react";
 import * as THREE from "three"
-import { useGLTF } from "@react-three/drei";
+import {Group} from "three";
+import {useGLTF, useAnimations, RoundedBoxGeometry } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
 import { group } from "console";
+import { rotate } from "three/tsl";
+import StandardNodeLibrary from "three/src/renderers/webgpu/nodes/StandardNodeLibrary.js";
+
  
+
+// Helper functtion
+function isMesh(object: THREE.Object3D): object is THREE.Mesh | THREE.SkinnedMesh {
+    return (object as any).isMesh === true || (object as any).isSkinnedMesh === true
+  }
+
+
+
+
+
 
 export function BedModel():JSX.Element {
 
@@ -69,7 +84,7 @@ export function ChairModel():JSX.Element{
 }
 
 
-export function CouchModel1():JSX.Element{
+export function CouchModel():JSX.Element{
 
     const couchModelCenter = useGLTF("models/couchModelCenter.glb",true)
     const couchModelLeft = useGLTF("models/couchModelLeft.glb",true)
@@ -101,7 +116,197 @@ export function CouchModel1():JSX.Element{
 }
 
 
-export 
+export function ClosetModel():JSX.Element{
+
+    const {scene:closetModel} = useGLTF("models/closetModel.glb", true)
+    
+      return(
+
+        <primitive object = {closetModel} 
+                
+                position = {[-9,0.4,5]} 
+                scale = {2.8}
+                rotation = {[0,-Math.PI/2,0]}
+                castShadown
+                recieveShadow/>
+
+        )
+            
+            
+}
+
+
+export function DrawerModel():JSX.Element {
+
+    const {scene:drawerModel} = useGLTF("models/drawerModel.glb", true)
+    
+      return(
+
+        <primitive object = {drawerModel} 
+                
+                position = {[-9.2,0,0]} 
+                scale = {2.8}
+                rotation = {[0,Math.PI/2,0]}
+                castShadown
+                recieveShadow/>
+
+        )
+
+}
+
+export function CoffeeTableModel():JSX.Element {
+
+    const {scene:coffeeTableModel} = useGLTF("models/coffeeTableModel.glb", true)
+    
+      return(
+
+        <primitive object = {coffeeTableModel} 
+                
+                position = {[5.5,0.5,-0.5]} 
+                scale = {2.8}
+                rotation = {[0,Math.PI,0]}
+                castShadown
+                recieveShadow/>
+
+        )
+
+}
+
+export function TVModel():JSX.Element {
+
+    const {scene:tvModel} = useGLTF("models/tvModel.glb", true)
+    
+      return(
+        <group>
+        <mesh position={[9.8,4.5,0]} rotation = {[0,0,0.2]}>
+        <boxGeometry args={[0.25,1,2]}/>
+        <meshStandardMaterial color={"black"}/>
+       </mesh>
+        <primitive object = {tvModel} 
+                
+                position = {[9.745,2.95,-0.5]} 
+                scale = {0.1}
+                rotation = {[0,0,0.2]}
+                castShadown
+                recieveShadow/>
+
+
+        </group>
+        )
+
+}
+
+export function ControllerAndHeadphonesModel():JSX.Element {
+
+    const {scene:controllerModel} = useGLTF("models/ps5ControllerModel.glb", true)
+    const {scene:headphoneModel} = useGLTF("models/headphoneModel.glb", true)
+
+
+    return(
+      <group>
+      <primitive object = {controllerModel} 
+              
+              position = {[5.3,1.785,-0.53]} 
+              scale = {4.5}
+              rotation = {[0,-Math.PI/2,0]}
+              castShadown
+              recieveShadow >
+
+
+      </primitive>
+      <primitive object = {headphoneModel} 
+              
+              position = {[4.8,1.875,-0.05]} 
+              scale = {0.25}
+              rotation = {[Math.PI/2,-Math.PI/16,1]}
+              castShadown
+              recieveShadow/>
+
+
+      </group>
+      )
+
+}
+
+export function CeilingLightsModel():JSX.Element{
+
+    const ceilingLightsModelRight = useGLTF("models/ceilingLightsModelRight.glb",true)
+    const ceilingLightsModelLeft = useGLTF("models/ceilingLightsModelLeft.glb",true)
+
+    return(
+        <group>
+
+
+        {/* Make light Scaffolding for Right Light */}
+        <mesh position = {[5,8.5,0]} rotation={[0,0.135,0]}>
+            <RoundedBoxGeometry args={[0.3,0.1,1.9]} radius = {0.015}/>
+            <meshStandardMaterial color={"black"}/>
+
+        </mesh>
+
+        <mesh position = {[5,8.5,0]} rotation={[0,0.135 + Math.PI/2,0]}>
+            <RoundedBoxGeometry args={[0.3,0.1,1.9]} radius = {0.015}/>
+            <meshStandardMaterial color={"black"}/>
+
+        </mesh>
+
+        {/* Add in Cylinder */}
+
+        <mesh position =  {[5,26,0]}>
+
+        <cylinderGeometry args={[0.1, 0.1, 35, 32]} />
+        <meshStandardMaterial color= {"black"}/>
+
+
+        </mesh>
+
+        <primitive object = {ceilingLightsModelRight.scene} 
+        
+        position = {[5,7,0]} 
+        scale = {1}
+        rotation = {[0,Math.PI/2,0]}
+        castShadown
+        recieveShadow/>
+
+
+        {/* Make light Scaffolding for Right Light */}
+        <mesh position = {[-5,8.5,0]} rotation={[0,-0.24,0]}>
+            <RoundedBoxGeometry args={[0.3,0.1,1.9]} radius = {0.015}/>
+            <meshStandardMaterial color={"black"}/>
+
+        </mesh>
+
+        <mesh position = {[-5,8.5,0]} rotation={[0,-0.24 + Math.PI/2,0]}>
+            <RoundedBoxGeometry args={[0.3,0.1,1.9]} radius = {0.015}/>
+            <meshStandardMaterial color={"black"}/>
+
+        </mesh>
+
+        {/* Add in Cylinder */}
+
+        <mesh position =  {[-5,26,0]}>
+
+        <cylinderGeometry args={[0.1, 0.1, 35, 32]} />
+        <meshStandardMaterial color= {"black"}/>
+
+
+        </mesh>
+
+        <primitive object = {ceilingLightsModelLeft.scene} 
+        
+        position = {[-5,7,0]} 
+        scale = {1}
+        rotation = {[0,Math.PI/2 + 1.2,0]}
+        castShadown
+        recieveShadow/>
+
+        </group>
+            
+        
+        
+    )
+}
+
 
 
 useGLTF.preload('models/twinBedModel.glb')
@@ -109,3 +314,7 @@ useGLTF.preload('models/chairModel.glb')
 useGLTF.preload('models/tableModel.glb')
 useGLTF.preload('models/lampModel.glb')
 useGLTF.preload('models/couchModel.glb')
+useGLTF.preload('models/closetModel.glb')
+useGLTF.preload('models/drawerModel.glb')
+useGLTF.preload('models/headphoneModel.glb')
+useGLTF.preload('models/ps5ControllerModel.glb')

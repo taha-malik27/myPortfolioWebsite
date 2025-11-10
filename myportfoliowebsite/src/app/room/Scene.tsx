@@ -2,7 +2,9 @@ import {JSX} from "react"
 import * as THREE from "three"
 import { RoundedBoxGeometry, useTexture } from "@react-three/drei"
 import { normalMap, roughness } from "three/tsl"
-import {BedModel, ChairModel, CouchModel1, LampModel, TableModel} from "./Models";
+import {BedModel, ChairModel, CouchModel, LampModel, TableModel, 
+    ClosetModel, DrawerModel, CoffeeTableModel, TVModel, ControllerAndHeadphonesModel,
+    CeilingLightsModel} from "./Models";
 
 
 
@@ -36,7 +38,7 @@ function Scene(): JSX.Element {
     mappings.forEach((mapping) => {
         if (!mapping) return;
         mapping.wrapS = mapping.wrapT = THREE.MirroredRepeatWrapping
-        mapping.repeat.set(10,7)
+        mapping.repeat.set(5,3)
     })
 
 
@@ -65,9 +67,9 @@ function Scene(): JSX.Element {
 
 
             {/* Back wall */}
-            <mesh position = {[0,2.85,-7.5]} castShadow receiveShadow>
-                <boxGeometry args={[20,5,0.2]}/>
-                <meshStandardMaterial color ="#fce5c7" side={THREE.DoubleSide} />
+            <mesh position = {[0,4,-7.5]} castShadow receiveShadow>
+                <boxGeometry args={[20,7.5,0.2]}/>
+                <meshStandardMaterial color ="#fce3b1" side={THREE.DoubleSide} />
 
             </mesh>
             {/* Back wall Siding */}
@@ -80,9 +82,9 @@ function Scene(): JSX.Element {
 
 
             {/* Right wall */}
-            <mesh position = {[10,2.85,0]} rotation ={[0,-Math.PI/2,0]} castShadow receiveShadow>
-                <boxGeometry args={[15,5,0.2]}/>
-                <meshStandardMaterial color = "#fce5c7" side={THREE.DoubleSide}/>
+            <mesh position = {[10,4,0]} rotation ={[0,-Math.PI/2,0]} castShadow receiveShadow>
+                <boxGeometry args={[15,7.5,0.2]}/>
+                <meshStandardMaterial color = "#fafce3b1e4b9" side={THREE.DoubleSide}/>
             </mesh>
             {/* Right Wall Siding */}
             <mesh position = {[9.9,0.5,0]} rotation ={[0,Math.PI/2,0]} castShadow receiveShadow>
@@ -94,9 +96,9 @@ function Scene(): JSX.Element {
 
 
             {/* Left Wall */}
-            <mesh position = {[-10,2.85,0]} rotation ={[0,Math.PI/2,0]} castShadow receiveShadow>
-                <boxGeometry args={[15,5,0.2]}/>
-                <meshStandardMaterial color = "#fce5c7" side={THREE.DoubleSide}/>
+            <mesh position = {[-10,4,0]} rotation ={[0,Math.PI/2,0]} castShadow receiveShadow>
+                <boxGeometry args={[15,7.5,0.2]}/>
+                <meshStandardMaterial color = "#fce3b1" side={THREE.DoubleSide}/>
             </mesh>
             {/* Left Wall Siding */}
             <mesh position = {[-9.9,0.5,0]} rotation ={[0,Math.PI/2,0]} castShadow receiveShadow>
@@ -113,8 +115,13 @@ function Scene(): JSX.Element {
             <LampModel/>
             <ChairModel/>
             <TableModel/>
-            <CouchModel1/>
-            
+            <CouchModel/>
+            <ClosetModel/>
+            <DrawerModel/>
+            <CoffeeTableModel/>
+            <TVModel/>
+            <ControllerAndHeadphonesModel/>
+            <CeilingLightsModel/>
 
 
         </group>

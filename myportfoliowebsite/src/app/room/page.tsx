@@ -6,7 +6,7 @@ function Page(): JSX.Element {
 
     return (
 
-        <div style={{width :"100vw", height : "100vh"}}>
+        <div style={{ backgroundColor: '#000000' }}>
             <RoomCanvas/>
         </div>
 
