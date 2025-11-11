@@ -1,18 +1,20 @@
 "use client";
 
 import {Canvas} from "@react-three/fiber";
-import {Suspense, useState} from "react";
+import {Suspense, useState, useEffect} from "react";
 import { JSX } from "react";
 import Scene from "@/app/room/Scene"
 import Effects from "@/app/room/effects"
 import {Preload, OrbitControls} from "@react-three/drei"
 import PhysicsWorld from "@/app/room/physicsWorld"
 import FirstPersonControls from "@/app/room/firstPersonControls"
+import { useThree } from "@react-three/fiber"
 
 function RoomCanvas():JSX.Element{
 
     const [controlMode, setControlMode] = useState<"orbit" | "firstPerson">("orbit");
     const [isPointerLocked, setIsPointerLocked] = useState(false);
+    const [savedPlayerPosition, setSavedPlayerPosition] = useState<[number, number, number] | null>(null);
 
     const handleControlModeChange = (mode: "orbit" | "firstPerson") => {
         setControlMode(mode);
@@ -23,6 +25,10 @@ function RoomCanvas():JSX.Element{
             }
             setIsPointerLocked(false);
         }
+    };
+
+    const handleSavePlayerPosition = (position: [number, number, number]) => {
+        setSavedPlayerPosition(position);
     };
 
 return (
@@ -50,13 +56,16 @@ return (
                 
                 <ambientLight intensity = {0.9} />
 
+                <CameraResetter controlMode={controlMode} />
+
                 <PhysicsWorld>
                     <Scene />
                     
                     {controlMode === "firstPerson" && (
                         <FirstPersonControls 
-                            spawnPosition={[-2, 3.2, 0]} 
+                            spawnPosition={savedPlayerPosition || [-2, 3.2, 0]} 
                             onPointerLockChange={setIsPointerLocked}
+                            onPositionChange={handleSavePlayerPosition}
                         />
                     )}
                 </PhysicsWorld>
@@ -140,6 +149,21 @@ return (
 
 )
 
+}
+
+// Component to reset camera position when entering orbit mode
+function CameraResetter({ controlMode }: { controlMode: "orbit" | "firstPerson" }) {
+    const { camera } = useThree();
+
+    useEffect(() => {
+        if (controlMode === "orbit") {
+            // Reset camera to initial position
+            camera.position.set(0, 25, 25);
+            camera.lookAt(0, 0, 0);
+        }
+    }, [controlMode, camera]);
+
+    return null;
 }
 
 export default RoomCanvas

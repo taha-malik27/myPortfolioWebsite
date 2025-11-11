@@ -8,11 +8,13 @@ import * as THREE from "three";
 interface FirstPersonControlsProps {
   spawnPosition?: [number, number, number];
   onPointerLockChange?: (locked: boolean) => void;
+  onPositionChange?: (position: [number, number, number]) => void;
 }
 
 export default function FirstPersonControls({ 
   spawnPosition = [-2, 3.2, 0],
-  onPointerLockChange
+  onPointerLockChange,
+  onPositionChange
 }: FirstPersonControlsProps) {
   const { camera, gl } = useThree();
   const rigidBodyRef = useRef<any>(null);
@@ -28,8 +30,11 @@ export default function FirstPersonControls({
   // Camera rotation
   const euler = useRef(new THREE.Euler(0, 0, 0, "YXZ"));
   const PI_2 = Math.PI / 2;
+  
+  // Track previous pointer lock state
+  const previouslyLockedRef = useRef(false);
 
-  // Set initial position
+  // Set initial position only once on mount
   useEffect(() => {
     if (rigidBodyRef.current) {
       rigidBodyRef.current.setTranslation(
@@ -39,7 +44,8 @@ export default function FirstPersonControls({
     }
     camera.position.set(spawnPosition[0], spawnPosition[1], spawnPosition[2]);
     euler.current.set(0, 0, 0);
-  }, [camera, spawnPosition]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Only run on mount, don't react to spawnPosition changes
 
   // Pointer lock handling
   useEffect(() => {
@@ -47,6 +53,17 @@ export default function FirstPersonControls({
 
     const handlePointerLockChange = () => {
       const isLocked = document.pointerLockElement === canvas;
+      const wasLocked = previouslyLockedRef.current;
+      
+      // Only save position when LEAVING pointer lock (ESC pressed)
+      if (wasLocked && !isLocked && rigidBodyRef.current && onPositionChange) {
+        const pos = rigidBodyRef.current.translation();
+        onPositionChange([pos.x, pos.y, pos.z]);
+      }
+      
+      // Update the tracked state
+      previouslyLockedRef.current = isLocked;
+      
       if (onPointerLockChange) {
         onPointerLockChange(isLocked);
       }
