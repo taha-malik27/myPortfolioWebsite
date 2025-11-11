@@ -14,6 +14,10 @@ function Effects() {
         angle={1*Math.PI}
         position={[0,50,0]} 
         castShadow
+        shadow-mapSize-width={1024}
+        shadow-mapSize-height={1024}
+        shadow-camera-far={100}
+        shadow-bias={-0.0001}
         />
         
         <pointLight

@@ -32,7 +32,6 @@ export function BedModel():JSX.Element {
         rotation = {[0,Math.PI/2,0]}
         castShadow
         recieveShadow/>
-        
     )
 }
 
@@ -80,7 +79,6 @@ export function ChairModel():JSX.Element{
         rotation = {[0,0,0]}
         castShadow
         recieveShadow/>
-        
     )
 }
 
@@ -93,16 +91,13 @@ export function CouchModel():JSX.Element{
     return(
         <group>
         <primitive object = {couchModelCenter.scene} 
-        
         position = {[1.8,1.35,-0.75]} 
         scale = {2.5}
         rotation = {[0,0,0]}
         castShadow
         recieveShadow/>
 
-        
         <primitive object = {couchModelLeft.scene} 
-        
         position = {[6,1.35,-5.75]} 
         scale = {2.5}
         rotation = {[0,-Math.PI/2,0]}
@@ -122,15 +117,12 @@ export function ClosetModel():JSX.Element{
     const {scene:closetModel} = useGLTF("models/closetModel.glb", true)
     
       return(
-
         <primitive object = {closetModel} 
-                
                 position = {[-9,0.4,5]} 
                 scale = {2.8}
                 rotation = {[0,-Math.PI/2,0]}
                 castShadow
                 recieveShadow/>
-
         )
             
             
@@ -142,15 +134,12 @@ export function DrawerModel():JSX.Element {
     const {scene:drawerModel} = useGLTF("models/drawerModel.glb", true)
     
       return(
-
         <primitive object = {drawerModel} 
-                
                 position = {[-9.2,0,0]} 
                 scale = {2.8}
                 rotation = {[0,Math.PI/2,0]}
                 castShadow
                 recieveShadow/>
-
         )
 
 }
@@ -161,15 +150,12 @@ export function CoffeeTableModel():JSX.Element {
     const {scene:coffeeTableModel} = useGLTF("models/coffeeTableModel.glb", true)
     
       return(
-
         <primitive object = {coffeeTableModel} 
-                
                 position = {[5.5,0.5,-0.5]} 
                 scale = {2.8}
                 rotation = {[0,Math.PI,0]}
                 castShadow
                 recieveShadow/>
-
         )
 
 }
@@ -205,17 +191,12 @@ export function TVStandModel():JSX.Element{
     const {scene:tvStandModel} = useGLTF("models/tvStandModel.glb", true)
     
       return(
-        
-    
         <primitive object = {tvStandModel} 
-                
                 position = {[9,0.4,-0.3]} 
                 scale = {3.5}
                 rotation = {[0,-Math.PI/2,0]}
                 castShadow
                 recieveShadow/>
-
-
       
         )
 
@@ -427,7 +408,7 @@ export function LaptopModel():JSX.Element{
     const {scene:laptopModel} = useGLTF("models/laptopModel.glb", true)
     return (
         <primitive object = {laptopModel} 
-        position = {[-2.2,2.5,-6.75]} 
+        position = {[-2.2,2.4,-6.75]} 
         scale = {0.3}
         rotation = {[0,Math.PI/1.6,0]}
         castShadow
