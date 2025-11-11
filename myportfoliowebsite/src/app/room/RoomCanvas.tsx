@@ -31,6 +31,8 @@ function RoomCanvas():JSX.Element{
         setSavedPlayerPosition(position);
     };
 
+
+    
 return (
 
     <div id = "canvas-container" style={{position: "relative"}}>
@@ -46,7 +48,7 @@ return (
                     stencil: false,
                     depth: true
                 }}
-                shadows="soft"
+                shadows="variance"
                 performance={{ min: 0.5 }}
                 style={{height: "97.5vh", alignSelf:"center", justifyContent: "center"}} >
 
@@ -91,6 +93,41 @@ return (
             </Suspense>
         </Canvas>
 
+
+        {/* Crosshair for First Person Mode */}
+        {controlMode === "firstPerson" && isPointerLocked && (
+            <div style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                zIndex: 1001,
+                pointerEvents: "none"
+            }}>
+                {/* Horizontal line */}
+                <div style={{
+                    position: "absolute",
+                    width: "20px",
+                    height: "2px",
+                    backgroundColor: "white",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    boxShadow: "0 0 2px 1px black, 0 0 4px 1px black"
+                }} />
+                {/* Vertical line */}
+                <div style={{
+                    position: "absolute",
+                    width: "2px",
+                    height: "20px",
+                    backgroundColor: "white",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    boxShadow: "0 0 2px 1px black, 0 0 4px 1px black"
+                }} />
+            </div>
+        )}
 
         {/* Control Mode Toggle UI */}
         <div style={{
