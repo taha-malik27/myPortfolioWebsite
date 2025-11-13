@@ -1,13 +1,31 @@
+import SideBarComponent from '@/components/cards/sideBar';
 import React from 'react'
 
 
 
 function HomePage() {
     return (
-        <div>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "50px 1fr",
+            height: "100vh",
+            width: "100vw",
+            overflow: "hidden", 
+          }}
+        >
+          {/* Left side: sidebar */}
+          <div style={{ backgroundColor: "green", height: "100%" }}>
+            <SideBarComponent />
+          </div>
+    
+          {/* Right side: main content */}
+          <div style={{ padding: "1rem", backgroundColor:"black", color: "white"}}>
             <h1>Home Page</h1>
+            <p>Whatever content you want here.</p>
+          </div>
         </div>
-    )
-}
+      );
+    }
 
 export default HomePage;

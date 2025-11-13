@@ -50,7 +50,7 @@ return (
                 }}
                 shadows="variance"
                 performance={{ min: 0.5 }}
-                style={{height: "97.5vh", alignSelf:"center", justifyContent: "center"}} >
+                style={{height: "100dvh", alignSelf:"center", justifyContent: "center"}} >
 
             <color attach= "background" args = {["#fabb69"]} />
 

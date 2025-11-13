@@ -11,8 +11,8 @@ export const metadata:object = {
 export default function RootLayout({children}: {children:React.ReactNode}){
 
     return (
-        <html lang="en" suppressHydrationWarning style={{backgroundColor:"#fabb69"}}>
-            <body suppressHydrationWarning>
+        <html lang="en" suppressHydrationWarning style={{backgroundColor:"#fabb69", margin: 0, padding: 0, height: "100%"}}>
+            <body suppressHydrationWarning style={{margin: 0, padding: 0, height: "100%", overflow: "hidden"}}>
                 {children}
             </body>
         </html>
