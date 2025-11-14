@@ -21,6 +21,30 @@
     display: grid;
     grid-template-rows: 50px 1fr ;
     align-items: center;
+
+}
+
+/* Remove default link styling in sidebar */
+.sidebar a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.sidebar a:hover {
+    text-decoration: none;
+}
+
+.sidebar a:visited {
+    color: inherit;
+}
+
+.sidebar a:active {
+    color: inherit;
+}
+
+/* Also prevent the blue outline/focus ring */
+.sidebar a:focus {
+    outline: none;
 }
 
 
@@ -30,7 +54,7 @@
     align-items: center;
     justify-content: center;
     width:50px;
-    height: 50%;
+    height: 60%;
     text-align: center;
    
 }
