@@ -17,6 +17,7 @@ export default function SideBarComponent():JSX.Element {
         <div className={"sidebar-content"} >
 
 
+
             {/* Home */}
             <Link href= "/">
                 <div 
@@ -57,6 +58,7 @@ export default function SideBarComponent():JSX.Element {
             </Link>
 
 
+
             {/* Room */}
             <Link href= "/room">
                 <div 
@@ -95,6 +97,8 @@ export default function SideBarComponent():JSX.Element {
                         </span>
                 </div>
             </Link>
+
+
 
             {/* Skills */}
             <Link href= "/skills">
@@ -137,6 +141,8 @@ export default function SideBarComponent():JSX.Element {
                 </div>
             </Link>
 
+
+
             {/* Projects */}
             <Link href= "/projects">
                 <div 
@@ -178,6 +184,8 @@ export default function SideBarComponent():JSX.Element {
                 </div>
             </Link>
 
+
+
             {/* Work */}
             <Link href="/work">
                 <div 
@@ -217,6 +225,8 @@ export default function SideBarComponent():JSX.Element {
                 </div>
             </Link>
 
+
+
             {/* Contact */}
             <Link href="/contact">
                 <div 
@@ -255,6 +265,7 @@ export default function SideBarComponent():JSX.Element {
                     </span>
                 </div>
             </Link>
+
 
 
         </div>

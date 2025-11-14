@@ -14,16 +14,21 @@ function HomePage() {
             overflow: "hidden", 
           }}
         >
-          {/* Left side: sidebar */}
-          <div style={{height: "100%" }}>
-            <SideBarComponent />
-          </div>
+
+
+            {/* Left side: sidebar */}
+            <div style={{height: "100%" }}>
+                <SideBarComponent />
+            </div>
     
-          {/* Right side: main content */}
-          <div className = {"gradient"} style={{ padding: "1rem", color: "black"}}>
-            <h1>Home Page</h1>
-            <p>Whatever content you want here.</p>
-          </div>
+
+
+            {/* Right side: main content */}
+            <div className = {"gradient"} style={{ padding: "1rem", color: "black"}}>
+                    <h1>Home Page</h1>
+                    <p>Whatever content you want here.</p>
+            </div>
+
         </div>
       );
     }
