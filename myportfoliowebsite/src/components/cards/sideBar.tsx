@@ -11,8 +11,11 @@ export default function SideBarComponent():JSX.Element {
     return(
     
     <div className={"sidebar"}>
+        <Link href="/">
 
-        <Image src="/images/TMLogoTransparent.png" alt="TM Logo" width={50} height={50} priority />
+            <Image src="/images/TMLogoTransparent.png" alt="TM Logo" width={50} height={50} priority />
+        
+        </Link>
 
         <div className={"sidebar-content"} >
 
@@ -47,9 +50,7 @@ export default function SideBarComponent():JSX.Element {
                             opacity: hoveredItem === 'home' ? 1 : 0,
                             transition: 'opacity 0.25s ease-in-out',
                             whiteSpace: 'nowrap',
-                            pointerEvents: 'none',
-                            fontFamily: "'Montserrat', sans-serif",
-                            fontWeight: 600
+                            pointerEvents: 'none'
                         }}
                     >
                         Home
@@ -88,9 +89,7 @@ export default function SideBarComponent():JSX.Element {
                                 opacity: hoveredItem === 'room' ? 1 : 0,
                                 transition: 'opacity 0.25s ease-in-out',
                                 whiteSpace: 'nowrap',
-                                pointerEvents: 'none',
-                                fontFamily: "'Montserrat', sans-serif",
-                                fontWeight: 600
+                                pointerEvents: 'none'
                             }}
                         >
                             Room
@@ -130,9 +129,7 @@ export default function SideBarComponent():JSX.Element {
                                 opacity: hoveredItem === 'skills' ? 1 : 0,
                                 transition: 'opacity 0.25s ease-in-out',
                                 whiteSpace: 'nowrap',
-                                pointerEvents: 'none',
-                                fontFamily: "'Montserrat', sans-serif",
-                                fontWeight: 600
+                                pointerEvents: 'none'
                             }}
                         >
                             Skills
@@ -172,9 +169,7 @@ export default function SideBarComponent():JSX.Element {
                                 opacity: hoveredItem === 'projects' ? 1 : 0,
                                 transition: 'opacity 0.25s ease-in-out',
                                 whiteSpace: 'nowrap',
-                                pointerEvents: 'none',
-                                fontFamily: "'Montserrat', sans-serif",
-                                fontWeight: 600
+                                pointerEvents: 'none'
                             }}
                         >
                             Projects
@@ -215,9 +210,7 @@ export default function SideBarComponent():JSX.Element {
                             opacity: hoveredItem === 'work' ? 1 : 0,
                             transition: 'opacity 0.25s ease-in-out',
                             whiteSpace: 'nowrap',
-                            pointerEvents: 'none',
-                            fontFamily: "'Montserrat', sans-serif",
-                            fontWeight: 600
+                            pointerEvents: 'none'
                         }}
                     >
                         Work
@@ -256,9 +249,7 @@ export default function SideBarComponent():JSX.Element {
                             opacity: hoveredItem === 'contact' ? 1 : 0,
                             transition: 'opacity 0.25s ease-in-out',
                             whiteSpace: 'nowrap',
-                            pointerEvents: 'none',
-                            fontFamily: "'Montserrat', sans-serif",
-                            fontWeight: 600
+                            pointerEvents: 'none'
                         }}
                     >
                         Contact

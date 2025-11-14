@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Stack+Sans+Notch:wght@200..700&display=swap');
 
 .gradient{
     background: #721121;
@@ -61,6 +60,7 @@
 
 .sidebar-item{
     font-family: 'Stack Sans Notch', sans-serif;
+    font-weight: 600;
     font-size: x-small;
     color: orange ;
 }
