@@ -24,9 +24,9 @@ function HomePage() {
 
 
             {/* Right side: main content */}
-            <div className = {"gradient"} style={{ padding: "1rem", color: "black"}}>
-                    <h1>Home Page</h1>
-                    <p>Whatever content you want here.</p>
+            <div className = {"gradient"} style={{ padding: "1rem", color: "white"}}>
+                    <h1 className='header-styling'>Home Page</h1>
+                    <p className='subheader-styling'>Subheader - Whatever content you want here.</p>
             </div>
 
         </div>

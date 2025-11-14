@@ -3,17 +3,19 @@
 import React, { JSX } from "react";
 import Image from "next/image";
 import Link from "next/link"
+import { usePathname } from "next/navigation";
 
 export default function SideBarComponent():JSX.Element {
     const [hoveredItem, setHoveredItem] = React.useState<string | null>(null);
+    const pathname = usePathname();
     
 
     return(
     
     <div className={"sidebar"}>
-        <Link href="/">
+        <Link href="/" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 
-            <Image src="/images/TMLogoTransparent.png" alt="TM Logo" width={50} height={50} priority />
+            <Image src="/images/Logo.png" alt="TM Logo" width={45} height={45} priority />
         
         </Link>
 
@@ -33,7 +35,7 @@ export default function SideBarComponent():JSX.Element {
                     }}
                 >
                     <Image 
-                        src="/images/HomeIcon.png" 
+                        src={pathname === '/' ? "/images/HomeIcon.png" : "/images/HomeIconWhite.png"}
                         alt="Home" 
                         priority
                         width={30} 
@@ -50,7 +52,12 @@ export default function SideBarComponent():JSX.Element {
                             opacity: hoveredItem === 'home' ? 1 : 0,
                             transition: 'opacity 0.25s ease-in-out',
                             whiteSpace: 'nowrap',
-                            pointerEvents: 'none'
+                            pointerEvents: 'none',
+                            color: pathname === '/' ? 'orange' : 'white',
+                            backgroundImage: pathname === '/' ? 'linear-gradient(120deg,rgb(223, 21, 21) 25%, rgb(255, 168, 7))' : 'none',
+                            backgroundClip: pathname === '/' ? 'text' : 'unset',
+                            WebkitBackgroundClip: pathname === '/' ? 'text' : 'unset',
+                            WebkitTextFillColor: pathname === '/' ? 'transparent' : 'white'
                         }}
                     >
                         Home
@@ -72,7 +79,7 @@ export default function SideBarComponent():JSX.Element {
                     }}
                 >
                         <Image 
-                            src="/images/3DRoomIcon.png" 
+                            src={pathname === '/room' ? "/images/3DRoomIcon.png" : "/images/3DRoomIconWhite.png"}
                             alt="My Room" 
                             priority
                             width={34} 
@@ -89,7 +96,12 @@ export default function SideBarComponent():JSX.Element {
                                 opacity: hoveredItem === 'room' ? 1 : 0,
                                 transition: 'opacity 0.25s ease-in-out',
                                 whiteSpace: 'nowrap',
-                                pointerEvents: 'none'
+                                pointerEvents: 'none',
+                                color: pathname === '/room' ? 'orange' : 'white',
+                                backgroundImage: pathname === '/room' ? 'linear-gradient(120deg,rgb(223, 21, 21) 25%, rgb(255, 168, 7))' : 'none',
+                                backgroundClip: pathname === '/room' ? 'text' : 'unset',
+                                WebkitBackgroundClip: pathname === '/room' ? 'text' : 'unset',
+                                WebkitTextFillColor: pathname === '/room' ? 'transparent' : 'white'
                             }}
                         >
                             Room
@@ -111,7 +123,7 @@ export default function SideBarComponent():JSX.Element {
                     }}
                 >
                     <Image 
-                        src= "/images/SkillsIcon.png" 
+                        src={pathname === '/skills' ? "/images/SkillsIcon.png" : "/images/SkillsIconWhite.png"}
                         alt="Skills" 
                         priority
                         width= {30} 
@@ -129,7 +141,12 @@ export default function SideBarComponent():JSX.Element {
                                 opacity: hoveredItem === 'skills' ? 1 : 0,
                                 transition: 'opacity 0.25s ease-in-out',
                                 whiteSpace: 'nowrap',
-                                pointerEvents: 'none'
+                                pointerEvents: 'none',
+                                color: pathname === '/skills' ? 'orange' : 'white',
+                                backgroundImage: pathname === '/skills' ? 'linear-gradient(120deg,rgb(223, 21, 21) 25%, rgb(255, 168, 7))' : 'none',
+                                backgroundClip: pathname === '/skills' ? 'text' : 'unset',
+                                WebkitBackgroundClip: pathname === '/skills' ? 'text' : 'unset',
+                                WebkitTextFillColor: pathname === '/skills' ? 'transparent' : 'white'
                             }}
                         >
                             Skills
@@ -152,7 +169,7 @@ export default function SideBarComponent():JSX.Element {
                     }} 
                 >
                     <Image 
-                        src= "/images/ProjectsIcon.png" 
+                        src={pathname === '/projects' ? "/images/ProjectsIcon.png" : "/images/ProjectsIconWhite.png"}
                         alt="Projects" 
                         priority
                         width= {30} 
@@ -169,7 +186,12 @@ export default function SideBarComponent():JSX.Element {
                                 opacity: hoveredItem === 'projects' ? 1 : 0,
                                 transition: 'opacity 0.25s ease-in-out',
                                 whiteSpace: 'nowrap',
-                                pointerEvents: 'none'
+                                pointerEvents: 'none',
+                                color: pathname === '/projects' ? 'orange' : 'white',
+                                backgroundImage: pathname === '/projects' ? 'linear-gradient(120deg,rgb(223, 21, 21) 25%, rgb(255, 168, 7))' : 'none',
+                                backgroundClip: pathname === '/projects' ? 'text' : 'unset',
+                                WebkitBackgroundClip: pathname === '/projects' ? 'text' : 'unset',
+                                WebkitTextFillColor: pathname === '/projects' ? 'transparent' : 'white'
                             }}
                         >
                             Projects
@@ -193,7 +215,7 @@ export default function SideBarComponent():JSX.Element {
                     }}
                 >
                     <Image 
-                        src="/images/WorkIcon.png" 
+                        src={pathname === '/work' ? "/images/WorkIcon.png" : "/images/WorkIconWhite.png"}
                         alt="Work" 
                         priority
                         width={29} 
@@ -210,7 +232,12 @@ export default function SideBarComponent():JSX.Element {
                             opacity: hoveredItem === 'work' ? 1 : 0,
                             transition: 'opacity 0.25s ease-in-out',
                             whiteSpace: 'nowrap',
-                            pointerEvents: 'none'
+                            pointerEvents: 'none',
+                            color: pathname === '/work' ? 'orange' : 'white',
+                            backgroundImage: pathname === '/work' ? 'linear-gradient(120deg,rgb(223, 21, 21) 25%, rgb(255, 168, 7))' : 'none',
+                            backgroundClip: pathname === '/work' ? 'text' : 'unset',
+                            WebkitBackgroundClip: pathname === '/work' ? 'text' : 'unset',
+                            WebkitTextFillColor: pathname === '/work' ? 'transparent' : 'white'
                         }}
                     >
                         Work
@@ -232,7 +259,7 @@ export default function SideBarComponent():JSX.Element {
                     }}
                 >
                     <Image 
-                        src="/images/ContactIcon.png" 
+                        src={pathname === '/contact' ? "/images/ContactIcon.png" : "/images/ContactIconWhite.png"}
                         alt="Contact" 
                         priority
                         width={30} 
@@ -249,7 +276,12 @@ export default function SideBarComponent():JSX.Element {
                             opacity: hoveredItem === 'contact' ? 1 : 0,
                             transition: 'opacity 0.25s ease-in-out',
                             whiteSpace: 'nowrap',
-                            pointerEvents: 'none'
+                            pointerEvents: 'none',
+                            color: pathname === '/contact' ? 'orange' : 'white',
+                            backgroundImage: pathname === '/contact' ? 'linear-gradient(120deg,rgb(223, 21, 21) 25%, rgb(255, 168, 7))' : 'none',
+                            backgroundClip: pathname === '/contact' ? 'text' : 'unset',
+                            WebkitBackgroundClip: pathname === '/contact' ? 'text' : 'unset',
+                            WebkitTextFillColor: pathname === '/contact' ? 'transparent' : 'white'
                         }}
                     >
                         Contact
