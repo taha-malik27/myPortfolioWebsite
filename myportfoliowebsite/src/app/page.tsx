@@ -15,12 +15,12 @@ function HomePage() {
           }}
         >
           {/* Left side: sidebar */}
-          <div style={{ backgroundColor: "green", height: "100%" }}>
+          <div style={{height: "100%" }}>
             <SideBarComponent />
           </div>
     
           {/* Right side: main content */}
-          <div style={{ padding: "1rem", backgroundColor:"black", color: "white"}}>
+          <div className = {"gradient"} style={{ padding: "1rem", color: "black"}}>
             <h1>Home Page</h1>
             <p>Whatever content you want here.</p>
           </div>
