@@ -21,10 +21,10 @@ function AboutMePage() {
             </div>
 
             {/* Right side: main content */}
-            <div className={"gradient"} style={{ position: "relative", padding: "1rem", color: "black", overflow: "hidden"}}>
+            <div className={"gradient"} style={{ position: "relative", padding: "1rem", color: "white", overflow: "hidden"}}>
                 <ParticlesBackground />
-                <div style={{position: "relative", zIndex: 1}}>
-                    <h1>About Me Page</h1>
+                <div className= "fade-in" style={{position: "relative", zIndex: 1, marginTop:"3%", display:"grid", justifyContent: "center", justifyItems:"center", textAlign:"center"}}>
+                    <h1 className = "header-styling">About Me </h1>
                 </div>
             </div>
         </div>

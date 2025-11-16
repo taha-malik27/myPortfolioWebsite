@@ -79,11 +79,11 @@ export default function SideBarComponent():JSX.Element {
                     }}
                 >
                     <Image 
-                        src={pathname === '/about' ? "/images/AboutMeIcon.png" : "/images/AboutMeIconWhite.png"}
+                        src={pathname === '/about' ? "/images/AboutIcon.png" : "/images/AboutIconWhite.png"}
                         alt="About Me" 
                         priority
                         width={30} 
-                        height={30}
+                        height={34}
                         style={{
                             gridArea: '1 / 1',
                             opacity: hoveredItem === 'about' ? 0 : 1,

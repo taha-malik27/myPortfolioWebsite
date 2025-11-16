@@ -47,7 +47,7 @@ function ParticlesBackground() {
         },
         modes: {
           push: {
-            quantity: 3,
+            quantity: 1,
           },
           grab: {
             distance: 180,
@@ -90,7 +90,8 @@ function ParticlesBackground() {
           density: {
             enable: true,
           },
-          value: 70,
+          value: 20,
+          limit: 30,
         },
         opacity: {
           value: { min: 0.1, max: 0.4 },

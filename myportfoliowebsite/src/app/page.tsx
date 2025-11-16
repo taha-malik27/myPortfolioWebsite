@@ -37,14 +37,25 @@ function HomePage() {
                     {/* Particles Background with Parallax */}
                     <ParticlesBackground />
                     
-                    <div style={{position: "relative", zIndex: 1, marginTop:"5%", display:"grid", justifyContent: "center", justifyItems:"center", textAlign:"center"}}>
+                    <div className= "fade-in" style={{position: "relative", zIndex: 1, marginTop:"3%", display:"grid", justifyContent: "center", justifyItems:"center", textAlign:"center"}}>
 
                       <Image src={"/images/SynthSun.gif"} alt = "Sun" width={200} height={200} ></Image>
                       
-                      <div style={{backgroundColor:"white", height: "1.5px", width:"75%"}}></div>
+                      <div style={{backgroundColor:"white", height: "1.5px", width:"100%"}}></div>
 
-                      <h1 className='header-styling' style={{marginBottom:"10px"}}>Hey there! I'm Taha!</h1>
-                      <p className='interim-header-styling'>Software Engineer<br/>Finance & Investing Ethusiast<br/>Synthwave & Cyberpunk Enjoyer </p>
+
+                      <div style={{display:"grid", gridTemplateColumns: "1.15fr 1fr", backgroundColor:"transparent"}}>
+
+                          <h1 className='header-styling' style={{marginTop:"25px"}}>Hey there!</h1>
+                          
+                          <h1 className='header-styling' style={{marginBottom:"-1.5px", paddingTop:"50px"}}>I'm Taha!</h1>
+
+                      </div>
+
+
+                      <p className='interim-header-styling underline-slide' style={{marginBottom:"-10px"}}>Software Engineer</p>
+                      <p className='interim-header-styling underline-slide' style={{marginBottom:"-10px"}}>Finance & Investing Ethusiast</p>
+                      <p className='interim-header-styling underline-slide'>Synthwave & Cyberpunk Enjoyer</p>
                       <p className='subheader-styling'>Computer Science and Finance Student at the University of Calgary</p>
 
                       <br/>
