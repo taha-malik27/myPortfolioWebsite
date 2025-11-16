@@ -1,5 +1,8 @@
+"use client"
+
 import SideBarComponent from '@/components/cards/sideBar';
 import React from 'react'
+import ParticlesBackground from '@/components/ParticlesBackground';
 
 function ProjectsPage() {
     return (
@@ -18,8 +21,11 @@ function ProjectsPage() {
             </div>
 
             {/* Right side: main content */}
-            <div className={"gradient"} style={{ padding: "1rem", color: "black"}}>
-                <h1>Projects Page</h1>
+            <div className={"gradient"} style={{ position: "relative", padding: "1rem", color: "black", overflow: "hidden"}}>
+                <ParticlesBackground />
+                <div style={{position: "relative", zIndex: 1}}>
+                    <h1>Projects Page</h1>
+                </div>
             </div>
         </div>
     )

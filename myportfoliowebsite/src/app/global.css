@@ -20,6 +20,8 @@
     display: grid;
     grid-template-rows: 50px 1fr ;
     align-items: center;
+    position: relative;
+    z-index: 10;
 
 }
 
@@ -53,7 +55,7 @@
     align-items: center;
     justify-content: center;
     width:50px;
-    height: 60%;
+    height: 50%;
     text-align: center;
    
 }

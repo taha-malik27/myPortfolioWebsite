@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 import Image from "next/image";
 import { backgroundBlurriness } from 'three/tsl';
 import { useRouter } from 'next/navigation';
+import ParticlesBackground from '@/components/ParticlesBackground';
 
 
 function HomePage() {
@@ -31,9 +32,12 @@ function HomePage() {
 
 
             {/* Right side: main content */}
-            <div className = {"gradient"} style={{ padding: "1rem", color: "white"}}>
+            <div className = {"gradient"} style={{ position: "relative", padding: "1rem", color: "white", overflow: "hidden"}}>
                     
-                    <div style={{marginTop:"5%", display:"grid", justifyContent: "center", justifyItems:"center", textAlign:"center"}}>
+                    {/* Particles Background with Parallax */}
+                    <ParticlesBackground />
+                    
+                    <div style={{position: "relative", zIndex: 1, marginTop:"5%", display:"grid", justifyContent: "center", justifyItems:"center", textAlign:"center"}}>
 
                       <Image src={"/images/SynthSun.gif"} alt = "Sun" width={200} height={200} ></Image>
                       

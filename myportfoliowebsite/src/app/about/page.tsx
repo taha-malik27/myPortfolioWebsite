@@ -4,7 +4,7 @@ import SideBarComponent from '@/components/cards/sideBar';
 import React from 'react'
 import ParticlesBackground from '@/components/ParticlesBackground';
 
-function SkillsPage() {
+function AboutMePage() {
     return (
         <div
           style={{
@@ -24,11 +24,12 @@ function SkillsPage() {
             <div className={"gradient"} style={{ position: "relative", padding: "1rem", color: "black", overflow: "hidden"}}>
                 <ParticlesBackground />
                 <div style={{position: "relative", zIndex: 1}}>
-                    <h1>Skills Page</h1>
+                    <h1>About Me Page</h1>
                 </div>
             </div>
         </div>
     )
 }
 
-export default SkillsPage;
+export default AboutMePage;
+
