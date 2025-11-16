@@ -67,6 +67,50 @@ export default function SideBarComponent():JSX.Element {
 
 
 
+            {/* About Me */}
+            <Link href= "/about">
+                <div 
+                    className={"sidebar-item"} 
+                    onMouseEnter={() => setHoveredItem('about')}
+                    onMouseLeave={() => setHoveredItem(null)}
+                    style={{ 
+                        display: 'grid',
+                        placeItems: 'center'
+                    }}
+                >
+                    <Image 
+                        src={pathname === '/about' ? "/images/AboutMeIcon.png" : "/images/AboutMeIconWhite.png"}
+                        alt="About Me" 
+                        priority
+                        width={30} 
+                        height={30}
+                        style={{
+                            gridArea: '1 / 1',
+                            opacity: hoveredItem === 'about' ? 0 : 1,
+                            transition: 'opacity 0.25s ease-in-out'
+                        }}
+                    />
+                    <span 
+                        style={{ 
+                            gridArea: '1 / 1',
+                            opacity: hoveredItem === 'about' ? 1 : 0,
+                            transition: 'opacity 0.25s ease-in-out',
+                            whiteSpace: 'nowrap',
+                            pointerEvents: 'none',
+                            color: pathname === '/about' ? 'orange' : 'white',
+                            backgroundImage: pathname === '/about' ? 'linear-gradient(120deg,rgb(223, 21, 21) 25%, rgb(255, 168, 7))' : 'none',
+                            backgroundClip: pathname === '/about' ? 'text' : 'unset',
+                            WebkitBackgroundClip: pathname === '/about' ? 'text' : 'unset',
+                            WebkitTextFillColor: pathname === '/about' ? 'transparent' : 'white'
+                        }}
+                    >
+                        About <br/> Me
+                    </span>
+                </div>
+            </Link>
+
+
+
             {/* Room */}
             <Link href= "/room">
                 <div 

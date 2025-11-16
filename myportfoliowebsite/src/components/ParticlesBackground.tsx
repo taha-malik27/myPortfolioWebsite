@@ -4,8 +4,9 @@ import { useEffect, useMemo, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { type Container, type ISourceOptions } from "@tsparticles/engine";
 import { loadSlim } from "@tsparticles/slim";
+import React from "react";
 
-const ParticlesBackground = () => {
+function ParticlesBackground() {
   const [init, setInit] = useState(false);
 
   useEffect(() => {
@@ -137,7 +138,7 @@ const ParticlesBackground = () => {
   }
 
   return null;
-};
+}
 
-export default ParticlesBackground;
+export default React.memo(ParticlesBackground);
 
