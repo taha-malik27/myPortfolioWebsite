@@ -13,6 +13,8 @@
 }
 
 
+/* SIDE BAR */
+
 .sidebar{
     background-color:#0b0202ee;
     height: 100%;
@@ -68,6 +70,8 @@
 }
 
 
+/* TEXT STYLING */
+
 .header-styling{
     font-family: 'Stack Sans Notch', sans-serif;
     font-weight: 600;
@@ -94,10 +98,11 @@
 .paragraph-styling{
     font-family: "Outfit", sans-serif;
     font-weight:400;
-    font-size: medium;
+    font-size: 14;
     color: rgb(232, 229, 229)
 }
 
+/* CUSTOM MADE CONTACT ME BUTTON STYLING */
 
 .contact-me-button{
     background-color: transparent;
@@ -149,6 +154,60 @@
     transform: scale(0.95);
 }
 
+/*  SCROLL BAR STYLING - Cross-browser compatibility */
+
+/* Base scrollbar styling - Firefox (Modern & Legacy) */
+.div-scroll {
+    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+    scrollbar-width: thin;
+    -moz-scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+    -moz-scrollbar-width: thin;
+}
+
+/* Webkit Browsers (Chrome, Safari, Edge Chromium, Opera, Brave) */
+.div-scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+.div-scroll::-webkit-scrollbar-track {
+    background: transparent;
+    -webkit-background: transparent;
+}
+
+.div-scroll::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    -webkit-background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+
+.div-scroll::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+    -webkit-background: rgba(255, 255, 255, 0.5);
+}
+
+/* Legacy Edge (Pre-Chromium) */
+.div-scroll::-ms-scrollbar {
+    width: 8px;
+}
+
+.div-scroll::-ms-scrollbar-track {
+    background: transparent;
+}
+
+.div-scroll::-ms-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+.div-scroll::-ms-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+
+
+/* EFFECTS AND ANIMATIONS */
+
 .underline-slide {
     display: inline;                            
     background-image: linear-gradient(currentColor, currentColor);
@@ -186,3 +245,4 @@
     animation: fadeIn 0.5s ease-in;
 }
   
+

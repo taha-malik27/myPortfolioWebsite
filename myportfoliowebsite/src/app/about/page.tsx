@@ -39,7 +39,7 @@ function AboutMePage() {
             </div>
 
             {/* Right side: main content */}
-            <div className={"gradient"} style={{ position: "relative", padding: "1rem", color: "white", overflow: "hidden"}}>
+            <div className={"gradient div-scroll"} style={{ position: "relative", padding: "1rem", color: "white", overflowY: "scroll", overflowX: "hidden"}}>
                 <ParticlesBackground />
                 <div className= "fade-in" style={{position: "relative", zIndex: 1, marginTop:"3%", display:"grid", gridTemplateColumns:"50% 1fr", justifyContent: "center", justifyItems:"center", backgroundColor:"transparent"}}>
                     
@@ -63,6 +63,48 @@ function AboutMePage() {
                         <p className='paragraph-styling'>
                             When I am not coding or testing signals, I am usually lifting weights, hiking, taking photos, or listening to synthwave far too late at night. I enjoy challenges, I like learning fast, and I try to build things that pull me a little closer to the future I imagine.
                         </p>
+
+                        {/* TLDR Section */}
+                        <div style={{
+                            marginTop: "30px",
+                            padding: "20px",
+                            borderLeft: "3px solid #fc8803",
+                            backgroundColor: "rgba(0, 0, 0, 0.3)",
+                            borderRadius: "8px"
+                        }}>
+                            <h2 style={{
+                                fontFamily: 'Stack Sans Notch, sans-serif',
+                                fontWeight: 600,
+                                fontSize: "large",
+                                color: "#fc8803",
+                                marginBottom: "15px",
+                                marginTop: 0
+                            }}>
+                                TL;DR
+                            </h2>
+                            
+                            <div style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: "12px"
+                            }}>
+                                <p className='paragraph-styling' style={{margin: 0}}>
+                                    🧠 Co founder of a student sci fi style neurotech club
+                                </p>
+                                <p className='paragraph-styling' style={{margin: 0}}>
+                                    🌆 Obsessed with cyberpunk, synthwave, and neon cities
+                                </p>
+                                <p className='paragraph-styling' style={{margin: 0}}>
+                                    ✈️ Heading to Singapore for exchange, with China and Japan on the list
+                                </p>
+                                <p className='paragraph-styling' style={{margin: 0}}>
+                                    🛠 Builds things that should not work but somehow do
+                                </p>
+                                <p className='paragraph-styling' style={{margin: 0}}>
+                                    🏋️ Hiking, lifting, photography, and late night playlists
+                                </p>
+                            </div>
+                        </div>
                 
                     </div>
 
