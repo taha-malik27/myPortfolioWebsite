@@ -69,9 +69,74 @@
 .header-styling{
     font-family: 'Stack Sans Notch', sans-serif;
     font-weight: 600;
+    color: white;
+    font-size: xxx-large;
 }
+
+
+.interim-header-styling{
+    font-family: 'Stack Sans Notch', sans-serif;
+    font-weight:400;
+    color: white;
+    font-size: large;
+}
+
 
 .subheader-styling{
     font-family: 'Stack Sans Notch', sans-serif;
-    font-weight: 350;
+    font-weight: 250;
+    font-size: small;
+    color: rgb(194, 194, 194)
 }
+
+.contact-me-button{
+    background-color: transparent;
+    height: 35px;
+    width: 110px;
+    border-radius: 25px;
+    border: solid 2px white;
+    font-family: 'Stack Sans Notch', sans-serif;
+    color: white;
+    transition: transform 0.1s ease;
+    cursor: pointer;
+}
+
+
+.contact-me-button-container:hover .contact-me-button{
+    background-color: transparent;
+    background-image: linear-gradient(120deg,rgb(223, 21, 21) 25%, rgb(255, 168, 7));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    border-radius: 25px;
+}
+
+.contact-me-button-container:active .contact-me-button,
+.contact-me-button:active{
+    background-color: transparent;
+    background-image: linear-gradient(120deg,rgb(223, 21, 21) 25%, rgb(255, 168, 7));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    border-radius: 25px;
+    transform: scale(0.95);
+}
+
+.contact-me-button-background{
+    background-color: transparent;
+    height: 35px;
+    width: 110px;
+    border-radius: 25px;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.contact-me-button-container:hover .contact-me-button-background{
+    background-color: white;
+}
+
+.contact-me-button-container:active .contact-me-button-background{
+    background-color: white;
+    transform: scale(0.95);
+}
+
