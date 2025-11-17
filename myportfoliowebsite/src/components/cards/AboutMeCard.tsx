@@ -2,6 +2,7 @@
 
 import React from 'react';
 import ImageGallery from '@/components/ImageGallery';
+import HoverText from '@/components/HoverText';
 
 interface AboutMeCardProps {
     backgroundColor?: string;
@@ -57,7 +58,9 @@ const AboutMeCard: React.FC<AboutMeCardProps> = ({ backgroundColor = "transparen
         >
             {/* Text Content Section */}
             <div style={{alignSelf: "center", paddingLeft:"10%"}}>
-                <h1 className="header-styling">About Me</h1>
+                <h1 style={{margin: 0, marginBottom: "1rem"}}>
+                    <HoverText text="About Me" className="header-styling" />
+                </h1>
 
                 <p className='paragraph-styling'>
                     Hey! I'm Taha. I study Computer Science and Finance at the University of Calgary, and I spend a lot of time building things, breaking them, and then trying to remember what I did.

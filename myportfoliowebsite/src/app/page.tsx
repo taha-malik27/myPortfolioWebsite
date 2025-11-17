@@ -6,6 +6,7 @@ import Image from "next/image";
 import { backgroundBlurriness } from 'three/tsl';
 import { useRouter } from 'next/navigation';
 import ParticlesBackground from '@/components/ParticlesBackground';
+import HoverText from '@/components/HoverText';
 
 
 function HomePage() {
@@ -46,9 +47,13 @@ function HomePage() {
 
                       <div style={{display:"grid", gridTemplateColumns: "1.15fr 1fr", backgroundColor:"transparent"}}>
 
-                          <h1 className='header-styling' style={{marginTop:"25px"}}>Hey there!</h1>
+                          <h1 style={{marginTop:"25px", marginBottom: "0", marginLeft:"0", marginRight:"0"}}>
+                              <HoverText text="Hey there!" className='header-styling' />
+                          </h1>
                           
-                          <h1 className='header-styling' style={{marginBottom:"-1.5px", paddingTop:"50px"}}>I'm Taha!</h1>
+                          <h1 style={{marginBottom:"-1.5px", paddingTop:"80px", margin: 0}}>
+                              <HoverText text="I'm Taha!" className='header-styling' />
+                          </h1>
 
                       </div>
 
