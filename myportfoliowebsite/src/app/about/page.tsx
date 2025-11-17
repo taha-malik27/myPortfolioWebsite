@@ -4,8 +4,12 @@ import SideBarComponent from '@/components/cards/sideBar';
 import React from 'react'
 import ParticlesBackground from '@/components/ParticlesBackground';
 import AboutMeCard from '@/components/cards/AboutMeCard';
+import LoadingScreen from '@/components/LoadingScreen';
+import { usePageLoader } from '@/hooks/usePageLoader';
 
 function AboutMePage() {
+    const isLoading = usePageLoader(1200); // 1.2 seconds
+
     return (
         <div
           style={{
@@ -13,7 +17,7 @@ function AboutMePage() {
             gridTemplateColumns: "50px 1fr",
             height: "100vh",
             width: "100vw",
-            overflow: "hidden", 
+            overflow: "hidden",
           }}
         >
             {/* Left side: sidebar */}
@@ -32,11 +36,19 @@ function AboutMePage() {
                     color: "white"
                 }}
             >
+                {/* Gradient and Particles load immediately */}
                 <ParticlesBackground />
                 
-                {/* About Me Info Card, reusable since in Room it will also be available*/}
-                <AboutMeCard backgroundColor="transparent" />
-
+                {/* Loading screen overlays content area while children load */}
+                <LoadingScreen isLoading={isLoading} />
+                
+                {/* About Me Info Card fades in after loading */}
+                <div style={{
+                    opacity: isLoading ? 0 : 1,
+                    transition: 'opacity 0.3s ease-in',
+                }}>
+                    <AboutMeCard backgroundColor="transparent" />
+                </div>
 
             </div>
         </div>

@@ -4,8 +4,12 @@ import SideBarComponent from '@/components/cards/sideBar';
 import React from 'react'
 import ParticlesBackground from '@/components/ParticlesBackground';
 import { SkillsCard } from '@/components/cards/SkillsCard';
+import LoadingScreen from '@/components/LoadingScreen';
+import { usePageLoader } from '@/hooks/usePageLoader';
 
 function SkillsPage() {
+    const isLoading = usePageLoader(1200); // 1.2 seconds
+
     return (
         <div
           style={{
@@ -32,11 +36,19 @@ function SkillsPage() {
                     color: "white"
                 }}
             >
+                {/* Gradient and Particles load immediately */}
                 <ParticlesBackground />
                 
-                {/* Skills Info Card, reusable since in Room it will also be available*/}
-                <SkillsCard backgroundColor='transparent'/>
-
+                {/* Loading screen overlays content area while children load */}
+                <LoadingScreen isLoading={isLoading} />
+                
+                {/* Skills Info Card fades in after loading */}
+                <div style={{
+                    opacity: isLoading ? 0 : 1,
+                    transition: 'opacity 0.3s ease-in',
+                }}>
+                    <SkillsCard backgroundColor='transparent'/>
+                </div>
 
             </div>
         </div>

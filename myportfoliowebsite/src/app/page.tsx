@@ -7,11 +7,14 @@ import { backgroundBlurriness } from 'three/tsl';
 import { useRouter } from 'next/navigation';
 import ParticlesBackground from '@/components/ParticlesBackground';
 import HoverText from '@/components/HoverText';
+import LoadingScreen from '@/components/LoadingScreen';
+import { usePageLoader } from '@/hooks/usePageLoader';
 
 
 function HomePage() {
     const router = useRouter();
     const [hoveredItem,setHoveredItem] = useState<string|null>(null)
+    const isLoading = usePageLoader(1200); // 1.2 seconds
 
     return (
         <div
@@ -38,7 +41,17 @@ function HomePage() {
                     {/* Particles Background with Parallax */}
                     <ParticlesBackground />
                     
-                    <div className= "fade-in" style={{position: "relative", zIndex: 1, marginTop:"3%", display:"grid", justifyContent: "center", justifyItems:"center", textAlign:"center"}}>
+                    {/* Loading screen overlays content area while children load */}
+                    <LoadingScreen isLoading={isLoading} />
+                    
+                    {/* Home page content fades in after loading */}
+                    <div style={{
+                        opacity: isLoading ? 0 : 1,
+                        visibility: isLoading ? 'hidden' : 'visible',
+                        transition: 'opacity 0.3s ease-in, visibility 0s linear',
+                        transitionDelay: isLoading ? '0s' : '0.3s',
+                    }}>
+                      <div className= "fade-in" style={{position: "relative", zIndex: 1, marginTop:"3%", display:"grid", justifyContent: "center", justifyItems:"center", textAlign:"center"}}>
 
                       <Image src={"/images/SynthSun.gif"} alt = "Sun" width={200} height={200} ></Image>
                       
@@ -117,6 +130,7 @@ function HomePage() {
                         />
                       </div>
 
+                      </div>
                     </div>
                     
                     
