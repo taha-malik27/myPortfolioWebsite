@@ -9,6 +9,8 @@ interface AboutMeCardProps {
 }
 
 const AboutMeCard: React.FC<AboutMeCardProps> = ({ backgroundColor = "transparent" }) => {
+    
+    
     const images = [
         '/images/Headshot.jpg',
         '/images/SnowHike.jpg',

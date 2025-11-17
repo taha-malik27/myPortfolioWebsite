@@ -3,6 +3,7 @@
 import SideBarComponent from '@/components/cards/sideBar';
 import React from 'react'
 import ParticlesBackground from '@/components/ParticlesBackground';
+import { SkillsCard } from '@/components/cards/SkillsCard';
 
 function SkillsPage() {
     return (
@@ -21,11 +22,22 @@ function SkillsPage() {
             </div>
 
             {/* Right side: main content */}
-            <div className={"gradient"} style={{ position: "relative", padding: "1rem", color: "black", overflow: "hidden"}}>
+            <div 
+                className={"gradient"} 
+                style={{ 
+                    position: "relative",
+                    padding: "1rem",
+                    paddingRight: "0",
+                    overflow: "hidden",
+                    color: "white"
+                }}
+            >
                 <ParticlesBackground />
-                <div style={{position: "relative", zIndex: 1}}>
-                    <h1>Skills Page</h1>
-                </div>
+                
+                {/* Skills Info Card, reusable since in Room it will also be available*/}
+                <SkillsCard backgroundColor='transparent'/>
+
+
             </div>
         </div>
     )
