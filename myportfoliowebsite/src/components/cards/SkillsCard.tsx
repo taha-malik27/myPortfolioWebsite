@@ -3,6 +3,7 @@
 import React, {JSX} from 'react';
 import ImageGallery from '@/components/ImageGallery';
 import HoverText from '@/components/HoverText';
+import VennDialComponent from '../VennDialComponent';
 
 
 interface SkillsCardProps {
@@ -98,21 +99,27 @@ export const SkillsCard: React.FC<SkillsCardProps> = ({ backgroundColor = "trans
                 alignItems:"center" , 
                 justifyContent: "center", 
                 width: "100%",
-                backgroundColor: "rgba(105, 105, 105, 0.77)" 
+                backgroundColor: "rgba(105, 105, 105, 0)" 
             }}>
 
 
                 <div style={{
-                    backgroundColor: "rgba(0, 255, 255, 0.3)", // Cyan tint - temporary
+                    backgroundColor: "rgba(0, 255, 255, 0)", // Cyan tint - temporary
                     padding: "2rem",
                     textAlign: "center",
-                    height:"30%"
+                    height:"30%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center"
                 }}>
-                    <p>Category Controller</p>
+                    <VennDialComponent 
+                        size={220}
+                        onSelectionChange={(selected) => console.log("Selected:", selected)}
+                    />
                 </div>
 
                 <div style={{
-                    backgroundColor: "rgba(0, 255, 255, 0.3)", // Cyan tint - temporary
+                    backgroundColor: "rgba(0, 255, 255, 0)", // Cyan tint - temporary
                     padding: "2rem",
                     textAlign: "center",
                     height:"70%"

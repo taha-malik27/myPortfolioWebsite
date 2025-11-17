@@ -221,6 +221,62 @@
 
 
 
+
+/* SHAPES */
+.circle {
+    width: 100px;
+    height: 100px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 50%; /* This creates the circular shape */
+}
+
+/* Venn Diagram Styles */
+.venn-dial-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    user-select: none;
+    margin-top: 2rem;
+    font-family: 'Stack Sans Notch', sans-serif;
+}
+
+.venn-dial-svg {
+    overflow: visible;
+}
+
+.venn-dial-rotating-group {
+    transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.venn-dial-circle {
+    transition: stroke 0.3s, stroke-width 0.3s, fill 0.3s;
+    pointer-events: none;
+}
+
+.venn-dial-hitbox {
+    fill: transparent;
+    pointer-events: all;
+}
+
+.venn-dial-text {
+    transition: fill 0.3s, font-size 0.3s, font-weight 0.3s;
+    pointer-events: none;
+    text-anchor: middle;
+    dominant-baseline: middle;
+}
+
+.venn-dial-center-dot {
+    fill: #ffffff;
+    opacity: 0.3;
+}
+
+.venn-dial-arrow {
+    fill: #ffac53;
+    opacity: 0.8;
+}
+
+
+
 /* EFFECTS AND ANIMATIONS */
 
 .underline-slide {
