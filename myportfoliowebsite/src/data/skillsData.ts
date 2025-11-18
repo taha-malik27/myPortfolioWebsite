@@ -2,6 +2,7 @@ export interface Skill {
     name: string;
     years: number;
     color: string;
+    note?: string; // Optional note to display beside the skill name
 }
 
 export interface SkillCategory {
@@ -75,11 +76,12 @@ export const skillsData: SkillCategory[] = [
         title: "AI Tools",
         description: "AI-powered tools that enhance productivity and unlock creative possibilities.",
         skills: [
-            { name: "ChatGPT & OpenAI API", years: 3, color: "#10A37F" },
+            { name: "ChatGPT & OpenAI API", years: 3, color: "#10A37F", note: "(Yes, I was there in Nov 2022)" },
             { name: "DALL-E", years: 2, color: "#FF6B6B" },
             { name: "Gemini", years: 1.5, color: "#4285F4" },
             { name: "Cursor", years: 1.5, color: "#000000" },
             { name: "SORA", years: 1.5, color: "#FF3B3B" },
+            { name: "Microsoft Copilot", years: 1.5, color: "#00A4EF" },
             { name: "GitHub Copilot", years: 1, color: "#6E40C9" },
             { name: "Perplexity AI", years: 1, color: "#20808D" }
         ]

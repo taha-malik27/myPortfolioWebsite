@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { SkillCategory } from '@/data/skillsData';
+import { getCategoryColor } from '@/utils/categoryColors';
 
 interface SkillSubCardProps {
     category: SkillCategory;
@@ -19,6 +20,9 @@ export const SkillSubCard: React.FC<SkillSubCardProps> = ({ category }) => {
 
     // Find max years for scaling the bars
     const maxYears = Math.max(...category.skills.map(skill => skill.years));
+    
+    // Get the appropriate color for this category
+    const titleColor = getCategoryColor(category.title);
 
     return (
         <div 
@@ -43,7 +47,7 @@ export const SkillSubCard: React.FC<SkillSubCardProps> = ({ category }) => {
             <h2 style={{ 
                 margin: 0, 
                 marginBottom: "0.75rem",
-                color: "#ffac53",
+                color: titleColor,
                 fontSize: "1.75rem",
                 fontWeight: "600",
                 fontFamily: "'Stack Sans Notch', sans-serif",
@@ -89,6 +93,18 @@ export const SkillSubCard: React.FC<SkillSubCardProps> = ({ category }) => {
                                     minWidth: "0"
                                 }}>
                                     {skill.name}
+                                    {skill.note && (
+                                        <span style={{
+                                            marginLeft: "0.5rem",
+                                            fontSize: "0.8rem",
+                                            fontStyle: "italic",
+                                            color: "rgba(255, 255, 255, 0.5)",
+                                            fontFamily: "'Outfit', sans-serif",
+                                            fontWeight: "400"
+                                        }}>
+                                            {skill.note}
+                                        </span>
+                                    )}
                                 </span>
                                 <span style={{
                                     color: "rgba(255, 255, 255, 0.6)",

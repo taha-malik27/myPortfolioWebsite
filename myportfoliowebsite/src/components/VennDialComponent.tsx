@@ -1,6 +1,7 @@
 "use client"
 
 import React, { JSX, useState, useEffect } from "react"
+import { getCategoryColor } from "@/utils/categoryColors"
 
 interface VennDialComponentProps {
     onSelectionChange?: (selected: string) => void;
@@ -104,6 +105,7 @@ const VennDialComponent = ({ onSelectionChange, size = 240 }: VennDialComponentP
                         const pos = getCirclePosition(index, 0);
                         const isSelected = index === selectedIndex;
                         const isHovered = hoveredIndex === index;
+                        const categoryColor = getCategoryColor(option);
                         
                         return (
                             <g key={option}>
@@ -127,8 +129,8 @@ const VennDialComponent = ({ onSelectionChange, size = 240 }: VennDialComponentP
                                     cx={pos.cx}
                                     cy={pos.cy}
                                     r={radius}
-                                    fill={isHovered ? "rgba(0, 255, 255, 0.1)" : "none"}
-                                    stroke={isSelected ? "#ffac53" : isHovered ? "#ffac53" : "#ffffff"}
+                                    fill={isHovered ? `${categoryColor}1a` : "none"}
+                                    stroke={isSelected ? categoryColor : isHovered ? categoryColor : "#ffffff"}
                                     strokeWidth={isSelected ? "3" : isHovered ? "2.5" : "2"}
                                     style={{
                                         opacity: isSelected ? 1 : isHovered ? 0.9 : 0.7
@@ -144,6 +146,7 @@ const VennDialComponent = ({ onSelectionChange, size = 240 }: VennDialComponentP
                         const isHovered = hoveredIndex === index;
                         const textPos = getTextPosition(index);
                         const textRotation = getTextRotation(index);
+                        const categoryColor = getCategoryColor(option);
                         
                         return (
                             <text
@@ -151,7 +154,7 @@ const VennDialComponent = ({ onSelectionChange, size = 240 }: VennDialComponentP
                                 key={`text-${option}`}
                                 x={textPos.x}
                                 y={textPos.y}
-                                fill={isSelected ? "#ffac53" : isHovered ? "#ffac53" : "#ffffff"}
+                                fill={isSelected ? categoryColor : isHovered ? categoryColor : "#ffffff"}
                                 fontSize={isSelected ? "15" : isHovered ? "13" : "12"}
                                 fontWeight={isSelected ? "bold" : isHovered ? "600" : "normal"}
                                 style={{
@@ -177,6 +180,10 @@ const VennDialComponent = ({ onSelectionChange, size = 240 }: VennDialComponentP
                 <path
                     className="venn-dial-arrow"
                     d={`M ${centerX} ${size - 5} L ${centerX - 6} ${size + 2} L ${centerX + 6} ${size + 2} Z`}
+                    fill={getCategoryColor(selectedOption)}
+                    style={{
+                        transition: "fill 0.6s cubic-bezier(0.4, 0.0, 0.2, 1)"
+                    }}
                 />
             </svg>
         </div>

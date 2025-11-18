@@ -20,7 +20,7 @@ export const SkillsCard: React.FC<SkillsCardProps> = ({ backgroundColor = "trans
     // Update dial size based on viewport width
     useEffect(() => {
         const updateDialSize = () => {
-            const newSize = Math.max(150, Math.min(300, window.innerWidth * 0.2));
+            const newSize = Math.max(130, Math.min(300, window.innerWidth * 0.35));
             setDialSize(newSize);
         };
         
@@ -103,30 +103,57 @@ export const SkillsCard: React.FC<SkillsCardProps> = ({ backgroundColor = "trans
                 )}
             </div>
 
-            {/* Venn Diagram Section */}
+            {/* Right Section - Visual/Interactive Element */}
             <div style={{
-                display: "flex", 
+                display: "grid", 
+                gridTemplateRows: "40% 60%",
                 alignItems: "center", 
+                justifyItems: "center",
+                alignContent: "center",
                 justifyContent: "center", 
-                paddingRight: "10%", 
-                paddingTop: "5%", 
-                paddingLeft: "12%", 
                 width: "100%",
-                minWidth: 0
+                height: "100%"
             }}>
+                {/* Top Section - Venn Diagram */}
                 <div style={{
+                    display: "flex", 
+                    alignItems: "center", 
+                    justifyContent: "center", 
                     width: "100%",
-                    maxWidth: "300px",
-                    minWidth: "150px",
-                    aspectRatio: "1",
+                    height: "100%"
+                }}>
+                    <div style={{
+                        width: "100%",
+                        maxWidth: "300px",
+                        minWidth: "150px",
+                        aspectRatio: "1",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center"
+                    }}>
+                        <VennDialComponent 
+                            size={dialSize}
+                            onSelectionChange={(selected) => setSelectedCategory(selected)}
+                        />
+                    </div>
+                </div>
+
+                {/* Bottom Section - Placeholder for Future Visual */}
+                <div style={{
                     display: "flex",
                     alignItems: "center",
-                    justifyContent: "center"
+                    justifyContent: "center",
+                    textAlign: "center",
+                    width: "100%",
+                    height: "100%"
                 }}>
-                    <VennDialComponent 
-                        size={dialSize}
-                        onSelectionChange={(selected) => setSelectedCategory(selected)}
-                    />
+                    <p style={{
+                        color: "rgba(255, 255, 255, 0.5)",
+                        fontFamily: "'Outfit', sans-serif",
+                        fontSize: "0.9rem"
+                    }}>
+                        Visual element / Icon grid / Chart goes here
+                    </p>
                 </div>
             </div>
         </div>

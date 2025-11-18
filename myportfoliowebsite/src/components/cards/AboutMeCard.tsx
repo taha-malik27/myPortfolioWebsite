@@ -48,7 +48,7 @@ const AboutMeCard: React.FC<AboutMeCardProps> = ({ backgroundColor = "transparen
                 
                 /* Spacing */
                 marginTop: "-0.5%",
-                paddingRight: "1rem",
+                paddingRight: "2rem",
                 
                 /* Overflow */
                 overflowY: "auto",
