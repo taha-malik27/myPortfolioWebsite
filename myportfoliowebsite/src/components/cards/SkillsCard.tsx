@@ -1,16 +1,53 @@
 "use client"
 
-import React, {JSX} from 'react';
-import ImageGallery from '@/components/ImageGallery';
+import React, { useState, useEffect } from 'react';
 import HoverText from '@/components/HoverText';
 import VennDialComponent from '../VennDialComponent';
-
+import { SkillSubCard } from './SkillSubCard';
+import { skillsData } from '@/data/skillsData';
 
 interface SkillsCardProps {
-    backgroundColor?: string
+    backgroundColor?: string;
 }
 
 export const SkillsCard: React.FC<SkillsCardProps> = ({ backgroundColor = "transparent" }) => {
+    // State to track which category is selected (default to Languages)
+    const [selectedCategory, setSelectedCategory] = useState<string>("Languages");
+    
+    // State for responsive dial size
+    const [dialSize, setDialSize] = useState<number>(300);
+    
+    // Update dial size based on viewport width
+    useEffect(() => {
+        const updateDialSize = () => {
+            const newSize = Math.max(150, Math.min(300, window.innerWidth * 0.2));
+            setDialSize(newSize);
+        };
+        
+        // Set initial size
+        updateDialSize();
+        
+        // Add resize listener
+        window.addEventListener('resize', updateDialSize);
+        
+        // Cleanup
+        return () => window.removeEventListener('resize', updateDialSize);
+    }, []);
+
+    // Map the selection to the correct category data
+    const getCategoryData = () => {
+        const categoryMap: { [key: string]: string } = {
+            "Languages": "languages",
+            "Frameworks": "frameworks",
+            "Technologies": "technologies",
+            "AI Tools": "aitools"
+        };
+        
+        const categoryId = categoryMap[selectedCategory];
+        return skillsData.find(cat => cat.id === categoryId);
+    };
+
+    const currentCategory = getCategoryData();
 
     return (
         <div 
@@ -22,7 +59,7 @@ export const SkillsCard: React.FC<SkillsCardProps> = ({ backgroundColor = "trans
                 
                 /* Layout */
                 display: "grid",
-                gridTemplateColumns: "55% 1fr",
+                gridTemplateColumns: "50% 1fr",
                 justifyContent: "center",
                 justifyItems: "center",
                 
@@ -41,95 +78,59 @@ export const SkillsCard: React.FC<SkillsCardProps> = ({ backgroundColor = "trans
                 backgroundColor: backgroundColor
             }}
         >
-            {/* Left Section - Skills Content */}
+            {/* Text Content Section */}
             <div style={{
                 alignSelf: "center", 
-                backgroundColor: "rgba(0, 0, 0, 0.47)", // white tint - temporary
+                paddingLeft:"10%",
+                paddingRight: "5%",
                 width: "100%",
-               
+                boxSizing: "border-box"
             }}>
+                <h1 style={{margin: 0, marginBottom: "1rem"}}>
+                    <HoverText text="My Skills" className="header-styling" />
+                </h1>
 
+                <p className='paragraph-styling'>
+                    These are the technical skills I have touched throughout my journey, and my relative experience with them.
+                </p>
 
-                    <h1 style={{ margin: 0, marginBottom: "1rem" }}>
-                        <HoverText text="My Skills" className="header-styling" />
-                    </h1>
-
-                    
-                    {/* Skills Categories Section */}
-                    <div style={{
-                        backgroundColor: "rgba(0, 255, 0, 0.2)", // Green tint - temporary
-                        padding: "1rem",
-                        marginBottom: "1rem"
-                    }}>
-                        <h2>Category 1 - Languages</h2>
-                        <p className='paragraph-styling'>Skills content here...</p>
-                    </div>
-
-
-                    <div style={{
-                        backgroundColor: "rgba(0, 0, 255, 0.2)", // Blue tint - temporary
-                        padding: "1rem",
-                        marginBottom: "1rem"
-                    }}>
-
-                        <h2>Category 2 - Frameworks</h2>
-                        <p className='paragraph-styling'>Skills content here...</p>
-                    </div>
-
-
-                    <div style={{
-                        backgroundColor: "rgba(255, 255, 0, 0.2)", // Yellow tint - temporary
-                        padding: "1rem",
-                        marginBottom: "1rem"
-                    }}>
-                        <h2>Category 3 - Tools</h2>
-                        <p className='paragraph-styling'>Skills content here...</p>
-                    </div>
-
-                    
+                {/* Dynamic Skill Category Card */}
+                {currentCategory && (
+                    <SkillSubCard 
+                        key={currentCategory.id}
+                        category={currentCategory} 
+                    />
+                )}
             </div>
 
-            
-
-
-            {/* Right Section - Visual/Interactive Element */}
+            {/* Venn Diagram Section */}
             <div style={{
-                display: "grid", 
-                gridTemplateRows:"30% 1fr",
-                alignItems:"center" , 
+                display: "flex", 
+                alignItems: "center", 
                 justifyContent: "center", 
+                paddingRight: "10%", 
+                paddingTop: "5%", 
+                paddingLeft: "12%", 
                 width: "100%",
-                backgroundColor: "rgba(105, 105, 105, 0)" 
+                minWidth: 0
             }}>
-
-
                 <div style={{
-                    backgroundColor: "rgba(0, 255, 255, 0)", // Cyan tint - temporary
-                    padding: "2rem",
-                    textAlign: "center",
-                    height:"30%",
+                    width: "100%",
+                    maxWidth: "300px",
+                    minWidth: "150px",
+                    aspectRatio: "1",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center"
                 }}>
                     <VennDialComponent 
-                        size={220}
-                        onSelectionChange={(selected) => console.log("Selected:", selected)}
+                        size={dialSize}
+                        onSelectionChange={(selected) => setSelectedCategory(selected)}
                     />
                 </div>
-
-                <div style={{
-                    backgroundColor: "rgba(0, 255, 255, 0)", // Cyan tint - temporary
-                    padding: "2rem",
-                    textAlign: "center",
-                    height:"70%"
-                }}>
-                    <p>Visual element / Icon grid / Chart goes here</p>
-                </div>
-
             </div>
         </div>
     );
+};
 
-}
-
+export default SkillsCard;

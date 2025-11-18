@@ -1,6 +1,6 @@
 "use client"
 
-import React, { JSX, useState } from "react"
+import React, { JSX, useState, useEffect } from "react"
 
 interface VennDialComponentProps {
     onSelectionChange?: (selected: string) => void;
@@ -11,21 +11,28 @@ const VennDialComponent = ({ onSelectionChange, size = 240 }: VennDialComponentP
     const [rotation, setRotation] = useState(180); // Start at 180 degrees so first circle is at bottom
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
     
-    const options = ["Languages", "Frameworks", "Technologies"];
+    const options = ["Languages", "Frameworks", "Technologies", "AI Tools"];
+    
+    // Emit initial selection on mount
+    useEffect(() => {
+        const normalizedRotation = ((rotation % 360) + 360) % 360;
+        const selectedIndex = (Math.round((180 - normalizedRotation) / 90) % 4 + 4) % 4;
+        onSelectionChange?.(options[selectedIndex]);
+    }, []); // Empty dependency array means this only runs once on mount
     
     // Calculate which option is currently at the bottom (selected)
-    // Since circles are positioned with angle = (index * 120 + rot - 90)
-    // For a circle to be at bottom (90°): index * 120 + rot - 90 = 90
-    // Therefore: rot = 180 - index * 120
-    // Solving for index: index = (180 - rot) / 120
+    // Since circles are positioned with angle = (index * 90 + rot - 90)
+    // For a circle to be at bottom (90°): index * 90 + rot - 90 = 90
+    // Therefore: rot = 180 - index * 90
+    // Solving for index: index = (180 - rot) / 90
     const normalizedRotation = ((rotation % 360) + 360) % 360;
-    const selectedIndex = (Math.round((180 - normalizedRotation) / 120) % 3 + 3) % 3;
+    const selectedIndex = (Math.round((180 - normalizedRotation) / 90) % 4 + 4) % 4;
     const selectedOption = options[selectedIndex];
 
     const handleCircleClick = (clickedIndex: number) => {
         // Calculate target rotation to bring clicked circle to bottom
-        // For index to be at bottom: rot = 180 - index * 120
-        const targetRotation = 180 - clickedIndex * 120;
+        // For index to be at bottom: rot = 180 - index * 90
+        const targetRotation = 180 - clickedIndex * 90;
         
         // Find the shortest path from current rotation to target
         let diff = targetRotation - rotation;
@@ -39,15 +46,15 @@ const VennDialComponent = ({ onSelectionChange, size = 240 }: VennDialComponentP
         onSelectionChange?.(options[clickedIndex]);
     };
 
-    // Calculate circle positions for Venn diagram (120 degrees apart)
+    // Calculate circle positions for 4-way dial (90 degrees apart)
     const radius = size * 0.30; // Radius of each circle
     const centerX = size / 2;
     const centerY = size / 2;
-    const orbitRadius = size * 0.16; // Distance from center
+    const orbitRadius = size * 0.22; // Distance from center (increased for more spacing)
 
     // Circle positions (starting with one at bottom)
     const getCirclePosition = (index: number, rot: number) => {
-        const angle = (index * 120 + rot - 90) * (Math.PI / 180); // -90 to start at bottom
+        const angle = (index * 90 + rot - 90) * (Math.PI / 180); // -90 to start at bottom
         return {
             cx: centerX + orbitRadius * Math.cos(angle),
             cy: centerY + orbitRadius * Math.sin(angle),
@@ -58,10 +65,9 @@ const VennDialComponent = ({ onSelectionChange, size = 240 }: VennDialComponentP
     // Text position - in the non-intersecting outer part of each circle
     const getTextPosition = (index: number) => {
         // Each circle's angle within the group
-        const circleAngle = (index * 120 - 90) * (Math.PI / 180);
+        const circleAngle = (index * 90 - 90) * (Math.PI / 180);
         
         // Position text along the ray from center, in the outer non-overlapping region
-        // Adjusted to be closer to center (reduced from 0.7 to 0.62 for ~5px closer)
         const textDistance = orbitRadius + radius * 0.5;
         
         return {
@@ -72,9 +78,9 @@ const VennDialComponent = ({ onSelectionChange, size = 240 }: VennDialComponentP
     
     // Calculate text rotation - so it's upright when THIS circle is selected (at bottom)
     const getTextRotation = (index: number) => {
-        // When group rotates to put circle i at bottom: rotation = 180 - i * 120
-        // For text to be upright at that point: text_rotation_in_group = i * 120 - 180
-        return index * 120 - 180;
+        // When group rotates to put circle i at bottom: rotation = 180 - i * 90
+        // For text to be upright at that point: text_rotation_in_group = i * 90 - 180
+        return index * 90 - 180;
     };
 
     return (
@@ -93,7 +99,7 @@ const VennDialComponent = ({ onSelectionChange, size = 240 }: VennDialComponentP
                         transform: `rotate(${rotation}deg)`
                     }}
                 >
-                    {/* Draw three circles with click handlers */}
+                    {/* Draw four circles with click handlers */}
                     {options.map((option, index) => {
                         const pos = getCirclePosition(index, 0);
                         const isSelected = index === selectedIndex;

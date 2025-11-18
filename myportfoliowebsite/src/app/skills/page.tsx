@@ -17,7 +17,7 @@ function SkillsPage() {
             gridTemplateColumns: "50px 1fr",
             height: "100vh",
             width: "100vw",
-            overflow: "hidden", 
+            overflow: "hidden",
           }}
         >
             {/* Left side: sidebar */}
@@ -47,7 +47,7 @@ function SkillsPage() {
                     opacity: isLoading ? 0 : 1,
                     transition: 'opacity 0.3s ease-in',
                 }}>
-                    <SkillsCard backgroundColor='transparent'/>
+                    <SkillsCard backgroundColor="transparent" />
                 </div>
 
             </div>

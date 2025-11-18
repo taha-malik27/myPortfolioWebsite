@@ -59,7 +59,13 @@ const AboutMeCard: React.FC<AboutMeCardProps> = ({ backgroundColor = "transparen
             }}
         >
             {/* Text Content Section */}
-            <div style={{alignSelf: "center", paddingLeft:"10%"}}>
+            <div style={{
+                alignSelf: "center", 
+                paddingLeft:"10%",
+                paddingRight: "5%",
+                width: "100%",
+                boxSizing: "border-box"
+            }}>
                 <h1 style={{margin: 0, marginBottom: "1rem"}}>
                     <HoverText text="About Me" className="header-styling" />
                 </h1>
