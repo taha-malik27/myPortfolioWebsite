@@ -4,7 +4,9 @@ import React, { useState, useEffect } from 'react';
 import HoverText from '@/components/HoverText';
 import VennDialComponent from '../VennDialComponent';
 import { SkillSubCard } from './SkillSubCard';
+import { SkillHalo } from '../SkillHalo';
 import { skillsData } from '@/data/skillsData';
+import { getCategoryColor } from '@/utils/categoryColors';
 
 interface SkillsCardProps {
     backgroundColor?: string;
@@ -14,24 +16,35 @@ export const SkillsCard: React.FC<SkillsCardProps> = ({ backgroundColor = "trans
     // State to track which category is selected (default to Languages)
     const [selectedCategory, setSelectedCategory] = useState<string>("Languages");
     
-    // State for responsive dial size
-    const [dialSize, setDialSize] = useState<number>(300);
+    // State for responsive dial size (10% smaller)
+    const [dialSize, setDialSize] = useState<number>(270);
     
-    // Update dial size based on viewport width
+    // State for responsive halo radius
+    const [haloRadius, setHaloRadius] = useState<number>(120);
+    
+    // State for fade transition of halo
+    const [isHaloVisible, setIsHaloVisible] = useState(false);
+    
+    // Update dial size and halo radius based on viewport width
     useEffect(() => {
-        const updateDialSize = () => {
-            const newSize = Math.max(130, Math.min(300, window.innerWidth * 0.35));
-            setDialSize(newSize);
+        const updateSizes = () => {
+            // Dial size scaled down by 10%
+            const newDialSize = Math.max(130, Math.min(300, window.innerWidth * 0.35)) * 0.85;
+            setDialSize(newDialSize);
+            
+            // Halo radius scales between 100-140px based on viewport (more spacious)
+            const newHaloRadius = Math.max(80, Math.min(150, window.innerWidth * 0.1)) *0.85;
+            setHaloRadius(newHaloRadius);
         };
         
-        // Set initial size
-        updateDialSize();
+        // Set initial sizes
+        updateSizes();
         
         // Add resize listener
-        window.addEventListener('resize', updateDialSize);
+        window.addEventListener('resize', updateSizes);
         
         // Cleanup
-        return () => window.removeEventListener('resize', updateDialSize);
+        return () => window.removeEventListener('resize', updateSizes);
     }, []);
 
     // Map the selection to the correct category data
@@ -49,6 +62,26 @@ export const SkillsCard: React.FC<SkillsCardProps> = ({ backgroundColor = "trans
 
     const currentCategory = getCategoryData();
 
+    // Trigger fade animation when category changes
+    useEffect(() => {
+        setIsHaloVisible(false);
+        const timer = setTimeout(() => setIsHaloVisible(true), 50);
+        return () => clearTimeout(timer);
+    }, [currentCategory?.id]);
+
+    // Get featured skills for the current category
+    const getFeaturedSkills = () => {
+        if (!currentCategory || !currentCategory.featuredSkills) return [];
+        
+        return currentCategory.featuredSkills
+            .map(featuredName => 
+                currentCategory.skills.find(skill => skill.name === featuredName)
+            )
+            .filter(skill => skill !== undefined);
+    };
+
+    const featuredSkills = getFeaturedSkills();
+
     return (
         <div 
             className="fade-in div-scroll" 
@@ -59,7 +92,7 @@ export const SkillsCard: React.FC<SkillsCardProps> = ({ backgroundColor = "trans
                 
                 /* Layout */
                 display: "grid",
-                gridTemplateColumns: "50% 1fr",
+                gridTemplateColumns: "45% 1fr",
                 justifyContent: "center",
                 justifyItems: "center",
                 
@@ -106,13 +139,15 @@ export const SkillsCard: React.FC<SkillsCardProps> = ({ backgroundColor = "trans
             {/* Right Section - Visual/Interactive Element */}
             <div style={{
                 display: "grid", 
-                gridTemplateRows: "40% 60%",
+                gridTemplateRows: "45% 55%",
                 alignItems: "center", 
                 justifyItems: "center",
                 alignContent: "center",
                 justifyContent: "center", 
                 width: "100%",
-                height: "100%"
+                height: "100%",
+                marginTop: "-20px",
+                // backgroundColor:"black" DEBUG
             }}>
                 {/* Top Section - Venn Diagram */}
                 <div style={{
@@ -120,7 +155,10 @@ export const SkillsCard: React.FC<SkillsCardProps> = ({ backgroundColor = "trans
                     alignItems: "center", 
                     justifyContent: "center", 
                     width: "100%",
-                    height: "100%"
+                    height: "100%",
+                    marginTop: "-10px",
+                    marginBottom: "10px",
+                    // backgroundColor:"lime" DEBUG
                 }}>
                     <div style={{
                         width: "100%",
@@ -129,7 +167,8 @@ export const SkillsCard: React.FC<SkillsCardProps> = ({ backgroundColor = "trans
                         aspectRatio: "1",
                         display: "flex",
                         alignItems: "center",
-                        justifyContent: "center"
+                        justifyContent: "center",
+                        // backgroundColor: "red" DEBUG
                     }}>
                         <VennDialComponent 
                             size={dialSize}
@@ -138,22 +177,32 @@ export const SkillsCard: React.FC<SkillsCardProps> = ({ backgroundColor = "trans
                     </div>
                 </div>
 
-                {/* Bottom Section - Placeholder for Future Visual */}
+                {/* Bottom Section - Skill Halo */}
                 <div style={{
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     textAlign: "center",
+                    paddingTop:"15px",
                     width: "100%",
-                    height: "100%"
+                    height: "100%",
+                    opacity: isHaloVisible ? 1 : 0,
+                    transform: isHaloVisible ? 'translateY(0)' : 'translateY(-20px)',
+                    transition: 'opacity 0.4s ease-out, transform 0.4s ease-out',
+                    // backgroundColor:"yellow" DEBUG
                 }}>
-                    <p style={{
-                        color: "rgba(255, 255, 255, 0.5)",
-                        fontFamily: "'Outfit', sans-serif",
-                        fontSize: "0.9rem"
-                    }}>
-                        Visual element / Icon grid / Chart goes here
-                    </p>
+                    {currentCategory && featuredSkills.length > 0 && (
+                        <SkillHalo
+                            key={currentCategory.id}
+                            categoryId={currentCategory.id}
+                            label={currentCategory.title}
+                            skills={featuredSkills}
+                            radius={haloRadius}
+                            rotationSpeed={20}
+                            direction="clockwise"
+                            titleColor={getCategoryColor(currentCategory.title)}
+                        />
+                    )}
                 </div>
             </div>
         </div>

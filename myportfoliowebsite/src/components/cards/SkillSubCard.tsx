@@ -34,7 +34,7 @@ export const SkillSubCard: React.FC<SkillSubCardProps> = ({ category }) => {
                 border: "1px solid rgba(255, 255, 255, 0.1)",
                 marginBottom: "1rem",
                 opacity: isVisible ? 1 : 0,
-                transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+                transform: isVisible ? 'translateY(0)' : 'translateY(-20px)',
                 transition: 'opacity 0.4s ease-out, transform 0.4s ease-out',
                 maxHeight: "65vh",
                 overflowY: "auto",

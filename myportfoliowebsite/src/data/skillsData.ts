@@ -3,6 +3,7 @@ export interface Skill {
     years: number;
     color: string;
     note?: string; // Optional note to display beside the skill name
+    logoSrc?: string; // Path to the skill logo image
 }
 
 export interface SkillCategory {
@@ -10,6 +11,7 @@ export interface SkillCategory {
     title: string;
     description: string;
     skills: Skill[];
+    featuredSkills?: string[]; // Array of 5 skill names to display in halo
 }
 
 export const skillsData: SkillCategory[] = [
@@ -17,6 +19,7 @@ export const skillsData: SkillCategory[] = [
         id: "languages",
         title: "Languages",
         description: "Programming languages I use to bring ideas to life, from system-level code to web development.",
+        featuredSkills: ["Python", "Java", "JavaScript/TypeScript", "SQL", "HTML & CSS"],
         skills: [
             { name: "Python", years: 4, color: "#3776AB" },
             { name: "Java", years: 3, color: "#007396" },
@@ -33,15 +36,16 @@ export const skillsData: SkillCategory[] = [
         id: "frameworks",
         title: "Libraries & Frameworks",
         description: "Frameworks and libraries that accelerate development and enable powerful functionality.",
+        featuredSkills: ["React.js", "NumPy", "SciPy", "PostgreSQL", "Tailwind CSS"],
         skills: [
             { name: "SciPy", years: 3, color: "#8CAAE6" },
             { name: "NumPy", years: 3, color: "#013243" },
-            { name: "VispY", years: 3, color: "#FF6B6B" },
+            { name: "VisPy", years: 3, color: "#FF6B6B" },
             { name: "Pandas", years: 3, color: "#150458" },
             { name: "Shiny", years: 3, color: "#75AADB" },
             { name: "JavaFX", years: 2.5, color: "#FF8800" },
             { name: "PostgreSQL", years: 2, color: "#336791" },
-            { name: "React", years: 2, color: "#61DAFB" },
+            { name: "React.js", years: 2, color: "#61DAFB" },
             { name: "Node.js", years: 2, color: "#339933" },
             { name: "Next.js", years: 2, color: "#000000" },
             { name: "Tailwind CSS", years: 2, color: "#06B6D4" },
@@ -53,6 +57,7 @@ export const skillsData: SkillCategory[] = [
         id: "technologies",
         title: "Technologies & Dev Tools",
         description: "Tools and platforms that streamline development workflows and enable robust cloud solutions.",
+        featuredSkills: ["Git (GitHub/GitLab)", "VS Code", "IntelliJ IDEA", "Azure Cloud", "Excel"],
         skills: [
             { name: "Git (GitHub/GitLab)", years: 4, color: "#F05032" },
             { name: "VS Code", years: 4, color: "#007ACC" },
@@ -75,6 +80,7 @@ export const skillsData: SkillCategory[] = [
         id: "aitools",
         title: "AI Tools",
         description: "AI-powered tools that enhance productivity and unlock creative possibilities.",
+        featuredSkills: ["ChatGPT & OpenAI API", "Gemini", "Cursor", "Microsoft Copilot", "GitHub Copilot"],
         skills: [
             { name: "ChatGPT & OpenAI API", years: 3, color: "#10A37F", note: "(Yes, I was there in Nov 2022)" },
             { name: "DALL-E", years: 2, color: "#FF6B6B" },

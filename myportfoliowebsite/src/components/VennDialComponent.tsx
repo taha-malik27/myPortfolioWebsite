@@ -14,6 +14,9 @@ const VennDialComponent = ({ onSelectionChange, size = 240 }: VennDialComponentP
     
     const options = ["Languages", "Frameworks", "Technologies", "AI Tools"];
     
+    // Responsive text size - decreases 15% more as viewport/size shrinks
+    const responsiveTextSize = Math.max(10, Math.min(13, size * 0.05));
+    
     // Emit initial selection on mount
     useEffect(() => {
         const normalizedRotation = ((rotation % 360) + 360) % 360;
@@ -155,7 +158,7 @@ const VennDialComponent = ({ onSelectionChange, size = 240 }: VennDialComponentP
                                 x={textPos.x}
                                 y={textPos.y}
                                 fill={isSelected ? categoryColor : isHovered ? categoryColor : "#ffffff"}
-                                fontSize={isSelected ? "15" : isHovered ? "13" : "12"}
+                                fontSize={isSelected ? responsiveTextSize + 2 : isHovered ? responsiveTextSize : responsiveTextSize - 1}
                                 fontWeight={isSelected ? "bold" : isHovered ? "600" : "normal"}
                                 style={{
                                     transform: `rotate(${textRotation}deg)`,
