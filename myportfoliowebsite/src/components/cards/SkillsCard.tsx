@@ -22,9 +22,6 @@ export const SkillsCard: React.FC<SkillsCardProps> = ({ backgroundColor = "trans
     // State for responsive halo radius
     const [haloRadius, setHaloRadius] = useState<number>(120);
     
-    // State for fade transition of halo
-    const [isHaloVisible, setIsHaloVisible] = useState(false);
-    
     // Update dial size and halo radius based on viewport width
     useEffect(() => {
         const updateSizes = () => {
@@ -61,13 +58,6 @@ export const SkillsCard: React.FC<SkillsCardProps> = ({ backgroundColor = "trans
     };
 
     const currentCategory = getCategoryData();
-
-    // Trigger fade animation when category changes
-    useEffect(() => {
-        setIsHaloVisible(false);
-        const timer = setTimeout(() => setIsHaloVisible(true), 50);
-        return () => clearTimeout(timer);
-    }, [currentCategory?.id]);
 
     // Get featured skills for the current category
     const getFeaturedSkills = () => {
@@ -186,9 +176,6 @@ export const SkillsCard: React.FC<SkillsCardProps> = ({ backgroundColor = "trans
                     paddingTop:"15px",
                     width: "100%",
                     height: "100%",
-                    opacity: isHaloVisible ? 1 : 0,
-                    transform: isHaloVisible ? 'translateY(0)' : 'translateY(-20px)',
-                    transition: 'opacity 0.4s ease-out, transform 0.4s ease-out',
                     // backgroundColor:"yellow" DEBUG
                 }}>
                     {currentCategory && featuredSkills.length > 0 && (

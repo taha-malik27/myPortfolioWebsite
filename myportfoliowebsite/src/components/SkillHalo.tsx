@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Skill } from '@/data/skillsData';
 
 interface SkillHaloProps {
@@ -57,6 +57,15 @@ export const SkillHalo: React.FC<SkillHaloProps> = ({
     paused = false,
     titleColor = "#ffac53"
 }) => {
+    const [isVisible, setIsVisible] = useState(false);
+
+    // Trigger animation on mount or category change (same as SkillSubCard)
+    useEffect(() => {
+        setIsVisible(false);
+        const timer = setTimeout(() => setIsVisible(true), 50);
+        return () => clearTimeout(timer);
+    }, [categoryId]);
+
     // Adjust radius to account for container padding (only left/right now)
     const effectiveRadius = radius * 1.1; // Scale up since we only have horizontal padding
     
@@ -95,7 +104,10 @@ export const SkillHalo: React.FC<SkillHaloProps> = ({
                 paddingRight:"30px",
                 paddingTop:"10px",
                 boxSizing: "border-box",
-                overflow: "hidden"
+                overflow: "hidden",
+                opacity: isVisible ? 1 : 0,
+                transform: isVisible ? 'translateY(0)' : 'translateY(-20px)',
+                transition: 'opacity 0.4s ease-out, transform 0.4s ease-out'
             }}
         >
             {/* Rotating ring container */}
