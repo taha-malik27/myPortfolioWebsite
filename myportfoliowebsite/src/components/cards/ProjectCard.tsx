@@ -83,7 +83,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
     const [isOneColumn, setIsOneColumn] = useState(false);
     const [iframeScale, setIframeScale] = useState(1);
     const [isVideoHovered, setIsVideoHovered] = useState(false);
-    const [isVideoPlaying, setIsVideoPlaying] = useState(true);
+    const [isVideoPlaying, setIsVideoPlaying] = useState(false);
     const [isFullscreen, setIsFullscreen] = useState(false);
     const [isIframeActive, setIsIframeActive] = useState(false);
     const [lastInteractionTime, setLastInteractionTime] = useState<number | null>(null);
@@ -416,7 +416,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
                     ref={videoRef}
                     src="/images/projects/MINDStreamDemo.mp4"
                     loop
-                    autoPlay
                     muted
                     playsInline
                     style={{

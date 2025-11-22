@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import Image from 'next/image';
 
 interface ProjectImageGalleryProps {
@@ -242,8 +243,8 @@ const ProjectImageGallery: React.FC<ProjectImageGalleryProps> = ({
             </div>
         </div>
         
-        {/* Fullscreen Modal */}
-        {isFullscreen && (
+        {/* Fullscreen Modal - Rendered via Portal to document.body */}
+        {isFullscreen && typeof window !== 'undefined' && createPortal(
             <div
                 style={{
                     position: "fixed",
@@ -475,7 +476,8 @@ const ProjectImageGallery: React.FC<ProjectImageGalleryProps> = ({
                         </div>
                     )}
                 </div>
-            </div>
+            </div>,
+            document.body
         )}
         </>
     );
