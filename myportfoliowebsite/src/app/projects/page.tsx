@@ -3,6 +3,7 @@
 import SideBarComponent from '@/components/cards/sideBar';
 import React from 'react'
 import ParticlesBackground from '@/components/ParticlesBackground';
+import ProjectCard from '@/components/cards/ProjectCard';
 import LoadingScreen from '@/components/LoadingScreen';
 import { usePageLoader } from '@/hooks/usePageLoader';
 
@@ -16,7 +17,7 @@ function ProjectsPage() {
             gridTemplateColumns: "50px 1fr",
             height: "100vh",
             width: "100vw",
-            overflow: "hidden", 
+            overflow: "hidden",
           }}
         >
             {/* Left side: sidebar */}
@@ -25,22 +26,30 @@ function ProjectsPage() {
             </div>
 
             {/* Right side: main content */}
-            <div className={"gradient"} style={{ position: "relative", padding: "1rem", color: "black", overflow: "hidden"}}>
+            <div 
+                className={"gradient"} 
+                style={{ 
+                    position: "relative",
+                    padding: "1rem",
+                    paddingRight: "0",
+                    overflow: "hidden",
+                    color: "white"
+                }}
+            >
                 {/* Gradient and Particles load immediately */}
                 <ParticlesBackground />
                 
                 {/* Loading screen overlays content area while children load */}
                 <LoadingScreen isLoading={isLoading} />
                 
-                {/* Projects page content fades in after loading */}
+                {/* Projects Info Card fades in after loading */}
                 <div style={{
-                    position: "relative",
-                    zIndex: 1,
                     opacity: isLoading ? 0 : 1,
                     transition: 'opacity 0.3s ease-in',
                 }}>
-                    <h1>Projects Page</h1>
+                    <ProjectCard backgroundColor="transparent" />
                 </div>
+
             </div>
         </div>
     )
