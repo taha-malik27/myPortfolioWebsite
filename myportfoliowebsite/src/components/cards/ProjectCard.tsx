@@ -60,7 +60,7 @@ const projects: Project[] = [
         title: "CAPM Portfolio Optimizer",
         tagline: "Portfolio Optimization & Forecasting",
         tags: ["Excel", "CAPM", "Financial Modeling", "Sharpe Ratio"],
-        color: "#ffbe0b",
+        color: "#10B981", // Money green
         description: "This project builds an optimal investment portfolio using portfolio theory and the Capital Asset Pricing Model (CAPM). The goal was simple: maximize returns while managing risk effectively.\n\nI analyzed five years of market data and used Excel Solver to construct a 4-asset portfolio that delivered a 23.31% annual return at 18.48% volatility. The portfolio's Sharpe ratio (reward per unit of risk) beat 50 randomly sampled alternatives.\n\nThe real test came when I ran the model forward through 2023-2025. The results were eye-opening:\n• Gold (GLD): +22.8% above expected (positive alpha)\n• International stocks (VEA): -23.5% below expected (negative alpha)\n\nThese gaps revealed how quickly markets shift during political and policy changes. Static models struggle to keep up. The lesson: even solid theory needs periodic rebalancing and updated assumptions to stay relevant.",
         githubLink: "#", // Will be document download link
         period: "Mar 2025 - Apr 2025"
@@ -87,6 +87,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
     const [isFullscreen, setIsFullscreen] = useState(false);
     const [isIframeActive, setIsIframeActive] = useState(false);
     const [lastInteractionTime, setLastInteractionTime] = useState<number | null>(null);
+    const [isContentVisible, setIsContentVisible] = useState(true);
+    const [displayedProject, setDisplayedProject] = useState<Project>(projects[0]);
+    
+    // Initialize displayedProject to match selectedProject on mount
+    useEffect(() => {
+        setDisplayedProject(selectedProject);
+    }, []); // Only run on mount
     const videoRef = React.useRef<HTMLVideoElement>(null);
     const videoContainerRef = React.useRef<HTMLDivElement>(null);
     const visualContainerRef = React.useRef<HTMLDivElement>(null);
@@ -250,6 +257,25 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
         }
     }, [selectedProject.id]);
     
+    // Fade animation when project changes - fade out, then fade in
+    useEffect(() => {
+        if (selectedProject.id !== displayedProject.id) {
+            // Step 1: Fade out current content
+            setIsContentVisible(false);
+            
+            // Step 2: After fade-out completes (250ms), update displayed project
+            const updateTimer = setTimeout(() => {
+                setDisplayedProject(selectedProject);
+                // Step 3: Fade in new content after a brief delay
+                setTimeout(() => {
+                    setIsContentVisible(true);
+                }, 50);
+            }, 250); // Match transition duration
+            
+            return () => clearTimeout(updateTimer);
+        }
+    }, [selectedProject, displayedProject.id]);
+    
     // Check if current project should show video
     const shouldShowVideo = (projectId: string) => {
         return projectId === "mindstream";
@@ -381,6 +407,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
                     alignItems: "center",
                     justifyContent: "center",
                     backgroundColor: "rgba(0, 0, 0, 0.3)",
+                    border: `1px solid ${displayedProject.color}40`,
                     borderRadius: "12px",
                     overflow: "hidden"
                 }}
@@ -435,7 +462,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
                             }}
                             onMouseEnter={(e) => {
                                 e.currentTarget.style.transform = "scale(1.2)";
-                                e.currentTarget.style.color = selectedProject.color;
+                                e.currentTarget.style.color = displayedProject.color;
                             }}
                             onMouseLeave={(e) => {
                                 e.currentTarget.style.transform = "scale(1)";
@@ -462,7 +489,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
                             }}
                             onMouseEnter={(e) => {
                                 e.currentTarget.style.transform = "scale(1.2)";
-                                e.currentTarget.style.color = selectedProject.color;
+                                e.currentTarget.style.color = displayedProject.color;
                             }}
                             onMouseLeave={(e) => {
                                 e.currentTarget.style.transform = "scale(1)";
@@ -494,7 +521,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
                     alignItems: "center",
                     justifyContent: "center",
                     position: "relative",
-                    backgroundColor: "transparent"
+                    backgroundColor: "rgba(0, 0, 0, 0.3)",
+                    border: `1px solid ${displayedProject.color}40`,
+                    borderRadius: "12px"
                 }}
                 onMouseMove={isIframeActive ? handleIframeInteraction : undefined}
                 onMouseDown={isIframeActive ? handleIframeInteraction : undefined}
@@ -531,7 +560,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
                                 opacity: 1,
                                 transition: "opacity 0.4s ease"
                             }}
-                            title={`${selectedProject.title} Preview`}
+                            title={`${displayedProject.title} Preview`}
                             allow="fullscreen"
                             scrolling="auto"
                             sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-presentation"
@@ -564,14 +593,15 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
                             transition: "opacity 0.4s ease",
                             pointerEvents: "auto",
                             backgroundColor: "rgba(0, 0, 0, 0.3)",
-                            backdropFilter: "blur(2px)"
+                            backdropFilter: "blur(2px)",
+                            borderRadius: "12px"
                         }}
                     >
                         <button
                             onClick={activateIframe}
                             style={{
-                                backgroundColor: selectedProject.color,
-                                border: `2px solid ${selectedProject.color}`,
+                                backgroundColor: displayedProject.color,
+                                border: `2px solid ${displayedProject.color}`,
                                 borderRadius: "12px",
                                 padding: "1rem 2rem",
                                 color: "#000000",
@@ -580,16 +610,16 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
                                 fontFamily: "'Stack Sans Notch', sans-serif",
                                 cursor: "pointer",
                                 transition: "all 0.3s ease",
-                                boxShadow: `0 4px 12px ${selectedProject.color}40`,
+                                boxShadow: `0 4px 12px ${displayedProject.color}40`,
                                 transform: "scale(1)"
                             }}
                             onMouseEnter={(e) => {
                                 e.currentTarget.style.transform = "scale(1.05)";
-                                e.currentTarget.style.boxShadow = `0 6px 20px ${selectedProject.color}60`;
+                                e.currentTarget.style.boxShadow = `0 6px 20px ${displayedProject.color}60`;
                             }}
                             onMouseLeave={(e) => {
                                 e.currentTarget.style.transform = "scale(1)";
-                                e.currentTarget.style.boxShadow = `0 4px 12px ${selectedProject.color}40`;
+                                e.currentTarget.style.boxShadow = `0 4px 12px ${displayedProject.color}40`;
                             }}
                             onMouseDown={(e) => {
                                 e.currentTarget.style.transform = "scale(0.98)";
@@ -598,7 +628,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
                                 e.currentTarget.style.transform = "scale(1.05)";
                             }}
                         >
-                            {selectedProject.id === "portfolio" ? "Click for some websiteception!" : "Click to Interact!"}
+                            {displayedProject.id === "portfolio" ? "Click for some websiteception!" : "Click to Interact!"}
                         </button>
                     </div>
                 )}
@@ -756,21 +786,27 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
             <div></div>
 
             {/* Right Section - Project Details */}
-            <div style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "start", 
-                justifyContent: "flex-start", 
-                paddingRight: "22%", 
-                paddingTop: "2%",
-                paddingBottom: "0.5rem",
-                paddingLeft: "12%",
-                width: "100%",
-                maxHeight: "calc(100vh - 3rem)",
-                gap: "1.5rem",
-                boxSizing: "border-box",
-                marginBottom:"0px",
-            }}>
+            <div 
+                key={displayedProject.id}
+                style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "start", 
+                    justifyContent: "flex-start", 
+                    paddingRight: "22%", 
+                    paddingTop: "2%",
+                    paddingBottom: "0.5rem",
+                    paddingLeft: "12%",
+                    width: "100%",
+                    maxHeight: "calc(100vh - 3rem)",
+                    gap: "1.5rem",
+                    boxSizing: "border-box",
+                    marginBottom:"0px",
+                    opacity: isContentVisible ? 1 : 0,
+                    transform: isContentVisible ? 'translateY(0)' : 'translateY(-30px)',
+                    transition: 'opacity 0.25s ease-out, transform 0.25s ease-out'
+                }}
+            >
                  {/* Top Section - Detailed Description + Links */}
                 <div style={{
                     width: "100%",
@@ -783,27 +819,27 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
                     <h2 
                         className="project-detail-title"
                         style={{
-                            color: selectedProject.color,
-                            textShadow: `0 0 20px ${selectedProject.color}40`
+                            color: displayedProject.color,
+                            textShadow: `0 0 20px ${displayedProject.color}40`
                         }}
                     >
-                        {selectedProject.title}
+                        {displayedProject.title}
                     </h2>
 
                     {/* Period */}
                     <p className="project-detail-period">
-                        {selectedProject.period}
+                        {displayedProject.period}
                     </p>
 
                     {/* Description */}
                     <div 
                         className="project-description-box"
                         style={{
-                            border: `1px solid ${selectedProject.color}40`
+                            border: `1px solid ${displayedProject.color}40`
                         }}
                     >
                         <div className="project-description-text">
-                            {selectedProject.description}
+                            {displayedProject.description}
                         </div>
                     </div>
 
@@ -811,57 +847,106 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
                     <div style={{
                         display: "flex",
                         gap: "1rem",
-                        justifyContent: selectedProject.productLink ? "stretch" : "center"
+                        justifyContent: displayedProject.productLink ? "stretch" : "center"
                     }}>
-                        {/* GitHub button - always visible */}
-                        <a
-                            href={selectedProject.githubLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="project-button"
-                            style={{
-                                flex: selectedProject.productLink ? 1 : "0 0 auto",
-                                minWidth: selectedProject.productLink ? "auto" : "200px",
-                                backgroundColor: "rgba(255, 255, 255, 0.05)",
-                                border: `2px solid ${selectedProject.color}`,
-                                color: selectedProject.color
-                            }}
-                            onMouseEnter={(e) => {
-                                e.currentTarget.style.backgroundColor = `${selectedProject.color}20`;
-                                e.currentTarget.style.transform = 'translateY(-2px)';
-                            }}
-                            onMouseLeave={(e) => {
-                                e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
-                                e.currentTarget.style.transform = 'translateY(0)';
-                            }}
-                        >
-                            → GitHub
-                        </a>
+                        {/* CAPM Download Buttons */}
+                        {displayedProject.id === "capm-portfolio" ? (
+                            <>
+                                {/* Download Excel Sheet button - styled like GitHub */}
+                                <button
+                                    className="project-button"
+                                    style={{
+                                        flex: 1,
+                                        backgroundColor: "rgba(255, 255, 255, 0.05)",
+                                        border: `2px solid ${displayedProject.color}`,
+                                        color: displayedProject.color
+                                    }}
+                                    onMouseEnter={(e) => {
+                                        e.currentTarget.style.backgroundColor = `${displayedProject.color}20`;
+                                        e.currentTarget.style.transform = 'translateY(-2px)';
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
+                                        e.currentTarget.style.transform = 'translateY(0)';
+                                    }}
+                                >
+                                    → Download Excel Sheet
+                                </button>
 
-                        {/* Check it out button - conditional */}
-                        {selectedProject.productLink && (
-                            <a
-                                href={selectedProject.productLink}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="project-button"
-                                style={{
-                                    flex: 1,
-                                    backgroundColor: selectedProject.color,
-                                    border: `2px solid ${selectedProject.color}`,
-                                    color: "#000000"
-                                }}
-                                onMouseEnter={(e) => {
-                                    e.currentTarget.style.transform = 'translateY(-2px)';
-                                    e.currentTarget.style.boxShadow = `0 8px 20px ${selectedProject.color}60`;
-                                }}
-                                onMouseLeave={(e) => {
-                                    e.currentTarget.style.transform = 'translateY(0)';
-                                    e.currentTarget.style.boxShadow = 'none';
-                                }}
-                            >
-                                → Check it Out
-                            </a>
+                                {/* Download Report button - styled like Check it Out */}
+                                <button
+                                    className="project-button"
+                                    style={{
+                                        flex: 1,
+                                        backgroundColor: displayedProject.color,
+                                        border: `2px solid ${displayedProject.color}`,
+                                        color: "#000000"
+                                    }}
+                                    onMouseEnter={(e) => {
+                                        e.currentTarget.style.transform = 'translateY(-2px)';
+                                        e.currentTarget.style.boxShadow = `0 8px 20px ${displayedProject.color}60`;
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        e.currentTarget.style.transform = 'translateY(0)';
+                                        e.currentTarget.style.boxShadow = 'none';
+                                    }}
+                                >
+                                    → Download Report
+                                </button>
+                            </>
+                        ) : (
+                            <>
+                                {/* GitHub button - always visible for other projects */}
+                                <a
+                                    href={displayedProject.githubLink}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="project-button"
+                                    style={{
+                                        flex: displayedProject.productLink ? 1 : "0 0 auto",
+                                        minWidth: displayedProject.productLink ? "auto" : "200px",
+                                        backgroundColor: "rgba(255, 255, 255, 0.05)",
+                                        border: `2px solid ${displayedProject.color}`,
+                                        color: displayedProject.color
+                                    }}
+                                    onMouseEnter={(e) => {
+                                        e.currentTarget.style.backgroundColor = `${displayedProject.color}20`;
+                                        e.currentTarget.style.transform = 'translateY(-2px)';
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
+                                        e.currentTarget.style.transform = 'translateY(0)';
+                                    }}
+                                >
+                                    → GitHub
+                                </a>
+
+                                {/* Check it out button - conditional */}
+                                {displayedProject.productLink && (
+                                    <a
+                                        href={displayedProject.productLink}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="project-button"
+                                        style={{
+                                            flex: 1,
+                                            backgroundColor: displayedProject.color,
+                                            border: `2px solid ${displayedProject.color}`,
+                                            color: "#000000"
+                                        }}
+                                        onMouseEnter={(e) => {
+                                            e.currentTarget.style.transform = 'translateY(-2px)';
+                                            e.currentTarget.style.boxShadow = `0 8px 20px ${displayedProject.color}60`;
+                                        }}
+                                        onMouseLeave={(e) => {
+                                            e.currentTarget.style.transform = 'translateY(0)';
+                                            e.currentTarget.style.boxShadow = 'none';
+                                        }}
+                                    >
+                                        → Check it Out
+                                    </a>
+                                )}
+                            </>
                         )}
                     </div>
                 </div>
@@ -872,23 +957,21 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
                         width: "100%",
                         flex: "1 1 auto",
                         minHeight: "200px",
-                        border: (shouldShowIframe(selectedProject.id) || shouldShowVideo(selectedProject.id) || shouldShowImageGallery(selectedProject.id)) ? "none" : `1px solid ${selectedProject.color}20`,
-                        borderRadius: "12px",
                         overflow: "hidden",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center"
                     }}
                 >
-                    {shouldShowVideo(selectedProject.id) ? (
+                    {shouldShowVideo(displayedProject.id) ? (
                         renderVideo()
-                    ) : shouldShowIframe(selectedProject.id) && selectedProject.productLink ? (
-                        renderIframe(selectedProject.productLink)
-                    ) : shouldShowImageGallery(selectedProject.id) ? (
+                    ) : shouldShowIframe(displayedProject.id) && displayedProject.productLink ? (
+                        renderIframe(displayedProject.productLink)
+                    ) : shouldShowImageGallery(displayedProject.id) ? (
                         <ProjectImageGallery
-                            images={getProjectImages(selectedProject.id)}
-                            descriptions={getProjectImageDescriptions(selectedProject.id)}
-                            projectColor={selectedProject.color}
+                            images={getProjectImages(displayedProject.id)}
+                            descriptions={getProjectImageDescriptions(displayedProject.id)}
+                            projectColor={displayedProject.color}
                         />
                     ) : (
                         <div style={{
