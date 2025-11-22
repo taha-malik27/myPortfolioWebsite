@@ -448,20 +448,6 @@
     cursor: pointer;
 }
 
-.project-visual-placeholder {
-    width: 100%;
-    flex: 1 1 auto;
-    min-height: 200px;
-    background-color: rgba(0, 0, 0, 0.3);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgba(255, 255, 255, 0.4);
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.85rem;
-    font-style: italic;
-}
 
 
 
