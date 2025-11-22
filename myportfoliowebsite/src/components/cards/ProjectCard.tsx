@@ -15,8 +15,10 @@ interface Project {
     tags: string[];
     color: string;
     description: string;
-    githubLink: string;
+    roughWorkLink: string; // GitHub, Google Drive, or other source link
     productLink?: string; // Optional - only if project has a live demo
+    excelLink?: string; // Optional - for download links (e.g., CAPM Excel sheet)
+    reportLink?: string; // Optional - for download links (e.g., CAPM report PDF)
     period: string;
 }
 
@@ -29,7 +31,7 @@ const projects: Project[] = [
         tags: ["React.js", "Tailwind CSS", "HTML5", "Node.js"],
         color: "#ff6b6b",
         description: "ISolve is a side hustle with my friend Harris where we build custom websites for small businesses. It is not about millions yet, more about learning while picking up real client work. We use React.js and Tailwind CSS for responsive, mobile-first sites that actually convert.\n\nKey results:\n• 50% improvement in client retention through strategic UI design\n• 75% increase in online inquiries\n• 40% reduction in bounce rates\n\nEach project teaches us something new about performance tuning and what actually works in production.",
-        githubLink: "https://github.com/taha-malik27/ISolve",
+        roughWorkLink: "https://github.com/taha-malik27/ISolve",
         productLink: "https://isolve.info/",
         period: "May 2025 - Present"
     },
@@ -40,7 +42,7 @@ const projects: Project[] = [
         tags: ["Next.js", "Three.js", "React", "TypeScript"],
         color: "#fc8803",
         description: "This portfolio is where I went all in on creating something that stands out. The centerpiece is a fully interactive 3D room you can explore with orbit or first-person controls. Built with React Three Fiber, Three.js, and physics simulation using Rapier. Beyond the 3D experience, I built custom interactive components like the rotating skill halo, Venn diagram selector, and particle backgrounds. Runs on Next.js 16 with TypeScript and Tailwind CSS v4, fully responsive. A playground for 3D graphics programming and modern web dev wrapped in a cyberpunk synthwave aesthetic.",
-        githubLink: "https://github.com/taha-malik27/myPortfolioWebsite",
+        roughWorkLink: "https://github.com/taha-malik27/myPortfolioWebsite",
         productLink: typeof window !== 'undefined' ? window.location.origin : 'https://your-portfolio.com',
         period: "Nov 2024 - Present"
     },
@@ -50,8 +52,8 @@ const projects: Project[] = [
         tagline: "Real-Time EEG Dashboard",
         tags: ["Python", "PyQt", "BrainFlow", "Signal Processing"],
         color: "#1887f5",
-        description: "MINDStream is an open source EEG dashboard for capturing and analyzing brain signals in real time. Built with PyQt, BrainFlow, and Matplotlib for 25+ researchers and students at MIND who need powerful signal analysis without expensive commercial software.\n\nFeatures & Impact:\n• Real-time visualization (raw signals, frequency spectra, power distributions)\n• Advanced filtering (band pass/stop, ICA for artifact removal)\n• GPU accelerated graphics via VisPy with multithreaded data collection\n• 2× experiment efficiency, 3× signal clarity improvement\n• Full recording and export for ML workflows\n• Small language model with RAG for EXG analysis\n\nCheck out the GUI_Development directory in the repo!",
-        githubLink: "https://github.com/MINDUofC/MINDEEG",
+        description: "MINDStream is an open source EEG dashboard for capturing and analyzing brain signals in real time. Built with PyQt, BrainFlow, and Matplotlib for 25+ researchers and students at MIND who need powerful signal analysis without expensive commercial software.\n\nFeatures & Impact:\n• Real-time visualization (raw signals, frequency spectra, power distributions)\n• Advanced filtering (band pass/stop, ICA for artifact removal)\n• GPU accelerated graphics via VisPy with multithreaded data collection\n• 2× experiment efficiency, 3× signal clarity improvement\n• Full recording and export for ML workflows\n• Small language model with RAG for EXG analysis\n\nCheck it out the GUI_Development directory in the repo!",
+        roughWorkLink: "https://github.com/MINDUofC/MINDEEG",
         productLink: "https://drive.google.com/drive/folders/1_QRY28tUKmzTXfE40aNRZEaNSN1qlqPe?usp=sharing",
         period: "Apr 2025 - Sep 2025"
     },
@@ -60,9 +62,11 @@ const projects: Project[] = [
         title: "CAPM Portfolio Optimizer",
         tagline: "Portfolio Optimization & Forecasting",
         tags: ["Excel", "CAPM", "Financial Modeling", "Sharpe Ratio"],
-        color: "#10B981", // Money green
+        color: "#10B981", 
         description: "This project builds an optimal investment portfolio using portfolio theory and the Capital Asset Pricing Model (CAPM). The goal was simple: maximize returns while managing risk effectively.\n\nI analyzed five years of market data and used Excel Solver to construct a 4-asset portfolio that delivered a 23.31% annual return at 18.48% volatility. The portfolio's Sharpe ratio (reward per unit of risk) beat 50 randomly sampled alternatives.\n\nThe real test came when I ran the model forward through 2023-2025. The results were eye-opening:\n• Gold (GLD): +22.8% above expected (positive alpha)\n• International stocks (VEA): -23.5% below expected (negative alpha)\n\nThese gaps revealed how quickly markets shift during political and policy changes. Static models struggle to keep up. The lesson: even solid theory needs periodic rebalancing and updated assumptions to stay relevant.",
-        githubLink: "#", // Will be document download link
+        roughWorkLink: "#",
+        excelLink: "/downloads/Calculations.xlsx",
+        reportLink: "/downloads/CAPM-Based Tangent Portfolio Optimization and Forecasting Analysis.pdf",
         period: "Mar 2025 - Apr 2025"
     },
     {
@@ -72,9 +76,10 @@ const projects: Project[] = [
         tags: ["Java", "JavaFX", "OOP"],
         color: "#a855f7",
         description: "SavorScope is a desktop nutrition tracker that helps users log meals, track nutritional values, and calculate health metrics like BMI and daily caloric needs. Built with Java and JavaFX, focusing on clean OOP design and an intuitive interface. Features meal logging, nutritional analysis, and custom reporting to identify eating patterns. One of my earlier projects that taught me desktop app development and user-centered design.",
-        githubLink: "https://github.com/taha-malik27/SavorScope",
+        roughWorkLink: "https://github.com/taha-malik27/SavorScope",
         period: "Feb 2024 - Apr 2024"
     }
+    
 ];
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparent" }) => {
@@ -852,17 +857,20 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
                         {displayedProject.id === "capm-portfolio" ? (
                             <>
                                 {/* Download Excel Sheet button - styled like GitHub */}
-                                <a
-                                 href="/downloads/Calculations.xlsx"
-                                 download
-                                >
-                                    <button
+                                {displayedProject.excelLink && (
+                                    <a
+                                        href={displayedProject.excelLink}
+                                        download
                                         className="project-button"
                                         style={{
                                             flex: 1,
                                             backgroundColor: "rgba(255, 255, 255, 0.05)",
                                             border: `2px solid ${displayedProject.color}`,
-                                            color: displayedProject.color
+                                            color: displayedProject.color,
+                                            textDecoration: "none",
+                                            display: "flex",
+                                            alignItems: "center",
+                                            justifyContent: "center"
                                         }}
                                         onMouseEnter={(e) => {
                                             e.currentTarget.style.backgroundColor = `${displayedProject.color}20`;
@@ -874,21 +882,24 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
                                         }}
                                     >
                                         → Download Excel Sheet
-                                  </button>
-                                </a> 
+                                    </a>
+                                )}
 
                                 {/* Download Report button - styled like Check it Out */}
-                                <a
-                                 href="/downloads/CAPM-Based Tangent Portfolio Optimization and Forecasting Analysis.pdf"
-                                 download
-                                 >
-                                    <button
+                                {displayedProject.reportLink && (
+                                    <a
+                                        href={displayedProject.reportLink}
+                                        download
                                         className="project-button"
                                         style={{
                                             flex: 1,
                                             backgroundColor: displayedProject.color,
                                             border: `2px solid ${displayedProject.color}`,
-                                            color: "#000000"
+                                            color: "#000000",
+                                            textDecoration: "none",
+                                            display: "flex",
+                                            alignItems: "center",
+                                            justifyContent: "center"
                                         }}
                                         onMouseEnter={(e) => {
                                             e.currentTarget.style.transform = 'translateY(-2px)';
@@ -900,14 +911,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
                                         }}
                                     >
                                         → Download Report
-                                    </button>
-                                </a>
+                                    </a>
+                                )}
                             </>
                         ) : (
                             <>
-                                {/* GitHub button - always visible for other projects */}
+                                {/* Rough Work Link button - always visible for other projects */}
                                 <a
-                                    href={displayedProject.githubLink}
+                                    href={displayedProject.roughWorkLink}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="project-button"

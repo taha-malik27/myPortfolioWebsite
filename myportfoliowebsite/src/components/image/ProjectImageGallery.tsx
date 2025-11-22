@@ -322,14 +322,22 @@ const ProjectImageGallery: React.FC<ProjectImageGalleryProps> = ({
                             left: "50%",
                             transform: "translateX(-50%)",
                             zIndex: 10001,
-                            width: "auto",
-                            maxWidth: "80vw"
+                            width: "80vw",
+                            maxWidth: "80vw",
+                            minHeight: "2rem",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center"
                         }}>
                             {descriptions.map((description, index) => (
                                 <p 
                                     key={index}
                                     style={{
-                                        position: index === currentImageIndex ? "relative" : "absolute",
+                                        position: "absolute",
+                                        top: "50%",
+                                        left: "50%",
+                                        transform: "translate(-50%, -50%)",
+                                        width: "100%",
                                         opacity: index === currentImageIndex ? 1 : 0,
                                         transition: "opacity 0.5s ease-in-out",
                                         color: "rgba(255, 255, 255, 0.9)",
@@ -337,7 +345,9 @@ const ProjectImageGallery: React.FC<ProjectImageGalleryProps> = ({
                                         fontSize: "1rem",
                                         textAlign: "center",
                                         margin: 0,
-                                        pointerEvents: index === currentImageIndex ? 'auto' : 'none'
+                                        pointerEvents: index === currentImageIndex ? 'auto' : 'none',
+                                        whiteSpace: "normal",
+                                        wordWrap: "break-word"
                                     }}
                                 >
                                     {description}
