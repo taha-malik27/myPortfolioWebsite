@@ -852,46 +852,56 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
                         {displayedProject.id === "capm-portfolio" ? (
                             <>
                                 {/* Download Excel Sheet button - styled like GitHub */}
-                                <button
-                                    className="project-button"
-                                    style={{
-                                        flex: 1,
-                                        backgroundColor: "rgba(255, 255, 255, 0.05)",
-                                        border: `2px solid ${displayedProject.color}`,
-                                        color: displayedProject.color
-                                    }}
-                                    onMouseEnter={(e) => {
-                                        e.currentTarget.style.backgroundColor = `${displayedProject.color}20`;
-                                        e.currentTarget.style.transform = 'translateY(-2px)';
-                                    }}
-                                    onMouseLeave={(e) => {
-                                        e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
-                                        e.currentTarget.style.transform = 'translateY(0)';
-                                    }}
+                                <a
+                                 href="/downloads/Calculations.xlsx"
+                                 download
                                 >
-                                    → Download Excel Sheet
-                                </button>
+                                    <button
+                                        className="project-button"
+                                        style={{
+                                            flex: 1,
+                                            backgroundColor: "rgba(255, 255, 255, 0.05)",
+                                            border: `2px solid ${displayedProject.color}`,
+                                            color: displayedProject.color
+                                        }}
+                                        onMouseEnter={(e) => {
+                                            e.currentTarget.style.backgroundColor = `${displayedProject.color}20`;
+                                            e.currentTarget.style.transform = 'translateY(-2px)';
+                                        }}
+                                        onMouseLeave={(e) => {
+                                            e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
+                                            e.currentTarget.style.transform = 'translateY(0)';
+                                        }}
+                                    >
+                                        → Download Excel Sheet
+                                  </button>
+                                </a> 
 
                                 {/* Download Report button - styled like Check it Out */}
-                                <button
-                                    className="project-button"
-                                    style={{
-                                        flex: 1,
-                                        backgroundColor: displayedProject.color,
-                                        border: `2px solid ${displayedProject.color}`,
-                                        color: "#000000"
-                                    }}
-                                    onMouseEnter={(e) => {
-                                        e.currentTarget.style.transform = 'translateY(-2px)';
-                                        e.currentTarget.style.boxShadow = `0 8px 20px ${displayedProject.color}60`;
-                                    }}
-                                    onMouseLeave={(e) => {
-                                        e.currentTarget.style.transform = 'translateY(0)';
-                                        e.currentTarget.style.boxShadow = 'none';
-                                    }}
-                                >
-                                    → Download Report
-                                </button>
+                                <a
+                                 href="/downloads/CAPM-Based Tangent Portfolio Optimization and Forecasting Analysis.pdf"
+                                 download
+                                 >
+                                    <button
+                                        className="project-button"
+                                        style={{
+                                            flex: 1,
+                                            backgroundColor: displayedProject.color,
+                                            border: `2px solid ${displayedProject.color}`,
+                                            color: "#000000"
+                                        }}
+                                        onMouseEnter={(e) => {
+                                            e.currentTarget.style.transform = 'translateY(-2px)';
+                                            e.currentTarget.style.boxShadow = `0 8px 20px ${displayedProject.color}60`;
+                                        }}
+                                        onMouseLeave={(e) => {
+                                            e.currentTarget.style.transform = 'translateY(0)';
+                                            e.currentTarget.style.boxShadow = 'none';
+                                        }}
+                                    >
+                                        → Download Report
+                                    </button>
+                                </a>
                             </>
                         ) : (
                             <>
