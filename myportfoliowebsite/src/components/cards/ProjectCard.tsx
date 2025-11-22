@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import HoverText from '@/components/HoverText';
+import ProjectImageGallery from '@/components/image/ProjectImageGallery';
 
 interface ProjectCardProps {
     backgroundColor?: string;
@@ -252,6 +253,43 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
     // Check if current project should show video
     const shouldShowVideo = (projectId: string) => {
         return projectId === "mindstream";
+    };
+    
+    // Check if current project should show image gallery
+    const shouldShowImageGallery = (projectId: string) => {
+        return projectId === "savorscope" || projectId === "capm-portfolio";
+    };
+    
+    // Get images for image gallery based on project
+    const getProjectImages = (projectId: string): string[] => {
+        if (projectId === "savorscope") {
+            return [
+                "/images/projects/SavorScopeApp.png",
+                "/images/projects/SavorScopeLogo.png"
+            ];
+        } else if (projectId === "capm-portfolio") {
+            return [
+                "/images/projects/CAPMGraph1.png",
+                "/images/projects/CAPMGraph2.png"
+            ];
+        }
+        return [];
+    };
+    
+    // Get image descriptions for gallery (optional)
+    const getProjectImageDescriptions = (projectId: string): string[] => {
+        if (projectId === "savorscope") {
+            return [
+                "SavorScope Application Interface",
+                "SavorScope Logo"
+            ];
+        } else if (projectId === "capm-portfolio") {
+            return [
+                "CAPM Portfolio Analysis Graph 1",
+                "CAPM Portfolio Analysis Graph 2"
+            ];
+        }
+        return [];
     };
     
     // Handle video play/pause
@@ -834,15 +872,24 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
                         width: "100%",
                         flex: "1 1 auto",
                         minHeight: "200px",
-                        border: (shouldShowIframe(selectedProject.id) || shouldShowVideo(selectedProject.id)) ? "none" : `1px solid ${selectedProject.color}20`,
+                        border: (shouldShowIframe(selectedProject.id) || shouldShowVideo(selectedProject.id) || shouldShowImageGallery(selectedProject.id)) ? "none" : `1px solid ${selectedProject.color}20`,
                         borderRadius: "12px",
-                        overflow: "hidden"
+                        overflow: "hidden",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center"
                     }}
                 >
                     {shouldShowVideo(selectedProject.id) ? (
                         renderVideo()
                     ) : shouldShowIframe(selectedProject.id) && selectedProject.productLink ? (
                         renderIframe(selectedProject.productLink)
+                    ) : shouldShowImageGallery(selectedProject.id) ? (
+                        <ProjectImageGallery
+                            images={getProjectImages(selectedProject.id)}
+                            descriptions={getProjectImageDescriptions(selectedProject.id)}
+                            projectColor={selectedProject.color}
+                        />
                     ) : (
                         <div style={{
                             width: "100%",

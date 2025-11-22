@@ -1,7 +1,7 @@
 "use client"
 
 import React from 'react';
-import ImageGallery from '@/components/ImageGallery';
+import ImageGallery from '@/components/image/ImageGallery';
 import HoverText from '@/components/HoverText';
 
 interface AboutMeCardProps {
