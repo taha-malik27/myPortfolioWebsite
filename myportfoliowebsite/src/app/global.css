@@ -326,7 +326,142 @@
   
 
 
+/* Project Card Styles */
+.project-card {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    padding: 1.25rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
 
+.project-card-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.project-card-title {
+    margin: 0;
+    margin-bottom: 0.4rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+    font-family: 'Stack Sans Notch', sans-serif;
+    transition: color 0.3s ease;
+}
+
+.project-card-period {
+    margin: 0;
+    margin-bottom: 0.4rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.7rem;
+    font-family: 'Outfit', sans-serif;
+    font-style: italic;
+}
+
+.project-card-tagline {
+    margin: 0;
+    margin-bottom: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.8rem;
+    line-height: 1.3;
+    font-family: 'Outfit', sans-serif;
+}
+
+.project-tag {
+    padding: 0.2rem 0.6rem;
+    border-radius: 10px;
+    font-size: 0.68rem;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.project-selected-indicator {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(1.2);
+    }
+}
+
+.project-detail-title {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: 'Stack Sans Notch', sans-serif;
+}
+
+.project-detail-period {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.75rem;
+    font-family: 'Outfit', sans-serif;
+    font-style: italic;
+}
+
+.project-description-box {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 1.25rem;
+    border-radius: 12px;
+    flex: 0 0 auto;
+    overflow-y: auto;
+    max-height: 30vh;
+}
+
+.project-description-text {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    font-family: 'Outfit', sans-serif;
+    white-space: pre-line;
+}
+
+.project-button {
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: 'Stack Sans Notch', sans-serif;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.project-visual-placeholder {
+    width: 100%;
+    flex: 1 1 auto;
+    min-height: 200px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.4);
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.85rem;
+    font-style: italic;
+}
 
 
 
@@ -390,4 +525,6 @@
         transform: rotate(-360deg);
     }
 }
+
+
 

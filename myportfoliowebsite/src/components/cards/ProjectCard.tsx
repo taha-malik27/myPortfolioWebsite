@@ -155,6 +155,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
                         return (
                             <div
                                 key={project.id}
+                                className="project-card"
                                 onClick={() => setSelectedProject(project)}
                                 onMouseEnter={() => setHoveredProject(project.id)}
                                 onMouseLeave={() => setHoveredProject(null)}
@@ -163,68 +164,40 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
                                     maxWidth: isLastAndOdd ? "calc(50% - 0.75rem)" : "100%",
                                     marginLeft: isLastAndOdd ? "auto" : "0",
                                     marginRight: isLastAndOdd ? "auto" : "0",
-                                    backgroundColor: "rgba(0, 0, 0, 0.3)",
                                     border: `2px solid ${isSelected ? project.color : isHovered ? project.color + '80' : 'rgba(255, 255, 255, 0.1)'}`,
-                                    borderRadius: "12px",
-                                    padding: "1.25rem",
-                                    cursor: "pointer",
-                                    transition: "all 0.3s ease",
                                     transform: isHovered ? 'translateY(-5px) scale(1.02)' : isSelected ? 'scale(1.0)' : 'scale(1)',
                                     boxShadow: isSelected 
                                         ? `0 8px 24px ${project.color}40, 0 0 0 3px ${project.color}20`
                                         : isHovered 
                                         ? `0 8px 20px rgba(0, 0, 0, 0.4)` 
-                                        : '0 2px 8px rgba(0, 0, 0, 0.2)',
-                                    position: "relative",
-                                    overflow: "hidden"
+                                        : '0 2px 8px rgba(0, 0, 0, 0.2)'
                                 }}
                             >
                                 {/* Animated background gradient on hover */}
-                                <div style={{
-                                    position: "absolute",
-                                    top: 0,
-                                    left: 0,
-                                    right: 0,
-                                    bottom: 0,
-                                    background: `linear-gradient(135deg, ${project.color}10, transparent)`,
-                                    opacity: isHovered || isSelected ? 1 : 0,
-                                    transition: "opacity 0.3s ease",
-                                    pointerEvents: "none"
-                                }} />
+                                <div 
+                                    className="project-card-gradient"
+                                    style={{
+                                        background: `linear-gradient(135deg, ${project.color}10, transparent)`,
+                                        opacity: isHovered || isSelected ? 1 : 0
+                                    }} 
+                                />
 
                                 {/* Content */}
                                 <div style={{ position: "relative", zIndex: 1 }}>
-                                    <h3 style={{
-                                        margin: 0,
-                                        marginBottom: "0.4rem",
-                                        color: isSelected ? project.color : "#ffffff",
-                                        fontSize: "1.15rem",
-                                        fontWeight: 600,
-                                        fontFamily: "'Stack Sans Notch', sans-serif",
-                                        transition: "color 0.3s ease"
-                                    }}>
+                                    <h3 
+                                        className="project-card-title"
+                                        style={{
+                                            color: isSelected ? project.color : "#ffffff"
+                                        }}
+                                    >
                                         {project.title}
                                     </h3>
 
-                                    <p style={{
-                                        margin: 0,
-                                        marginBottom: "0.4rem",
-                                        color: "rgba(255, 255, 255, 0.5)",
-                                        fontSize: "0.7rem",
-                                        fontFamily: "'Outfit', sans-serif",
-                                        fontStyle: "italic"
-                                    }}>
+                                    <p className="project-card-period">
                                         {project.period}
                                     </p>
 
-                                    <p style={{
-                                        margin: 0,
-                                        marginBottom: "0.8rem",
-                                        color: "rgba(255, 255, 255, 0.7)",
-                                        fontSize: "0.8rem",
-                                        lineHeight: "1.3",
-                                        fontFamily: "'Outfit', sans-serif"
-                                    }}>
+                                    <p className="project-card-tagline">
                                         {project.tagline}
                                     </p>
 
@@ -237,15 +210,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
                                         {project.tags.map((tag, index) => (
                                             <span
                                                 key={index}
+                                                className="project-tag"
                                                 style={{
                                                     backgroundColor: isSelected ? `${project.color}30` : "rgba(255, 255, 255, 0.1)",
-                                                    color: isSelected ? project.color : "rgba(255, 255, 255, 0.8)",
-                                                    padding: "0.2rem 0.6rem",
-                                                    borderRadius: "10px",
-                                                    fontSize: "0.68rem",
-                                                    fontFamily: "'Outfit', sans-serif",
-                                                    fontWeight: 500,
-                                                    transition: "all 0.3s ease"
+                                                    color: isSelected ? project.color : "rgba(255, 255, 255, 0.8)"
                                                 }}
                                             >
                                                 {tag}
@@ -256,17 +224,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
 
                                 {/* Selected indicator */}
                                 {isSelected && (
-                                    <div style={{
-                                        position: "absolute",
-                                        top: "1rem",
-                                        right: "1rem",
-                                        width: "12px",
-                                        height: "12px",
-                                        borderRadius: "50%",
-                                        backgroundColor: project.color,
-                                        boxShadow: `0 0 12px ${project.color}`,
-                                        animation: "pulse 2s infinite"
-                                    }} />
+                                    <div 
+                                        className="project-selected-indicator"
+                                        style={{
+                                            backgroundColor: project.color,
+                                            boxShadow: `0 0 12px ${project.color}`
+                                        }} 
+                                    />
                                 )}
                             </div>
                         );
@@ -302,45 +266,29 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
                     gap: "1rem"
                 }}>
                     {/* Title with color */}
-                    <h2 style={{
-                        margin: 0,
-                        color: selectedProject.color,
-                        fontSize: "1.5rem",
-                        fontWeight: 700,
-                        fontFamily: "'Stack Sans Notch', sans-serif",
-                        textShadow: `0 0 20px ${selectedProject.color}40`
-                    }}>
+                    <h2 
+                        className="project-detail-title"
+                        style={{
+                            color: selectedProject.color,
+                            textShadow: `0 0 20px ${selectedProject.color}40`
+                        }}
+                    >
                         {selectedProject.title}
                     </h2>
 
                     {/* Period */}
-                    <p style={{
-                        margin: 0,
-                        color: "rgba(255, 255, 255, 0.5)",
-                        fontSize: "0.75rem",
-                        fontFamily: "'Outfit', sans-serif",
-                        fontStyle: "italic"
-                    }}>
+                    <p className="project-detail-period">
                         {selectedProject.period}
                     </p>
 
                     {/* Description */}
-                    <div style={{
-                        backgroundColor: "rgba(0, 0, 0, 0.3)",
-                        padding: "1.25rem",
-                        borderRadius: "12px",
-                        border: `1px solid ${selectedProject.color}40`,
-                        flex: "0 0 auto",
-                        overflowY: "auto",
-                        maxHeight: "30vh"
-                    }}>
-                        <div style={{
-                            color: "rgba(255, 255, 255, 0.9)",
-                            fontSize: "0.85rem",
-                            lineHeight: "1.5",
-                            fontFamily: "'Outfit', sans-serif",
-                            whiteSpace: "pre-line"
-                        }}>
+                    <div 
+                        className="project-description-box"
+                        style={{
+                            border: `1px solid ${selectedProject.color}40`
+                        }}
+                    >
+                        <div className="project-description-text">
                             {selectedProject.description}
                         </div>
                     </div>
@@ -356,21 +304,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
                             href={selectedProject.githubLink}
                             target="_blank"
                             rel="noopener noreferrer"
+                            className="project-button"
                             style={{
                                 flex: selectedProject.productLink ? 1 : "0 0 auto",
                                 minWidth: selectedProject.productLink ? "auto" : "200px",
                                 backgroundColor: "rgba(255, 255, 255, 0.05)",
                                 border: `2px solid ${selectedProject.color}`,
-                                borderRadius: "8px",
-                                padding: "0.75rem 1.5rem",
-                                color: selectedProject.color,
-                                fontSize: "0.9rem",
-                                fontWeight: 600,
-                                fontFamily: "'Stack Sans Notch', sans-serif",
-                                textAlign: "center",
-                                textDecoration: "none",
-                                transition: "all 0.3s ease",
-                                cursor: "pointer"
+                                color: selectedProject.color
                             }}
                             onMouseEnter={(e) => {
                                 e.currentTarget.style.backgroundColor = `${selectedProject.color}20`;
@@ -390,20 +330,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
                                 href={selectedProject.productLink}
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                className="project-button"
                                 style={{
                                     flex: 1,
                                     backgroundColor: selectedProject.color,
                                     border: `2px solid ${selectedProject.color}`,
-                                    borderRadius: "8px",
-                                    padding: "0.75rem 1.5rem",
-                                    color: "#000000",
-                                    fontSize: "0.9rem",
-                                    fontWeight: 600,
-                                    fontFamily: "'Stack Sans Notch', sans-serif",
-                                    textAlign: "center",
-                                    textDecoration: "none",
-                                    transition: "all 0.3s ease",
-                                    cursor: "pointer"
+                                    color: "#000000"
                                 }}
                                 onMouseEnter={(e) => {
                                     e.currentTarget.style.transform = 'translateY(-2px)';
@@ -421,38 +353,15 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
                 </div>
 
                  {/* Bottom Section - Visual Content Placeholder */}
-                <div style={{
-                    width: "100%",
-                    flex: "1 1 auto",
-                    minHeight: "200px",
-                    backgroundColor: "rgba(0, 0, 0, 0.3)",
-                    border: `1px solid ${selectedProject.color}20`,
-                    borderRadius: "12px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    color: "rgba(255, 255, 255, 0.4)",
-                    fontFamily: "'Outfit', sans-serif",
-                    fontSize: "0.85rem",
-                    fontStyle: "italic"
-                }}>
+                <div 
+                    className="project-visual-placeholder"
+                    style={{
+                        border: `1px solid ${selectedProject.color}20`
+                    }}
+                >
                     Visual content placeholder (images / iframe / video)
                 </div>
             </div>
-
-            {/* CSS for pulse animation */}
-            <style jsx>{`
-                @keyframes pulse {
-                    0%, 100% {
-                        opacity: 1;
-                        transform: scale(1);
-                    }
-                    50% {
-                        opacity: 0.7;
-                        transform: scale(1.2);
-                    }
-                }
-            `}</style>
         </div>
     );
 };
