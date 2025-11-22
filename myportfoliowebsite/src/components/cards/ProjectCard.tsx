@@ -19,7 +19,7 @@ interface Project {
     period: string;
 }
 
-// Real project data
+// Real project data - ordered from most recent to oldest
 const projects: Project[] = [
     {
         id: "isolve",
@@ -27,10 +27,21 @@ const projects: Project[] = [
         tagline: "Web Development Sidehustle",
         tags: ["React.js", "Tailwind CSS", "HTML5", "Node.js"],
         color: "#ff6b6b",
-        description: "I've been working on iSolve as a bit of an ongoing side hustle with Harris, building a bunch of slick, responsive sites that pull in JavaScript/React.js, HTML5 and both regular + Tailwind CSS. We also use other external APIs as well like Web3Forms for more specific tasks as well. Built several responsive websites using ReactJS and Tailwind CSS, improving client retention by 50% through strategic UI design, performance tuning, and mobile-first development. Translated client needs into technical specifications across multiple projects, increasing online inquiries by 75% and reducing bounce rates by 40% through tailored, goal-driven frontend solutions.",
+        description: "ISolve is a side hustle with my friend Harris where we build custom websites for small businesses. It is not about millions yet, more about learning while picking up real client work. We use React.js and Tailwind CSS for responsive, mobile-first sites that actually convert.\n\nKey results:\n• 50% improvement in client retention through strategic UI design\n• 75% increase in online inquiries\n• 40% reduction in bounce rates\n\nEach project teaches us something new about performance tuning and what actually works in production.",
         githubLink: "https://github.com/taha-malik27/ISolve",
         productLink: "https://isolve.info/",
         period: "May 2025 - Present"
+    },
+    {
+        id: "portfolio",
+        title: "Personal Portfolio",
+        tagline: "Interactive 3D Portfolio Experience",
+        tags: ["Next.js", "Three.js", "React", "TypeScript"],
+        color: "#fc8803",
+        description: "This portfolio is where I went all in on creating something that stands out. The centerpiece is a fully interactive 3D room you can explore with orbit or first-person controls. Built with React Three Fiber, Three.js, and physics simulation using Rapier. Beyond the 3D experience, I built custom interactive components like the rotating skill halo, Venn diagram selector, and particle backgrounds. Runs on Next.js 16 with TypeScript and Tailwind CSS v4, fully responsive. A playground for 3D graphics programming and modern web dev wrapped in a cyberpunk synthwave aesthetic.",
+        githubLink: "https://github.com/taha-malik27/myPortfolioWebsite",
+        productLink: typeof window !== 'undefined' ? window.location.origin : 'https://your-portfolio.com',
+        period: "Nov 2024 - Present"
     },
     {
         id: "mindstream",
@@ -38,7 +49,7 @@ const projects: Project[] = [
         tagline: "Real-Time EEG Dashboard",
         tags: ["Python", "PyQt", "BrainFlow", "Signal Processing"],
         color: "#1887f5",
-        description: "Designing a real-time EEG dashboard with PyQT, BrainFlow, Matplotlib, and VisPy, enabling EEG board integration, band filtering, and live signal visualizations, creating an end user friendly interface for 25+ researchers and students. Implementing GPU accelerated graphics, multithreaded data collection, trial timers, and signal processing, increasing experiment efficiency by 2× and boosting signal clarity by 3× through optimized gain, sampling, and noise filtering. Note: Check out the GUI_Development directory in the repository for the latest code!",
+        description: "MINDStream is an open source EEG dashboard for capturing and analyzing brain signals in real time. Built with PyQt, BrainFlow, and Matplotlib for 25+ researchers and students at MIND who need powerful signal analysis without expensive commercial software.\n\nFeatures & Impact:\n• Real-time visualization (raw signals, frequency spectra, power distributions)\n• Advanced filtering (band pass/stop, ICA for artifact removal)\n• GPU accelerated graphics via VisPy with multithreaded data collection\n• 2× experiment efficiency, 3× signal clarity improvement\n• Full recording and export for ML workflows\n• Small language model with RAG for EXG analysis\n\nCheck out the GUI_Development directory in the repo!",
         githubLink: "https://github.com/MINDUofC/MINDEEG",
         productLink: "https://drive.google.com/drive/folders/1_QRY28tUKmzTXfE40aNRZEaNSN1qlqPe?usp=sharing",
         period: "Apr 2025 - Sep 2025"
@@ -49,7 +60,7 @@ const projects: Project[] = [
         tagline: "Portfolio Optimization & Forecasting",
         tags: ["Excel", "CAPM", "Financial Modeling", "Sharpe Ratio"],
         color: "#ffbe0b",
-        description: "Built and optimized a 4-asset tangent portfolio in Excel, maximizing Sharpe to deliver 23.31% annualized return at 18.48% vol, outperforming 50 sample portfolios. Stress-tested CAPM through political shifts; post-2023 results showed alphas up to +22.8% (GLD) and −23.5% (VEA), leading me to recommend rolling-beta re-optimization. Clear takeaway: blend disciplined modeling with timely updates to keep portfolios risk-aware and realistic.",
+        description: "This project builds an optimal investment portfolio using portfolio theory and the Capital Asset Pricing Model (CAPM). The goal was simple: maximize returns while managing risk effectively.\n\nI analyzed five years of market data and used Excel Solver to construct a 4-asset portfolio that delivered a 23.31% annual return at 18.48% volatility. The portfolio's Sharpe ratio (reward per unit of risk) beat 50 randomly sampled alternatives.\n\nThe real test came when I ran the model forward through 2023-2025. The results were eye-opening:\n• Gold (GLD): +22.8% above expected (positive alpha)\n• International stocks (VEA): -23.5% below expected (negative alpha)\n\nThese gaps revealed how quickly markets shift during political and policy changes. Static models struggle to keep up. The lesson: even solid theory needs periodic rebalancing and updated assumptions to stay relevant.",
         githubLink: "#", // Will be document download link
         period: "Mar 2025 - Apr 2025"
     },
@@ -58,21 +69,10 @@ const projects: Project[] = [
         title: "SavorScope",
         tagline: "Dietary Nutrition Tracker",
         tags: ["Java", "JavaFX", "OOP"],
-        color: "#9b59b6",
-        description: "SavorScope Tracker is a comprehensive dietary and activity tracking application designed to help users manage their nutritional intake and track their physical activity levels. The application allows users to log daily meals, track nutritional values, and calculate key health metrics like BMI and daily caloric needs. Built with JavaFX with user-centric features including meal logging, nutritional analysis, and custom reporting.",
+        color: "#a855f7",
+        description: "SavorScope is a desktop nutrition tracker that helps users log meals, track nutritional values, and calculate health metrics like BMI and daily caloric needs. Built with Java and JavaFX, focusing on clean OOP design and an intuitive interface. Features meal logging, nutritional analysis, and custom reporting to identify eating patterns. One of my earlier projects that taught me desktop app development and user-centered design.",
         githubLink: "https://github.com/taha-malik27/SavorScope",
         period: "Feb 2024 - Apr 2024"
-    },
-    {
-        id: "portfolio",
-        title: "Personal Portfolio",
-        tagline: "Interactive 3D Portfolio Experience",
-        tags: ["Next.js", "Three.js", "React", "TypeScript"],
-        color: "#fc8803",
-        description: "A cutting-edge portfolio website featuring a fully interactive 3D room built with React Three Fiber and Three.js. The experience includes dual control modes (orbit and first-person with physics), custom 3D models, postprocessing effects, and dynamic lighting. Beyond the 3D room, the site showcases custom-built interactive components including a rotating skill halo visualization, Venn diagram category selector, particle backgrounds, smooth page transitions, and an image gallery system. Built entirely with Next.js 16, TypeScript, and Tailwind CSS v4, featuring responsive design that adapts seamlessly across all devices. The project demonstrates advanced React patterns, 3D graphics programming, physics simulation with Rapier, and modern web development practices with a cyberpunk-synthwave aesthetic throughout.",
-        githubLink: "https://github.com/taha-malik27/myPortfolioWebsite",
-        productLink: typeof window !== 'undefined' ? window.location.origin : 'https://your-portfolio.com',
-        period: "Nov 2024 - Present"
     }
 ];
 
@@ -127,13 +127,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
                 paddingLeft:"10%",
                 paddingRight: "5%",
                 width: "100%",
-                boxSizing: "border-box",
-                display: "flex",
-                flexDirection: "column",
-                maxHeight: "calc(100vh - 2rem)"
+                boxSizing: "border-box"
             }}>
-                {/* Header - Outside scrollable area */}
-                <h1 style={{margin: 0, marginBottom: "1.5rem"}}>
+                {/* Header - Matches other pages */}
+                <h1 style={{margin: 0, marginTop: "2rem", marginBottom: "1rem"}}>
                     <HoverText text="My Projects" className="header-styling" />
                 </h1>
 
@@ -141,13 +138,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
                 <div style={{
                     overflowY: "auto",
                     overflowX: "hidden",
-                    paddingBottom: "1rem",
-                    flex: 1
+                    maxHeight: "calc(100vh - 10rem)",
+                    paddingRight: "0.5rem" // Space for scrollbar
                 }}>
                     <div style={{
                         display: "grid",
                         gridTemplateColumns: isOneColumn ? "1fr" : "1fr 1fr",
-                        gap: "1.5rem"
+                        gap: "1.5rem",
+                        padding: "0.5rem" // Padding to prevent hover scale cutoff
                     }}>
                         {projects.map((project, index) => {
                             const isLastAndOdd = !isOneColumn && index === projects.length - 1 && projects.length % 2 !== 0;
@@ -168,7 +166,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
                                     backgroundColor: "rgba(0, 0, 0, 0.3)",
                                     border: `2px solid ${isSelected ? project.color : isHovered ? project.color + '80' : 'rgba(255, 255, 255, 0.1)'}`,
                                     borderRadius: "12px",
-                                    padding: "1.5rem",
+                                    padding: "1.25rem",
                                     cursor: "pointer",
                                     transition: "all 0.3s ease",
                                     transform: isHovered ? 'translateY(-5px) scale(1.02)' : isSelected ? 'scale(1.0)' : 'scale(1)',
@@ -198,9 +196,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
                                 <div style={{ position: "relative", zIndex: 1 }}>
                                     <h3 style={{
                                         margin: 0,
-                                        marginBottom: "0.5rem",
+                                        marginBottom: "0.4rem",
                                         color: isSelected ? project.color : "#ffffff",
-                                        fontSize: "1.25rem",
+                                        fontSize: "1.15rem",
                                         fontWeight: 600,
                                         fontFamily: "'Stack Sans Notch', sans-serif",
                                         transition: "color 0.3s ease"
@@ -210,9 +208,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
 
                                     <p style={{
                                         margin: 0,
-                                        marginBottom: "0.5rem",
+                                        marginBottom: "0.4rem",
                                         color: "rgba(255, 255, 255, 0.5)",
-                                        fontSize: "0.75rem",
+                                        fontSize: "0.7rem",
                                         fontFamily: "'Outfit', sans-serif",
                                         fontStyle: "italic"
                                     }}>
@@ -221,10 +219,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
 
                                     <p style={{
                                         margin: 0,
-                                        marginBottom: "1rem",
+                                        marginBottom: "0.8rem",
                                         color: "rgba(255, 255, 255, 0.7)",
-                                        fontSize: "0.85rem",
-                                        lineHeight: "1.4",
+                                        fontSize: "0.8rem",
+                                        lineHeight: "1.3",
                                         fontFamily: "'Outfit', sans-serif"
                                     }}>
                                         {project.tagline}
@@ -242,9 +240,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
                                                 style={{
                                                     backgroundColor: isSelected ? `${project.color}30` : "rgba(255, 255, 255, 0.1)",
                                                     color: isSelected ? project.color : "rgba(255, 255, 255, 0.8)",
-                                                    padding: "0.25rem 0.75rem",
-                                                    borderRadius: "12px",
-                                                    fontSize: "0.7rem",
+                                                    padding: "0.2rem 0.6rem",
+                                                    borderRadius: "10px",
+                                                    fontSize: "0.68rem",
                                                     fontFamily: "'Outfit', sans-serif",
                                                     fontWeight: 500,
                                                     transition: "all 0.3s ease"
@@ -281,30 +279,33 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
 
             {/* Right Section - Project Details */}
             <div style={{
-                display: "grid", 
-                gridTemplateRows: "60% 40%",
+                display: "flex",
+                flexDirection: "column",
                 alignItems: "start", 
-                justifyContent: "center", 
+                justifyContent: "flex-start", 
                 paddingRight: "22%", 
-                paddingTop: "5%", 
+                paddingTop: "2%",
+                paddingBottom: "0.5rem",
                 paddingLeft: "12%",
                 width: "100%",
-                height: "80%", // Reduced from 100% to 80%
-                gap: "2rem"
+                maxHeight: "calc(100vh - 3rem)",
+                gap: "1.5rem",
+                boxSizing: "border-box",
+                marginBottom:"0px",
             }}>
-                {/* Top Section - Detailed Description + Links */}
+                 {/* Top Section - Detailed Description + Links */}
                 <div style={{
                     width: "100%",
-                    height: "100%",
+                    flex: "0 0 auto",
                     display: "flex",
                     flexDirection: "column",
-                    gap: "1.5rem"
+                    gap: "1rem"
                 }}>
                     {/* Title with color */}
                     <h2 style={{
                         margin: 0,
                         color: selectedProject.color,
-                        fontSize: "2rem",
+                        fontSize: "1.5rem",
                         fontWeight: 700,
                         fontFamily: "'Stack Sans Notch', sans-serif",
                         textShadow: `0 0 20px ${selectedProject.color}40`
@@ -316,7 +317,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
                     <p style={{
                         margin: 0,
                         color: "rgba(255, 255, 255, 0.5)",
-                        fontSize: "0.9rem",
+                        fontSize: "0.75rem",
                         fontFamily: "'Outfit', sans-serif",
                         fontStyle: "italic"
                     }}>
@@ -326,21 +327,22 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
                     {/* Description */}
                     <div style={{
                         backgroundColor: "rgba(0, 0, 0, 0.3)",
-                        padding: "1.5rem",
+                        padding: "1.25rem",
                         borderRadius: "12px",
                         border: `1px solid ${selectedProject.color}40`,
-                        flex: 1,
-                        overflowY: "auto"
+                        flex: "0 0 auto",
+                        overflowY: "auto",
+                        maxHeight: "30vh"
                     }}>
-                        <p style={{
-                            margin: 0,
+                        <div style={{
                             color: "rgba(255, 255, 255, 0.9)",
-                            fontSize: "0.95rem",
-                            lineHeight: "1.6",
-                            fontFamily: "'Outfit', sans-serif"
+                            fontSize: "0.85rem",
+                            lineHeight: "1.5",
+                            fontFamily: "'Outfit', sans-serif",
+                            whiteSpace: "pre-line"
                         }}>
                             {selectedProject.description}
-                        </p>
+                        </div>
                     </div>
 
                     {/* Links */}
@@ -418,10 +420,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
                     </div>
                 </div>
 
-                {/* Bottom Section - Visual Content Placeholder */}
+                 {/* Bottom Section - Visual Content Placeholder */}
                 <div style={{
                     width: "100%",
-                    height: "100%",
+                    flex: "1 1 auto",
+                    minHeight: "200px",
                     backgroundColor: "rgba(0, 0, 0, 0.3)",
                     border: `1px solid ${selectedProject.color}20`,
                     borderRadius: "12px",
@@ -430,7 +433,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
                     justifyContent: "center",
                     color: "rgba(255, 255, 255, 0.4)",
                     fontFamily: "'Outfit', sans-serif",
-                    fontSize: "0.9rem",
+                    fontSize: "0.85rem",
                     fontStyle: "italic"
                 }}>
                     Visual content placeholder (images / iframe / video)
