@@ -5,6 +5,7 @@ import React from 'react'
 import ParticlesBackground from '@/components/ParticlesBackground';
 import LoadingScreen from '@/components/LoadingScreen';
 import { usePageLoader } from '@/hooks/usePageLoader';
+import WorkCard from '@/components/cards/WorkCard';
 
 function ExperiencePage() {
     const isLoading = usePageLoader(1200); // 1.2 seconds
@@ -25,7 +26,7 @@ function ExperiencePage() {
             </div>
 
             {/* Right side: main content */}
-            <div className={"gradient"} style={{ position: "relative", padding: "1rem", color: "black", overflow: "hidden"}}>
+            <div className={"gradient"} style={{ position: "relative", padding: "1rem", color: "white", overflow: "hidden", paddingRight:"0"}}>
                 {/* Gradient and Particles load immediately */}
                 <ParticlesBackground />
                 
@@ -39,7 +40,7 @@ function ExperiencePage() {
                     opacity: isLoading ? 0 : 1,
                     transition: 'opacity 0.3s ease-in',
                 }}>
-                    <h1>Work Page</h1>
+                    <WorkCard backgroundColor = "transparent" />
                 </div>
             </div>
         </div>

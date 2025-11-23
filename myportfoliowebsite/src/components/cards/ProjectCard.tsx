@@ -39,7 +39,7 @@ const projects: Project[] = [
         id: "portfolio",
         title: "Personal Portfolio",
         tagline: "Interactive 3D Portfolio Experience",
-        tags: ["Next.js", "Three.js", "React", "TypeScript"],
+        tags: ["Next.js", "Three.js", "React.js", "TypeScript"],
         color: "#fc8803",
         description: "This portfolio is where I went all in on creating something that stands out. The centerpiece is a fully interactive 3D room you can explore with orbit or first-person controls. Built with React Three Fiber, Three.js, and physics simulation using Rapier. Beyond the 3D experience, I built custom interactive components like the rotating skill halo, Venn diagram selector, and particle backgrounds. Runs on Next.js 16 with TypeScript and Tailwind CSS v4, fully responsive. A playground for 3D graphics programming and modern web dev wrapped in a cyberpunk synthwave aesthetic.",
         roughWorkLink: "https://github.com/taha-malik27/myPortfolioWebsite",
