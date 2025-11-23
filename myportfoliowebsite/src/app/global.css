@@ -169,7 +169,7 @@
     transform: scale(0.95);
 }
 
-/*  SCROLL BAR STYLING - Cross-browser compatibility */
+/*  GENERAL SCROLL BAR STYLING - Cross-browser compatibility */
 
 /* Base scrollbar styling - Firefox (Modern & Legacy) */
 .div-scroll {
@@ -219,6 +219,14 @@
     background: rgba(255, 255, 255, 0.5);
 }
 
+
+
+
+
+/* Skills Card Styles */
+
+
+
 /* Smaller scrollbar for skill subcard - Firefox (Modern & Legacy) */
 .skill-subcard-scroll {
     scrollbar-color: rgba(255, 172, 83, 0.4) transparent;
@@ -266,8 +274,6 @@
 .skill-subcard-scroll::-ms-scrollbar-thumb:hover {
     background: rgba(255, 172, 83, 0.6);
 }
-
-
 
 
 /* SHAPES */
@@ -449,12 +455,32 @@
 }
 
 
+/* Work Card Styling */
+
+.vertical-line{
+    height: 100%;
+    background-color: white;
+    width: 25%;
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    border-radius: 30px;
+}
 
 
 
 
 
-/* EFFECTS AND ANIMATIONS */
+
+
+
+
+
+
+
+
+
+/* GENERAL EFFECTS AND ANIMATIONS */
 
 .underline-slide {
     display: inline;                            
