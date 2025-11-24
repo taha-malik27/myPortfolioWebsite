@@ -21,62 +21,101 @@ interface WorkExperience {
     location?: string;
 }
 
-// Placeholder work experiences - ordered from earliest (top) to latest (bottom)
+// Work experiences - ordered from earliest (top) to latest (bottom)
 const workExperiences: WorkExperience[] = [
     {
         id: "exp1",
-        company: "Company One",
-        role: "Role One",
-        date: "Jan 2020 - Dec 2020",
-        color: "#fc8803", // Orange
-        whatIDid: "Placeholder: What I did at Company One...",
-        impact: "Placeholder: Impact at Company One...",
-        technologies: ["Tech1", "Tech2"],
-        location: "Location One"
+        company: "American Eagle Outfitters",
+        role: "Sales Ambassador",
+        date: "May 2023 - Sept 2025",
+        logo: "/images/work/AEOLogo.png",
+        color: "#ffffff", // White
+        whatIDid: "Optimized weekly stock organization and floor sets to improve product visibility and streamline inventory workflows. Assisted roughly 30 to 60 customers per shift, delivered strong customer service, and handled 40 to 80 transactions per shift with consistent accuracy. Maintained professionalism during high tension situations and helped de escalate conflicts to keep store operations smooth.",
+        impact: "Improved purchase conversions and reduced inventory processing time by about 10 percent. Supported strong customer satisfaction through high volume service and reliable checkout accuracy.",
+        technologies: [],
+        location: "Calgary, AB, Canada (On site)"
     },
     {
         id: "exp2",
-        company: "Company Two",
-        role: "Role Two",
-        date: "Jan 2021 - Dec 2021",
-        color: "#1887f5", // Blue
-        whatIDid: "Placeholder: What I did at Company Two...",
-        impact: "Placeholder: Impact at Company Two...",
-        technologies: ["Tech3", "Tech4"],
-        location: "Location Two"
+        company: "Data Science and Machine Learning Club (DSMLC)",
+        role: "Vice President of Outreach (previously Junior VP of Marketing)",
+        date: "Nov 2023 - Apr 2025",
+        logo: "/images/work/DSMLCLogo.png",
+        color: "#facc15", // Yellow
+        whatIDid: "Managed club finances, sponsorships, and external partnerships. Built relationships with 30 plus industry professionals and coordinated sponsorship outreach. Organized the club's largest event for student industry networking and showcases. Delivered workshops on SciPy, NumPy, and data visualization. Ran LinkedIn and Instagram campaigns to increase reach and engagement.",
+        impact: "Secured about 5,500 dollars in sponsorships. Produced the club's largest event with 150 plus attendees and 20 plus company participants. Strengthened technical skills for 40 plus students through workshops and expanded campus awareness.",
+        technologies: ["Python", "SciPy", "NumPy", "Power BI"],
+        location: "University of Calgary, Calgary, AB (Hybrid)"
     },
     {
         id: "exp3",
-        company: "Company Three",
-        role: "Role Three",
-        date: "Jan 2022 - Dec 2022",
-        color: "#10B981", // Green
-        whatIDid: "Placeholder: What I did at Company Three...",
-        impact: "Placeholder: Impact at Company Three...",
-        technologies: ["Tech5", "Tech6"],
-        location: "Location Three"
+        company: "Mechatronics Integration of Neural Dynamics (MIND)",
+        role: "Co Founder and Co President",
+        date: "Feb 2024 - Present",
+        logo: "/images/work/MINDLogo.jpg",
+        color: "#38bdf8", // Sky blue
+        whatIDid: "Co founded and scaled a university neurotechnology design team by launching core finance and outreach systems. Recruited and structured interdisciplinary R and D teams across engineering and neuro streams. Led development of a BCI controlled RC car using brain signal acquisition and processing, including frequency filtering, independent component analysis, and threshold based classification in Python. Developed MINDStream, an open source EEG dashboard for real time brain signal capture and analysis using PyQt, BrainFlow, and Matplotlib. Implemented GPU accelerated graphics via VisPy with multithreaded data collection, advanced filtering including band pass/stop and ICA for artifact removal, real time visualization of raw signals and frequency spectra, and integrated a small language model with RAG for EXG analysis. Oversaw development of additional projects including MINDScope PCB board and a custom EEG headset.",
+        impact: "Secured 7,000 plus dollars in funding and grew the organization to 35 plus active members from 140 plus applicants. Delivered a functioning proof of concept BCI vehicle and established a multi project neurotech pipeline for ongoing research and prototyping. MINDStream achieved 2× experiment efficiency and 3× signal clarity improvement, now used by 25 plus researchers and students at MIND who need powerful signal analysis without expensive commercial software.",
+        technologies: [
+            "Python",
+            "Matlab (Introductory)",
+            "PyQt",
+            "BrainFlow",
+            "Matplotlib",
+            "VisPy",
+            "EEG",
+            "Signal Processing",
+            "Independent Component Analysis (ICA)",
+            "Threshold Classification",
+            "GPU Acceleration",
+            "Multithreading",
+            "RAG",
+            "Small Language Models"
+        ],
+        location: "University of Calgary, Calgary, AB (Hybrid)"
     },
     {
         id: "exp4",
-        company: "Company Four",
-        role: "Role Four",
-        date: "Jan 2023 - Dec 2023",
-        color: "#a855f7", // Purple
-        whatIDid: "Placeholder: What I did at Company Four...",
-        impact: "Placeholder: Impact at Company Four...",
-        technologies: ["Tech7", "Tech8"],
-        location: "Location Four"
+        company: "Ovintiv",
+        role: "Software Development Intern, Chief Digital Office",
+        date: "May 2025 - Dec 2025",
+        logo: "/images/work/OvintivLogo.png",
+        color: "#ea580c", // Deep orange
+        whatIDid: "Developed and deployed an Emergency Response Plan app using ReactJS, Python, and Flask, with automated CI and CD through Azure DevOps. Built security access provisioning automations by integrating ServiceNow with Python services hosted on Azure App Services, secured via Azure Key Vault and connected to Oracle databases. Improved risk assessment workflows through permission logic, UI enhancements, and standardized deployment versioning. Led cloud migration work from Oracle to Azure SQL, refactoring SQL logic, updating configurations, and coordinating pre deployment testing and VM transitions. Delivered a mobile Emergency Response Plan experience in Microsoft Power Apps with offline access support.",
+        impact: "Cut incident reporting time by 35 percent and improved emergency response for 100 plus field employees. Reduced access provisioning time by 40 percent and accelerated software provisioning by about 80 percent for multiple teams. Earned an internship extension from 4 months to 8 months based on performance and project needs.",
+        technologies: [
+            "ReactJS",
+            "Python",
+            "Flask",
+            "Azure DevOps",
+            "ServiceNow",
+            "Azure App Services",
+            "Azure Key Vault",
+            "Oracle",
+            "Azure SQL",
+            "Angular",
+            ".NET",
+            "Power Apps",
+            "SQL"
+        ],
+        location: "Calgary, AB, Canada (On site)"
     },
     {
         id: "exp5",
-        company: "Company Five",
-        role: "Role Five",
-        date: "Jan 2024 - Present",
-        color: "#ff6b6b", // Red
-        whatIDid: "Placeholder: What I did at Company Five...",
-        impact: "Placeholder: Impact at Company Five...",
-        technologies: ["Tech9", "Tech10"],
-        location: "Location Five"
+        company: "Deloitte",
+        role: "Incoming Audit and Assurance Intern",
+        date: "Sept 2026 - Dec 2026",
+        logo: "/images/work/DeloitteLogo.png",
+        color: "#22c55e", // Deloitte green
+        whatIDid: "Support financial statement audits, internal controls testing, and compliance reviews for clients across multiple industries.",
+        impact: "Incoming role focused on building audit, assurance, and client service experience in a professional services environment.",
+        technologies: [
+            "Audit and Assurance",
+            "Financial Statement Audits",
+            "Internal Controls Testing",
+            "Compliance Reviews"
+        ],
+        location: "Calgary, AB, Canada"
     }
 ];
 
@@ -162,6 +201,14 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
         return experience?.color || "#fc8803"; // Default to orange if not found
     };
 
+    // Convert hex color to rgba
+    const hexToRgba = (hex: string, alpha: number): string => {
+        const r = parseInt(hex.slice(1, 3), 16);
+        const g = parseInt(hex.slice(3, 5), 16);
+        const b = parseInt(hex.slice(5, 7), 16);
+        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    };
+
     
     return (
         <div 
@@ -222,7 +269,7 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                         backgroundColor: "rgba(0, 0, 0, 0.3)",
                         borderRadius: "12px",
                         padding: isSmallViewport ? `${Math.max(1, Math.min(2, viewportWidth / 600))}rem` : "2rem",
-                        border: `1px solid ${selectedExperience.id === hoveredExperience ? "#fc8803" : "rgba(255, 255, 255, 0.2)"}`,
+                        border: `1px solid ${selectedExperience.id === hoveredExperience ? displayedExperience.color : "rgba(255, 255, 255, 0.2)"}`,
                         transition: "border-color 0.3s ease",
                         height: "100%",
                         overflowY: "auto",
@@ -234,7 +281,7 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                             fontFamily: 'Stack Sans Notch, sans-serif',
                             fontWeight: 600,
                             fontSize: isSmallViewport ? `clamp(1.25rem, ${Math.max(1.25, Math.min(2, viewportWidth / 80))}rem, 2rem)` : "xx-large",
-                            color: "#fc8803",
+                            color: displayedExperience.color,
                             marginTop: 0,
                             marginBottom: "0.5rem"
                         }}>
@@ -280,7 +327,7 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                                 fontFamily: 'Stack Sans Notch, sans-serif',
                                 fontWeight: 600,
                                 fontSize: isSmallViewport ? `clamp(0.9rem, ${Math.max(0.9, Math.min(1.25, viewportWidth / 110))}rem, 1.25rem)` : "large",
-                                color: "#fc8803",
+                                color: displayedExperience.color,
                                 marginBottom: "0.75rem",
                                 marginTop: 0
                             }}>
@@ -301,7 +348,7 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                                 fontFamily: "Stack Sans Notch, sans-serif",
                                 fontWeight: 600,
                                 fontSize: isSmallViewport ? `clamp(0.9rem, ${Math.max(0.9, Math.min(1.25, viewportWidth / 110))}rem, 1.25rem)` : "large",
-                                color: "#fc8803",
+                                color: displayedExperience.color,
                                 marginBottom: "0.75rem",
                                 marginTop: 0
                             }}>
@@ -323,7 +370,7 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                                     fontFamily: 'Stack Sans Notch, sans-serif',
                                     fontWeight: 600,
                                     fontSize: isSmallViewport ? `clamp(0.9rem, ${Math.max(0.9, Math.min(1.25, viewportWidth / 110))}rem, 1.25rem)` : "large",
-                                    color: "#fc8803",
+                                    color: displayedExperience.color,
                                     marginBottom: "0.75rem",
                                     marginTop: 0
                                 }}>
@@ -334,22 +381,26 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                                     flexWrap: "wrap",
                                     gap: "0.5rem"
                                 }}>
-                                    {displayedExperience.technologies.map((tech, idx) => (
-                                        <span
-                                            key={idx}
-                                            style={{
-                                                padding: isSmallViewport ? `${Math.max(0.15, viewportWidth / 800)}rem ${Math.max(0.5, viewportWidth / 300)}rem` : "0.25rem 0.75rem",
-                                                backgroundColor: "rgba(252, 136, 3, 0.2)",
-                                                border: "1px solid rgba(252, 136, 3, 0.5)",
-                                                borderRadius: "6px",
-                                                fontSize: isSmallViewport ? `clamp(0.7rem, ${Math.max(0.7, Math.min(0.875, viewportWidth / 150))}rem, 0.875rem)` : "0.875rem",
-                                                color: "#fc8803",
-                                                fontFamily: 'Stack Sans Notch, sans-serif'
-                                            }}
-                                        >
-                                            {tech}
-                                        </span>
-                                    ))}
+                                    {displayedExperience.technologies.map((tech, idx) => {
+                                        const experienceColor = displayedExperience.color;
+                                        
+                                        return (
+                                            <span
+                                                key={idx}
+                                                style={{
+                                                    padding: isSmallViewport ? `${Math.max(0.15, viewportWidth / 800)}rem ${Math.max(0.5, viewportWidth / 300)}rem` : "0.25rem 0.75rem",
+                                                    backgroundColor: hexToRgba(experienceColor, 0.2),
+                                                    border: `1px solid ${hexToRgba(experienceColor, 0.5)}`,
+                                                    borderRadius: "6px",
+                                                    fontSize: isSmallViewport ? `clamp(0.7rem, ${Math.max(0.7, Math.min(0.875, viewportWidth / 150))}rem, 0.875rem)` : "0.875rem",
+                                                    color: experienceColor,
+                                                    fontFamily: 'Stack Sans Notch, sans-serif'
+                                                }}
+                                            >
+                                                {tech}
+                                            </span>
+                                        );
+                                    })}
                                 </div>
                             </div>
                         )}
