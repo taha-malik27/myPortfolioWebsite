@@ -18,6 +18,7 @@ interface WorkExperience {
     whatIDid: string;
     impact: string;
     technologies?: string[];
+    skills?: string[]; // Non-technological skills
     location?: string;
 }
 
@@ -33,6 +34,7 @@ const workExperiences: WorkExperience[] = [
         whatIDid: "Optimized weekly stock organization and floor sets to improve product visibility and streamline inventory workflows. Assisted roughly 30 to 60 customers per shift, delivered strong customer service, and handled 40 to 80 transactions per shift with consistent accuracy. Maintained professionalism during high tension situations and helped de escalate conflicts to keep store operations smooth.",
         impact: "Improved purchase conversions and reduced inventory processing time by about 10 percent. Supported strong customer satisfaction through high volume service and reliable checkout accuracy.",
         technologies: [],
+        skills: ["Customer Service", "Inventory Management", "Conflict Resolution", "Transaction Processing", "Retail Operations"],
         location: "Calgary, AB, Canada (On site)"
     },
     {
@@ -107,13 +109,15 @@ const workExperiences: WorkExperience[] = [
         date: "Sept 2026 - Dec 2026",
         logo: "/images/work/DeloitteLogo.png",
         color: "#22c55e", // Deloitte green
-        whatIDid: "Support financial statement audits, internal controls testing, and compliance reviews for clients across multiple industries.",
+        whatIDid: "Will support financial statement audits, internal controls testing, and compliance reviews for clients across multiple industries.",
         impact: "Incoming role focused on building audit, assurance, and client service experience in a professional services environment.",
-        technologies: [
+        technologies: [],
+        skills: [
             "Audit and Assurance",
             "Financial Statement Audits",
             "Internal Controls Testing",
-            "Compliance Reviews"
+            "Compliance Reviews",
+            "Client Service"
         ],
         location: "Calgary, AB, Canada"
     }
@@ -139,8 +143,9 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
         const handleResize = () => {
             const width = window.innerWidth;
             setViewportWidth(width);
-            // Small viewport mode triggers at ~70% of typical desktop width (around 1200px)
-            setIsSmallViewport(width < 1200);
+            // Small viewport mode triggers at 80% of typical desktop width (1536px at 1920px)
+            const typicalDesktopWidth = 1920;
+            setIsSmallViewport(width < typicalDesktopWidth * 0.8);
         };
 
         if (typeof window !== 'undefined') {
@@ -265,7 +270,7 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                     opacity: isContentVisible ? 1 : 0,
                     transition: "opacity 0.3s ease-in-out"
                 }}>
-                    <div style={{
+                    <div className="div-scroll" style={{
                         backgroundColor: "rgba(0, 0, 0, 0.3)",
                         borderRadius: "12px",
                         padding: isSmallViewport ? `${Math.max(1, Math.min(2, viewportWidth / 600))}rem` : "2rem",
@@ -331,7 +336,7 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                                 marginBottom: "0.75rem",
                                 marginTop: 0
                             }}>
-                                What I Did
+                                {displayedExperience.company === "Deloitte" ? "What I Will Do" : "What I Did"}
                             </h3>
                             <p className="paragraph-styling" style={{ 
                                 margin: 0, 
@@ -404,6 +409,48 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                                 </div>
                             </div>
                         )}
+
+                        {/* Skills */}
+                        {displayedExperience.skills && displayedExperience.skills.length > 0 && (
+            <div>
+                                <h3 style={{
+                                    fontFamily: 'Stack Sans Notch, sans-serif',
+                                    fontWeight: 600,
+                                    fontSize: isSmallViewport ? `clamp(0.9rem, ${Math.max(0.9, Math.min(1.25, viewportWidth / 110))}rem, 1.25rem)` : "large",
+                                    color: displayedExperience.color,
+                                    marginBottom: "0.75rem",
+                                    marginTop: 0
+                                }}>
+                                    Skills
+                                </h3>
+                                <div style={{
+                                    display: "flex",
+                                    flexWrap: "wrap",
+                                    gap: "0.5rem"
+                                }}>
+                                    {displayedExperience.skills.map((skill, idx) => {
+                                        const experienceColor = displayedExperience.color;
+                                        
+                                        return (
+                                            <span
+                                                key={idx}
+                                                style={{
+                                                    padding: isSmallViewport ? `${Math.max(0.15, viewportWidth / 800)}rem ${Math.max(0.5, viewportWidth / 300)}rem` : "0.25rem 0.75rem",
+                                                    backgroundColor: hexToRgba(experienceColor, 0.2),
+                                                    border: `1px solid ${hexToRgba(experienceColor, 0.5)}`,
+                                                    borderRadius: "6px",
+                                                    fontSize: isSmallViewport ? `clamp(0.7rem, ${Math.max(0.7, Math.min(0.875, viewportWidth / 150))}rem, 0.875rem)` : "0.875rem",
+                                                    color: experienceColor,
+                                                    fontFamily: 'Stack Sans Notch, sans-serif'
+                                                }}
+                                            >
+                                                {skill}
+                                            </span>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
@@ -423,7 +470,9 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                     position: "relative",
                     padding: "1.6rem 0rem 2rem 1.5rem",
                     alignSelf: "stretch",
-                    boxSizing: "border-box"
+                    boxSizing: "border-box",
+                    transform: "scale(0.95)",
+                    transformOrigin: "center"
                 }}>
                     {workExperiences.map((experience, index) => {
                         const isSelected = experience.id === selectedExperience.id;
@@ -527,7 +576,9 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                                             fontWeight: 600,
                                             fontSize: "0.9rem",
                                             color: "white",
-                                            marginBottom: "0.25rem"
+                                            marginBottom: "0.25rem",
+                                            wordWrap: "break-word",
+                                            overflowWrap: "break-word"
                                         }}>
                                             {experience.role}
                                         </div>
@@ -535,7 +586,9 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                                             fontFamily: 'Stack Sans Notch, sans-serif',
                                             fontWeight: 400,
                                             fontSize: "0.75rem",
-                                            color: "rgba(255, 255, 255, 0.7)"
+                                            color: "rgba(255, 255, 255, 0.7)",
+                                            wordWrap: "break-word",
+                                            overflowWrap: "break-word"
                                         }}>
                                             {experience.company}
                                         </div>
@@ -544,7 +597,9 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                                             fontWeight: 400,
                                             fontSize: "0.7rem",
                                             color: "rgba(255, 255, 255, 0.5)",
-                                            marginTop: "0.25rem"
+                                            marginTop: "0.25rem",
+                                            wordWrap: "break-word",
+                                            overflowWrap: "break-word"
                                         }}>
                                             {experience.date}
                                         </div>
@@ -560,14 +615,16 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                     overflowY: "auto",
                     overflowX: viewportWidth < 600 ? "scroll" : "hidden",
                     height: "90%", 
-                    width: "100%",
+                    width: "120%",
                     minWidth: "400px",
                     display: "grid",
                     gridTemplateColumns: "minmax(0, 1fr) minmax(60px, auto) minmax(0, 1fr)",
                     position: "relative",
                     padding: "0.8rem 0.5rem",
-                    marginRight:"5rem",
+                    marginRight:"3rem",
                     alignSelf: "center",
+                    transform: "scale(0.95)",
+                    transformOrigin: "center",
                     // backgroundColor:"rgba(100,100,100,0.5)" DEBUG
                 }}>
 
@@ -581,7 +638,7 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                         zIndex: 2,
                         overflow: "visible",
                         alignContent: workExperiences.length <= 5 ? "space-evenly" : "start",
-                        // backgroundColor:"rgba(100,200,100,0.5)" DEBUG
+                        // backgroundColor:"rgba(100,200,100,0.5)" //DEBUG
                     }}>
                         {timelineSlots.filter(s => isLeftColumn(s.slot)).map((slotData, idx) => {
                             const experience = slotData.experience;
@@ -626,10 +683,11 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                                                 transition: "all 0.3s ease",
                                                 transform: isHovered ? "scale(1.05)" : "scale(1)",
                                                 width: "100%",
-                                                maxWidth: "280px",
+                                                maxWidth: "250px",
+                                                height: "auto",
                                                 minHeight: "64px",
                                                 display: "flex",
-                                                alignItems: "center",
+                                                alignItems: "flex-start",
                                                 gap: "0.8rem",
                                                 overflow: "visible"
                                             }}
@@ -666,9 +724,8 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                                                     fontSize: "0.9rem",
                                                     color: "white",
                                                     marginBottom: "0.25rem",
-                                                    overflow: "hidden",
-                                                    textOverflow: "ellipsis",
-                                                    whiteSpace: "nowrap"
+                                                    wordWrap: "break-word",
+                                                    overflowWrap: "break-word"
                                                 }}>
                                                     {experience.role}
                                                 </div>
@@ -677,9 +734,8 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                                                     fontWeight: 400,
                                                     fontSize: "0.75rem",
                                                     color: "rgba(255, 255, 255, 0.7)",
-                                                    overflow: "hidden",
-                                                    textOverflow: "ellipsis",
-                                                    whiteSpace: "nowrap"
+                                                    wordWrap: "break-word",
+                                                    overflowWrap: "break-word"
                                                 }}>
                                                     {experience.company}
                                                 </div>
@@ -688,7 +744,9 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                                                     fontWeight: 400,
                                                     fontSize: "0.7rem",
                                                     color: "rgba(255, 255, 255, 0.5)",
-                                                    marginTop: "0.25rem"
+                                                    marginTop: "0.25rem",
+                                                    wordWrap: "break-word",
+                                                    overflowWrap: "break-word"
                                                 }}>
                                                     {experience.date}
                                                 </div>
@@ -825,10 +883,11 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                                                 transition: "all 0.3s ease",
                                                 transform: isHovered ? "scale(1.05)" : "scale(1)",
                                                 width: "100%",
-                                                maxWidth: "280px",
+                                                maxWidth: "250px",
+                                                height: "auto",
                                                 minHeight: "64px",
                                                 display: "flex",
-                                                alignItems: "center",
+                                                alignItems: "flex-start",
                                                 gap: "0.8rem",
                                                 overflow: "visible"
                                             }}
@@ -865,9 +924,8 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                                                     fontSize: "0.9rem",
                                                     color: "white",
                                                     marginBottom: "0.25rem",
-                                                    overflow: "hidden",
-                                                    textOverflow: "ellipsis",
-                                                    whiteSpace: "nowrap"
+                                                    wordWrap: "break-word",
+                                                    overflowWrap: "break-word"
                                                 }}>
                                                     {experience.role}
                                                 </div>
@@ -876,9 +934,8 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                                                     fontWeight: 400,
                                                     fontSize: "0.75rem",
                                                     color: "rgba(255, 255, 255, 0.7)",
-                                                    overflow: "hidden",
-                                                    textOverflow: "ellipsis",
-                                                    whiteSpace: "nowrap"
+                                                    wordWrap: "break-word",
+                                                    overflowWrap: "break-word"
                                                 }}>
                                                     {experience.company}
                                                 </div>
@@ -887,7 +944,9 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                                                     fontWeight: 400,
                                                     fontSize: "0.7rem",
                                                     color: "rgba(255, 255, 255, 0.5)",
-                                                    marginTop: "0.25rem"
+                                                    marginTop: "0.25rem",
+                                                    wordWrap: "break-word",
+                                                    overflowWrap: "break-word"
                                                 }}>
                                                     {experience.date}
                                                 </div>
