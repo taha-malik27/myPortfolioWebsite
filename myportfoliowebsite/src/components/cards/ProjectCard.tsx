@@ -671,7 +671,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
         >
             {/* Left Section - Project Cards Grid */}
             <div style={{
-                alignSelf: "center", 
+                // alignSelf: "center", 
                 paddingLeft:"10%",
                 paddingRight: "5%",
                 width: "100%",

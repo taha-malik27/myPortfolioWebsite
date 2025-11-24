@@ -13,6 +13,7 @@ interface WorkExperience {
     role: string;
     date: string;
     logo?: string; // Path to logo image
+    color: string; // Color for this experience
     // Placeholder fields for detailed content
     whatIDid: string;
     impact: string;
@@ -27,6 +28,7 @@ const workExperiences: WorkExperience[] = [
         company: "Company One",
         role: "Role One",
         date: "Jan 2020 - Dec 2020",
+        color: "#fc8803", // Orange
         whatIDid: "Placeholder: What I did at Company One...",
         impact: "Placeholder: Impact at Company One...",
         technologies: ["Tech1", "Tech2"],
@@ -37,6 +39,7 @@ const workExperiences: WorkExperience[] = [
         company: "Company Two",
         role: "Role Two",
         date: "Jan 2021 - Dec 2021",
+        color: "#1887f5", // Blue
         whatIDid: "Placeholder: What I did at Company Two...",
         impact: "Placeholder: Impact at Company Two...",
         technologies: ["Tech3", "Tech4"],
@@ -47,6 +50,7 @@ const workExperiences: WorkExperience[] = [
         company: "Company Three",
         role: "Role Three",
         date: "Jan 2022 - Dec 2022",
+        color: "#10B981", // Green
         whatIDid: "Placeholder: What I did at Company Three...",
         impact: "Placeholder: Impact at Company Three...",
         technologies: ["Tech5", "Tech6"],
@@ -57,6 +61,7 @@ const workExperiences: WorkExperience[] = [
         company: "Company Four",
         role: "Role Four",
         date: "Jan 2023 - Dec 2023",
+        color: "#a855f7", // Purple
         whatIDid: "Placeholder: What I did at Company Four...",
         impact: "Placeholder: Impact at Company Four...",
         technologies: ["Tech7", "Tech8"],
@@ -67,6 +72,7 @@ const workExperiences: WorkExperience[] = [
         company: "Company Five",
         role: "Role Five",
         date: "Jan 2024 - Present",
+        color: "#ff6b6b", // Red
         whatIDid: "Placeholder: What I did at Company Five...",
         impact: "Placeholder: Impact at Company Five...",
         technologies: ["Tech9", "Tech10"],
@@ -80,15 +86,6 @@ const getSlotForIndex = (index: number): number => {
     const pattern = [1, 7, 3, 9, 5];
     return pattern[index % pattern.length];
 };
-
-// Color palette for different roles/experiences
-const roleColors = [
-    "#fc8803", // Orange
-    "#1887f5", // Blue
-    "#10B981", // Green
-    "#a855f7", // Purple
-    "#ff6b6b", // Red
-];
 
 const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) => {
     const [selectedExperience, setSelectedExperience] = useState<WorkExperience>(workExperiences[0]);
@@ -161,10 +158,11 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
 
     // Get color for an experience by its index
     const getExperienceColor = (experienceId: string): string => {
-        const index = workExperiences.findIndex(exp => exp.id === experienceId);
-        return roleColors[index % roleColors.length];
+        const experience = workExperiences.find(exp => exp.id === experienceId);
+        return experience?.color || "#fc8803"; // Default to orange if not found
     };
 
+    
     return (
         <div 
             className="fade-in" 
@@ -172,7 +170,7 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                 position: "relative",
                 zIndex: 1,
                 display: "grid",
-                gridTemplateColumns: isSmallViewport ? "1fr 1fr" : "48% 48%",
+                gridTemplateColumns: "48% 1fr 48%",
                 gridTemplateRows: isSmallViewport ? "1fr" : "1fr",
                 gap: isSmallViewport ? "1rem" : "0",
                 justifyContent: "center",
@@ -180,16 +178,15 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                 height: "calc(100vh - 2rem)",
                 marginTop: "-0.5%",
                 paddingRight: "1rem",
-                paddingLeft: isSmallViewport ? "1rem" : "0",
                 overflow: "hidden",
                 backgroundColor: backgroundColor
             }}
         >
             {/* Left Section - Work Experience Details */}
             <div className={isSmallViewport ? 'div-scroll' : ''} style={{
-                alignSelf: "stretch", 
-                paddingLeft: isSmallViewport ? "5%" : "10%",
-                paddingRight: isSmallViewport ? "5%" : "5%",
+                // alignSelf: "center", 
+                paddingLeft: "10%",
+                paddingRight:"5%" ,
                 width: "100%",
                 boxSizing: "border-box",
                 height: "100%",
@@ -214,7 +211,7 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                 <div style={{
                     flex: "1 1 0",
                     minHeight: "0",
-                    width: "90%",
+                    width: "100%",
                     marginBottom: "1.5rem",
                     display: "flex",
                     flexDirection: "column",
@@ -359,6 +356,9 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                     </div>
                 </div>
             </div>
+
+
+            <div></div>
 
             {/* Right Section - Visual Vertical Timeline */}
             {isSmallViewport ? (
@@ -515,8 +515,9 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                     gridTemplateColumns: "minmax(0, 1fr) minmax(60px, auto) minmax(0, 1fr)",
                     position: "relative",
                     padding: "0.8rem 0.5rem",
+                    marginRight:"5rem",
                     alignSelf: "center",
-                    backgroundColor:"rgba(100,100,100,0.5)"
+                    // backgroundColor:"rgba(100,100,100,0.5)" DEBUG
                 }}>
 
                     {/* Left Column - Preview Cards */}
@@ -529,7 +530,7 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                         zIndex: 2,
                         overflow: "visible",
                         alignContent: workExperiences.length <= 5 ? "space-evenly" : "start",
-                        backgroundColor:"rgba(100,200,100,0.5)"
+                        // backgroundColor:"rgba(100,200,100,0.5)" DEBUG
                     }}>
                         {timelineSlots.filter(s => isLeftColumn(s.slot)).map((slotData, idx) => {
                             const experience = slotData.experience;
@@ -661,7 +662,7 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                         zIndex: 1,
                         minWidth: "60px",
                         flexShrink: 0,
-                        backgroundColor:"rgba(200,100,100,0.5)"
+                        // backgroundColor:"rgba(200,100,100,0.5)" DEBUG
                     }}>
                         {/* Vertical Timeline Line */}
                         <div className='vertical-line' style={{
@@ -728,7 +729,7 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                         zIndex: 2,
                         overflow: "visible",
                         alignContent: workExperiences.length <= 5 ? "space-evenly" : "start",
-                        backgroundColor:"rgba(100,100,200,0.5)"
+                        // backgroundColor:"rgba(100,100,200,0.5)" DEBUG
                     }}>
                         {timelineSlots.filter(s => isRightColumn(s.slot)).map((slotData, idx) => {
                             const experience = slotData.experience;
