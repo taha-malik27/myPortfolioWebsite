@@ -46,12 +46,13 @@ const ContactCard: React.FC<ContactCardProps> = ({ backgroundColor = "transparen
                 // alignSelf: "center", 
                 paddingLeft:"10%",
                 paddingRight: "5%",
+                paddingBottom:"5%",
                 width: "100%",
                 boxSizing: "border-box",
                 display:"flex",
                 flexDirection:"column",
                 backgroundColor:"rgba(100,200,100,0.5)",
-                gap:"2rem"
+                // gap:"1.5rem"
             }}>
 
                 {/* Header - Matches other pages */}
@@ -70,7 +71,8 @@ const ContactCard: React.FC<ContactCardProps> = ({ backgroundColor = "transparen
                     gridTemplateColumns:"1fr 70%",
                     justifyItems:"center",
                     alignItems:"center",
-                    textAlign:"center"
+                    textAlign:"center",
+                    marginBottom:"2vh"
                 }}>
 
                 <div>Email - Icon</div>
@@ -86,7 +88,8 @@ const ContactCard: React.FC<ContactCardProps> = ({ backgroundColor = "transparen
                     backgroundColor:"rgba(100,100,200,0.5)", //DEBUG
                     justifySelf:"center",
                     width:"100%",
-                    height:"20%",
+                    flex: 1,
+                    height:"100%",
                     display:"grid",
                     gridTemplateColumns:"50% 50%",
                     justifyItems:"center",
