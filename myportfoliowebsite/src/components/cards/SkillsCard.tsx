@@ -2,9 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import HoverText from '@/components/HoverText';
-import VennDialComponent from '../VennDialComponent';
+import VennDialComponent from '../skills/VennDialComponent';
 import { SkillSubCard } from './SkillSubCard';
-import { SkillHalo } from '../SkillHalo';
+import { SkillHalo } from '../skills/SkillHalo';
 import { skillsData } from '@/data/skillsData';
 import { getCategoryColor } from '@/utils/categoryColors';
 

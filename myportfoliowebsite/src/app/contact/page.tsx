@@ -5,6 +5,7 @@ import React from 'react'
 import ParticlesBackground from '@/components/ParticlesBackground';
 import LoadingScreen from '@/components/LoadingScreen';
 import { usePageLoader } from '@/hooks/usePageLoader';
+import ContactCard from '@/components/cards/ContactCard';
 
 function ContactPage() {
     const isLoading = usePageLoader(1200); // 1.2 seconds
@@ -39,7 +40,7 @@ function ContactPage() {
                     opacity: isLoading ? 0 : 1,
                     transition: 'opacity 0.3s ease-in',
                 }}>
-                    <h1>Contact Page</h1>
+                    <ContactCard backgroundColor = "transparent" />
                 </div>
             </div>
         </div>

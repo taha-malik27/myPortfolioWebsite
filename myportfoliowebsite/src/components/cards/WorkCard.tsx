@@ -79,7 +79,7 @@ const workExperiences: WorkExperience[] = [
     {
         id: "exp4",
         company: "Ovintiv",
-        role: "Software Development Intern, Chief Digital Office",
+        role: "Software Engineering Intern",
         date: "May 2025 - Dec 2025",
         logo: "/images/work/OvintivLogo.png",
         color: "#ea580c", // Deep orange
