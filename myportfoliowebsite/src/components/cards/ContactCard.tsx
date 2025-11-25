@@ -50,7 +50,8 @@ const ContactCard: React.FC<ContactCardProps> = ({ backgroundColor = "transparen
                 boxSizing: "border-box",
                 display:"flex",
                 flexDirection:"column",
-                backgroundColor:"rgba(100,200,100,0.5)"
+                backgroundColor:"rgba(100,200,100,0.5)",
+                gap:"2rem"
             }}>
 
                 {/* Header - Matches other pages */}
@@ -60,11 +61,63 @@ const ContactCard: React.FC<ContactCardProps> = ({ backgroundColor = "transparen
 
 
                 {/* Sub Box for Socials, will be 2x2 grid, 30-70 between icon and text */}
-                <div style={{}}>
+                <div style={{
+                    backgroundColor:"rgba(200,150,150,0.5)", //DEBUG
+                    justifySelf:"center",
+                    width:"100%",
+                    height:"50%",
+                    display:"grid",
+                    gridTemplateColumns:"1fr 70%",
+                    justifyItems:"center",
+                    alignItems:"center",
+                    textAlign:"center"
+                }}>
+
+                <div>Email - Icon</div>
+                <div>Email - Text/Link</div>
+                <div>LinkedIn - Icon</div>
+                <div>LinkedIn - Text/Link</div>
+                
+                </div>
+
+
+                {/* Resume Box - needs to contain 2 identical buttons with Resume - SENG and Resume - Finance on each */}
+                <div style={{
+                    backgroundColor:"rgba(100,100,200,0.5)", //DEBUG
+                    justifySelf:"center",
+                    width:"100%",
+                    height:"20%",
+                    display:"grid",
+                    gridTemplateColumns:"50% 50%",
+                    justifyItems:"center",
+                    alignItems:"center"
+                    
+
+                }}>
+
+
+                    {/* Download Button 1 - SENG Resume */}
+                    <div style={{
+                        backgroundColor:"rgba(200,100,100,0.5)", //DEBUG
+                        width:"85%",
+                        height:"85%"
+                    }}>
+                        Resume 1 - Software Engineering
+                    </div>
+
+
+
+                    {/* Download Button 2 - Finance Resume */}
+                    <div style={{
+                        backgroundColor:"rgba(200,100,100,0.5)", //DEBUG
+                        width:"85%",
+                        height:"85%"
+                    }}>
+                        Resume 2 - Finance
+                    </div>
 
 
                 </div>
-
 
             </div>
 
@@ -73,9 +126,9 @@ const ContactCard: React.FC<ContactCardProps> = ({ backgroundColor = "transparen
             <div></div>
 
 
-            {/* Right Section - Contact Card Message Sender */}
+            {/* Right Section - Contact Card Message Sender - Outer Container */}
             <div style={{
-                backgroundColor:"rgba(100,100,100,0.5)",
+                backgroundColor:"rgba(100,100,100,0.5)", //DEBUG
                 width:"100%",
                 height:"100%",
                 display:'flex',
@@ -87,12 +140,12 @@ const ContactCard: React.FC<ContactCardProps> = ({ backgroundColor = "transparen
 
                 {/* this is gonna be the form box, replace with actual form code */}
                 <div style = {{
-                 backgroundColor:"rgba(100,100,100,0.5)",
+                 backgroundColor:"rgba(100,100,100,0.5)", //DEBUG
                  width:"80%",
                  height:"80%"
                 }}
                 >
-
+                FORM
                 </div>
 
             </div>
