@@ -65,8 +65,8 @@ const projects: Project[] = [
         color: "#10B981", 
         description: "This project builds an optimal investment portfolio using portfolio theory and the Capital Asset Pricing Model (CAPM). The goal was simple: maximize returns while managing risk effectively.\n\nI analyzed five years of market data and used Excel Solver to construct a 4-asset portfolio that delivered a 23.31% annual return at 18.48% volatility. The portfolio's Sharpe ratio (reward per unit of risk) beat 50 randomly sampled alternatives.\n\nThe real test came when I ran the model forward through 2023-2025. The results were eye-opening:\n• Gold (GLD): +22.8% above expected (positive alpha)\n• International stocks (VEA): -23.5% below expected (negative alpha)\n\nThese gaps revealed how quickly markets shift during political and policy changes. Static models struggle to keep up. The lesson: even solid theory needs periodic rebalancing and updated assumptions to stay relevant.",
         roughWorkLink: "#",
-        excelLink: "/downloads/Calculations.xlsx",
-        reportLink: "/downloads/CAPM-Based Tangent Portfolio Optimization and Forecasting Analysis.pdf",
+        excelLink: "/downloads/projects/Calculations.xlsx",
+        reportLink: "/downloads/projects/CAPM-Based Tangent Portfolio Optimization and Forecasting Analysis.pdf",
         period: "Mar 2025 - Apr 2025"
     },
     {

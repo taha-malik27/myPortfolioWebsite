@@ -57,7 +57,7 @@ const workExperiences: WorkExperience[] = [
         logo: "/images/work/MINDLogo.jpg",
         color: "#38bdf8", // Sky blue
         whatIDid: "Co founded and scaled a university neurotechnology design team by launching core finance and outreach systems. Recruited and structured interdisciplinary R and D teams across engineering and neuro streams. Led development of a BCI controlled RC car using brain signal acquisition and processing, including frequency filtering, independent component analysis, and threshold based classification in Python. Developed MINDStream, an open source EEG dashboard for real time brain signal capture and analysis using PyQt, BrainFlow, and Matplotlib. Implemented GPU accelerated graphics via VisPy with multithreaded data collection, advanced filtering including band pass/stop and ICA for artifact removal, real time visualization of raw signals and frequency spectra, and integrated a small language model with RAG for EXG analysis. Oversaw development of additional projects including MINDScope PCB board and a custom EEG headset.",
-        impact: "Secured 7,000 plus dollars in funding and grew the organization to 35 plus active members from 140 plus applicants. Delivered a functioning proof of concept BCI vehicle and established a multi project neurotech pipeline for ongoing research and prototyping. MINDStream achieved 2× experiment efficiency and 3× signal clarity improvement, now used by 25 plus researchers and students at MIND who need powerful signal analysis without expensive commercial software.",
+        impact: "Secured 8,000+ dollars in funding and grew the organization to 35 plus active members from 140 plus applicants. Delivered a functioning proof of concept BCI vehicle and established a multi project neurotech pipeline for ongoing research and prototyping. MINDStream achieved 2× experiment efficiency and 3× signal clarity improvement, now used by 25 plus researchers and students at MIND who need powerful signal analysis without expensive commercial software.",
         technologies: [
             "Python",
             "Matlab (Introductory)",
@@ -109,7 +109,7 @@ const workExperiences: WorkExperience[] = [
         date: "Sept 2026 - Dec 2026",
         logo: "/images/work/DeloitteLogo.png",
         color: "#22c55e", // Deloitte green
-        whatIDid: "Will support financial statement audits, internal controls testing, and compliance reviews for clients across multiple industries.",
+        whatIDid: "Will support financial statement audits, internal controls testing, and compliance reviews for clients across multiple industries. Super excited to get a feel of the professional finanical services industry!",
         impact: "Incoming role focused on building audit, assurance, and client service experience in a professional services environment.",
         technologies: [],
         skills: [
