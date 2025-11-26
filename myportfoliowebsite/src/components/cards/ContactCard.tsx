@@ -136,10 +136,10 @@ const ContactCard: React.FC<ContactCardProps> = ({ backgroundColor = "transparen
                         }}>
                             Got questions, ideas, opportunities, or something you want to collaborate on? I'm always open to hearing from people who want to build, create, or just wanna reachout. Drop a message through the form and I'll get back to you as soon as I can!
                         </p>
-                    </div>
+                </div>
 
                     {/* Email Icon */}
-                    <div style={{
+                <div style={{
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "left",
@@ -230,7 +230,7 @@ const ContactCard: React.FC<ContactCardProps> = ({ backgroundColor = "transparen
                                 color: "white",
                                 opacity: isGmailHovered ? 0 : 1,
                                 transition: "opacity 0.5s ease"
-                            }}>
+                }}>
                                 tahammalikbo3@gmail.com
                             </span>
                             <span style={{
@@ -369,104 +369,97 @@ const ContactCard: React.FC<ContactCardProps> = ({ backgroundColor = "transparen
                             </span>
                         </a>
                     </div>
-                
+
                 </div>
 
-
-                {/* Resume Box - needs to contain 2 identical buttons with Resume - SENG and Resume - Finance on each */}
+                {/* Resume Box - Single rectangle split 50/50 */}
                 <div style={{
-                    justifySelf:"center",
-                    width:"100%",
-                    flex: 1,
-                    height:"100%",
-                    display:"grid",
-                    gridTemplateColumns:"1fr 1fr",
-                    gap: "2rem",
-                    justifyItems:"center",
-                    alignItems:"center",
-                    // backgroundColor:"black" //DEBUG
+                    marginTop:"5vh",
+                    width: "85%",
+                    height: "10%",
+                    display: "flex",
+                    backgroundColor: "rgba(0, 0, 0, 0.3)",
+                    borderRadius: "12px",
+                    padding: "clamp(0.75rem, 2vw, 1.5rem)",
+                    gap: "clamp(0.5rem, 1.5vw, 1rem)"
                 }}>
-
-
-                    {/* Download Button 1 - SENG Resume */}
+                    {/* SENG Resume */}
                     <a
                         href="/downloads/contact/Taha Malik Resume SENG.pdf"
                         download
                         style={{
-                            width:"80%",
-                            height:"85%",
+                            flex: "1 1 0",
+                            minWidth: 0,
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
-                            backgroundColor: "rgba(0, 0, 0, 0.3)",
-                            border: "2px solid white",
-                            borderRadius: "12px",
                             textDecoration: "none",
                             color: "white",
                             fontFamily: "'Stack Sans Notch', sans-serif",
-                            fontSize: "0.9rem",
+                            fontSize: "clamp(0.7rem, 1.8vw, 0.9rem)",
                             fontWeight: 600,
                             transition: "all 0.3s ease",
                             cursor: "pointer",
-                            textAlign: "center"
+                            textAlign: "center",
+                            padding: "clamp(0.5rem, 1vw, 1rem)",
+                            wordBreak: "break-word",
+                            borderRadius: "12px",
+                            overflowWrap: "break-word"
                         }}
                         onMouseEnter={(e) => {
-                            e.currentTarget.style.backgroundColor = "rgba(125, 12, 12, 0.3)";
-                            e.currentTarget.style.borderColor = "rgba(223, 21, 21, 1)";
-                            e.currentTarget.style.color = "rgba(223, 21, 21, 1)";
-                            e.currentTarget.style.transform = "scale(1.05)";
+                            e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.25)";
+                            e.currentTarget.style.color = "rgba(255, 255, 255, 1)";
                         }}
                         onMouseLeave={(e) => {
-                            e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
-                            e.currentTarget.style.borderColor = "white";
+                            e.currentTarget.style.backgroundColor = "transparent";
                             e.currentTarget.style.color = "white";
-                            e.currentTarget.style.transform = "scale(1)";
                         }}
                     >
-                        Resume - Software Engineering
+                        Resume<br/> - <br/>SENG
                     </a>
 
+                    {/* Vertical Divider */}
+                    <div style={{
+                        width: "1px",
+                        flexShrink: 0,
+                        backgroundColor: "rgba(255, 255, 255, 0.3)",
+                        margin: "clamp(0.25rem, 1vw, 0.5rem) 0"
+                    }} />
 
-
-                    {/* Download Button 2 - Finance Resume */}
+                    {/* Finance Resume */}
                     <a
                         href="/downloads/contact/Taha Malik Resume Finance.pdf"
                         download
                         style={{
-                            width:"80%",
-                            height:"85%",
+                            flex: "1 1 0",
+                            minWidth: 0,
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
-                            backgroundColor: "rgba(0, 0, 0, 0.3)",
-                            border: "2px solid white",
-                            borderRadius: "12px",
                             textDecoration: "none",
                             color: "white",
                             fontFamily: "'Stack Sans Notch', sans-serif",
-                            fontSize: "0.9rem",
+                            fontSize: "clamp(0.7rem, 1.8vw, 0.9rem)",
                             fontWeight: 600,
                             transition: "all 0.3s ease",
                             cursor: "pointer",
-                            textAlign: "center"
+                            textAlign: "center",
+                            padding: "clamp(0.5rem, 1vw, 1rem)",
+                            wordBreak: "break-word",
+                            borderRadius: "12px",
+                            overflowWrap: "break-word"
                         }}
                         onMouseEnter={(e) => {
-                            e.currentTarget.style.backgroundColor = "rgba(172, 114, 6, 0.3)";
-                            e.currentTarget.style.borderColor = "rgba(255, 168, 7, 1)";
-                            e.currentTarget.style.color = "rgba(255, 168, 7, 1)";
-                            e.currentTarget.style.transform = "scale(1.05)";
+                            e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.25)";
+                            e.currentTarget.style.color = "rgba(255, 255, 255, 1)";
                         }}
                         onMouseLeave={(e) => {
-                            e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
-                            e.currentTarget.style.borderColor = "white";
+                            e.currentTarget.style.backgroundColor = "transparent";
                             e.currentTarget.style.color = "white";
-                            e.currentTarget.style.transform = "scale(1)";
                         }}
                     >
-                        Resume - Finance
+                        Resume<br/> - <br/>Finance
                     </a>
-
-
                 </div>
 
             </div>
@@ -491,7 +484,7 @@ const ContactCard: React.FC<ContactCardProps> = ({ backgroundColor = "transparen
                 <form 
                     onSubmit={handleSubmit}
                     style = {{
-                        width:"70%",
+                 width:"80%",
                         height:"80%",
                         display: "flex",
                         flexDirection: "column",
@@ -642,13 +635,14 @@ const ContactCard: React.FC<ContactCardProps> = ({ backgroundColor = "transparen
                                 outline: "none",
                                 resize: "vertical",
                                 transition: "border-color 0.3s ease",
-                                flex: 1,
-                                minHeight: "120px"
-                            }}
+                                minHeight: "120px",
+                                width: "100%",
+                                boxSizing: "border-box"
+                }}
                             onFocus={(e) => e.currentTarget.style.borderColor = "rgba(255, 140, 0, 1)"}
                             onBlur={(e) => e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.3)"}
                         />
-                    </div>
+                </div>
 
                     {/* Submit Button */}
                     <button
