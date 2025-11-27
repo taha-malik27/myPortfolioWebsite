@@ -9,6 +9,7 @@ import {Preload, OrbitControls} from "@react-three/drei"
 import PhysicsWorld from "@/app/room/physicsWorld"
 import FirstPersonControls from "@/app/room/firstPersonControls"
 import { useThree } from "@react-three/fiber"
+import * as THREE from "three"
 
 function RoomCanvas():JSX.Element{
 
@@ -35,7 +36,7 @@ function RoomCanvas():JSX.Element{
     
 return (
 
-    <div id = "canvas-container" style={{position: "relative"}}>
+    <div id = "canvas-container" style={{position: "relative", width: "100%", height: "100vh", overflow: "hidden"}}>
 
         {/*Cameria Position is 0 X (deadcenter), 2Y (above ground), 4.5 Z (closer to viewer). FOV is 45 degrees, shadows, antialiasing, and alpha/transparence enabled, 
         dpr or pixel level is limited from 1 (standard monitors) to 2 (retina displays)*/}
@@ -50,7 +51,7 @@ return (
                 }}
                 shadows="variance"
                 performance={{ min: 0.5 }}
-                style={{height: "100dvh", alignSelf:"center", justifyContent: "center"}} >
+                style={{width: "100%", height: "100%", display: "block"}} >
 
             <color attach= "background" args = {["#fabb69"]} />
 
@@ -59,6 +60,7 @@ return (
                 <ambientLight intensity = {0.9} />
 
                 <CameraResetter controlMode={controlMode} />
+                <ResponsiveCamera />
 
                 <PhysicsWorld>
                     <Scene />
@@ -199,6 +201,22 @@ function CameraResetter({ controlMode }: { controlMode: "orbit" | "firstPerson" 
             camera.lookAt(0, 0, 0);
         }
     }, [controlMode, camera]);
+
+    return null;
+}
+
+// Component to handle responsive camera adjustments
+function ResponsiveCamera() {
+    const { camera, size } = useThree();
+
+    useEffect(() => {
+        if (camera instanceof THREE.PerspectiveCamera) {
+            // Only update aspect ratio and projection matrix
+            // Don't change camera position - let OrbitControls handle that
+            camera.aspect = size.width / size.height;
+            camera.updateProjectionMatrix();
+        }
+    }, [size, camera]);
 
     return null;
 }

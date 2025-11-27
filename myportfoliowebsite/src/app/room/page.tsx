@@ -20,7 +20,7 @@ function Page(): JSX.Element {
             </div>
 
             {/* Right side: 3D Room Canvas */}
-            <div style={{ backgroundColor: '#000000' }}>
+            <div style={{ backgroundColor: '#000000', width: '100%', height: '100%', overflow: 'hidden' }}>
                 <RoomCanvas/>
             </div>
         </div>
