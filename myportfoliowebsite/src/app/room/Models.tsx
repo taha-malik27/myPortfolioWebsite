@@ -14,20 +14,47 @@ function isMesh(object: THREE.Object3D): object is THREE.Mesh | THREE.SkinnedMes
     return (object as any).isMesh === true || (object as any).isSkinnedMesh === true
   }
 
-// Component to add gold glow effect on hover with 0.3s delay
+// Component to add gold glow effect on hover with 0.3s delay and 0.4s fade
 function GlowWrapper({ children }: { children: React.ReactElement }) {
     const [showGlow, setShowGlow] = useState(false);
     const groupRef = useRef<THREE.Group>(null);
     const originalMaterialsRef = useRef<Map<THREE.Mesh, THREE.Material | THREE.Material[]>>(new Map());
+    const glowMaterialsRef = useRef<Map<THREE.Mesh, THREE.Material | THREE.Material[]>>(new Map());
     const glowTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+    const currentIntensityRef = useRef(0);
+    const fadeStartTimeRef = useRef<number | null>(null);
+    const isFadingInRef = useRef(false);
+    const FADE_DURATION = 0.4; // 0.4 seconds
 
-    // Store original materials on first mount
+    // Store original materials on first mount and create glow materials
     useEffect(() => {
         if (groupRef.current) {
             groupRef.current.traverse((child) => {
                 if (isMesh(child) && child.material && !originalMaterialsRef.current.has(child)) {
                     // Store reference to original material(s)
                     originalMaterialsRef.current.set(child, child.material);
+                    
+                    // Create glow materials with gold emissive
+                    const materials = Array.isArray(child.material) ? child.material : [child.material];
+                    const glowMaterials: THREE.Material[] = [];
+                    
+                    materials.forEach((mat) => {
+                        if (mat instanceof THREE.MeshStandardMaterial || 
+                            mat instanceof THREE.MeshPhysicalMaterial ||
+                            mat instanceof THREE.MeshPhongMaterial ||
+                            mat instanceof THREE.MeshLambertMaterial) {
+                            // Clone material for glow effect
+                            const glowMaterial = mat.clone();
+                            glowMaterial.emissive = new THREE.Color(0xffd700); // Gold color
+                            glowMaterial.emissiveIntensity = 0; // Will be animated
+                            glowMaterials.push(glowMaterial);
+                        } else {
+                            // Keep non-standard materials as-is
+                            glowMaterials.push(mat);
+                        }
+                    });
+                    
+                    glowMaterialsRef.current.set(child, Array.isArray(child.material) ? glowMaterials : glowMaterials[0]);
                 }
             });
         }
@@ -35,42 +62,79 @@ function GlowWrapper({ children }: { children: React.ReactElement }) {
 
     useEffect(() => {
         if (showGlow && groupRef.current) {
-            // Traverse all meshes and apply gold emissive glow
+            // Start fade in from current intensity (or 0)
+            isFadingInRef.current = true;
+            fadeStartTimeRef.current = null; // Will be initialized in useFrame
+            // Switch to glow materials
             groupRef.current.traverse((child) => {
-                if (isMesh(child) && child.material) {
-                    const materials = Array.isArray(child.material) ? child.material : [child.material];
-                    const newMaterials: THREE.Material[] = [];
+                if (isMesh(child) && glowMaterialsRef.current.has(child)) {
+                    child.material = glowMaterialsRef.current.get(child)!;
+                }
+            });
+        } else if (!showGlow && groupRef.current) {
+            // Start fade out from current intensity
+            if (currentIntensityRef.current > 0) {
+                isFadingInRef.current = false;
+                fadeStartTimeRef.current = null; // Will be initialized in useFrame
+            }
+        }
+    }, [showGlow]);
+
+    // Simple fade animation
+    useFrame((state) => {
+        if (!groupRef.current) return;
+        
+        // Initialize fade start time when needed
+        if (fadeStartTimeRef.current === null && (showGlow || currentIntensityRef.current > 0)) {
+            fadeStartTimeRef.current = state.clock.elapsedTime;
+        }
+        
+        // Animate fade
+        if (fadeStartTimeRef.current !== null) {
+            const elapsed = state.clock.elapsedTime - fadeStartTimeRef.current;
+            const progress = Math.min(elapsed / FADE_DURATION, 1);
+            
+            if (isFadingInRef.current) {
+                // Fade in: 0 to 0.8
+                currentIntensityRef.current = progress * 0.8;
+            } else {
+                // Fade out: 0.8 to 0
+                currentIntensityRef.current = (1 - progress) * 0.8;
+            }
+            
+            // Update all glow materials
+            groupRef.current.traverse((child) => {
+                if (isMesh(child) && glowMaterialsRef.current.has(child)) {
+                    // Ensure we're using glow materials during fade
+                    child.material = glowMaterialsRef.current.get(child)!;
                     
+                    const materials = Array.isArray(child.material) ? child.material : [child.material];
                     materials.forEach((mat) => {
                         if (mat instanceof THREE.MeshStandardMaterial || 
                             mat instanceof THREE.MeshPhysicalMaterial ||
                             mat instanceof THREE.MeshPhongMaterial ||
                             mat instanceof THREE.MeshLambertMaterial) {
-                            // Clone and modify material for glow effect
-                            const glowMaterial = mat.clone();
-                            glowMaterial.emissive = new THREE.Color(0xffd700); // Gold color
-                            glowMaterial.emissiveIntensity = 0.8;
-                            newMaterials.push(glowMaterial);
-                        } else {
-                            // Keep non-standard materials as-is
-                            newMaterials.push(mat);
+                            mat.emissiveIntensity = currentIntensityRef.current;
                         }
                     });
-                    
-                    // Apply the modified materials
-                    child.material = Array.isArray(child.material) ? newMaterials : newMaterials[0];
                 }
             });
-        } else if (!showGlow && groupRef.current) {
-            // Restore original materials
-            groupRef.current.traverse((child) => {
-                if (isMesh(child) && originalMaterialsRef.current.has(child)) {
-                    const originalMaterial = originalMaterialsRef.current.get(child)!;
-                    child.material = originalMaterial;
+            
+            // Animation complete
+            if (progress >= 1) {
+                fadeStartTimeRef.current = null;
+                
+                // If faded out completely, restore original materials
+                if (!isFadingInRef.current && currentIntensityRef.current === 0) {
+                    groupRef.current.traverse((child) => {
+                        if (isMesh(child) && originalMaterialsRef.current.has(child)) {
+                            child.material = originalMaterialsRef.current.get(child)!;
+                        }
+                    });
                 }
-            });
+            }
         }
-    }, [showGlow]);
+    });
 
     const handlePointerOver = (e: any) => {
         e.stopPropagation();
