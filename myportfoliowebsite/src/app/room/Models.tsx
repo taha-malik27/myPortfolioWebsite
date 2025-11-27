@@ -1,4 +1,4 @@
-import React, { JSX, useRef, useEffect} from "react";
+import React, { JSX, useRef, useEffect, useState} from "react";
 import * as THREE from "three"
 import {Group} from "three";
 import {useGLTF, useAnimations, RoundedBoxGeometry } from "@react-three/drei";
@@ -13,6 +13,102 @@ import StandardNodeLibrary from "three/src/renderers/webgpu/nodes/StandardNodeLi
 function isMesh(object: THREE.Object3D): object is THREE.Mesh | THREE.SkinnedMesh {
     return (object as any).isMesh === true || (object as any).isSkinnedMesh === true
   }
+
+// Component to add gold glow effect on hover with 0.3s delay
+function GlowWrapper({ children }: { children: React.ReactElement }) {
+    const [showGlow, setShowGlow] = useState(false);
+    const groupRef = useRef<THREE.Group>(null);
+    const originalMaterialsRef = useRef<Map<THREE.Mesh, THREE.Material | THREE.Material[]>>(new Map());
+    const glowTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+    // Store original materials on first mount
+    useEffect(() => {
+        if (groupRef.current) {
+            groupRef.current.traverse((child) => {
+                if (isMesh(child) && child.material && !originalMaterialsRef.current.has(child)) {
+                    // Store reference to original material(s)
+                    originalMaterialsRef.current.set(child, child.material);
+                }
+            });
+        }
+    }, []);
+
+    useEffect(() => {
+        if (showGlow && groupRef.current) {
+            // Traverse all meshes and apply gold emissive glow
+            groupRef.current.traverse((child) => {
+                if (isMesh(child) && child.material) {
+                    const materials = Array.isArray(child.material) ? child.material : [child.material];
+                    const newMaterials: THREE.Material[] = [];
+                    
+                    materials.forEach((mat) => {
+                        if (mat instanceof THREE.MeshStandardMaterial || 
+                            mat instanceof THREE.MeshPhysicalMaterial ||
+                            mat instanceof THREE.MeshPhongMaterial ||
+                            mat instanceof THREE.MeshLambertMaterial) {
+                            // Clone and modify material for glow effect
+                            const glowMaterial = mat.clone();
+                            glowMaterial.emissive = new THREE.Color(0xffd700); // Gold color
+                            glowMaterial.emissiveIntensity = 0.8;
+                            newMaterials.push(glowMaterial);
+                        } else {
+                            // Keep non-standard materials as-is
+                            newMaterials.push(mat);
+                        }
+                    });
+                    
+                    // Apply the modified materials
+                    child.material = Array.isArray(child.material) ? newMaterials : newMaterials[0];
+                }
+            });
+        } else if (!showGlow && groupRef.current) {
+            // Restore original materials
+            groupRef.current.traverse((child) => {
+                if (isMesh(child) && originalMaterialsRef.current.has(child)) {
+                    const originalMaterial = originalMaterialsRef.current.get(child)!;
+                    child.material = originalMaterial;
+                }
+            });
+        }
+    }, [showGlow]);
+
+    const handlePointerOver = (e: any) => {
+        e.stopPropagation();
+        // Delay glow by 0.3 seconds
+        glowTimeoutRef.current = setTimeout(() => {
+            setShowGlow(true);
+        }, 300);
+    };
+
+    const handlePointerOut = (e: any) => {
+        e.stopPropagation();
+        // Clear timeout if still pending
+        if (glowTimeoutRef.current) {
+            clearTimeout(glowTimeoutRef.current);
+            glowTimeoutRef.current = null;
+        }
+        setShowGlow(false);
+    };
+
+    // Cleanup on unmount
+    useEffect(() => {
+        return () => {
+            if (glowTimeoutRef.current) {
+                clearTimeout(glowTimeoutRef.current);
+            }
+        };
+    }, []);
+
+    return (
+        <group 
+            ref={groupRef}
+            onPointerOver={handlePointerOver}
+            onPointerOut={handlePointerOut}
+        >
+            {children}
+        </group>
+    );
+}
 
 
 
@@ -240,13 +336,15 @@ export function PlayStationModel():JSX.Element{
     
     
     return (
-        <primitive object = {playStationModel} 
-        position = {[8.8,2.25,-2.4]} 
-        scale = {0.7}
-        rotation = {[0,Math.PI/9,0]}
-        castShadow
-        receiveShadow >
-      </primitive>
+        <GlowWrapper>
+            <primitive object = {playStationModel} 
+            position = {[8.8,2.25,-2.4]} 
+            scale = {0.7}
+            rotation = {[0,Math.PI/9,0]}
+            castShadow
+            receiveShadow >
+          </primitive>
+        </GlowWrapper>
     )
 }
 
@@ -407,13 +505,15 @@ export function WallArtModel3():JSX.Element{
 export function LaptopModel():JSX.Element{
     const {scene:laptopModel} = useGLTF("models/laptopModel.glb", true)
     return (
-        <primitive object = {laptopModel} 
-        position = {[-2.2,2.4,-6.75]} 
-        scale = {0.3}
-        rotation = {[0,Math.PI/1.6,0]}
-        castShadow
-        receiveShadow >
-      </primitive>
+        <GlowWrapper>
+            <primitive object = {laptopModel} 
+            position = {[-2.2,2.4,-6.75]} 
+            scale = {0.3}
+            rotation = {[0,Math.PI/1.6,0]}
+            castShadow
+            receiveShadow >
+          </primitive>
+        </GlowWrapper>
     )
 }
 
