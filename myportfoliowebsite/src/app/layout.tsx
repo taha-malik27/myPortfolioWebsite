@@ -17,6 +17,13 @@ export const metadata: Metadata = {
         ],
         shortcut: '/favicon.ico',
     },
+    
+    appleWebApp: {
+        capable: true,
+        statusBarStyle: 'default',
+        title: "Taha's Portfolio",
+    }
+    
 }
 
 // all its saying any object comes in, destructure for children property, then it also checks for
@@ -29,6 +36,9 @@ export default function RootLayout({children}: {children:React.ReactNode}){
             <head>
                 {/* Manifest link - critical for mobile browsers (especially Chrome) */}
                 <link rel="manifest" href="/site.webmanifest" />
+                {/* Additional favicon links for maximum compatibility - some mobile browsers need explicit links */}
+                <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+                <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
                 {/* Font preconnects */}
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
