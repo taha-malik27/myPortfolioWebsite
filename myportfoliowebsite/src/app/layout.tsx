@@ -11,7 +11,7 @@ export const metadata:object = {
 export default function RootLayout({children}: {children:React.ReactNode}){
 
     return (
-        <html lang="en" suppressHydrationWarning style={{backgroundColor:"#fabb69", margin: 0, padding: 0, height: "100%"}}>
+        <html lang="en" suppressHydrationWarning className="gradient" style={{margin: 0, padding: 0, height: "100%"}}>
             <head>
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

@@ -37,6 +37,17 @@ function RoomCanvas():JSX.Element{
 return (
 
     <div id = "canvas-container" style={{position: "relative", width: "100%", height: "100vh", overflow: "hidden"}}>
+        
+        {/* Gradient background */}
+        <div style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            background: "linear-gradient(to top, #ff7e5f, #feb47b, #ffecb3)",
+            zIndex: 0
+        }} />
 
         {/*Cameria Position is 0 X (deadcenter), 2Y (above ground), 4.5 Z (closer to viewer). FOV is 45 degrees, shadows, antialiasing, and alpha/transparence enabled, 
         dpr or pixel level is limited from 1 (standard monitors) to 2 (retina displays)*/}
@@ -44,16 +55,14 @@ return (
                 dpr = {[1, 1.5]}  
                 gl = {{
                     antialias: true, 
-                    alpha: false,
+                    alpha: true,
                     powerPreference: "high-performance",
                     stencil: false,
                     depth: true
                 }}
                 shadows="variance"
                 performance={{ min: 0.5 }}
-                style={{width: "100%", height: "100%", display: "block"}} >
-
-            <color attach= "background" args = {["#fabb69"]} />
+                style={{width: "100%", height: "100%", display: "block", position: "relative", zIndex: 1}} >
 
             <Suspense fallback = {null}>
                 
