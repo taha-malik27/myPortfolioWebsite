@@ -76,7 +76,7 @@ return (
 
                 <Effects />
 
-                {/* OrbitControls for camera movement dictated by left mouse button and scroll wheel*/}
+                {/* OrbitControls for camera movement dictated by left mouse button and scroll wheel */}
                 {controlMode === "orbit" && (
                     <OrbitControls enableZoom ={true} 
                                     zoomSpeed = {0.75}
@@ -136,49 +136,149 @@ return (
             position: "absolute",
             bottom: "20px",
             right: "20px",
-            backgroundColor: "rgba(0, 0, 0, 0.7)",
-            padding: "15px",
-            borderRadius: "8px",
+            backgroundColor: "rgba(0, 0, 0, 0.3)",
+            padding: "1.25rem",
+            borderRadius: "12px",
             color: "white",
-            fontFamily: "Arial, sans-serif",
-            fontSize: "14px",
-            zIndex: 1000
+            fontFamily: "'Outfit', sans-serif",
+            fontSize: "0.9rem",
+            zIndex: 1000,
+            transition: "all 0.3s ease"
         }}>
             {controlMode === "firstPerson" && isPointerLocked ? (
-                <div style={{textAlign: "center"}}>
-                    <p style={{margin: 0}}>Press <strong>ESC</strong> to return to Orbit</p>
+                <div style={{
+                    textAlign: "center",
+                    fontFamily: "'Outfit', sans-serif"
+                }}>
+                    <p style={{
+                        margin: 0,
+                        color: "rgba(255, 255, 255, 0.9)",
+                        fontSize: "0.9rem",
+                        lineHeight: "1.5"
+                    }}>
+                        Press <strong style={{
+                            fontFamily: "'Stack Sans Notch', sans-serif",
+                            fontWeight: 600,
+                            backgroundImage: "linear-gradient(120deg, rgb(223, 21, 21) 25%, rgb(255, 168, 7))",
+                            backgroundClip: "text",
+                            WebkitBackgroundClip: "text",
+                            WebkitTextFillColor: "transparent"
+                        }}>ESC</strong> to return to Orbit
+                    </p>
                 </div>
             ) : (
                 <div>
-                    <div style={{marginBottom: "10px", fontWeight: "bold"}}>Control Mode</div>
+                    <div style={{
+                        marginBottom: "0.75rem",
+                        fontFamily: "'Stack Sans Notch', sans-serif",
+                        fontWeight: 600,
+                        fontSize: "1rem",
+                        color: "white"
+                    }}>
+                        Control Mode
+                    </div>
                     <div style={{display: "flex", gap: "10px"}}>
                         <button
                             onClick={() => handleControlModeChange("orbit")}
                             style={{
-                                padding: "8px 16px",
-                                backgroundColor: controlMode === "orbit" ? "#4CAF50" : "#555",
+                                position: "relative",
+                                padding: "0.75rem 1.5rem",
+                                backgroundColor: controlMode === "orbit" 
+                                    ? "transparent" 
+                                    : "rgba(255, 255, 255, 0.1)",
                                 color: "white",
-                                border: "none",
-                                borderRadius: "4px",
+                                border: controlMode === "orbit"
+                                    ? "2px solid transparent"
+                                    : "2px solid rgba(255, 255, 255, 0.3)",
+                                borderRadius: "8px",
                                 cursor: "pointer",
-                                fontWeight: controlMode === "orbit" ? "bold" : "normal"
+                                fontFamily: "'Stack Sans Notch', sans-serif",
+                                fontWeight: controlMode === "orbit" ? 600 : 400,
+                                fontSize: "0.9rem",
+                                transition: "all 0.4s ease",
+                                overflow: "hidden"
+                            }}
+                            onMouseEnter={(e) => {
+                                if (controlMode !== "orbit") {
+                                    e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.15)";
+                                    e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.5)";
+                                }
+                            }}
+                            onMouseLeave={(e) => {
+                                if (controlMode !== "orbit") {
+                                    e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.1)";
+                                    e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.3)";
+                                }
                             }}
                         >
-                            Orbit
+                            <span style={{
+                                position: "relative",
+                                zIndex: 1
+                            }}>
+                                Orbit
+                            </span>
+                            <div style={{
+                                position: "absolute",
+                                top: 0,
+                                left: 0,
+                                right: 0,
+                                bottom: 0,
+                                backgroundImage: "linear-gradient(120deg, rgb(223, 21, 21) 25%, rgb(255, 168, 7))",
+                                opacity: controlMode === "orbit" ? 1 : 0,
+                                transition: "opacity 0.4s ease",
+                                pointerEvents: "none"
+                            }} />
                         </button>
                         <button
                             onClick={() => handleControlModeChange("firstPerson")}
                             style={{
-                                padding: "8px 16px",
-                                backgroundColor: controlMode === "firstPerson" ? "#4CAF50" : "#555",
+                                position: "relative",
+                                padding: "0.75rem 1.5rem",
+                                backgroundColor: controlMode === "firstPerson" 
+                                    ? "transparent" 
+                                    : "rgba(255, 255, 255, 0.1)",
                                 color: "white",
-                                border: "none",
-                                borderRadius: "4px",
+                                border: controlMode === "firstPerson"
+                                    ? "2px solid transparent"
+                                    : "2px solid rgba(255, 255, 255, 0.3)",
+                                borderRadius: "8px",
                                 cursor: "pointer",
-                                fontWeight: controlMode === "firstPerson" ? "bold" : "normal"
+                                fontFamily: "'Stack Sans Notch', sans-serif",
+                                fontWeight: controlMode === "firstPerson" ? 600 : 400,
+                                fontSize: "0.9rem",
+                                transition: "all 0.4s ease",
+                                overflow: "hidden"
+                            }}
+                            onMouseEnter={(e) => {
+                                if (controlMode !== "firstPerson") {
+                                    e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.15)";
+                                    e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.5)";
+                                }
+                            }}
+                            onMouseLeave={(e) => {
+                                if (controlMode !== "firstPerson") {
+                                    e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.1)";
+                                    e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.3)";
+                                }
                             }}
                         >
-                            First Person
+                            <span style={{
+                                position: "relative",
+                                zIndex: 1
+                            }}>
+                                First Person
+                            </span>
+                            <div style={{
+                                position: "absolute",
+                                top: 0,
+                                left: 0,
+                                right: 0,
+                                bottom: 0,
+                                backgroundImage: "linear-gradient(120deg, rgb(223, 21, 21) 25%, rgb(255, 168, 7))",
+                                opacity: controlMode === "firstPerson" ? 1 : 0,
+                                transition: "opacity 0.4s ease",
+                                pointerEvents: "none"
+                            }} />
                         </button>
                     </div>
                 </div>
