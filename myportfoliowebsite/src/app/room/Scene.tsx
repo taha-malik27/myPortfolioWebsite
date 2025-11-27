@@ -14,7 +14,7 @@ import {BedModel, ChairModel, CouchModel, LampModel, TableModel,
 
 
 
-function Scene(): JSX.Element {
+function Scene({ onHoverClickableChange }: { onHoverClickableChange?: (isHovering: boolean) => void }): JSX.Element {
     
     // Initialize the texture for the Carpet
 
@@ -180,7 +180,7 @@ function Scene(): JSX.Element {
             <WallArtModel1/>
             <WallArtModel2/>
             <WallArtModel3/>
-            <LaptopModel/>
+            <LaptopModel onHoverChange={onHoverClickableChange} />
             <TrashCanModel/>
             <WallPieceModel/>
 

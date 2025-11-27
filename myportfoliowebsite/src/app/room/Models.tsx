@@ -18,10 +18,11 @@ function isMesh(object: THREE.Object3D): object is THREE.Mesh | THREE.SkinnedMes
   }
 
 // Component to add gold glow effect on hover with 0.3s delay and 0.4s fade
-function GlowWrapper({ children, onClick, showCursor = false }: { 
+function GlowWrapper({ children, onClick, showCursor = false, onHoverChange }: { 
     children: React.ReactElement;
     onClick?: (e: any) => void;
     showCursor?: boolean;
+    onHoverChange?: (isHovering: boolean) => void;
 }) {
     const [showGlow, setShowGlow] = useState(false);
     const groupRef = useRef<THREE.Group>(null);
@@ -148,6 +149,9 @@ function GlowWrapper({ children, onClick, showCursor = false }: {
         if (showCursor) {
             document.body.style.cursor = 'pointer';
         }
+        if (onHoverChange) {
+            onHoverChange(true);
+        }
         // Delay glow by 0.3 seconds
         glowTimeoutRef.current = setTimeout(() => {
             setShowGlow(true);
@@ -158,6 +162,9 @@ function GlowWrapper({ children, onClick, showCursor = false }: {
         e.stopPropagation();
         if (showCursor) {
             document.body.style.cursor = 'auto';
+        }
+        if (onHoverChange) {
+            onHoverChange(false);
         }
         // Clear timeout if still pending
         if (glowTimeoutRef.current) {
@@ -587,7 +594,7 @@ export function WallArtModel3():JSX.Element{
     )
 }
 
-export function LaptopModel():JSX.Element{
+export function LaptopModel({ onHoverChange }: { onHoverChange?: (isHovering: boolean) => void }):JSX.Element{
     const {scene:laptopModel} = useGLTF("models/laptopModel.glb", true)
     const router = useRouter();
     
@@ -596,7 +603,7 @@ export function LaptopModel():JSX.Element{
     };
     
     return (
-        <GlowWrapper onClick={handleClick} showCursor={true}>
+        <GlowWrapper onClick={handleClick} showCursor={true} onHoverChange={onHoverChange}>
             <primitive 
                 object = {laptopModel} 
                 position = {[-2.2,2.4,-6.75]} 

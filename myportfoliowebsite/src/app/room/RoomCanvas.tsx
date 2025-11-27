@@ -16,6 +16,7 @@ function RoomCanvas():JSX.Element{
     const [controlMode, setControlMode] = useState<"orbit" | "firstPerson">("orbit");
     const [isPointerLocked, setIsPointerLocked] = useState(false);
     const [savedPlayerPosition, setSavedPlayerPosition] = useState<[number, number, number] | null>(null);
+    const [isHoveringClickable, setIsHoveringClickable] = useState(false);
 
     const handleControlModeChange = (mode: "orbit" | "firstPerson") => {
         setControlMode(mode);
@@ -72,7 +73,7 @@ return (
                 <ResponsiveCamera />
 
                 <PhysicsWorld>
-                    <Scene />
+                    <Scene onHoverClickableChange={setIsHoveringClickable} />
                     
                     {controlMode === "firstPerson" && (
                         <FirstPersonControls 
@@ -113,30 +114,51 @@ return (
                 left: "50%",
                 transform: "translate(-50%, -50%)",
                 zIndex: 1001,
-                pointerEvents: "none"
+                pointerEvents: "none",
+                transition: "all 0.3s ease"
             }}>
                 {/* Horizontal line */}
                 <div style={{
                     position: "absolute",
-                    width: "20px",
-                    height: "2px",
-                    backgroundColor: "white",
+                    width: isHoveringClickable ? "30px" : "20px",
+                    height: isHoveringClickable ? "3px" : "2px",
+                    backgroundColor: isHoveringClickable ? "#ffd700" : "white",
                     top: "50%",
                     left: "50%",
                     transform: "translate(-50%, -50%)",
-                    boxShadow: "0 0 2px 1px black, 0 0 4px 1px black"
+                    boxShadow: isHoveringClickable 
+                        ? "0 0 4px 2px rgba(255, 215, 0, 0.8), 0 0 8px 2px rgba(255, 215, 0, 0.6)" 
+                        : "0 0 2px 1px black, 0 0 4px 1px black",
+                    transition: "all 0.3s ease"
                 }} />
                 {/* Vertical line */}
                 <div style={{
                     position: "absolute",
-                    width: "2px",
-                    height: "20px",
-                    backgroundColor: "white",
+                    width: isHoveringClickable ? "3px" : "2px",
+                    height: isHoveringClickable ? "30px" : "20px",
+                    backgroundColor: isHoveringClickable ? "#ffd700" : "white",
                     top: "50%",
                     left: "50%",
                     transform: "translate(-50%, -50%)",
-                    boxShadow: "0 0 2px 1px black, 0 0 4px 1px black"
+                    boxShadow: isHoveringClickable 
+                        ? "0 0 4px 2px rgba(255, 215, 0, 0.8), 0 0 8px 2px rgba(255, 215, 0, 0.6)" 
+                        : "0 0 2px 1px black, 0 0 4px 1px black",
+                    transition: "all 0.3s ease"
                 }} />
+                {/* Optional: Add center dot when hovering */}
+                {isHoveringClickable && (
+                    <div style={{
+                        position: "absolute",
+                        width: "6px",
+                        height: "6px",
+                        borderRadius: "50%",
+                        backgroundColor: "#ffd700",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        boxShadow: "0 0 4px 2px rgba(255, 215, 0, 0.8)"
+                    }} />
+                )}
             </div>
         )}
 
