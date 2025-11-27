@@ -1,3 +1,5 @@
+"use client";
+
 import React, { JSX, useRef, useEffect, useState} from "react";
 import * as THREE from "three"
 import {Group} from "three";
@@ -6,6 +8,7 @@ import { useFrame } from "@react-three/fiber";
 import { group } from "console";
 import { rotate } from "three/tsl";
 import StandardNodeLibrary from "three/src/renderers/webgpu/nodes/StandardNodeLibrary.js";
+import { useRouter } from "next/navigation";
 
  
 
@@ -15,7 +18,11 @@ function isMesh(object: THREE.Object3D): object is THREE.Mesh | THREE.SkinnedMes
   }
 
 // Component to add gold glow effect on hover with 0.3s delay and 0.4s fade
-function GlowWrapper({ children }: { children: React.ReactElement }) {
+function GlowWrapper({ children, onClick, showCursor = false }: { 
+    children: React.ReactElement;
+    onClick?: (e: any) => void;
+    showCursor?: boolean;
+}) {
     const [showGlow, setShowGlow] = useState(false);
     const groupRef = useRef<THREE.Group>(null);
     const originalMaterialsRef = useRef<Map<THREE.Mesh, THREE.Material | THREE.Material[]>>(new Map());
@@ -138,6 +145,9 @@ function GlowWrapper({ children }: { children: React.ReactElement }) {
 
     const handlePointerOver = (e: any) => {
         e.stopPropagation();
+        if (showCursor) {
+            document.body.style.cursor = 'pointer';
+        }
         // Delay glow by 0.3 seconds
         glowTimeoutRef.current = setTimeout(() => {
             setShowGlow(true);
@@ -146,12 +156,22 @@ function GlowWrapper({ children }: { children: React.ReactElement }) {
 
     const handlePointerOut = (e: any) => {
         e.stopPropagation();
+        if (showCursor) {
+            document.body.style.cursor = 'auto';
+        }
         // Clear timeout if still pending
         if (glowTimeoutRef.current) {
             clearTimeout(glowTimeoutRef.current);
             glowTimeoutRef.current = null;
         }
         setShowGlow(false);
+    };
+    
+    const handleClick = (e: any) => {
+        e.stopPropagation();
+        if (onClick) {
+            onClick(e);
+        }
     };
 
     // Cleanup on unmount
@@ -168,6 +188,7 @@ function GlowWrapper({ children }: { children: React.ReactElement }) {
             ref={groupRef}
             onPointerOver={handlePointerOver}
             onPointerOut={handlePointerOut}
+            onClick={onClick ? handleClick : undefined}
         >
             {children}
         </group>
@@ -568,14 +589,22 @@ export function WallArtModel3():JSX.Element{
 
 export function LaptopModel():JSX.Element{
     const {scene:laptopModel} = useGLTF("models/laptopModel.glb", true)
+    const router = useRouter();
+    
+    const handleClick = () => {
+        router.push('/skills');
+    };
+    
     return (
-        <GlowWrapper>
-            <primitive object = {laptopModel} 
-            position = {[-2.2,2.4,-6.75]} 
-            scale = {0.3}
-            rotation = {[0,Math.PI/1.6,0]}
-            castShadow
-            receiveShadow >
+        <GlowWrapper onClick={handleClick} showCursor={true}>
+            <primitive 
+                object = {laptopModel} 
+                position = {[-2.2,2.4,-6.75]} 
+                scale = {0.3}
+                rotation = {[0,Math.PI/1.6,0]}
+                castShadow
+                receiveShadow
+            >
           </primitive>
         </GlowWrapper>
     )

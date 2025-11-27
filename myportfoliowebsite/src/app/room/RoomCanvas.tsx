@@ -45,7 +45,7 @@ return (
             left: 0,
             width: "100%",
             height: "100%",
-            background: "linear-gradient(to top, #ff7e5f, #feb47b, #ffecb3)",
+            background: "linear-gradient(to top,rgb(254, 107, 71) 50%,rgb(255, 172, 108),rgb(251, 222, 135))",
             zIndex: 0
         }} />
 
