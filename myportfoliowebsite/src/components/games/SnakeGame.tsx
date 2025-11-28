@@ -11,7 +11,7 @@ type Position = { x: number; y: number };
 type Direction = { x: number; y: number };
 
 export interface SnakeGameProps {
-  /** Width of the game grid. Default: "min(600px, 90vw)" */
+  /** Width of the game grid. Default: "min(500px, 80vw)" */
   width?: string;
   /** Whether to show the title. Default: true */
   showTitle?: boolean;
@@ -45,7 +45,7 @@ function generateFood(snakeBody: Position[]): Position {
 }
 
 export default function SnakeGame({
-  width = "min(600px, 90vw)",
+  width = "min(500px, 80vw)",
   showTitle = true,
   showInstructions = true,
   className,
