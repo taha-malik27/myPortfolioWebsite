@@ -1,12 +1,13 @@
 import {JSX} from "react"
 import * as THREE from "three"
-import { RoundedBoxGeometry, useTexture } from "@react-three/drei"
+import { RoundedBoxGeometry, useTexture, Html } from "@react-three/drei"
 import { normalMap, roughness } from "three/tsl"
 import { RigidBody, CuboidCollider, CylinderCollider } from "@react-three/rapier"
 import {BedModel, ChairModel, CouchModel, LampModel, TableModel, 
     ClosetModel, DrawerModel, CoffeeTableModel, TVModel, ControllerAndHeadphonesModel,
     CeilingLightsModel, TVStandModel, ClockModel, WallArtModel1, WallArtModel2, WallArtModel3,
     PlayStationModel, LaptopModel, TrashCanModel, WallPieceModel} from "./Models";
+import SnakeGame from "@/components/games/SnakeGame";
 
 
 
@@ -266,6 +267,41 @@ function Scene({ onHoverClickableChange, onPS5Click, controlMode }: { onHoverCli
                     <meshStandardMaterial transparent opacity={0} side={THREE.DoubleSide} />
                 </mesh>
             </RigidBody>
+
+            {/* Test Box with Snake Game - Only visible in snake game mode */}
+            {controlMode === "snakeGame" && (
+                <group position={[7, 3.5, -0.25]} rotation = {[0,Math.PI/2,0]}>
+                    {/* Test box for reference */}
+                    <mesh castShadow receiveShadow>
+                        <boxGeometry args={[2, 2, 0.1]} />
+                        <meshStandardMaterial color="#333" transparent opacity={0}/>
+                    </mesh>
+                    
+                    {/* Snake Game HTML Component */}
+                    <Html
+                        transform
+                        center
+                        distanceFactor={1}
+                        position={[0.4, 0.22, 0.06]}
+                        rotation={[-0.3,Math.PI,0]}
+                        style={{
+                            pointerEvents: 'auto',
+                        }}
+                    >
+                        <SnakeGame
+                            showTitle={false}
+                            showInstructions={false}
+                            enableKeyboard={controlMode === "snakeGame"}
+                            width="571px"
+                            containerStyle={{
+                                minHeight: 'auto',
+                                padding: '10px',
+                                backgroundColor: 'rgba(10, 10, 10, 0.95)',
+                            }}
+                        />
+                    </Html>
+                </group>
+            )}
 
         </group>
     )
