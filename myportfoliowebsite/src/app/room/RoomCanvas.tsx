@@ -400,7 +400,7 @@ function CameraResetter({ controlMode }: { controlMode: "orbit" | "firstPerson" 
         } else if (controlMode === "snakeGame") {
             // Set camera to TV viewing position
             camera.position.set(2.7, 2.5, -0.3);
-            camera.lookAt(9.745, 2.95, -0.5);
+            camera.lookAt(9.745, 3.8, -0.3);
         }
     }, [controlMode, camera]);
 
