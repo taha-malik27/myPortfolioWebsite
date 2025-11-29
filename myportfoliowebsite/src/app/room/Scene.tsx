@@ -14,7 +14,7 @@ import {BedModel, ChairModel, CouchModel, LampModel, TableModel,
 
 
 
-function Scene({ onHoverClickableChange }: { onHoverClickableChange?: (isHovering: boolean) => void }): JSX.Element {
+function Scene({ onHoverClickableChange, onPS5Click }: { onHoverClickableChange?: (isHovering: boolean) => void; onPS5Click?: () => void }): JSX.Element {
     
     // Initialize the texture for the Carpet
 
@@ -174,7 +174,7 @@ function Scene({ onHoverClickableChange }: { onHoverClickableChange?: (isHoverin
             <TVModel/>
             <TVStandModel/>
             <ControllerAndHeadphonesModel/>
-            <PlayStationModel/>
+            <PlayStationModel onHoverChange={onHoverClickableChange} onClick={onPS5Click} />
             <CeilingLightsModel/>
             <ClockModel/>
             <WallArtModel1/>

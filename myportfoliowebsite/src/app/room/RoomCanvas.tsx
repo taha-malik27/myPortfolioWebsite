@@ -13,10 +13,11 @@ import * as THREE from "three"
 
 function RoomCanvas():JSX.Element{
 
-    const [controlMode, setControlMode] = useState<"orbit" | "firstPerson">("orbit");
+    const [controlMode, setControlMode] = useState<"orbit" | "firstPerson" | "snakeGame">("orbit");
     const [isPointerLocked, setIsPointerLocked] = useState(false);
     const [savedPlayerPosition, setSavedPlayerPosition] = useState<[number, number, number] | null>(null);
     const [isHoveringClickable, setIsHoveringClickable] = useState(false);
+    const [previousControlMode, setPreviousControlMode] = useState<"orbit" | "firstPerson">("orbit");
 
     const handleControlModeChange = (mode: "orbit" | "firstPerson") => {
         setControlMode(mode);
@@ -32,6 +33,34 @@ function RoomCanvas():JSX.Element{
     const handleSavePlayerPosition = (position: [number, number, number]) => {
         setSavedPlayerPosition(position);
     };
+
+    const handlePS5Click = () => {
+        // Save current control mode
+        if (controlMode === "orbit" || controlMode === "firstPerson") {
+            setPreviousControlMode(controlMode);
+        }
+        
+        // Exit pointer lock if active
+        if (document.pointerLockElement) {
+            document.exitPointerLock();
+        }
+        setIsPointerLocked(false);
+        
+        // Set to snake game mode
+        setControlMode("snakeGame");
+    };
+
+    // Handle ESC key to exit snake game mode
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "Escape" && controlMode === "snakeGame") {
+                setControlMode(previousControlMode);
+            }
+        };
+
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, [controlMode, previousControlMode]);
 
 
     
@@ -73,7 +102,7 @@ return (
                 <ResponsiveCamera />
 
                 <PhysicsWorld>
-                    <Scene onHoverClickableChange={setIsHoveringClickable} />
+                    <Scene onHoverClickableChange={setIsHoveringClickable} onPS5Click={handlePS5Click} />
                     
                     {controlMode === "firstPerson" && (
                         <FirstPersonControls 
@@ -176,7 +205,45 @@ return (
             zIndex: 1000,
             transition: "all 0.3s ease"
         }}>
-            {controlMode === "firstPerson" && isPointerLocked ? (
+            {controlMode === "snakeGame" ? (
+                <div style={{
+                    textAlign: "center",
+                    fontFamily: "'Outfit', sans-serif"
+                }}>
+                    <div style={{
+                        marginBottom: "0.75rem",
+                        fontFamily: "'Stack Sans Notch', sans-serif",
+                        fontWeight: 600,
+                        fontSize: "1rem",
+                        color: "white"
+                    }}>
+                        Snake Game Controls
+                    </div>
+                    <p style={{
+                        margin: "0.5rem 0",
+                        color: "rgba(255, 255, 255, 0.9)",
+                        fontSize: "0.9rem",
+                        lineHeight: "1.5"
+                    }}>
+                        WASD to move
+                    </p>
+                    <p style={{
+                        margin: "0.5rem 0 0 0",
+                        color: "rgba(255, 255, 255, 0.9)",
+                        fontSize: "0.9rem",
+                        lineHeight: "1.5"
+                    }}>
+                        Press <strong style={{
+                            fontFamily: "'Stack Sans Notch', sans-serif",
+                            fontWeight: 600,
+                            backgroundImage: "linear-gradient(120deg, rgb(223, 21, 21) 25%, rgb(255, 168, 7))",
+                            backgroundClip: "text",
+                            WebkitBackgroundClip: "text",
+                            WebkitTextFillColor: "transparent"
+                        }}>ESC</strong> to exit
+                    </p>
+                </div>
+            ) : controlMode === "firstPerson" && isPointerLocked ? (
                 <div style={{
                     textAlign: "center",
                     fontFamily: "'Outfit', sans-serif"
@@ -322,7 +389,7 @@ return (
 }
 
 // Component to reset camera position when entering orbit mode
-function CameraResetter({ controlMode }: { controlMode: "orbit" | "firstPerson" }) {
+function CameraResetter({ controlMode }: { controlMode: "orbit" | "firstPerson" | "snakeGame" }) {
     const { camera } = useThree();
 
     useEffect(() => {
@@ -330,6 +397,10 @@ function CameraResetter({ controlMode }: { controlMode: "orbit" | "firstPerson" 
             // Reset camera to initial position
             camera.position.set(0, 25, 25);
             camera.lookAt(0, 0, 0);
+        } else if (controlMode === "snakeGame") {
+            // Set camera to TV viewing position
+            camera.position.set(2.7, 2.5, -0.3);
+            camera.lookAt(9.745, 2.95, -0.5);
         }
     }, [controlMode, camera]);
 

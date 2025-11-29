@@ -423,12 +423,12 @@ export function ControllerAndHeadphonesModel():JSX.Element {
 }
 
 
-export function PlayStationModel():JSX.Element{
+export function PlayStationModel({ onHoverChange, onClick }: { onHoverChange?: (isHovering: boolean) => void; onClick?: () => void }):JSX.Element{
     const {scene:playStationModel} = useGLTF("models/ps5Model.glb", true)
     
     
     return (
-        <GlowWrapper>
+        <GlowWrapper onClick={onClick} showCursor={true} onHoverChange={onHoverChange}>
             <primitive object = {playStationModel} 
             position = {[8.8,2.25,-2.4]} 
             scale = {0.7}
@@ -655,6 +655,7 @@ useGLTF.preload('models/closetModel.glb')
 useGLTF.preload('models/drawerModel.glb')
 useGLTF.preload('models/headphoneModel.glb')
 useGLTF.preload('models/ps5ControllerModel.glb')
+useGLTF.preload('models/ps5Model.glb')
 useGLTF.preload('models/ceilingLightsModelRight.glb')
 useGLTF.preload('models/ceilingLightsModelLeft.glb')
 useGLTF.preload('models/coffeeTableModel.glb')
