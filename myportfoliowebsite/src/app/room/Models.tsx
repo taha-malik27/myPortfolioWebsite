@@ -1,6 +1,6 @@
 "use client";
 
-import React, { JSX, useRef, useEffect, useState} from "react";
+import React, { JSX, useRef, useEffect, useState, useCallback} from "react";
 import * as THREE from "three"
 import {Group} from "three";
 import {useGLTF, useAnimations, RoundedBoxGeometry } from "@react-three/drei";
@@ -17,32 +17,32 @@ function isMesh(object: THREE.Object3D): object is THREE.Mesh | THREE.SkinnedMes
     return (object as any).isMesh === true || (object as any).isSkinnedMesh === true
   }
 
-// Component to add gold glow effect on hover with 0.3s delay and 0.4s fade
-function GlowWrapper({ children, onClick, showCursor = false, onHoverChange }: { 
+// Component to add gold glow effect on hover - robust and simple
+function GlowWrapper({ children, onClick, showCursor = false, onHoverChange, enableInteractions = true }: { 
     children: React.ReactElement;
     onClick?: (e: any) => void;
     showCursor?: boolean;
     onHoverChange?: (isHovering: boolean) => void;
+    enableInteractions?: boolean;
 }) {
-    const [showGlow, setShowGlow] = useState(false);
+    const [isHovering, setIsHovering] = useState(false);
     const groupRef = useRef<THREE.Group>(null);
     const originalMaterialsRef = useRef<Map<THREE.Mesh, THREE.Material | THREE.Material[]>>(new Map());
     const glowMaterialsRef = useRef<Map<THREE.Mesh, THREE.Material | THREE.Material[]>>(new Map());
     const glowTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-    const currentIntensityRef = useRef(0);
-    const fadeStartTimeRef = useRef<number | null>(null);
-    const isFadingInRef = useRef(false);
-    const FADE_DURATION = 0.4; // 0.4 seconds
+    const HOVER_DELAY = 300; // 0.3 seconds delay before glow appears
 
-    // Store original materials on first mount and create glow materials
+    // Initialize materials on mount
     useEffect(() => {
-        if (groupRef.current) {
-            groupRef.current.traverse((child) => {
+        if (!groupRef.current) return;
+
+        const initializeMaterials = () => {
+            groupRef.current?.traverse((child) => {
                 if (isMesh(child) && child.material && !originalMaterialsRef.current.has(child)) {
-                    // Store reference to original material(s)
+                    // Store original material
                     originalMaterialsRef.current.set(child, child.material);
                     
-                    // Create glow materials with gold emissive
+                    // Create glow material
                     const materials = Array.isArray(child.material) ? child.material : [child.material];
                     const glowMaterials: THREE.Material[] = [];
                     
@@ -51,13 +51,11 @@ function GlowWrapper({ children, onClick, showCursor = false, onHoverChange }: {
                             mat instanceof THREE.MeshPhysicalMaterial ||
                             mat instanceof THREE.MeshPhongMaterial ||
                             mat instanceof THREE.MeshLambertMaterial) {
-                            // Clone material for glow effect
                             const glowMaterial = mat.clone();
-                            glowMaterial.emissive = new THREE.Color(0xffd700); // Gold color
-                            glowMaterial.emissiveIntensity = 0; // Will be animated
+                            glowMaterial.emissive = new THREE.Color(0xffd700); // Gold
+                            glowMaterial.emissiveIntensity = 0.8; // Full intensity
                             glowMaterials.push(glowMaterial);
                         } else {
-                            // Keep non-standard materials as-is
                             glowMaterials.push(mat);
                         }
                     });
@@ -65,117 +63,104 @@ function GlowWrapper({ children, onClick, showCursor = false, onHoverChange }: {
                     glowMaterialsRef.current.set(child, Array.isArray(child.material) ? glowMaterials : glowMaterials[0]);
                 }
             });
-        }
+        };
+
+        initializeMaterials();
     }, []);
 
-    useEffect(() => {
-        if (showGlow && groupRef.current) {
-            // Start fade in from current intensity (or 0)
-            isFadingInRef.current = true;
-            fadeStartTimeRef.current = null; // Will be initialized in useFrame
-            // Switch to glow materials
-            groupRef.current.traverse((child) => {
-                if (isMesh(child) && glowMaterialsRef.current.has(child)) {
-                    child.material = glowMaterialsRef.current.get(child)!;
-                }
-            });
-        } else if (!showGlow && groupRef.current) {
-            // Start fade out from current intensity
-            if (currentIntensityRef.current > 0) {
-                isFadingInRef.current = false;
-                fadeStartTimeRef.current = null; // Will be initialized in useFrame
-            }
-        }
-    }, [showGlow]);
-
-    // Simple fade animation
-    useFrame((state) => {
-        if (!groupRef.current) return;
-        
-        // Initialize fade start time when needed
-        if (fadeStartTimeRef.current === null && (showGlow || currentIntensityRef.current > 0)) {
-            fadeStartTimeRef.current = state.clock.elapsedTime;
-        }
-        
-        // Animate fade
-        if (fadeStartTimeRef.current !== null) {
-            const elapsed = state.clock.elapsedTime - fadeStartTimeRef.current;
-            const progress = Math.min(elapsed / FADE_DURATION, 1);
-            
-            if (isFadingInRef.current) {
-                // Fade in: 0 to 0.8
-                currentIntensityRef.current = progress * 0.8;
-            } else {
-                // Fade out: 0.8 to 0
-                currentIntensityRef.current = (1 - progress) * 0.8;
-            }
-            
-            // Update all glow materials
-            groupRef.current.traverse((child) => {
-                if (isMesh(child) && glowMaterialsRef.current.has(child)) {
-                    // Ensure we're using glow materials during fade
-                    child.material = glowMaterialsRef.current.get(child)!;
-                    
-                    const materials = Array.isArray(child.material) ? child.material : [child.material];
-                    materials.forEach((mat) => {
-                        if (mat instanceof THREE.MeshStandardMaterial || 
-                            mat instanceof THREE.MeshPhysicalMaterial ||
-                            mat instanceof THREE.MeshPhongMaterial ||
-                            mat instanceof THREE.MeshLambertMaterial) {
-                            mat.emissiveIntensity = currentIntensityRef.current;
-                        }
-                    });
-                }
-            });
-            
-            // Animation complete
-            if (progress >= 1) {
-                fadeStartTimeRef.current = null;
-                
-                // If faded out completely, restore original materials
-                if (!isFadingInRef.current && currentIntensityRef.current === 0) {
-                    groupRef.current.traverse((child) => {
-                        if (isMesh(child) && originalMaterialsRef.current.has(child)) {
-                            child.material = originalMaterialsRef.current.get(child)!;
-                        }
-                    });
-                }
-            }
-        }
-    });
-
-    const handlePointerOver = (e: any) => {
-        e.stopPropagation();
-        if (showCursor) {
-            document.body.style.cursor = 'pointer';
-        }
-        if (onHoverChange) {
-            onHoverChange(true);
-        }
-        // Delay glow by 0.3 seconds
-        glowTimeoutRef.current = setTimeout(() => {
-            setShowGlow(true);
-        }, 300);
-    };
-
-    const handlePointerOut = (e: any) => {
-        e.stopPropagation();
-        if (showCursor) {
-            document.body.style.cursor = 'auto';
-        }
-        if (onHoverChange) {
-            onHoverChange(false);
-        }
-        // Clear timeout if still pending
+    // Helper function to reset glow and cursor
+    const resetGlowAndCursor = useCallback(() => {
+        // Clear any pending glow timeout
         if (glowTimeoutRef.current) {
             clearTimeout(glowTimeoutRef.current);
             glowTimeoutRef.current = null;
         }
-        setShowGlow(false);
+        
+        // Remove glow
+        setIsHovering(false);
+        
+        // Reset cursor
+        if (showCursor) {
+            document.body.style.cursor = 'auto';
+        }
+        
+        // Notify parent
+        if (onHoverChange) {
+            onHoverChange(false);
+        }
+    }, [showCursor, onHoverChange]);
+
+    // Reset when interactions are disabled
+    useEffect(() => {
+        if (!enableInteractions) {
+            resetGlowAndCursor();
+        }
+    }, [enableInteractions, resetGlowAndCursor]);
+
+    // Apply or remove glow based on hover state
+    useEffect(() => {
+        if (!groupRef.current) return;
+
+        groupRef.current.traverse((child) => {
+            if (isMesh(child)) {
+                if (isHovering && glowMaterialsRef.current.has(child)) {
+                    // Apply glow material
+                    child.material = glowMaterialsRef.current.get(child)!;
+                } else if (!isHovering && originalMaterialsRef.current.has(child)) {
+                    // Restore original material
+                    child.material = originalMaterialsRef.current.get(child)!;
+                }
+            }
+        });
+    }, [isHovering]);
+
+    const handlePointerOver = (e: any) => {
+        if (!enableInteractions) return;
+        
+        // Stop propagation to ensure priority
+        e.stopPropagation();
+        e.nativeEvent?.stopPropagation?.();
+        
+        // Set cursor
+        if (showCursor) {
+            document.body.style.cursor = 'pointer';
+        }
+        
+        // Notify parent
+        if (onHoverChange) {
+            onHoverChange(true);
+        }
+        
+        // Delay glow by specified time
+        if (glowTimeoutRef.current) {
+            clearTimeout(glowTimeoutRef.current);
+        }
+        glowTimeoutRef.current = setTimeout(() => {
+            setIsHovering(true);
+        }, HOVER_DELAY);
+    };
+
+    const handlePointerOut = (e: any) => {
+        if (!enableInteractions) return;
+        
+        // Stop propagation to ensure priority
+        e.stopPropagation();
+        e.nativeEvent?.stopPropagation?.();
+        
+        // Reset glow and cursor
+        resetGlowAndCursor();
     };
     
     const handleClick = (e: any) => {
+        if (!enableInteractions) return;
+        
+        // Stop propagation to ensure priority
         e.stopPropagation();
+        e.nativeEvent?.stopPropagation?.();
+        
+        // Reset glow and cursor immediately on click
+        resetGlowAndCursor();
+        
         if (onClick) {
             onClick(e);
         }
@@ -187,15 +172,23 @@ function GlowWrapper({ children, onClick, showCursor = false, onHoverChange }: {
             if (glowTimeoutRef.current) {
                 clearTimeout(glowTimeoutRef.current);
             }
+            // Restore original materials
+            if (groupRef.current) {
+                groupRef.current.traverse((child) => {
+                    if (isMesh(child) && originalMaterialsRef.current.has(child)) {
+                        child.material = originalMaterialsRef.current.get(child)!;
+                    }
+                });
+            }
         };
     }, []);
 
     return (
         <group 
             ref={groupRef}
-            onPointerOver={handlePointerOver}
-            onPointerOut={handlePointerOut}
-            onClick={onClick ? handleClick : undefined}
+            onPointerOver={enableInteractions ? handlePointerOver : undefined}
+            onPointerOut={enableInteractions ? handlePointerOut : undefined}
+            onClick={enableInteractions && onClick ? handleClick : undefined}
         >
             {children}
         </group>
@@ -423,12 +416,20 @@ export function ControllerAndHeadphonesModel():JSX.Element {
 }
 
 
-export function PlayStationModel({ onHoverChange, onClick }: { onHoverChange?: (isHovering: boolean) => void; onClick?: () => void }):JSX.Element{
+export function PlayStationModel({ onHoverChange, onClick, controlMode }: { onHoverChange?: (isHovering: boolean) => void; onClick?: () => void; controlMode?: "orbit" | "firstPerson" | "snakeGame" }):JSX.Element{
     const {scene:playStationModel} = useGLTF("models/ps5Model.glb", true)
     
+    // Disable all interactions when in snake game mode
+    const isSnakeGameMode = controlMode === "snakeGame";
+    const shouldEnableInteractions = !isSnakeGameMode;
     
     return (
-        <GlowWrapper onClick={onClick} showCursor={true} onHoverChange={onHoverChange}>
+        <GlowWrapper 
+            onClick={onClick} 
+            showCursor={true} 
+            onHoverChange={onHoverChange}
+            enableInteractions={shouldEnableInteractions}
+        >
             <primitive object = {playStationModel} 
             position = {[8.8,2.25,-2.4]} 
             scale = {0.7}

@@ -102,7 +102,7 @@ return (
                 <ResponsiveCamera />
 
                 <PhysicsWorld>
-                    <Scene onHoverClickableChange={setIsHoveringClickable} onPS5Click={handlePS5Click} />
+                    <Scene onHoverClickableChange={setIsHoveringClickable} onPS5Click={handlePS5Click} controlMode={controlMode} />
                     
                     {controlMode === "firstPerson" && (
                         <FirstPersonControls 
