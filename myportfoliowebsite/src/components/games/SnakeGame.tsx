@@ -99,6 +99,14 @@ export default function SnakeGame({
 
     const handleKeyPress = (e: KeyboardEvent) => {
       const key = e.key.toLowerCase();
+
+      // Handle restart with R key when game is over or won (check this first)
+      if ((gameOver || gameWon) && key === "r") {
+        e.preventDefault();
+        restart();
+        return;
+      }
+
       let desiredDirection: Direction | null = null;
 
       if (key === "w" || key === "arrowup") {
@@ -116,7 +124,7 @@ export default function SnakeGame({
       // prevent page scroll with arrows
       e.preventDefault();
 
-      // if game over or won, ignore inputs (use button to restart)
+      // if game over or won, ignore movement inputs
       if (gameOver || gameWon) return;
 
       // first valid move starts the game immediately
@@ -428,10 +436,10 @@ export default function SnakeGame({
               left: "50%",
               transform: "translate(-50%, -50%)",
               zIndex: 10,
+              pointerEvents: "none",
             }}
           >
-            <button
-              onClick={restart}
+            <div
               style={{
                 padding: "12px 24px",
                 fontSize: "18px",
@@ -439,20 +447,14 @@ export default function SnakeGame({
                 color: "#000",
                 border: "2px solid #000",
                 borderRadius: "4px",
-                cursor: "pointer",
                 fontWeight: "bold",
                 fontFamily: "'Courier New', monospace",
                 boxShadow: "0 4px 8px rgba(0,0,0,0.5)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "#55ff55";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "#44ff44";
+                textAlign: "center",
               }}
             >
-              RESTART
-            </button>
+              Press R to restart
+            </div>
           </div>
         )}
       </div>

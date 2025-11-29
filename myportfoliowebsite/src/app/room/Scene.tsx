@@ -271,12 +271,14 @@ function Scene({ onHoverClickableChange, onPS5Click, controlMode }: { onHoverCli
             {/* Test Box with Snake Game - Only visible in snake game mode */}
             {controlMode === "snakeGame" && (
                 <group position={[7, 3.5, -0.25]} rotation = {[0,Math.PI/2,0]}>
-                    {/* Test box for reference */}
+                    {/* Anchor box for reference, will be invisible */}
                     <mesh castShadow receiveShadow>
                         <boxGeometry args={[2, 2, 0.1]} />
                         <meshStandardMaterial color="#333" transparent opacity={0}/>
                     </mesh>
                     
+
+
                     {/* Snake Game HTML Component */}
                     <Html
                         transform
@@ -300,6 +302,25 @@ function Scene({ onHoverClickableChange, onPS5Click, controlMode }: { onHoverCli
                             }}
                         />
                     </Html>
+
+                    <Html
+                        transform
+                        center
+                        distanceFactor={1}
+                        position={[0.42, 0.23,0.06]}
+                        rotation={[-0.2,Math.PI,0]}
+                        style={{
+                            pointerEvents: 'auto',
+                            width: '1120px',
+                            height: '630px',
+                            backgroundColor: 'black',
+                        }}
+                        
+                    >
+                       
+                    </Html>
+
+
                 </group>
             )}
 
