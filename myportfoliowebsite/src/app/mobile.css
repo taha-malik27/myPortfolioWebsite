@@ -331,13 +331,17 @@
         opacity: 1 !important;
     }
 
-    /* Disable hover text effects on mobile */
-    .home-header-container .header-styling span:hover {
-        color: inherit !important;
-        -webkit-text-stroke: none !important;
-        text-stroke: none !important;
-        transform: none !important;
-        filter: none !important;
+    /* Home page headers - same styling as about page on mobile */
+    /* Use :active instead of :hover for mobile touch interactions */
+    .home-header-container .header-styling span:active,
+    .home-header-1 .header-styling span:active,
+    .home-header-2 .header-styling span:active {
+        color: transparent !important;
+        -webkit-text-stroke: 1px white !important;
+        text-stroke: 1px white !important;
+        transform: scale(1.05) !important;
+        filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8))
+            drop-shadow(0 0 10px rgba(255, 255, 255, 0.5)) !important;
     }
 
     /* ========== ABOUT PAGE MOBILE STYLES ========== */
