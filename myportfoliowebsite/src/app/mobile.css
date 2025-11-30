@@ -1,0 +1,186 @@
+/* Mobile-specific styles - applies only to mobile devices */
+/* Media query targets mobile devices (phones and small tablets) */
+
+@media screen and (max-width: 768px) {
+    /* Page Layout - Change from side-by-side to stacked on mobile */
+    .page-container {
+        display: flex !important;
+        flex-direction: column !important;
+        grid-template-columns: none !important;
+        height: 100vh !important;
+        width: 100vw !important;
+    }
+
+    .sidebar-container {
+        height: auto !important;
+        width: 100% !important;
+        order: 1;
+    }
+
+    .content-container {
+        flex: 1 !important;
+        width: 100% !important;
+        order: 2;
+        overflow-y: auto;
+    }
+
+    /* Sidebar Mobile Styles */
+    .sidebar {
+        width: 100% !important;
+        height: auto !important;
+        background-color: #0b0202ee !important;
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        padding: 0.5rem 1.25rem !important;
+        grid-template-rows: none !important;
+        position: relative !important;
+        z-index: 1000 !important;
+        box-sizing: border-box !important;
+        overflow: visible !important;
+    }
+
+    /* Logo in mobile sidebar */
+    .sidebar .sidebar-logo {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        width: auto !important;
+        height: 45px !important;
+    }
+
+    /* Hamburger Menu Button */
+    .hamburger-button {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-around !important;
+        width: 30px !important;
+        height: 30px !important;
+        background: transparent !important;
+        border: none !important;
+        cursor: pointer !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        margin-left: auto !important;
+        flex-shrink: 0 !important;
+        z-index: 1001 !important;
+        position: relative !important;
+        box-sizing: border-box !important;
+    }
+
+    .hamburger-line {
+        width: 100% !important;
+        height: 3px !important;
+        background-color: white !important;
+        border-radius: 3px !important;
+        transition: all 0.3s ease !important;
+    }
+
+    .hamburger-button.active .hamburger-line:nth-child(1) {
+        transform: rotate(45deg) translate(8px, 8px) !important;
+    }
+
+    .hamburger-button.active .hamburger-line:nth-child(2) {
+        opacity: 0 !important;
+    }
+
+    .hamburger-button.active .hamburger-line:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px) !important;
+    }
+
+    /* Sidebar Content - Hidden by default, shown when hamburger is active */
+    .sidebar-content {
+        position: fixed !important;
+        top: 60px !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: calc(100vh - 60px) !important;
+        background-color: #0b0202ee !important;
+        display: none !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        padding: 1rem 0 !important;
+        overflow-y: auto !important;
+        z-index: 999 !important;
+        grid-template-rows: none !important;
+    }
+
+    .sidebar-content.mobile-open {
+        display: flex !important;
+    }
+
+    /* Sidebar Items - Stack vertically on mobile */
+    .sidebar-item {
+        width: 100% !important;
+        padding: 1rem !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 1rem !important;
+        grid-template-rows: none !important;
+        place-items: unset !important;
+    }
+
+    /* Disable hover effects on mobile - keep images and text always visible */
+    .sidebar-item img {
+        width: 30px !important;
+        height: 30px !important;
+        grid-area: unset !important;
+        position: static !important;
+        opacity: 1 !important;
+        transition: none !important;
+    }
+
+    .sidebar-item span {
+        font-size: 1rem !important;
+        white-space: normal !important;
+        grid-area: unset !important;
+        position: static !important;
+        opacity: 1 !important;
+        transition: none !important;
+    }
+
+    /* Disable hover state changes on mobile */
+    .sidebar-item:hover img,
+    .sidebar-item:active img {
+        opacity: 1 !important;
+    }
+
+    .sidebar-item:hover span,
+    .sidebar-item:active span {
+        opacity: 1 !important;
+    }
+
+    /* Hide Room button on mobile */
+    .sidebar-item.room-item {
+        display: none !important;
+    }
+
+    /* Desktop hamburger button should be hidden on desktop */
+}
+
+/* Hide hamburger button on desktop */
+@media screen and (min-width: 769px) {
+    .hamburger-button {
+        display: none !important;
+    }
+
+    /* Ensure sidebar content uses grid layout on desktop */
+    .sidebar-content {
+        display: grid !important;
+        position: static !important;
+        width: 50px !important;
+        height: 50% !important;
+        top: auto !important;
+        left: auto !important;
+        flex-direction: unset !important;
+        padding: 0 !important;
+    }
+
+    .sidebar-content.mobile-open {
+        display: grid !important;
+    }
+}
+

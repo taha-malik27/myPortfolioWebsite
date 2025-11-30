@@ -16,6 +16,7 @@ function ProjectsPage() {
 
     return (
         <div
+          className="page-container"
           style={{
             display: "grid",
             gridTemplateColumns: "50px 1fr",
@@ -25,13 +26,13 @@ function ProjectsPage() {
           }}
         >
             {/* Left side: sidebar */}
-            <div style={{height: "100%" }}>
+            <div className="sidebar-container" style={{height: "100%" }}>
                 <SideBarComponent />
             </div>
 
             {/* Right side: main content */}
             <div 
-                className={"gradient"} 
+                className="content-container gradient" 
                 style={{ 
                     position: "relative",
                     padding: "1rem",

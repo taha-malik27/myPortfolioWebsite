@@ -7,24 +7,43 @@ import { usePathname } from "next/navigation";
 
 export default function SideBarComponent():JSX.Element {
     const [hoveredItem, setHoveredItem] = React.useState<string | null>(null);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState<boolean>(false);
     const pathname = usePathname();
     
+    const toggleMobileMenu = () => {
+        setIsMobileMenuOpen(!isMobileMenuOpen);
+    };
+
+    const closeMobileMenu = () => {
+        setIsMobileMenuOpen(false);
+    };
 
     return(
     
     <div className={"sidebar"}>
-        <Link href="/" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Link href="/" className="sidebar-logo" onClick={closeMobileMenu} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 
             <Image src="/images/Logo.png" alt="TM Logo" width={45} height={45} priority />
         
         </Link>
 
-        <div className={"sidebar-content"} >
+        {/* Hamburger Menu Button */}
+        <button 
+            className={`hamburger-button ${isMobileMenuOpen ? 'active' : ''}`}
+            onClick={toggleMobileMenu}
+            aria-label="Toggle menu"
+        >
+            <span className="hamburger-line"></span>
+            <span className="hamburger-line"></span>
+            <span className="hamburger-line"></span>
+        </button>
+
+        <div className={`sidebar-content ${isMobileMenuOpen ? 'mobile-open' : ''}`} >
 
 
 
             {/* Home */}
-            <Link href= "/">
+            <Link href= "/" onClick={closeMobileMenu}>
                 <div 
                     className={"sidebar-item"} 
                     onMouseEnter={() => setHoveredItem('home')}
@@ -68,7 +87,7 @@ export default function SideBarComponent():JSX.Element {
 
 
             {/* About Me */}
-            <Link href= "/about">
+            <Link href= "/about" onClick={closeMobileMenu}>
                 <div 
                     className={"sidebar-item"} 
                     onMouseEnter={() => setHoveredItem('about')}
@@ -114,7 +133,7 @@ export default function SideBarComponent():JSX.Element {
             {/* Room */}
             <Link href= "/room">
                 <div 
-                    className={"sidebar-item"} 
+                    className={"sidebar-item room-item"} 
                     onMouseEnter={() => setHoveredItem('room')}
                     onMouseLeave={() => setHoveredItem(null)}
                     style={{ 
@@ -156,7 +175,7 @@ export default function SideBarComponent():JSX.Element {
 
 
             {/* Skills */}
-            <Link href= "/skills">
+            <Link href= "/skills" onClick={closeMobileMenu}>
                 <div 
                     className={"sidebar-item"} 
                     onMouseEnter={() => setHoveredItem('skills')}
@@ -202,7 +221,7 @@ export default function SideBarComponent():JSX.Element {
 
 
             {/* Projects */}
-            <Link href= "/projects">
+            <Link href= "/projects" onClick={closeMobileMenu}>
                 <div 
                     className={"sidebar-item"}
                     onMouseEnter={() => setHoveredItem('projects')}
@@ -248,7 +267,7 @@ export default function SideBarComponent():JSX.Element {
 
 
             {/* Work */}
-            <Link href="/work">
+            <Link href="/work" onClick={closeMobileMenu}>
                 <div 
                     className={"sidebar-item"}
                     onMouseEnter={() => setHoveredItem('work')}
@@ -292,7 +311,7 @@ export default function SideBarComponent():JSX.Element {
 
 
             {/* Contact */}
-            <Link href="/contact">
+            <Link href="/contact" onClick={closeMobileMenu}>
                 <div 
                     className={"sidebar-item"}
                     onMouseEnter={() => setHoveredItem('contact')}

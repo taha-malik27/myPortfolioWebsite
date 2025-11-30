@@ -16,6 +16,7 @@ function ExperiencePage() {
 
     return (
         <div
+          className="page-container"
           style={{
             display: "grid",
             gridTemplateColumns: "50px 1fr",
@@ -25,12 +26,12 @@ function ExperiencePage() {
           }}
         >
             {/* Left side: sidebar */}
-            <div style={{height: "100%" }}>
+            <div className="sidebar-container" style={{height: "100%" }}>
                 <SideBarComponent />
             </div>
 
             {/* Right side: main content */}
-            <div className={"gradient"} style={{ position: "relative", padding: "1rem", color: "white", overflow: "hidden", paddingRight:"0"}}>
+            <div className="content-container gradient" style={{ position: "relative", padding: "1rem", color: "white", overflow: "hidden", paddingRight:"0"}}>
                 {/* Gradient and Particles load immediately */}
                 <ParticlesBackground />
                 
