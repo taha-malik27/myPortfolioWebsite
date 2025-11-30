@@ -12,6 +12,7 @@ export default function LoadingScreen({ isLoading }: LoadingScreenProps):JSX.Ele
 
   return (
     <div
+      className="loading-screen-container"
       style={{
         position: 'absolute',
         top: 0,
@@ -28,7 +29,7 @@ export default function LoadingScreen({ isLoading }: LoadingScreenProps):JSX.Ele
         pointerEvents: 'none', // Allow interactions to pass through
       }}
     >
-      <div style={{
+      <div className="loading-screen-icon-wrapper" style={{
         animation: 'fadeIn 0.4s ease-in forwards',
       }}>
         <Image 
@@ -37,6 +38,7 @@ export default function LoadingScreen({ isLoading }: LoadingScreenProps):JSX.Ele
           width={150} 
           height={150}
           priority
+          className="loading-screen-icon"
         />
       </div>
       <style jsx>{`

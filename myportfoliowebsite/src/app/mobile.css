@@ -105,6 +105,7 @@
         overflow-y: auto !important;
         z-index: 999 !important;
         grid-template-rows: none !important;
+        box-sizing: border-box !important;
     }
 
     .sidebar-content.mobile-open {
@@ -114,6 +115,7 @@
     /* Sidebar Items - Stack vertically on mobile */
     .sidebar-item {
         width: 100% !important;
+        max-width: 100% !important;
         padding: 1rem !important;
         display: flex !important;
         align-items: center !important;
@@ -121,6 +123,17 @@
         gap: 1rem !important;
         grid-template-rows: none !important;
         place-items: unset !important;
+        margin: 0 auto !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Ensure links inside sidebar items are centered */
+    .sidebar-content a {
+        width: 100% !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        text-decoration: none !important;
     }
 
     /* Disable hover effects on mobile - keep images and text always visible */
@@ -131,6 +144,8 @@
         position: static !important;
         opacity: 1 !important;
         transition: none !important;
+        display: block !important;
+        flex-shrink: 0 !important;
     }
 
     .sidebar-item span {
@@ -140,6 +155,8 @@
         position: static !important;
         opacity: 1 !important;
         transition: none !important;
+        display: block !important;
+        text-align: center !important;
     }
 
     /* Disable hover state changes on mobile */
@@ -943,6 +960,39 @@
 
     .sidebar-content.mobile-open {
         display: grid !important;
+    }
+}
+
+/* ========== LOADING SCREEN MOBILE STYLES ========== */
+@media screen and (max-width: 768px) {
+    /* Loading screen container - ensure proper centering on mobile */
+    .loading-screen-container {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 100% !important;
+        height: 100% !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+    }
+
+    /* Loading icon wrapper - centered */
+    .loading-screen-icon-wrapper {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    /* Loading icon - smaller on mobile, centered */
+    .loading-screen-icon {
+        width: 100px !important;
+        height: 100px !important;
+        max-width: 100px !important;
+        max-height: 100px !important;
+        object-fit: contain !important;
     }
 }
 
