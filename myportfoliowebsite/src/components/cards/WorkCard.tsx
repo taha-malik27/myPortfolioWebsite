@@ -104,6 +104,24 @@ const workExperiences: WorkExperience[] = [
     },
     {
         id: "exp5",
+        company: "Ovintiv",
+        role: "Incoming Data Engineering Intern",
+        date: "May 2026 - Aug 2026",
+        logo: "/images/work/OvintivLogo.png",
+        color: "#ea580c", // Deep orange (same as first Ovintiv)
+        whatIDid: "Will contribute to a larger data infrastructure initiative focused on building secure and reliable data pipelines using Databricks and Dagster, while supporting the migration of data systems to Azure cloud. Working as part of a team to help centralize data sources, enabling improved data sourcing for company operators who rely on data science and analytics for operational decision making.",
+        impact: "Incoming role focused on supporting strategic data centralization goals that will enhance data accessibility and reliability across the organization.",
+        technologies: [
+            "Databricks",
+            "Dagster",
+            "Azure Cloud",
+            "Data Pipelines",
+            "Python"
+        ],
+        location: "Calgary, AB, Canada"
+    },
+    {
+        id: "exp6",
         company: "Deloitte",
         role: "Incoming Audit and Assurance Intern",
         date: "Sept 2026 - Dec 2026",
@@ -123,10 +141,60 @@ const workExperiences: WorkExperience[] = [
     }
 ];
 
-// Slot placement pattern: 1, 7, 3, 9, 5 (then repeats)
-// Slots 1-5 are left column, slots 6-10 are right column
+/**
+ * ============================================================================
+ * HOW TO ADD A NEW WORK EXPERIENCE (DESKTOP LAYOUT)
+ * ============================================================================
+ * 
+ * When adding a new work experience to the workExperiences array, you need to
+ * update several parts of this component to maintain proper desktop layout:
+ * 
+ * 1. UPDATE SLOT PATTERN (below):
+ *    - Add a new slot number to the pattern array
+ *    - Slots 1-5 = left column (rows 0-4)
+ *    - Slots 6-10 = right column (rows 0-4)
+ *    - Slots 11+ = special slots for experiences beyond 10 (right column, row 5+)
+ *    - Pattern alternates left/right: [left, right, left, right, ...]
+ *    - Example for 7 experiences: [1, 7, 3, 9, 5, 12, 2] (add slot 2 for 7th)
+ * 
+ * 2. UPDATE getRowIndex() function:
+ *    - Add special case for new slot if it's beyond slot 10
+ *    - Formula: slot 11 = row 5, slot 12 = row 5, slot 13 = row 6, etc.
+ *    - For slot 11+: return (slot - 11) + 5
+ * 
+ * 3. UPDATE createTimelineSlots() function:
+ *    - Update the condition that adds special slots (currently > 5)
+ *    - Add new slot initialization for slots beyond 10
+ *    - Example: if (workExperiences.length > 6) { slots.push({ slot: 13, experience: null }); }
+ * 
+ * 4. UPDATE isRightColumn() function:
+ *    - Add new slot numbers to the condition
+ *    - Example: || slot === 13
+ * 
+ * 5. UPDATE gridTemplateRows (2 places):
+ *    - Left column grid: line ~661
+ *    - Right column grid: line ~870
+ *    - Already dynamic: `repeat(${workExperiences.length}, 1fr)` when > 5
+ *    - No change needed if already using workExperiences.length
+ * 
+ * 6. Timeline dot positioning is already dynamic:
+ *    - Uses: (rowIndex * (100 / workExperiences.length)) + (100 / workExperiences.length / 2)
+ *    - Automatically adjusts for any number of experiences
+ * 
+ * CURRENT PATTERN FOR 6 EXPERIENCES:
+ * Row 0 (top):    Slot 1 (left)  - American Eagle
+ * Row 1:          Slot 7 (right) - DSMLC
+ * Row 2:          Slot 3 (left)  - MIND
+ * Row 3:          Slot 9 (right) - Ovintiv SWE
+ * Row 4:          Slot 5 (left)  - Ovintiv Data Eng
+ * Row 5 (bottom): Slot 12 (right) - Deloitte
+ * ============================================================================
+ */
 const getSlotForIndex = (index: number): number => {
-    const pattern = [1, 7, 3, 9, 5];
+    // Pattern: [left, right, left, right, left, right, ...]
+    // Update this array when adding new experiences
+    // Add slot numbers that alternate between left (1-5) and right (6-10, or 11+)
+    const pattern = [1, 7, 3, 9, 5, 12];
     return pattern[index % pattern.length];
 };
 
@@ -170,19 +238,51 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
         }
     }, [selectedExperience, displayedExperience.id]);
 
-    // Create grid slots (10 total: 1-5 left, 6-10 right)
+    /**
+     * Creates the timeline slot structure for desktop layout
+     * 
+     * TO UPDATE when adding experiences beyond 6:
+     * 1. Update the condition that checks workExperiences.length
+     * 2. Add initialization for new special slots (11+)
+     * 
+     * Example for 7 experiences:
+     *   if (workExperiences.length > 6) {
+     *       slots.push({ slot: 13, experience: null });
+     *   }
+     * 
+     * Example for 8 experiences:
+     *   if (workExperiences.length > 6) {
+     *       slots.push({ slot: 13, experience: null });
+     *       if (workExperiences.length > 7) {
+     *           slots.push({ slot: 14, experience: null });
+     *       }
+     *   }
+     */
     const createTimelineSlots = () => {
         const slots: Array<{ slot: number; experience: WorkExperience | null }> = [];
         
-        // Initialize all 10 slots as empty
+        // Initialize standard slots 1-10 (left: 1-5, right: 6-10)
         for (let i = 1; i <= 10; i++) {
             slots.push({ slot: i, experience: null });
         }
         
-        // Place experiences according to pattern
+        // Add special slots for experiences beyond 10
+        // UPDATE THIS when adding more experiences
+        if (workExperiences.length > 5) {
+            slots.push({ slot: 12, experience: null }); // 6th experience
+        }
+        // Add more slots here as needed:
+        // if (workExperiences.length > 6) {
+        //     slots.push({ slot: 13, experience: null }); // 7th experience
+        // }
+        
+        // Place experiences into slots according to pattern
         workExperiences.forEach((exp, index) => {
             const slot = getSlotForIndex(index);
-            slots[slot - 1] = { slot, experience: exp };
+            const slotIndex = slots.findIndex(s => s.slot === slot);
+            if (slotIndex !== -1) {
+                slots[slotIndex] = { slot, experience: exp };
+            }
         });
         
         return slots;
@@ -194,10 +294,46 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
         setSelectedExperience(experience);
     };
 
+    /**
+     * Determines if a slot is in the left column
+     * Left column slots: 1-5 (rows 0-4)
+     */
     const isLeftColumn = (slot: number) => slot >= 1 && slot <= 5;
-    const isRightColumn = (slot: number) => slot >= 6 && slot <= 10;
+    
+    /**
+     * Determines if a slot is in the right column
+     * Right column slots: 6-10 (rows 0-4), and special slots 11+ (rows 5+)
+     * 
+     * TO UPDATE: Add new special slot numbers here when adding experiences beyond 10
+     * Example for 7 experiences: || slot === 12 || slot === 13
+     */
+    const isRightColumn = (slot: number) => (slot >= 6 && slot <= 10) || slot === 12;
+    
+    /**
+     * Maps slot numbers to row indices (0-based)
+     * 
+     * TO UPDATE when adding experiences beyond 10:
+     * - For slot 11: return 5
+     * - For slot 12: return 5 (already handled)
+     * - For slot 13: return 6
+     * - For slot 14: return 6
+     * - General formula for slots 11+: return Math.floor((slot - 11) / 2) + 5
+     *   OR add explicit cases: if (slot === 13) return 6; etc.
+     * 
+     * Current mapping:
+     * - Slots 1-5 (left): rows 0-4
+     * - Slots 6-10 (right): rows 0-4
+     * - Slot 12 (right): row 5
+     */
     const getRowIndex = (slot: number) => {
+        // Left column: slots 1-5 map directly to rows 0-4
         if (slot <= 5) return slot - 1;
+        
+        // Special case for slot 12 (6th experience, row 5)
+        // ADD MORE SPECIAL CASES HERE for slots 11+ when adding more experiences
+        if (slot === 12) return 5;
+        
+        // Right column standard slots: 6-10 map to rows 0-4
         return slot - 6;
     };
 
@@ -345,7 +481,7 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                                 marginBottom: "0.75rem",
                                 marginTop: 0
                             }}>
-                                {displayedExperience.company === "Deloitte" ? "What I Will Do" : "What I Did"}
+                                {displayedExperience.role.includes("Incoming") ? "What I Will Do" : "What I Did"}
                             </h3>
                             <p className="paragraph-styling" style={{ 
                                 margin: 0, 
@@ -638,6 +774,10 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                 }}>
 
                     {/* Left Column - Preview Cards */}
+                    {/* 
+                        NOTE: gridTemplateRows is already dynamic - automatically adjusts for any number of experiences
+                        No changes needed here when adding new experiences
+                    */}
                     <div style={{
                         display: "grid",
                         gridTemplateRows: workExperiences.length > 5 ? `repeat(${workExperiences.length}, 1fr)` : "repeat(5, 1fr)",
@@ -651,7 +791,7 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                     }}>
                         {timelineSlots.filter(s => isLeftColumn(s.slot)).map((slotData, idx) => {
                             const experience = slotData.experience;
-                            const rowIndex = idx;
+                            const rowIndex = getRowIndex(slotData.slot);
                             const isSelected = experience?.id === selectedExperience.id;
                             const isHovered = experience?.id === hoveredExperience;
                             const experienceColor = experience ? getExperienceColor(experience.id) : "#fc8803";
@@ -804,8 +944,23 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                         const isHovered = slotData.experience.id === hoveredExperience;
                         const experienceColor = getExperienceColor(slotData.experience.id);
                         
-                        // Calculate position (each row is 20% of height, centered in row)
-                        const topPosition = `${(rowIndex * 20) + 10}%`;
+                        /**
+                         * Calculate timeline dot position dynamically
+                         * 
+                         * NOTE: This is already dynamic and works for any number of experiences
+                         * No changes needed when adding new experiences
+                         * 
+                         * Formula:
+                         * - rowSpacing = 100% / number of experiences (evenly divides height)
+                         * - topPosition = (rowIndex * spacing) + (spacing / 2) to center in row
+                         * 
+                         * Example for 6 experiences:
+                         * - rowSpacing = 100 / 6 = 16.67%
+                         * - Row 0: (0 * 16.67) + 8.33 = 8.33%
+                         * - Row 5: (5 * 16.67) + 8.33 = 91.67%
+                         */
+                        const rowSpacing = 100 / workExperiences.length;
+                        const topPosition = `${(rowIndex * rowSpacing) + (rowSpacing / 2)}%`;
                         
                         return (
                             <div
@@ -838,6 +993,10 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                 </div>
 
                     {/* Right Column - Preview Cards */}
+                    {/* 
+                        NOTE: gridTemplateRows is already dynamic - automatically adjusts for any number of experiences
+                        No changes needed here when adding new experiences
+                    */}
                     <div style={{
                         display: "grid",
                         gridTemplateRows: workExperiences.length > 5 ? `repeat(${workExperiences.length}, 1fr)` : "repeat(5, 1fr)",
@@ -851,7 +1010,7 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                     }}>
                         {timelineSlots.filter(s => isRightColumn(s.slot)).map((slotData, idx) => {
                             const experience = slotData.experience;
-                            const rowIndex = idx;
+                            const rowIndex = getRowIndex(slotData.slot);
                             const isSelected = experience?.id === selectedExperience.id;
                             const isHovered = experience?.id === hoveredExperience;
                             const experienceColor = experience ? getExperienceColor(experience.id) : "#fc8803";
