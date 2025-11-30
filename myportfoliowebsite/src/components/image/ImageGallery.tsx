@@ -30,7 +30,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
     };
 
     return (
-        <div style={{
+        <div className="image-gallery-container" style={{
             display: "flex",
             flexDirection: "column",
             alignItems: "center",

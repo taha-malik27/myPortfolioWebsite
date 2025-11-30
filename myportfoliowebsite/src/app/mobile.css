@@ -322,6 +322,70 @@
         transform: none !important;
         filter: none !important;
     }
+
+    /* ========== ABOUT PAGE MOBILE STYLES ========== */
+    
+    /* About Me Card - stack vertically on mobile */
+    .about-me-card {
+        display: flex !important;
+        flex-direction: column !important;
+        grid-template-columns: none !important;
+        height: auto !important;
+        min-height: fit-content !important;
+        margin-top: 0 !important;
+        padding-right: 0 !important;
+        padding-bottom: 2rem !important;
+        gap: 2rem !important;
+    }
+
+    /* Text section - full width, order 1 (after header) */
+    .about-me-text-section {
+        width: 100% !important;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+        align-self: unset !important;
+        order: 2 !important;
+    }
+
+    /* Header - order 1 (first) */
+    .about-me-header {
+        order: 1 !important;
+        width: 100% !important;
+        text-align: center !important;
+        margin-bottom: 1.5rem !important;
+    }
+
+    /* TLDR section - order 3 */
+    .about-me-tldr {
+        order: 3 !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        margin-top: 1.5rem !important;
+        margin-bottom: 1.5rem !important;
+    }
+
+    /* Image Gallery - order 4 (last) */
+    .about-me-gallery {
+        order: 4 !important;
+        width: 100% !important;
+        padding: 1rem !important;
+        padding-top: 0 !important;
+        padding-right: 0 !important;
+        padding-left: 0 !important;
+        margin-bottom: 3rem !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    /* Image Gallery Container - center, remove desktop padding, reduce size by 15% */
+    .image-gallery-container {
+        padding-left: 0 !important;
+        max-width: 85% !important;
+        min-width: 85% !important;
+        width: 85% !important;
+        margin: 0 auto !important;
+    }
 }
 
 /* Hide hamburger button on desktop */

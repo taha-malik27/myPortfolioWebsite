@@ -31,7 +31,7 @@ const AboutMeCard: React.FC<AboutMeCardProps> = ({ backgroundColor = "transparen
 
     return (
         <div 
-            className="fade-in div-scroll" 
+            className="fade-in div-scroll about-me-card" 
             style={{
                 /* Positioning */
                 position: "relative",
@@ -59,14 +59,14 @@ const AboutMeCard: React.FC<AboutMeCardProps> = ({ backgroundColor = "transparen
             }}
         >
             {/* Text Content Section */}
-            <div style={{
+            <div className="about-me-text-section" style={{
                 alignSelf: "center", 
                 paddingLeft:"10%",
                 paddingRight: "5%",
                 width: "100%",
                 boxSizing: "border-box"
             }}>
-                <h1 style={{margin: 0, marginBottom: "1rem"}}>
+                <h1 className="about-me-header" style={{margin: 0, marginBottom: "1rem"}}>
                     <HoverText text="About Me" className="header-styling" />
                 </h1>
 
@@ -87,7 +87,7 @@ const AboutMeCard: React.FC<AboutMeCardProps> = ({ backgroundColor = "transparen
                 </p>
 
                 {/* TLDR Section */}
-                <div style={{
+                <div className="about-me-tldr" style={{
                     marginTop: "30px",
                     padding: "20px",
                     borderLeft: "3px solid #fc8803",
@@ -131,7 +131,7 @@ const AboutMeCard: React.FC<AboutMeCardProps> = ({ backgroundColor = "transparen
             </div>
 
             {/* Image Gallery Section */}
-            <div style={{
+            <div className="about-me-gallery" style={{
                 display: "flex", 
                 alignItems: "center", 
                 justifyContent: "center", 
