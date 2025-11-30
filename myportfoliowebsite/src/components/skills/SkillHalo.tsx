@@ -58,14 +58,17 @@ export const SkillHalo: React.FC<SkillHaloProps> = ({
     titleColor = "#ffac53"
 }) => {
     const [isVisible, setIsVisible] = useState(false);
+    // Initialize with safe default to avoid hydration mismatch
     const [isMobile, setIsMobile] = useState(false);
 
     // Detect mobile on mount and resize
     useEffect(() => {
         const checkMobile = () => {
+            if (typeof window === 'undefined') return;
             setIsMobile(window.innerWidth <= 768);
         };
         
+        // Set initial value on mount (client-side only)
         checkMobile();
         window.addEventListener('resize', checkMobile);
         return () => window.removeEventListener('resize', checkMobile);

@@ -26,6 +26,8 @@ export const SkillsCard: React.FC<SkillsCardProps> = ({ backgroundColor = "trans
     // Update dial size and halo radius based on viewport width
     useEffect(() => {
         const updateSizes = () => {
+            if (typeof window === 'undefined') return;
+            
             const isMobile = window.innerWidth <= 768;
             
             // Dial size scaled down by 10%
@@ -43,7 +45,7 @@ export const SkillsCard: React.FC<SkillsCardProps> = ({ backgroundColor = "trans
             }
         };
         
-        // Set initial sizes
+        // Set initial sizes on mount (client-side only)
         updateSizes();
         
         // Add resize listener

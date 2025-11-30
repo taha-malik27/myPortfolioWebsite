@@ -135,24 +135,25 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
     const [hoveredExperience, setHoveredExperience] = useState<string | null>(null);
     const [isContentVisible, setIsContentVisible] = useState(true);
     const [displayedExperience, setDisplayedExperience] = useState<WorkExperience>(workExperiences[0]);
-    const [viewportWidth, setViewportWidth] = useState<number>(typeof window !== 'undefined' ? window.innerWidth : 1200);
+    const [viewportWidth, setViewportWidth] = useState<number>(1200);
     const [isSmallViewport, setIsSmallViewport] = useState<boolean>(false);
+    const [isMobile, setIsMobile] = useState<boolean>(false);
 
     // Track viewport width for responsive behavior
     useEffect(() => {
         const handleResize = () => {
+            if (typeof window === 'undefined') return;
             const width = window.innerWidth;
             setViewportWidth(width);
             // Small viewport mode triggers at 80% of typical desktop width (1536px at 1920px)
             const typicalDesktopWidth = 1920;
             setIsSmallViewport(width < typicalDesktopWidth * 0.8);
+            setIsMobile(width <= 768);
         };
 
-        if (typeof window !== 'undefined') {
-            handleResize();
-            window.addEventListener('resize', handleResize);
-            return () => window.removeEventListener('resize', handleResize);
-        }
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
     }, []);
 
     // Fade animation when experience changes
@@ -256,7 +257,15 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                     marginBottom: "1rem",
                     flexShrink: 0
                 }}>
-                    <HoverText text="My Work Experience" className="header-styling" />
+                    {isMobile ? (
+                        <>
+                            <HoverText text="My Work" className="header-styling" />
+                            <br />
+                            <HoverText text="Experience" className="header-styling" />
+                        </>
+                    ) : (
+                        <HoverText text="My Work Experience" className="header-styling" />
+                    )}
                 </h1>
 
                 {/* Detailed Work Experience Card */}
