@@ -12,7 +12,7 @@ const AboutMeCard: React.FC<AboutMeCardProps> = ({ backgroundColor = "transparen
     
     
     const images = [
-        '/images/TMHeadshot.jpg',
+        '/images/TMHeadshot.JPG',
         '/images/SnowHike.jpg',
         '/images/FallHike.jpg',
         '/images/SynthwaveAesthetic.png',
