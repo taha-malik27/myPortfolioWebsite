@@ -45,29 +45,30 @@ function Scene({ onHoverClickableChange, onPS5Click, controlMode }: { onHoverCli
     })
 
 
-    //Initialize the grass texture
-    const grassTexture = useTexture({
-        map: "/textures/grass/Poliigon_GrassPatchyGround_4585_BaseColor.jpg",
-        normalMap: "/textures/grass/Poliigon_GrassPatchyGround_4585_Normal.png",
-        roughnessMap: "/textures/grass/Poliigon_GrassPatchyGround_4585_Roughness.jpg",
-        displacementMap: "/textures/grass/Poliigon_GrassPatchyGround_4585_Displacement.jpg",
-        aoMap: "/textures/grass/Poliigon_GrassPatchyGround_4585_AmbientOcclusion.jpg",
+    //Initialize the synthwave texture
+    const synthwaveTexture = useTexture({
+        map: "/textures/synthwaveGrid/swBaseColor.png",
+        normalMap: "/textures/synthwaveGrid/swNormal.png",
+        roughnessMap: "/textures/synthwaveGrid/swRoughness.png",
+        emissiveMap: "/textures/synthwaveGrid/swEmission.png",
     });
 
-    grassTexture.map.colorSpace = THREE.SRGBColorSpace;
+    synthwaveTexture.map.colorSpace = THREE.SRGBColorSpace;
+    if (synthwaveTexture.emissiveMap) {
+        synthwaveTexture.emissiveMap.colorSpace = THREE.SRGBColorSpace;
+    }
 
-    const grassMappings = [
-        grassTexture.map,
-        grassTexture.normalMap,
-        grassTexture.roughnessMap,
-        grassTexture.displacementMap,
-        grassTexture.aoMap
+    const synthwaveMappings = [
+        synthwaveTexture.map,
+        synthwaveTexture.normalMap,
+        synthwaveTexture.roughnessMap,
+        synthwaveTexture.emissiveMap
     ] as THREE.Texture[];
 
-    grassMappings.forEach((mapping) => {
+    synthwaveMappings.forEach((mapping) => {
         if (!mapping) return;
         mapping.wrapS = mapping.wrapT = THREE.MirroredRepeatWrapping;
-        mapping.repeat.set(1, 1); // Larger repeat for the big grass area
+        mapping.repeat.set(0.25, 0.25); // Larger repeat for the big synthwave area
     });
 
 
@@ -98,12 +99,12 @@ function Scene({ onHoverClickableChange, onPS5Click, controlMode }: { onHoverCli
                 <mesh rotation = {[-Math.PI/2, 0, 0]} position={[0,0.2,0]} receiveShadow>
                     <RoundedBoxGeometry args={[1000,1000,0.2]} radius={0.1}/>
                     <meshPhysicalMaterial
-                    map={grassTexture.map}
-                    normalMap={grassTexture.normalMap}
-                    roughnessMap={grassTexture.roughnessMap}
-                    aoMap={grassTexture.aoMap}
-                    displacementMap={grassTexture.displacementMap}
-                    displacementScale={0.1}
+                    map={synthwaveTexture.map}
+                    normalMap={synthwaveTexture.normalMap}
+                    roughnessMap={synthwaveTexture.roughnessMap}
+                    emissiveMap={synthwaveTexture.emissiveMap}
+                    emissive={"#ffffff"}
+                    emissiveIntensity={1}
                     metalness={0}
                     roughness={1}
                     />
