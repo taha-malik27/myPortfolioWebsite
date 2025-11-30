@@ -13,6 +13,10 @@ function Page(): JSX.Element | null {
     const [alertAccepted, setAlertAccepted] = useState<boolean>(false);
 
     useEffect(() => {
+        document.title = "Taha's Portfolio - My Room";
+    }, []);
+
+    useEffect(() => {
         // Check if user has previously accepted the alert in this session
         const accepted = sessionStorage.getItem(ROOM_ALERT_KEY) === 'true';
         

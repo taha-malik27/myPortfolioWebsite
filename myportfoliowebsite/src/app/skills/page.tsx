@@ -1,7 +1,7 @@
 "use client"
 
 import SideBarComponent from '@/components/cards/sideBar';
-import React from 'react'
+import React, { useEffect } from 'react'
 import ParticlesBackground from '@/components/ParticlesBackground';
 import { SkillsCard } from '@/components/cards/SkillsCard';
 import LoadingScreen from '@/components/LoadingScreen';
@@ -9,6 +9,10 @@ import { usePageLoader } from '@/hooks/usePageLoader';
 
 function SkillsPage() {
     const isLoading = usePageLoader(1200); // 1.2 seconds
+
+    useEffect(() => {
+        document.title = "Taha's Portfolio - Skills";
+    }, []);
 
     return (
         <div

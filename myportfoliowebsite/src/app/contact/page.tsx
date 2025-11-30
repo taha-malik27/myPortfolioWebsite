@@ -1,7 +1,7 @@
 "use client"
 
 import SideBarComponent from '@/components/cards/sideBar';
-import React from 'react'
+import React, { useEffect } from 'react'
 import ParticlesBackground from '@/components/ParticlesBackground';
 import LoadingScreen from '@/components/LoadingScreen';
 import { usePageLoader } from '@/hooks/usePageLoader';
@@ -9,6 +9,10 @@ import ContactCard from '@/components/cards/ContactCard';
 
 function ContactPage() {
     const isLoading = usePageLoader(1200); // 1.2 seconds
+
+    useEffect(() => {
+        document.title = "Taha's Portfolio - Contact";
+    }, []);
 
     return (
         <div
