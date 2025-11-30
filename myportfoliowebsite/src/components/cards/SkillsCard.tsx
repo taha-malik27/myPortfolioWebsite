@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import HoverText from '@/components/HoverText';
 import VennDialComponent from '../skills/VennDialComponent';
+import MobileCategoryButtons from '../skills/MobileCategoryButtons';
 import { SkillSubCard } from './SkillSubCard';
 import { SkillHalo } from '../skills/SkillHalo';
 import { skillsData } from '@/data/skillsData';
@@ -25,13 +26,21 @@ export const SkillsCard: React.FC<SkillsCardProps> = ({ backgroundColor = "trans
     // Update dial size and halo radius based on viewport width
     useEffect(() => {
         const updateSizes = () => {
+            const isMobile = window.innerWidth <= 768;
+            
             // Dial size scaled down by 10%
             const newDialSize = Math.max(130, Math.min(300, window.innerWidth * 0.35)) * 0.85;
             setDialSize(newDialSize);
             
-            // Halo radius scales between 100-140px based on viewport (more spacious)
-            const newHaloRadius = Math.max(80, Math.min(150, window.innerWidth * 0.1)) *0.85;
-            setHaloRadius(newHaloRadius);
+            // Halo radius: fixed larger size on mobile, responsive on desktop
+            if (isMobile) {
+                // Fixed larger radius on mobile (disable viewport-based shrinking)
+                setHaloRadius(110);
+            } else {
+                // Halo radius scales between 100-140px based on viewport (more spacious)
+                const newHaloRadius = Math.max(80, Math.min(150, window.innerWidth * 0.1)) * 0.85;
+                setHaloRadius(newHaloRadius);
+            }
         };
         
         // Set initial sizes
@@ -74,7 +83,7 @@ export const SkillsCard: React.FC<SkillsCardProps> = ({ backgroundColor = "trans
 
     return (
         <div 
-            className="fade-in div-scroll" 
+            className="fade-in div-scroll skills-card" 
             style={{
                 /* Positioning */
                 position: "relative",
@@ -102,32 +111,34 @@ export const SkillsCard: React.FC<SkillsCardProps> = ({ backgroundColor = "trans
             }}
         >
             {/* Text Content Section */}
-            <div style={{
+            <div className="skills-text-section" style={{
                 alignSelf: "center", 
                 paddingLeft:"10%",
                 paddingRight: "5%",
                 width: "100%",
                 boxSizing: "border-box"
             }}>
-                <h1 style={{margin: 0, marginBottom: "1rem"}}>
+                <h1 className="skills-header" style={{margin: 0, marginBottom: "1rem"}}>
                     <HoverText text="My Skills" className="header-styling" />
                 </h1>
 
-                <p className='paragraph-styling'>
+                <p className="skills-excerpt paragraph-styling">
                     These are the technical skills I have touched throughout my journey, and my relative experience with them.
                 </p>
 
                 {/* Dynamic Skill Category Card */}
                 {currentCategory && (
-                    <SkillSubCard 
-                        key={currentCategory.id}
-                        category={currentCategory} 
-                    />
+                    <div className="skills-subcard-wrapper">
+                        <SkillSubCard 
+                            key={currentCategory.id}
+                            category={currentCategory} 
+                        />
+                    </div>
                 )}
             </div>
 
             {/* Right Section - Visual/Interactive Element */}
-            <div style={{
+            <div className="skills-visual-section" style={{
                 display: "grid", 
                 gridTemplateRows: "45% 55%",
                 alignItems: "center", 
@@ -139,8 +150,8 @@ export const SkillsCard: React.FC<SkillsCardProps> = ({ backgroundColor = "trans
                 marginTop: "-20px",
                 // backgroundColor:"black" DEBUG
             }}>
-                {/* Top Section - Venn Diagram */}
-                <div style={{
+                {/* Top Section - Venn Diagram (Desktop) */}
+                <div className="skills-dial-wrapper" style={{
                     display: "flex", 
                     alignItems: "center", 
                     justifyContent: "center", 
@@ -167,8 +178,16 @@ export const SkillsCard: React.FC<SkillsCardProps> = ({ backgroundColor = "trans
                     </div>
                 </div>
 
+                {/* Mobile Category Buttons (Mobile only) */}
+                <div className="skills-mobile-buttons-wrapper">
+                    <MobileCategoryButtons 
+                        onSelectionChange={(selected) => setSelectedCategory(selected)}
+                        initialSelection={selectedCategory}
+                    />
+                </div>
+
                 {/* Bottom Section - Skill Halo */}
-                <div style={{
+                <div className="skills-halo-wrapper" style={{
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",

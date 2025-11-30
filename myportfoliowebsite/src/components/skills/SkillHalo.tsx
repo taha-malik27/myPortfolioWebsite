@@ -58,6 +58,18 @@ export const SkillHalo: React.FC<SkillHaloProps> = ({
     titleColor = "#ffac53"
 }) => {
     const [isVisible, setIsVisible] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
+
+    // Detect mobile on mount and resize
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+        
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     // Trigger animation on mount or category change (same as SkillSubCard)
     useEffect(() => {
@@ -66,12 +78,16 @@ export const SkillHalo: React.FC<SkillHaloProps> = ({
         return () => clearTimeout(timer);
     }, [categoryId]);
 
+    // Mobile scale multiplier - makes everything bigger on mobile
+    const mobileScale = isMobile ? 1.3 : 1;
+
     // Adjust radius to account for container padding (only left/right now)
-    const effectiveRadius = radius * 1.1; // Scale up since we only have horizontal padding
+    // Scale up more on mobile
+    const effectiveRadius = radius * 1.1 * mobileScale; // Scale up since we only have horizontal padding
     
     const animationDirection = direction === "clockwise" ? "normal" : "reverse";
     
-    // Calculate positions for skills on the circle (15% smaller total)
+    // Calculate positions for skills on the circle (15% smaller total, but scaled up on mobile)
     const getSkillPosition = (index: number, total: number) => {
         const angle = (2 * Math.PI * index) / total - Math.PI / 2; // Start at top
         const adjustedRadius = effectiveRadius * 0.95 * 0.9;
@@ -80,13 +96,13 @@ export const SkillHalo: React.FC<SkillHaloProps> = ({
         return { x, y };
     };
     
-    // Responsive logo size based on radius (15% smaller total)
+    // Responsive logo size based on radius (15% smaller total, but bigger on mobile)
     const logoSize = Math.max(40, Math.min(55, effectiveRadius * 0.4)) * 0.95 * 0.9;
     
-    // Responsive center card size - shrinks 20% more aggressively with viewport, then 10% smaller overall
+    // Responsive center card size - bigger on mobile
     const centerCardMaxWidth = Math.max(100, Math.min(160, effectiveRadius * 1.0)) * 0.95 * 0.9 * 0.9;
     
-    // Responsive font size for center title - shrinks with viewport, then 10% smaller overall
+    // Responsive font size for center title - bigger on mobile
     const titleFontSize = Math.max(0.75, Math.min(1, effectiveRadius * 0.008)) * 0.9;
 
     return (
@@ -116,8 +132,8 @@ export const SkillHalo: React.FC<SkillHaloProps> = ({
                 key={`ring-${categoryId}`}
                 style={{
                     position: "relative",
-                    width: `${(effectiveRadius * 2 + 80) * 0.95 * 0.9}px`,
-                    height: `${(effectiveRadius * 2 + 80) * 0.95 * 0.9}px`,
+                    width: `${(effectiveRadius * 2 + 80 * mobileScale) * 0.95 * 0.9}px`,
+                    height: `${(effectiveRadius * 2 + 80 * mobileScale) * 0.95 * 0.9}px`,
                     animation: paused ? 'none' : `rotateHalo ${rotationSpeed}s linear infinite ${animationDirection}`,
                     willChange: 'transform'
                 }}
@@ -156,9 +172,9 @@ export const SkillHalo: React.FC<SkillHaloProps> = ({
                                         display: "flex",
                                         alignItems: "center",
                                         justifyContent: "center",
-                                        padding: "8px",
+                                        padding: `${8 * mobileScale}px`,
                                         boxShadow: '0 2px 8px rgba(0,0,0,0.3)',
-                                        border: '2px solid rgba(255,255,255,0.2)'
+                                        border: `${2 * mobileScale}px solid rgba(255,255,255,0.2)`
                                     }}
                                 >
                                     <img
@@ -186,9 +202,9 @@ export const SkillHalo: React.FC<SkillHaloProps> = ({
                     transform: "translate(-50%, -50%)",
                     backgroundColor: "rgba(0, 0, 0, 0.5)",
                     backdropFilter: "blur(20px)",
-                    borderRadius: "12px",
-                    border: "1px solid rgba(255, 255, 255, 0.1)",
-                    padding: "12px 16px",
+                    borderRadius: `${12 * mobileScale}px`,
+                    border: `${1 * mobileScale}px solid rgba(255, 255, 255, 0.1)`,
+                    padding: `${12 * mobileScale}px ${16 * mobileScale}px`,
                     textAlign: "center",
                     display: "flex",
                     alignItems: "center",

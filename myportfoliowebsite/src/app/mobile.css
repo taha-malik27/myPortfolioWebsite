@@ -386,6 +386,165 @@
         width: 85% !important;
         margin: 0 auto !important;
     }
+
+    /* ========== SKILLS PAGE MOBILE STYLES ========== */
+    
+    /* Skills Card - stack vertically on mobile */
+    .skills-card {
+        display: flex !important;
+        flex-direction: column !important;
+        grid-template-columns: none !important;
+        height: auto !important;
+        min-height: fit-content !important;
+        margin-top: 0 !important;
+        padding-right: 0 !important;
+        padding-bottom: 3rem !important;
+        gap: 2rem !important;
+    }
+
+    /* Text section - use display: contents to unwrap on mobile */
+    .skills-text-section {
+        display: contents !important;
+    }
+
+    /* Visual section - use display: contents to unwrap on mobile */
+    .skills-visual-section {
+        display: contents !important;
+    }
+
+    /* Hide desktop dial on mobile */
+    .skills-dial-wrapper {
+        display: none !important;
+    }
+
+    /* Show mobile buttons on mobile */
+    .skills-mobile-buttons-wrapper {
+        order: 3 !important;
+        width: 100% !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        padding: 1rem 0 !important;
+    }
+
+    /* Mobile Category Buttons Container */
+    .mobile-category-buttons {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 1rem !important;
+        width: 100% !important;
+        max-width: 300px !important;
+        padding: 0 1rem !important;
+    }
+
+    /* Mobile Category Button */
+    .mobile-category-button {
+        width: 100% !important;
+        padding: 1rem 1.5rem !important;
+        border: 2px solid !important;
+        border-radius: 12px !important;
+        font-family: 'Stack Sans Notch', sans-serif !important;
+        font-weight: 600 !important;
+        font-size: 1rem !important;
+        cursor: pointer !important;
+        transition: all 0.3s ease !important;
+        text-align: center !important;
+        box-sizing: border-box !important;
+    }
+
+    .mobile-category-button:hover {
+        transform: translateY(-2px) !important;
+        opacity: 0.9 !important;
+    }
+
+    .mobile-category-button:hover:not(.selected) {
+        background-color: rgba(var(--category-color-rgb, 255, 255, 255), 0.25) !important;
+    }
+
+    .mobile-category-button:active {
+        transform: translateY(0) !important;
+    }
+
+    .mobile-category-button.selected {
+        font-weight: 700 !important;
+    }
+
+    /* Header - order 1 (first) */
+    .skills-header {
+        order: 1 !important;
+        width: 100% !important;
+        text-align: center !important;
+        margin-bottom: 1rem !important;
+        padding: 0 1rem !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Excerpt - order 2 */
+    .skills-excerpt {
+        order: 2 !important;
+        width: 100% !important;
+        text-align: center !important;
+        margin-bottom: 1.5rem !important;
+        padding: 0 1rem !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Skills subcard wrapper - order 4 */
+    .skills-subcard-wrapper {
+        order: 4 !important;
+        width: 100% !important;
+        padding: 0 1rem !important;
+        box-sizing: border-box !important;
+        margin-top: 1rem !important;
+    }
+
+    /* Halo wrapper - order 5 (last), make bigger on mobile, remove all padding/margins */
+    .skills-halo-wrapper {
+        order: 5 !important;
+        width: 100% !important;
+        height: auto !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        margin-top: -4rem !important;
+        min-height: 500px !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    /* Remove all padding/margins from halo container */
+    .skills-halo-wrapper > div {
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 500px !important;
+        height: 500px !important;
+        min-width: 500px !important;
+        min-height: 500px !important;
+        max-width: 95vw !important;
+        max-height: 95vw !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    /* Make halo SVG bigger on mobile - override any viewport-based sizing */
+    .skills-halo-wrapper svg {
+        width: 500px !important;
+        height: 500px !important;
+        min-width: 500px !important;
+        min-height: 500px !important;
+        max-width: 95vw !important;
+        max-height: 95vw !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+}
+
+/* Hide mobile buttons on desktop */
+@media screen and (min-width: 769px) {
+    .skills-mobile-buttons-wrapper {
+        display: none !important;
+    }
 }
 
 /* Hide hamburger button on desktop */
