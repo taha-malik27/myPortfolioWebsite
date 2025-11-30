@@ -52,20 +52,20 @@ function HomePage() {
                         transition: 'opacity 0.3s ease-in, visibility 0s linear',
                         transitionDelay: isLoading ? '0s' : '0.3s',
                     }}>
-                      <div className= "fade-in" style={{position: "relative", zIndex: 1, marginTop:"3%", display:"grid", justifyContent: "center", justifyItems:"center", textAlign:"center"}}>
+                      <div className="fade-in home-content-wrapper" style={{position: "relative", zIndex: 1, marginTop:"3%", display:"grid", justifyContent: "center", justifyItems:"center", textAlign:"center"}}>
 
-                      <Image src={"/images/SynthSun.gif"} alt = "Sun" width={200} height={200} ></Image>
+                      <Image src={"/images/SynthSun.gif"} alt = "Sun" width={200} height={200} className="home-sun-image"></Image>
                       
-                      <div style={{backgroundColor:"white", height: "1.5px", width:"100%"}}></div>
+                      <div className="home-divider" style={{backgroundColor:"white", height: "1.5px", width:"100%"}}></div>
 
 
-                      <div style={{display:"grid", gridTemplateColumns: "1.15fr 1fr", backgroundColor:"transparent"}}>
+                      <div className="home-header-container" style={{display:"grid", gridTemplateColumns: "1.15fr 1fr", backgroundColor:"transparent"}}>
 
-                          <h1 style={{marginTop:"25px", marginBottom: "0", marginLeft:"0", marginRight:"0"}}>
+                          <h1 className="home-header-1" style={{marginTop:"25px", marginBottom: "0", marginLeft:"0", marginRight:"0"}}>
                               <HoverText text="Hey there!" className='header-styling' />
                           </h1>
                           
-                          <h1 style={{marginBottom:"-1.5px", paddingTop:"80px", margin: 0}}>
+                          <h1 className="home-header-2" style={{marginBottom:"-1.5px", paddingTop:"80px", margin: 0}}>
                               <HoverText text="I'm Taha!" className='header-styling' />
                           </h1>
 
@@ -95,6 +95,7 @@ function HomePage() {
                       <br/>
 
                       <div
+                        className="home-logo-container"
                         onMouseEnter={() => setHoveredItem("hovering")}
                         onMouseLeave={() => setHoveredItem(null)}
                         style={{position: "relative", width: "70px", height: "70px"}}
@@ -120,6 +121,7 @@ function HomePage() {
                           alt="TM" 
                           width={68} 
                           height={68}
+                          className="home-logo-colored"
                           style={{
                             position: "absolute", 
                             top: 0, 

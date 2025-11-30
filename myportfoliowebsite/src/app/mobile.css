@@ -158,7 +158,170 @@
         display: none !important;
     }
 
-    /* Desktop hamburger button should be hidden on desktop */
+    /* ========== HOME PAGE MOBILE STYLES ========== */
+    
+    /* Content container - ensure no horizontal overflow and proper scrolling */
+    /* Remove left padding on mobile, keep right padding for spacing */
+    /* Add styled scrollbar */
+    .content-container.gradient {
+        padding: 0.75rem 0.5rem 2rem 0 !important;
+        overflow-x: hidden !important;
+        overflow-y: scroll !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+
+    /* Apply styled scrollbar to content container on mobile */
+    .content-container.gradient {
+        scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+        scrollbar-width: thin;
+        -moz-scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+        -moz-scrollbar-width: thin;
+    }
+
+    .content-container.gradient::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .content-container.gradient::-webkit-scrollbar-track {
+        background: transparent;
+        -webkit-background: transparent;
+    }
+
+    .content-container.gradient::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.3);
+        -webkit-background: rgba(255, 255, 255, 0.3);
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+    }
+
+    .content-container.gradient::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.5);
+        -webkit-background: rgba(255, 255, 255, 0.5);
+    }
+
+    .content-container.gradient::-ms-scrollbar {
+        width: 8px;
+    }
+
+    .content-container.gradient::-ms-scrollbar-track {
+        background: transparent;
+    }
+
+    .content-container.gradient::-ms-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 10px;
+    }
+
+    .content-container.gradient::-ms-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.5);
+    }
+
+    /* Home content wrapper - ensure proper centering and no overflow */
+    .home-content-wrapper {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 1rem auto 2rem auto !important;
+        padding: 0 0.5rem !important;
+        padding-bottom: 2rem !important;
+        box-sizing: border-box !important;
+        overflow-x: hidden !important;
+        min-height: fit-content !important;
+    }
+
+    /* Sun image - smaller on mobile */
+    .home-sun-image {
+        width: 150px !important;
+        height: 150px !important;
+        max-width: 100% !important;
+    }
+
+    /* Divider line - ensure it doesn't overflow */
+    .home-divider {
+        max-width: 90% !important;
+        margin: 1rem auto !important;
+    }
+
+    /* Header container - stack vertically on mobile */
+    .home-header-container {
+        display: flex !important;
+        flex-direction: column !important;
+        grid-template-columns: none !important;
+        gap: 0.5rem !important;
+        width: 100% !important;
+        align-items: center !important;
+    }
+
+    /* Header text adjustments */
+    .home-header-1,
+    .home-header-2 {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        text-align: center !important;
+    }
+
+    .home-header-1 {
+        margin-top: 0.5rem !important;
+    }
+
+    .home-header-2 {
+        padding-top: 0 !important;
+        margin-bottom: 0.5rem !important;
+    }
+
+    /* Header styling - adjust font size for mobile */
+    .home-header-container .header-styling {
+        font-size: 2rem !important;
+        line-height: 1.2 !important;
+    }
+
+    /* Taglines and subheader - ensure no overflow */
+    /* Remove underline-slide effect on mobile */
+    .home-content-wrapper .interim-header-styling,
+    .home-content-wrapper .subheader-styling {
+        padding: 0 0.5rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Disable underline-slide hover effect on mobile */
+    .home-content-wrapper .interim-header-styling.underline-slide,
+    .home-content-wrapper .interim-header-styling.underline-slide:hover {
+        background-image: none !important;
+        background-size: 0 !important;
+    }
+
+    /* Contact button - ensure proper sizing */
+    .contact-me-button-container {
+        margin: 1rem auto !important;
+        max-width: 100% !important;
+    }
+
+    /* Logo container - disable hover effects on mobile */
+    /* Hide colored logo on mobile, only show white logo */
+    .home-logo-colored {
+        display: none !important;
+    }
+
+    .home-logo-container img {
+        opacity: 1 !important;
+        transition: none !important;
+    }
+
+    .home-logo-container:hover img,
+    .home-logo-container:active img {
+        opacity: 1 !important;
+    }
+
+    /* Disable hover text effects on mobile */
+    .home-header-container .header-styling span:hover {
+        color: inherit !important;
+        -webkit-text-stroke: none !important;
+        text-stroke: none !important;
+        transform: none !important;
+        filter: none !important;
+    }
 }
 
 /* Hide hamburger button on desktop */
