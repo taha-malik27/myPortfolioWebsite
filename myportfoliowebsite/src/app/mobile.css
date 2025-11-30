@@ -474,7 +474,7 @@
         order: 1 !important;
         width: 100% !important;
         text-align: center !important;
-        margin-bottom: 1rem !important;
+        margin-bottom: -1rem !important;
         padding: 0 1rem !important;
         box-sizing: border-box !important;
     }
@@ -484,7 +484,8 @@
         order: 2 !important;
         width: 100% !important;
         text-align: center !important;
-        margin-bottom: 1.5rem !important;
+        margin-bottom: -1rem !important;
+        margin-top: 0 !important;
         padding: 0 1rem !important;
         box-sizing: border-box !important;
     }
@@ -495,7 +496,7 @@
         width: 100% !important;
         padding: 0 1rem !important;
         box-sizing: border-box !important;
-        margin-top: 1rem !important;
+        margin-top: -0.75rem !important;
     }
 
     /* Halo wrapper - order 5 (last), make bigger on mobile, remove all padding/margins */
