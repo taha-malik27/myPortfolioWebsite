@@ -217,7 +217,7 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
     
     return (
         <div 
-            className="fade-in" 
+            className="fade-in work-card-container" 
             style={{
                 position: "relative",
                 zIndex: 1,
@@ -235,7 +235,7 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
             }}
         >
             {/* Left Section - Work Experience Details */}
-            <div className={isSmallViewport ? 'div-scroll' : ''} style={{
+            <div className={`work-left-section ${isSmallViewport ? 'div-scroll' : ''}`} style={{
                 // alignSelf: "center", 
                 paddingLeft: "10%",
                 paddingRight:"5%" ,
@@ -250,7 +250,7 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                 maxHeight: "100%"
             }}>
                 {/* Header - Matches other pages */}
-                <h1 style={{ 
+                <h1 className="work-header" style={{ 
                     margin: 0, 
                     marginTop: "2rem", 
                     marginBottom: "1rem",
@@ -260,7 +260,7 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                 </h1>
 
                 {/* Detailed Work Experience Card */}
-                <div style={{
+                <div className="work-details-card" style={{
                     flex: "1 1 0",
                     minHeight: "0",
                     width: "100%",
@@ -461,7 +461,7 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
             {/* Right Section - Visual Vertical Timeline */}
             {isSmallViewport ? (
                 // Small Viewport Version: Vertical Stack with Timeline Connections
-            <div className='div-scroll' style={{
+            <div className='div-scroll work-timeline-mobile' style={{
                     overflowY: "auto",
                     overflowX: "hidden",
                     height: "100%", 
@@ -481,7 +481,7 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                         const isLast = index === workExperiences.length - 1;
                         
                         return (
-                            <div key={experience.id} style={{
+                            <div key={experience.id} className="work-timeline-item-mobile" style={{
                                 position: "relative",
                                 marginBottom: isLast ? "0" : "1.6rem",
                                 display: "flex",
@@ -611,7 +611,7 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                 </div>
             ) : (
                 // Desktop Version: Three Column Timeline
-                <div className='div-scroll' style={{
+                <div className='div-scroll work-timeline-desktop' style={{
                     overflowY: "auto",
                     overflowX: viewportWidth < 600 ? "scroll" : "hidden",
                     height: "90%", 
