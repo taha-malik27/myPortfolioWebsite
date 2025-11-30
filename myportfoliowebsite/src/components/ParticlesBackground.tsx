@@ -90,8 +90,7 @@ function ParticlesBackground() {
           density: {
             enable: true,
           },
-          value: 20,
-          limit: 30,
+          value: 20
         },
         opacity: {
           value: { min: 0.1, max: 0.4 },
