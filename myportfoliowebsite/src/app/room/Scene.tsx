@@ -74,6 +74,35 @@ function Scene({ onHoverClickableChange, onPS5Click, controlMode }: { onHoverCli
 
     return (
         <group>
+            {/* SynthSun GIF - Background horizon element (always visible, never occluded) */}
+            <group renderOrder={-10}>
+                <Html
+                    transform
+                    center
+                    distanceFactor={25}
+                    position={[0, 9, -500]}
+                    rotation={[0, 0, 0]}
+                    style={{
+                        pointerEvents: 'none',
+                        userSelect: 'none',
+                        zIndex: -1000,
+                    }}
+                    zIndexRange={[-100, -1]}
+                    occlude={false}
+                >
+                    <img 
+                        src="/images/SynthSun.gif" 
+                        alt="Synthwave Sun" 
+                        style={{
+                            width: '2000px',
+                            height: 'auto',
+                            opacity: 1,
+                            
+                        }}
+                    />
+                </Html>
+            </group>
+
             {/* Floor */}
             {/* Rotation is X Y Z across axis in radians*/}
             <RigidBody type="fixed" colliders={false}>
