@@ -265,6 +265,7 @@ const ProjectImageGallery: React.FC<ProjectImageGalleryProps> = ({
             >
                 {/* Close Button */}
                 <button
+                    className="project-gallery-close-button"
                     onClick={(e) => {
                         e.stopPropagation();
                         closeFullscreen();
@@ -285,7 +286,10 @@ const ProjectImageGallery: React.FC<ProjectImageGalleryProps> = ({
                         alignItems: "center",
                         justifyContent: "center",
                         transition: "all 0.3s ease",
-                        zIndex: 10000
+                        zIndex: 10000,
+                        padding: 0,
+                        margin: 0,
+                        boxSizing: "border-box"
                     }}
                     onMouseEnter={(e) => {
                         e.currentTarget.style.backgroundColor = projectColor;
@@ -316,7 +320,7 @@ const ProjectImageGallery: React.FC<ProjectImageGalleryProps> = ({
                 >
                     {/* Description - Fixed at top center */}
                     {descriptions.length > 0 && (
-                        <div style={{
+                        <div className="project-gallery-description-fullscreen" style={{
                             position: "absolute",
                             top: "2rem",
                             left: "50%",

@@ -539,6 +539,127 @@
         padding: 0 !important;
         margin: 0 !important;
     }
+
+    /* ========== PROJECTS PAGE MOBILE STYLES ========== */
+    
+    /* Projects Card - stack vertically on mobile */
+    .projects-card {
+        display: flex !important;
+        flex-direction: column !important;
+        grid-template-columns: none !important;
+        height: auto !important;
+        min-height: fit-content !important;
+        margin-top: 0 !important;
+        padding-right: 0 !important;
+        padding-bottom: 2rem !important;
+        gap: 2rem !important;
+    }
+
+    /* Left section - horizontal scrollable project selection */
+    .projects-left-section {
+        order: 1 !important;
+        width: 100% !important;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+        padding-top: 1rem !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Projects header */
+    .projects-header {
+        text-align: center !important;
+        margin-top: 0 !important;
+        margin-bottom: 1rem !important;
+    }
+
+    /* Projects grid container - horizontal scroll on mobile */
+    .projects-grid-container {
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        max-height: none !important;
+        padding-right: 0 !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+
+    /* Projects grid - horizontal layout on mobile */
+    .projects-grid {
+        display: flex !important;
+        flex-direction: row !important;
+        grid-template-columns: none !important;
+        gap: 1rem !important;
+        padding: 0.5rem 0 !important;
+        width: max-content !important;
+    }
+
+    /* Project cards - fixed width for horizontal scroll */
+    .projects-grid .project-card {
+        min-width: 280px !important;
+        max-width: 280px !important;
+        width: 280px !important;
+        flex-shrink: 0 !important;
+    }
+
+    /* Spacer - hide on mobile */
+    .projects-spacer {
+        display: none !important;
+    }
+
+    /* Right section - project details, full width below */
+    .projects-right-section {
+        order: 2 !important;
+        width: 100% !important;
+        padding: 1rem !important;
+        padding-top: 1.5rem !important;
+        max-height: none !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Visual content section - reduce height on mobile */
+    .projects-visual-content {
+        min-height: 250px !important;
+        max-height: 350px !important;
+        height: 300px !important;
+        flex: 0 0 auto !important;
+        margin-bottom: 3rem !important;
+    }
+
+    /* Iframe container - constrain height on mobile without changing iframe */
+    .projects-iframe-container {
+        height: 100% !important;
+        max-height: 300px !important;
+        overflow: hidden !important;
+    }
+
+    /* Hide fullscreen button on mobile for MINDStream video */
+    .video-fullscreen-button {
+        display: none !important;
+    }
+
+    /* Project Image Gallery - Fix X button positioning and hitbox on mobile */
+    .project-gallery-close-button {
+        top: 1rem !important;
+        right: 1rem !important;
+        width: 44px !important;
+        height: 44px !important;
+        min-width: 44px !important;
+        min-height: 44px !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        pointer-events: auto !important;
+        touch-action: manipulation !important;
+    }
+
+    /* Ensure description doesn't overlap with close button on mobile */
+    .project-gallery-description-fullscreen {
+        top: 4rem !important;
+        width: calc(100vw - 6rem) !important;
+        max-width: calc(100vw - 6rem) !important;
+        padding: 0 3rem !important;
+        box-sizing: border-box !important;
+    }
 }
 
 /* Hide mobile buttons on desktop */

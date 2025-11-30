@@ -52,7 +52,7 @@ const projects: Project[] = [
         tagline: "Real-Time EEG Dashboard",
         tags: ["Python", "PyQt", "BrainFlow", "Signal Processing"],
         color: "#1887f5",
-        description: "MINDStream is an open source EEG dashboard for capturing and analyzing brain signals in real time. Built with PyQt, BrainFlow, and Matplotlib for 25+ researchers and students at MIND who need powerful signal analysis without expensive commercial software.\n\nFeatures & Impact:\n• Real-time visualization (raw signals, frequency spectra, power distributions)\n• Advanced filtering (band pass/stop, ICA for artifact removal)\n• GPU accelerated graphics via VisPy with multithreaded data collection\n• 2× experiment efficiency, 3× signal clarity improvement\n• Full recording and export for ML workflows\n• Small language model with RAG for EXG analysis\n\nCheck it out the GUI_Development directory in the repo!",
+        description: "MINDStream is an open source EEG dashboard for capturing and analyzing brain signals in real time. Built with PyQt, BrainFlow, and Matplotlib for 25+ researchers and students at MIND who need powerful signal analysis without expensive commercial software.\n\nNote: This is a Windows-only desktop application.\n\nFeatures & Impact:\n• Real-time visualization (raw signals, frequency spectra, power distributions)\n• Advanced filtering (band pass/stop, ICA for artifact removal)\n• GPU accelerated graphics via VisPy with multithreaded data collection\n• 2× experiment efficiency, 3× signal clarity improvement\n• Full recording and export for ML workflows\n• Small language model with RAG for EXG analysis\n\nCheck it out the GUI_Development directory in the repo!",
         roughWorkLink: "https://github.com/MINDUofC/MINDEEG",
         productLink: "https://drive.google.com/drive/folders/1_QRY28tUKmzTXfE40aNRZEaNSN1qlqPe?usp=sharing",
         period: "Apr 2025 - Sep 2025"
@@ -478,6 +478,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
                         
                         {/* Fullscreen Button */}
                         <button
+                            className="video-fullscreen-button"
                             onClick={toggleFullscreen}
                             style={{
                                 background: "transparent",
@@ -517,6 +518,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
         return (
             <div
                 ref={visualContainerRef}
+                className="projects-iframe-container"
                 style={{
                     width: "100%",
                     height: "100%",
@@ -642,7 +644,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
     
     return (
         <div 
-            className="fade-in div-scroll" 
+            className="fade-in div-scroll projects-card" 
             style={{
                 /* Positioning */
                 position: "relative",
@@ -670,7 +672,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
             }}
         >
             {/* Left Section - Project Cards Grid */}
-            <div style={{
+            <div className="projects-left-section" style={{
                 // alignSelf: "center", 
                 paddingLeft:"10%",
                 paddingRight: "5%",
@@ -678,18 +680,18 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
                 boxSizing: "border-box"
             }}>
                 {/* Header - Matches other pages */}
-                <h1 style={{margin: 0, marginTop: "2rem", marginBottom: "1rem"}}>
+                <h1 className="projects-header" style={{margin: 0, marginTop: "2rem", marginBottom: "1rem"}}>
                     <HoverText text="My Projects" className="header-styling" />
                 </h1>
 
                 {/* Scrollable Projects Grid */}
-                <div style={{
+                <div className="projects-grid-container" style={{
                     overflowY: "auto",
                     overflowX: "hidden",
                     maxHeight: "calc(100vh - 10rem)",
                     paddingRight: "0.5rem" // Space for scrollbar
                 }}>
-                    <div style={{
+                    <div className="projects-grid" style={{
                         display: "grid",
                         gridTemplateColumns: isOneColumn ? "1fr" : "1fr 1fr",
                         gap: "1.5rem",
@@ -787,11 +789,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
                 </div>
             </div>
 
-            <div></div>
+            <div className="projects-spacer"></div>
 
             {/* Right Section - Project Details */}
             <div 
                 key={displayedProject.id}
+                className="projects-right-section"
                 style={{
                     display: "flex",
                     flexDirection: "column",
@@ -973,6 +976,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
 
                  {/* Bottom Section - Visual Content */}
                 <div 
+                    className="projects-visual-content"
                     style={{
                         width: "100%",
                         flex: "1 1 auto",
