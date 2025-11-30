@@ -54,7 +54,7 @@ const ContactCard: React.FC<ContactCardProps> = ({ backgroundColor = "transparen
 
     return (
         <div 
-            className="fade-in div-scroll" 
+            className="fade-in div-scroll contact-card-container" 
             style={{
             /* Positioning */
             position: "relative",
@@ -83,7 +83,7 @@ const ContactCard: React.FC<ContactCardProps> = ({ backgroundColor = "transparen
 
 
             {/* Left Section - Contact Cards Socials*/}
-            <div style={{
+            <div className="contact-left-section" style={{
                 
                 paddingLeft:"10%",
                 paddingRight: "5%",
@@ -97,13 +97,13 @@ const ContactCard: React.FC<ContactCardProps> = ({ backgroundColor = "transparen
             }}>
 
                 {/* Header - Matches other pages */}
-                <h1 style={{margin: 0, marginTop: "2rem", marginBottom: "1rem", alignSelf:"start"}}>
+                <h1 className="contact-header" style={{margin: 0, marginTop: "2rem", marginBottom: "1rem", alignSelf:"start"}}>
                     <HoverText text="Contact Me!" className="header-styling" />
                 </h1>
 
 
                 {/* Sub Box for Socials - 3 rows: intro text, then 2x2 grid */}
-                <div style={{
+                <div className="contact-socials-section" style={{
                     width:"90%",
                     height:"50%",
                     display:"grid",
@@ -118,7 +118,7 @@ const ContactCard: React.FC<ContactCardProps> = ({ backgroundColor = "transparen
                 }}>
 
                     {/* Intro Text - Full Width Row */}
-                    <div  style={{
+                    <div className="contact-description" style={{
                         gridColumn: "1 / -1",
                         width: "100%",
                         marginBottom: "0.5rem",
@@ -139,7 +139,7 @@ const ContactCard: React.FC<ContactCardProps> = ({ backgroundColor = "transparen
                 </div>
 
                     {/* Email Icon */}
-                <div style={{
+                <div className="contact-gmail-icon" style={{
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "left",
@@ -192,7 +192,7 @@ const ContactCard: React.FC<ContactCardProps> = ({ backgroundColor = "transparen
                     </div>
 
                     {/* Email Text/Link */}
-                    <div style={{
+                    <div className="contact-gmail-text" style={{
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "flex-start",
@@ -253,7 +253,7 @@ const ContactCard: React.FC<ContactCardProps> = ({ backgroundColor = "transparen
                     </div>
 
                     {/* LinkedIn Icon */}
-                    <div style={{
+                    <div className="contact-linkedin-icon" style={{
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "left",
@@ -308,7 +308,7 @@ const ContactCard: React.FC<ContactCardProps> = ({ backgroundColor = "transparen
                     </div>
 
                     {/* LinkedIn Text/Link */}
-                    <div style={{
+                    <div className="contact-linkedin-text" style={{
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "flex-start",
@@ -373,7 +373,7 @@ const ContactCard: React.FC<ContactCardProps> = ({ backgroundColor = "transparen
                 </div>
 
                 {/* Resume Box - Single rectangle split 50/50 */}
-                <div style={{
+                <div className="contact-resume-section" style={{
                     marginTop:"5vh",
                     width: "85%",
                     height: "10%",
@@ -466,11 +466,11 @@ const ContactCard: React.FC<ContactCardProps> = ({ backgroundColor = "transparen
 
 
 
-            <div></div>
+            <div className="contact-spacer"></div>
 
 
             {/* Right Section - Contact Card Message Sender - Outer Container */}
-            <div style={{
+            <div className="contact-form-section" style={{
                 width:"100%",
                 height:"100%",
                 display:'flex',
