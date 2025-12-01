@@ -4,6 +4,7 @@ import { JSX, useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
 import RoomCanvas from "./RoomCanvas";
 import SideBarComponent from '@/components/cards/sideBar';
+import LoadingScreen from '@/components/LoadingScreen';
 
 const ROOM_ALERT_KEY = 'room-webgl-alert-accepted';
 
@@ -11,22 +12,34 @@ function Page(): JSX.Element | null {
     const router = useRouter();
     const [showAlert, setShowAlert] = useState<boolean>(false);
     const [alertAccepted, setAlertAccepted] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
         document.title = "Taha's Portfolio - My Room";
     }, []);
 
     useEffect(() => {
-        // Check if user has previously accepted the alert in this session
-        const accepted = sessionStorage.getItem(ROOM_ALERT_KEY) === 'true';
-        
-        if (accepted) {
-            // If they accepted before in this session, show the room immediately
-            setAlertAccepted(true);
-        } else {
-            // If not accepted, show the alert
-            setShowAlert(true);
-        }
+        // Show loading screen at the very start, then check sessionStorage
+        const timer = setTimeout(() => {
+            setIsLoading(false);
+            // After loading screen, check if user has previously accepted
+            const accepted = sessionStorage.getItem(ROOM_ALERT_KEY) === 'true';
+            
+            if (accepted) {
+                // If they accepted before, they're coming back - show loading screen again
+                setAlertAccepted(true);
+                setIsLoading(true);
+                // Hide loading screen after scene loads
+                setTimeout(() => {
+                    setIsLoading(false);
+                }, 2000);
+            } else {
+                // If not accepted, show the alert
+                setShowAlert(true);
+            }
+        }, 1200); // Show initial loading screen for 1.2 seconds
+
+        return () => clearTimeout(timer);
     }, []);
 
     const handleAccept = () => {
@@ -34,6 +47,8 @@ function Page(): JSX.Element | null {
         sessionStorage.setItem(ROOM_ALERT_KEY, 'true');
         setShowAlert(false);
         setAlertAccepted(true);
+        // Don't show loading screen when they accept - they're already here
+        setIsLoading(false);
     };
 
     const handleReject = () => {
@@ -68,6 +83,7 @@ function Page(): JSX.Element | null {
                     width: "100%",
                     position: "relative"
                 }}>
+                    <LoadingScreen isLoading={isLoading} />
                     <div style={{
                         backgroundColor: 'rgba(11, 2, 2, 0.95)',
                         padding: '2.5rem',
@@ -202,7 +218,7 @@ function Page(): JSX.Element | null {
 
     // Show room content only if alert was accepted
     if (!alertAccepted) {
-        // Still loading/checking - show sidebar with empty content
+        // Still loading/checking - show sidebar with loading screen
         return (
             <div
                 className="page-container"
@@ -217,7 +233,9 @@ function Page(): JSX.Element | null {
                 <div className="sidebar-container" style={{height: "100%" }}>
                     <SideBarComponent />
                 </div>
-                <div className="content-container gradient" style={{ width: '100%', height: '100%' }}></div>
+                <div className="content-container gradient" style={{ width: '100%', height: '100%', position: 'relative' }}>
+                    <LoadingScreen isLoading={isLoading} />
+                </div>
             </div>
         );
     }
@@ -239,8 +257,9 @@ function Page(): JSX.Element | null {
             </div>
 
             {/* Right side: 3D Room Canvas */}
-            <div className="content-container" style={{ backgroundColor: '#000000', width: '100%', height: '100%', overflow: 'hidden' }}>
+            <div className="content-container" style={{ backgroundColor: '#000000', width: '100%', height: '100%', overflow: 'hidden', position: 'relative' }}>
                 <RoomCanvas/>
+                <LoadingScreen isLoading={isLoading} />
             </div>
         </div>
     )
