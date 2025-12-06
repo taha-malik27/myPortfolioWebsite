@@ -127,7 +127,7 @@ const workExperiences: WorkExperience[] = [
         date: "Sept 2026 - Dec 2026",
         logo: "/images/work/DeloitteLogo.png",
         color: "#22c55e", // Deloitte green
-        whatIDid: "Will support financial statement audits, internal controls testing, and compliance reviews for clients across multiple industries. Super excited to get a feel of the professional finanical services industry!",
+        whatIDid: "Will support financial statement audits, internal controls testing, and compliance reviews for clients across multiple industries. Super excited to get a feel of the professional financial services industry!",
         impact: "Incoming role focused on building audit, assurance, and client service experience in a professional services environment.",
         technologies: [],
         skills: [
