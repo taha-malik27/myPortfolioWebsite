@@ -53,7 +53,7 @@ const workExperiences: WorkExperience[] = [
         id: "exp3",
         company: "Mechatronics Integration of Neural Dynamics (MIND)",
         role: "Co Founder and Co President",
-        date: "Feb 2024 - Present",
+        date: "Feb 2024 - December 2025",
         logo: "/images/work/MINDLogo.jpg",
         color: "#38bdf8", // Sky blue
         whatIDid: "Co founded and scaled a university neurotechnology design team by launching core finance and outreach systems. Recruited and structured interdisciplinary R and D teams across engineering and neuro streams. Led development of a BCI controlled RC car using brain signal acquisition and processing, including frequency filtering, independent component analysis, and threshold based classification in Python. Developed MINDStream, an open source EEG dashboard for real time brain signal capture and analysis using PyQt, BrainFlow, and Matplotlib. Implemented GPU accelerated graphics via VisPy with multithreaded data collection, advanced filtering including band pass/stop and ICA for artifact removal, real time visualization of raw signals and frequency spectra, and integrated a small language model with RAG for EXG analysis. Oversaw development of additional projects including MINDScope PCB board and a custom EEG headset.",

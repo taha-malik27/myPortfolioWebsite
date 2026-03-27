@@ -33,7 +33,7 @@ const projects: Project[] = [
         description: "ISolve is a side hustle with my friend Harris where we build custom websites for small businesses. It is not about millions yet, more about learning while picking up real client work. We use React.js and Tailwind CSS for responsive, mobile-first sites that actually convert.\n\nKey results:\n• 50% improvement in client retention through strategic UI design\n• 75% increase in online inquiries\n• 40% reduction in bounce rates\n\nEach project teaches us something new about performance tuning and what actually works in production.",
         roughWorkLink: "https://github.com/taha-malik27/ISolve",
         productLink: "https://isolve.info/",
-        period: "May 2025 - Present"
+        period: "May 2025 - September 2025"
     },
     {
         id: "portfolio",
