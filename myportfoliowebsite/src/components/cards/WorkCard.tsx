@@ -126,6 +126,30 @@ const workExperiences: WorkExperience[] = [
         location: "Calgary, AB, Canada"
     },
     {
+        id: "exp7",
+        company: "Data Science and Machine Learning Club (DSMLC)",
+        role: "Vice President of Internal",
+        date: "May 2026 - Present",
+        logo: "/images/work/DSMLCLogo.png",
+        color: "#facc15", // Yellow (same as first DSMLC)
+        whatIDid: "Rejoined the club after a year away on exchange and building MIND, this time leading the internal side of the organization. I oversee the marketing, events, and operations departments, set direction and strategy across them, and decide which projects the club takes on and how they get executed. The first big build under my tenure was an end to end data hub for all of the club's data logistics, covering attendance tracking, engagement and conversion across our different platforms, and the reporting that comes out of it, so decisions get made on real numbers instead of guesses. Right now I am putting together the most packed academic year the club has run.",
+        impact: "Gave the club a single place to see how it is actually performing, replacing scattered manual tracking with real attendance and platform conversion data. Currently targeting 15 to 20 events for the year, along with the most industry guests and the most sponsorships the club has ever brought in.",
+        technologies: [
+            "Data Pipelines",
+            "Analytics",
+            "Dashboarding"
+        ],
+        skills: [
+            "Leadership",
+            "Strategy",
+            "Team Management",
+            "Event Operations",
+            "Marketing",
+            "Sponsorship"
+        ],
+        location: "University of Calgary, Calgary, AB (Hybrid)"
+    },
+    {
         id: "exp6",
         company: "Deloitte",
         role: "Incoming Audit and Assurance Intern",
@@ -160,7 +184,7 @@ const workExperiences: WorkExperience[] = [
  *    - Slots 6-10 = right column (rows 0-4)
  *    - Slots 11+ = special slots for experiences beyond 10 (right column, row 5+)
  *    - Pattern alternates left/right: [left, right, left, right, ...]
- *    - Example for 7 experiences: [1, 7, 3, 9, 5, 12, 2] (add slot 2 for 7th)
+ *    - Example for 8 experiences: [1, 7, 3, 9, 5, 12, 13, 14] (add slot 14 for 8th)
  * 
  * 2. UPDATE getRowIndex() function:
  *    - Add special case for new slot if it's beyond slot 10
@@ -186,20 +210,21 @@ const workExperiences: WorkExperience[] = [
  *    - Uses: (rowIndex * (100 / workExperiences.length)) + (100 / workExperiences.length / 2)
  *    - Automatically adjusts for any number of experiences
  * 
- * CURRENT PATTERN FOR 6 EXPERIENCES:
+ * CURRENT PATTERN FOR 7 EXPERIENCES:
  * Row 0 (top):    Slot 1 (left)  - American Eagle
- * Row 1:          Slot 7 (right) - DSMLC
+ * Row 1:          Slot 7 (right) - DSMLC (VP Outreach)
  * Row 2:          Slot 3 (left)  - MIND
  * Row 3:          Slot 9 (right) - Ovintiv SDE
- * Row 4:          Slot 5 (left)  - Ovintiv SWE 
- * Row 5 (bottom): Slot 12 (right) - Deloitte
+ * Row 4:          Slot 5 (left)  - Ovintiv SWE
+ * Row 5:          Slot 12 (right) - DSMLC (VP Internal)
+ * Row 6 (bottom): Slot 13 (left) - Deloitte
  * ============================================================================
  */
 const getSlotForIndex = (index: number): number => {
     // Pattern: [left, right, left, right, left, right, ...]
     // Update this array when adding new experiences
-    // Add slot numbers that alternate between left (1-5) and right (6-10, or 11+)
-    const pattern = [1, 7, 3, 9, 5, 12];
+    // Add slot numbers that alternate between left (1-5, 13) and right (6-10, 12)
+    const pattern = [1, 7, 3, 9, 5, 12, 13];
     return pattern[index % pattern.length];
 };
 
@@ -274,11 +299,14 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
         // Add special slots for experiences beyond 10
         // UPDATE THIS when adding more experiences
         if (workExperiences.length > 5) {
-            slots.push({ slot: 12, experience: null }); // 6th experience
+            slots.push({ slot: 12, experience: null }); // 6th experience (right, row 5)
+        }
+        if (workExperiences.length > 6) {
+            slots.push({ slot: 13, experience: null }); // 7th experience (left, row 6)
         }
         // Add more slots here as needed:
-        // if (workExperiences.length > 6) {
-        //     slots.push({ slot: 13, experience: null }); // 7th experience
+        // if (workExperiences.length > 7) {
+        //     slots.push({ slot: 14, experience: null }); // 8th experience (right, row 7)
         // }
         
         // Place experiences into slots according to pattern
@@ -301,9 +329,9 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
 
     /**
      * Determines if a slot is in the left column
-     * Left column slots: 1-5 (rows 0-4)
+     * Left column slots: 1-5 (rows 0-4), and special slot 13 (row 6)
      */
-    const isLeftColumn = (slot: number) => slot >= 1 && slot <= 5;
+    const isLeftColumn = (slot: number) => (slot >= 1 && slot <= 5) || slot === 13;
     
     /**
      * Determines if a slot is in the right column
@@ -329,14 +357,16 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
      * - Slots 1-5 (left): rows 0-4
      * - Slots 6-10 (right): rows 0-4
      * - Slot 12 (right): row 5
+     * - Slot 13 (left): row 6
      */
     const getRowIndex = (slot: number) => {
         // Left column: slots 1-5 map directly to rows 0-4
         if (slot <= 5) return slot - 1;
         
-        // Special case for slot 12 (6th experience, row 5)
-        // ADD MORE SPECIAL CASES HERE for slots 11+ when adding more experiences
+        // Special cases for slots beyond the standard 1-10 grid
+        // ADD MORE SPECIAL CASES HERE when adding more experiences
         if (slot === 12) return 5;
+        if (slot === 13) return 6;
         
         // Right column standard slots: 6-10 map to rows 0-4
         return slot - 6;
@@ -805,6 +835,8 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                                 <div
                                     key={`left-${rowIndex}`}
                                     style={{
+                                        // Pinned so a column that skips a row still lines up with the timeline
+                                        gridRow: rowIndex + 1,
                                         display: "flex",
                                         alignItems: "center",
                                         justifyContent: "flex-end",
@@ -1024,6 +1056,8 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
                                 <div
                                     key={`right-${rowIndex}`}
                                     style={{
+                                        // Pinned so a column that skips a row still lines up with the timeline
+                                        gridRow: rowIndex + 1,
                                         display: "flex",
                                         alignItems: "center",
                                         justifyContent: "flex-start",
