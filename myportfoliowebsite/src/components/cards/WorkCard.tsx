@@ -550,7 +550,7 @@ const WorkCard: React.FC<WorkCardProps> = ({ backgroundColor = "transparent" }) 
 
                         {/* Technologies */}
                         {displayedExperience.technologies && displayedExperience.technologies.length > 0 && (
-            <div>
+                            <div style={{ marginBottom: "1.5rem" }}>
                                 <h3 style={{
                                     fontFamily: 'Stack Sans Notch, sans-serif',
                                     fontWeight: 600,
