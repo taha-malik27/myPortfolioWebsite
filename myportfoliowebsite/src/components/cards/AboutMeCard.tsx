@@ -12,19 +12,25 @@ const AboutMeCard: React.FC<AboutMeCardProps> = ({ backgroundColor = "transparen
     
     
     const images = [
-        '/images/TMHeadshot.JPG',
-        '/images/SnowHike.jpg',
-        '/images/FallHike.jpg',
-        '/images/SynthwaveAesthetic.png',
-        '/images/CyberpunkAesthetic.png',
-        '/images/KidMe.JPG'
+        '/images/about/TMHeadshot.JPG',
+        '/images/about/KualaLumpur.jpg',
+        '/images/about/SnowHike.jpg',
+        '/images/about/FallHike.jpg',
+        '/images/about/HaGiangLoop.jpg',
+        '/images/about/SynthwaveAesthetic.png',
+        '/images/about/GreatWallofChina.jpg',
+        '/images/about/CyberpunkAesthetic.png',
+        '/images/about/KidMe.JPG'
     ];
 
     const descriptions = [
         "Professional headshot",
+        "Chillin' in Kuala Lumpur",
         "Solo hiking in the mountains",
         "Pastoral fall hiking adventure",
+        "Ha Giang Loop, Vietnam",
         "Synthwave aesthetic vibes",
+        "Taking in the Great Wall of China",
         "Cyberpunk cityscape aesthetic",
         "Sneaky lil' childhood vibe check"
     ];
@@ -79,7 +85,11 @@ const AboutMeCard: React.FC<AboutMeCardProps> = ({ backgroundColor = "transparen
                 </p>
 
                 <p className='paragraph-styling'>
-                    I have always loved cyberpunk and futurewave worlds. Neon cities and experimental tech are a huge influence on me, and they are part of why I am heading to Singapore for my Winter 2026 exchange. I want to see how places like Singapore, China, and Japan shape their future through design and culture.
+                    I have always loved cyberpunk and futurewave worlds. Neon cities and experimental tech are a huge influence on me, and they are part of why I picked Singapore for my Winter 2026 exchange. That one is in the books now, and seeing how places like Singapore, China, and Japan actually build their future was very different from reading about it.
+                </p>
+
+                <p className='paragraph-styling'>
+                    The exchange also turned me into a proper traveler. I am at ten countries at 21 and already working on the next one, because every new place changes how I think about the one I came from.
                 </p>
 
                 <p className='paragraph-styling'>
@@ -118,7 +128,7 @@ const AboutMeCard: React.FC<AboutMeCardProps> = ({ backgroundColor = "transparen
                             🌆 Obsessed with cyberpunk, synthwave, and neon cities
                         </p>
                         <p className='paragraph-styling' style={{margin: 0}}>
-                            ✈️ Heading to Singapore for exchange, with China and Japan on the list
+                            ✈️ Ten countries at 21 after my Singapore exchange, and counting
                         </p>
                         <p className='paragraph-styling' style={{margin: 0}}>
                             🛠 Builds things that should not work but somehow do
