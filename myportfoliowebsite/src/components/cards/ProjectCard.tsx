@@ -25,6 +25,16 @@ interface Project {
 // Real project data - ordered from most recent to oldest
 const projects: Project[] = [
     {
+        id: "quantarc",
+        title: "QuantArc",
+        tagline: "Desktop Personal Finance Dashboard",
+        tags: ["Electron", "React.js", "Python","FastAPI", "Azure SQL", "Plaid", "OpenBB", "Alpha Vantage"],
+        color: "#4ade80",
+        description: "QuantArc is a Windows desktop app that pulls your whole financial picture into one place. Link your bank, credit, and brokerage accounts through Plaid, then research the market and read the news moving it without ever leaving the app. It is an Electron and React front end talking to a local Python FastAPI backend on Azure SQL.\n\nThe parts I am most proud of:\n• Backup-first dashboard: the portfolio always reads from the last successful snapshot, so a failed account pull never wipes good data off your screen\n• Markets research desk with TradingView-style charts, asset-class-aware search, and side-by-side comparison of up to 5 tickers\n• News Signal Desk: topic pulse, 6-month sentiment trends, earnings transcripts, and the insider trading tape\n• Rules-based snapshot score across momentum, profitability, health, and valuation\n• Optional AI company summaries that quietly fall back to a deterministic version when there is no API key\n• Live USD/CAD conversion applied across every money metric\n\nUnder the hood: JWT and Google sign-in, AES-GCM encrypted Plaid tokens, per-route rate limits, and a provider adapter layer over Plaid, OpenBB, and Alpha Vantage so swapping a data vendor is a config change instead of a rewrite.\n\nFavourite lesson learned: Electron and Google OAuth refuse to cooperate over file://, so the packaged app serves its UI from a real localhost origin instead.",
+        roughWorkLink: "https://github.com/taha-malik27/QuantArc",
+        period: "May 2026 - July 2026"
+    },
+    {
         id: "isolve",
         title: "ISolve",
         tagline: "Web Development Sidehustle",
@@ -44,7 +54,7 @@ const projects: Project[] = [
         description: "This portfolio is where I went all in on creating something that stands out. The centerpiece is a fully interactive 3D room you can explore with orbit or first-person controls. Built with React Three Fiber, Three.js, and physics simulation using Rapier. Beyond the 3D experience, I built custom interactive components like the rotating skill halo, Venn diagram selector, and particle backgrounds. Runs on Next.js 16 with TypeScript and Tailwind CSS v4, fully responsive. A playground for 3D graphics programming and modern web dev wrapped in a cyberpunk synthwave aesthetic.",
         roughWorkLink: "https://github.com/taha-malik27/myPortfolioWebsite",
         productLink: typeof window !== 'undefined' ? window.location.origin : 'https://your-portfolio.com',
-        period: "Nov 2024 - Present"
+        period: "Forever Ongoing!"
     },
     {
         id: "mindstream",
@@ -81,6 +91,12 @@ const projects: Project[] = [
     }
     
 ];
+
+// Demo videos by project id - projects listed here render the video player
+const projectVideos: Record<string, string> = {
+    quantarc: "/images/projects/QuantArcDemo.mp4",
+    mindstream: "/images/projects/MINDStreamDemo.mp4"
+};
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparent" }) => {
     const [selectedProject, setSelectedProject] = useState<Project>(projects[0]);
@@ -283,7 +299,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
     
     // Check if current project should show video
     const shouldShowVideo = (projectId: string) => {
-        return projectId === "mindstream";
+        return projectId in projectVideos;
     };
     
     // Check if current project should show image gallery
@@ -397,7 +413,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
         };
     }, [selectedProject.id]);
     
-    // Render video player for MINDStream
+    // Render demo video player for projects listed in projectVideos
     const renderVideo = () => {
         return (
             <div
@@ -418,11 +434,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ backgroundColor = "transparen
                 }}
             >
                 <video
+                    key={displayedProject.id}
                     ref={videoRef}
-                    src="/images/projects/MINDStreamDemo.mp4"
+                    src={projectVideos[displayedProject.id]}
                     loop
                     muted
                     playsInline
+                    preload="metadata"
                     style={{
                         width: "100%",
                         height: "100%",

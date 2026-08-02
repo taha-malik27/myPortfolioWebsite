@@ -79,7 +79,7 @@ const workExperiences: WorkExperience[] = [
     {
         id: "exp4",
         company: "Ovintiv",
-        role: "Software Engineering Intern",
+        role: "Software Development Intern",
         date: "May 2025 - Dec 2025",
         logo: "/images/work/OvintivLogo.png",
         color: "#ea580c", // Deep orange
@@ -105,18 +105,23 @@ const workExperiences: WorkExperience[] = [
     {
         id: "exp5",
         company: "Ovintiv",
-        role: "Incoming Data Engineering Intern",
+        role: "Software Engineering Intern",
         date: "May 2026 - Aug 2026",
         logo: "/images/work/OvintivLogo.png",
         color: "#ea580c", // Deep orange (same as first Ovintiv)
-        whatIDid: "Will contribute to a larger data infrastructure initiative focused on building secure and reliable data pipelines using Databricks and Dagster, while supporting the migration of data systems to Azure cloud. Working as part of a team to help centralize data sources, enabling improved data sourcing for company operators who rely on data science and analytics for operational decision making.",
-        impact: "Incoming role focused on supporting strategic data centralization goals that will enhance data accessibility and reliability across the organization.",
+        whatIDid: "Given full freedom to architect my own software solution end to end, and built a platform that lets engineers create, manage, compare, predict, and forecast projected ultimate well costs across the company. Brought together raw data and machine learning models from across the organization, including regression tested variables, well data, and SMS and material data, to generate month over month ultimate cost predictions for every well as variables change over time. Built with Oracle databases, R and R Shiny, and JavaScript. Designed the application architecture, database schema, authentication, and external integrations myself, along with a custom equation editor that works like a lean version of an Excel formula engine. Detailed projection tooling lets engineers adjust assumptions under different scenarios, and results are exported and saved into other internal applications across the company.",
+        impact: "Delivered a fully self architected forecasting platform that became a shared source of projected ultimate cost data for engineering teams, feeding predictions into other internal applications and replacing manual, spreadsheet driven cost projection work with scenario based forecasting. Saves 8 to 11 hours of employee work for every outlook produced on a set of wells. Improved data accuracy and confidence by centralizing everything into a single source of truth that always pulls the latest data, which keeps SMS, engineering and operations, and scheduling teams aligned on the same numbers. Highly flexible projection and comparison tooling also made decision making faster and better informed.",
         technologies: [
-            "Databricks",
-            "Dagster",
-            "Azure Cloud",
-            "Data Pipelines",
-            "Python"
+            "R",
+            "R Shiny",
+            "JavaScript",
+            "Oracle",
+            "SQL",
+            "Regression Modeling",
+            "Software Architecture",
+            "Database Design",
+            "Authentication",
+            "API Integrations"
         ],
         location: "Calgary, AB, Canada"
     },
@@ -185,8 +190,8 @@ const workExperiences: WorkExperience[] = [
  * Row 0 (top):    Slot 1 (left)  - American Eagle
  * Row 1:          Slot 7 (right) - DSMLC
  * Row 2:          Slot 3 (left)  - MIND
- * Row 3:          Slot 9 (right) - Ovintiv SWE
- * Row 4:          Slot 5 (left)  - Ovintiv Data Eng
+ * Row 3:          Slot 9 (right) - Ovintiv SDE
+ * Row 4:          Slot 5 (left)  - Ovintiv SWE 
  * Row 5 (bottom): Slot 12 (right) - Deloitte
  * ============================================================================
  */
