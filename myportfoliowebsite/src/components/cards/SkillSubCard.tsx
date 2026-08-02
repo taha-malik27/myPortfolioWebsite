@@ -1,7 +1,7 @@
 "use client"
 
 import React from 'react';
-import { SkillCategory } from '@/data/skillsData';
+import { SkillCategory, getSkillYearsOffset, getDisplayYears } from '@/data/skillsData';
 import { getCategoryColor } from '@/utils/categoryColors';
 
 interface SkillSubCardProps {
@@ -10,6 +10,7 @@ interface SkillSubCardProps {
 
 export const SkillSubCard: React.FC<SkillSubCardProps> = ({ category }) => {
     const [isVisible, setIsVisible] = React.useState(false);
+    const [yearsOffset, setYearsOffset] = React.useState(0);
 
     // Trigger animation on mount or category change
     React.useEffect(() => {
@@ -18,8 +19,15 @@ export const SkillSubCard: React.FC<SkillSubCardProps> = ({ category }) => {
         return () => clearTimeout(timer);
     }, [category.id]);
 
+    // Resolved after mount so a stale prerender can still age without a rebuild
+    React.useEffect(() => {
+        setYearsOffset(getSkillYearsOffset());
+    }, []);
+
     // Find max years for scaling the bars
-    const maxYears = Math.max(...category.skills.map(skill => skill.years));
+    const maxYears = Math.max(
+        ...category.skills.map(skill => getDisplayYears(skill, yearsOffset, category.autoAge))
+    );
     
     // Get the appropriate color for this category
     const titleColor = getCategoryColor(category.title);
@@ -70,7 +78,8 @@ export const SkillSubCard: React.FC<SkillSubCardProps> = ({ category }) => {
 
             <div style={{ display: "flex", flexDirection: "column", gap: "0.9rem" }}>
                 {category.skills.map((skill, index) => {
-                    const percentage = (skill.years / maxYears) * 100;
+                    const years = getDisplayYears(skill, yearsOffset, category.autoAge);
+                    const percentage = (years / maxYears) * 100;
                     
                     return (
                         <div key={index} style={{ position: "relative" }}>
@@ -114,7 +123,7 @@ export const SkillSubCard: React.FC<SkillSubCardProps> = ({ category }) => {
                                     whiteSpace: "nowrap",
                                     flex: "0 0 auto"
                                 }}>
-                                    {skill.years} {skill.years === 1 ? 'year' : 'years'}
+                                    {years} {years === 1 ? 'year' : 'years'}
                                 </span>
                             </div>
 
