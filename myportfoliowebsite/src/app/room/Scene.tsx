@@ -7,7 +7,7 @@ import {BedModel, ChairModel, CouchModel, LampModel, TableModel,
     ClosetModel, DrawerModel, CoffeeTableModel, TVModel, ControllerAndHeadphonesModel,
     CeilingLightsModel, TVStandModel, ClockModel, WallArtModel1, WallArtModel2, WallArtModel3,
     PlayStationModel, LaptopModel, TrashCanModel, WallPieceModel} from "./Models";
-import SnakeGame from "@/components/games/SnakeGame";
+import SnakeTvScreen from "@/app/room/SnakeTvScreen";
 
 
 
@@ -298,60 +298,8 @@ function Scene({ onHoverClickableChange, onPS5Click, controlMode }: { onHoverCli
                 </mesh>
             </RigidBody>
 
-            {/* Test Box with Snake Game - Only visible in snake game mode */}
             {controlMode === "snakeGame" && (
-                <group position={[7, 3.5, -0.25]} rotation = {[0,Math.PI/2,0]}>
-                    {/* Anchor box for reference, will be invisible */}
-                    <mesh castShadow receiveShadow>
-                        <boxGeometry args={[2, 2, 0.1]} />
-                        <meshStandardMaterial color="#333" transparent opacity={0}/>
-                    </mesh>
-                    
-
-
-                    {/* Snake Game HTML Component */}
-                    <Html
-                        transform
-                        center
-                        distanceFactor={1}
-                        position={[0.4, 0.22, 0.06]}
-                        rotation={[-0.3,Math.PI,0]}
-                        style={{
-                            pointerEvents: 'auto',
-                        }}
-                    >
-                        <SnakeGame
-                            showTitle={false}
-                            showInstructions={false}
-                            enableKeyboard={controlMode === "snakeGame"}
-                            width="571px"
-                            containerStyle={{
-                                minHeight: 'auto',
-                                padding: '10px',
-                                backgroundColor: 'rgba(10, 10, 10, 0.95)',
-                            }}
-                        />
-                    </Html>
-
-                    <Html
-                        transform
-                        center
-                        distanceFactor={1}
-                        position={[0.42, 0.23,0.06]}
-                        rotation={[-0.2,Math.PI,0]}
-                        style={{
-                            pointerEvents: 'auto',
-                            width: '1120px',
-                            height: '630px',
-                            backgroundColor: 'black',
-                        }}
-                        
-                    >
-                       
-                    </Html>
-
-
-                </group>
+                <SnakeTvScreen enabled={controlMode === "snakeGame"} />
             )}
 
         </group>
