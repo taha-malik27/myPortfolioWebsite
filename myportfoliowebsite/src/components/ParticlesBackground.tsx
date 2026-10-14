@@ -6,7 +6,7 @@ import { type Container, type ISourceOptions } from "@tsparticles/engine";
 import { loadSlim } from "@tsparticles/slim";
 import React from "react";
 
-function ParticlesBackground() {
+function ParticlesBackground({ style }: { style?: React.CSSProperties }) {
   const [init, setInit] = useState(false);
 
   useEffect(() => {
@@ -90,7 +90,7 @@ function ParticlesBackground() {
           density: {
             enable: true,
           },
-          value: 20
+          value: 10
         },
         opacity: {
           value: { min: 0.1, max: 0.4 },
@@ -132,6 +132,7 @@ function ParticlesBackground() {
           width: "100%",
           height: "100%",
           zIndex: 0,
+          ...style,
         }}
       />
     );

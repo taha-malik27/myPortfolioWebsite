@@ -32,7 +32,7 @@ export const metadata: Metadata = {
 export default function RootLayout({children}: {children:React.ReactNode}){
 
     return (
-        <html lang="en" suppressHydrationWarning className="gradient" style={{margin: 0, padding: 0, height: "100%"}}>
+        <html lang="en" suppressHydrationWarning className="gradient" style={{margin: 0, padding: 0, height: "100%", minHeight: "100dvh"}}>
             <head>
                 {/* Manifest link - critical for mobile browsers (especially Chrome) */}
                 <link rel="manifest" href="/site.webmanifest" />
@@ -42,9 +42,9 @@ export default function RootLayout({children}: {children:React.ReactNode}){
                 {/* Font preconnects */}
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-                <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Stack+Sans+Notch:wght@200..700&display=swap" rel="stylesheet"/>
+                <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Satisfy&family=Stack+Sans+Notch:wght@200..700&display=swap" rel="stylesheet"/>
             </head>
-            <body suppressHydrationWarning style={{margin: 0, padding: 0, height: "100%", overflow: "hidden"}}>
+            <body suppressHydrationWarning style={{margin: 0, padding: 0, height: "100%", minHeight: "100dvh", overflow: "hidden", backgroundColor: "#070406"}}>
                 {children}
             </body>
         </html>

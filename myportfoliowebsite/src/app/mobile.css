@@ -1,14 +1,18 @@
-/* Mobile-specific styles - applies only to mobile devices */
-/* Media query targets mobile devices (phones and small tablets) */
+/* Mobile-specific styles - phones, small tablets, and phone landscape
+   (iPhone 16 landscape is 852x393, which is wider than 768px) */
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 768px),
+       screen and (orientation: landscape) and (max-height: 540px) and (max-width: 960px) {
     /* Page Layout - Change from side-by-side to stacked on mobile */
     .page-container {
         display: flex !important;
         flex-direction: column !important;
         grid-template-columns: none !important;
         height: 100vh !important;
+        height: 100dvh !important;
+        max-height: 100dvh !important;
         width: 100vw !important;
+        min-height: 0 !important;
     }
 
     .sidebar-container {
@@ -313,6 +317,10 @@
     .contact-me-button-container {
         margin: 1rem auto !important;
         max-width: 100% !important;
+    }
+
+    .home-city .contact-me-button-container {
+        margin: 0 !important;
     }
 
     /* Logo container - disable hover effects on mobile */
@@ -938,14 +946,14 @@
 }
 
 /* Hide mobile buttons on desktop */
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 769px) and (min-height: 541px) {
     .skills-mobile-buttons-wrapper {
         display: none !important;
     }
 }
 
 /* Hide hamburger button on desktop */
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 769px) and (min-height: 541px) {
     .hamburger-button {
         display: none !important;
     }
@@ -967,8 +975,19 @@
     }
 }
 
+@media screen and (orientation: landscape) and (max-height: 540px) and (max-width: 960px) {
+    .sidebar {
+        padding: 0.2rem 0.9rem !important;
+    }
+
+    .sidebar .sidebar-logo {
+        height: 32px !important;
+    }
+}
+
 /* ========== LOADING SCREEN MOBILE STYLES ========== */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 768px),
+       screen and (orientation: landscape) and (max-height: 540px) and (max-width: 960px) {
     /* Loading screen container - ensure proper centering on mobile */
     .loading-screen-container {
         display: flex !important;
@@ -997,6 +1016,24 @@
         max-width: 100px !important;
         max-height: 100px !important;
         object-fit: contain !important;
+    }
+
+    /* Homepage city fills the leftover viewport; the sign scrolls inside the panel if needed */
+    .content-container.gradient.home-city {
+        padding: 0 !important;
+        flex: 1 1 0 !important;
+        min-height: 0 !important;
+        position: relative !important;
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+
+    .home-city-stage {
+        position: absolute !important;
+        inset: 0 !important;
+        min-height: 0 !important;
+        height: auto !important;
     }
 }
 

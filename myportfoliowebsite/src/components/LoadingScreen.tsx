@@ -1,6 +1,6 @@
 "use client"
 
-import React, {JSX} from 'react';
+import React, {JSX, useEffect, useState} from 'react';
 import Image from 'next/image';
 
 interface LoadingScreenProps {
@@ -8,7 +8,19 @@ interface LoadingScreenProps {
 }
 
 export default function LoadingScreen({ isLoading }: LoadingScreenProps):JSX.Element|null {
-  if (!isLoading) return null;
+  const [mounted, setMounted] = useState(true);
+
+  useEffect(() => {
+    if (isLoading) {
+      setMounted(true);
+      return;
+    }
+
+    const timer = window.setTimeout(() => setMounted(false), 300);
+    return () => window.clearTimeout(timer);
+  }, [isLoading]);
+
+  if (!mounted) return null;
 
   return (
     <div
@@ -19,18 +31,18 @@ export default function LoadingScreen({ isLoading }: LoadingScreenProps):JSX.Ele
         left: 0,
         width: '100%',
         height: '100%',
-        backgroundColor: 'transparent', // Transparent so gradient and particles show through
+        backgroundColor: 'transparent',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        zIndex: 10, // Above particles and gradient, below nothing
-        animation: 'fadeOut 0.3s ease-out forwards',
-        animationDelay: '0.9s', // Start fade at 0.9s so it completes by 1.2s
-        pointerEvents: 'none', // Allow interactions to pass through
+        zIndex: 10,
+        opacity: isLoading ? 1 : 0,
+        transition: 'opacity 0.3s ease-out',
+        pointerEvents: 'none',
       }}
     >
       <div className="loading-screen-icon-wrapper" style={{
-        animation: 'fadeIn 0.4s ease-in forwards',
+        animation: 'loaderFadeIn 0.4s ease-out forwards',
       }}>
         <Image 
           src="/images/SynthSun.gif" 
@@ -42,20 +54,12 @@ export default function LoadingScreen({ isLoading }: LoadingScreenProps):JSX.Ele
         />
       </div>
       <style jsx>{`
-        @keyframes fadeIn {
+        @keyframes loaderFadeIn {
           from {
             opacity: 0;
           }
           to {
             opacity: 1;
-          }
-        }
-        @keyframes fadeOut {
-          from {
-            opacity: 1;
-          }
-          to {
-            opacity: 0;
           }
         }
       `}</style>
