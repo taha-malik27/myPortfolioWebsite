@@ -22,32 +22,100 @@ interface WorkExperience {
     location?: string;
 }
 
-// Work experiences - ordered from earliest (top) to latest (bottom)
+// Work experiences - ordered from latest (top) to earliest (bottom)
 const workExperiences: WorkExperience[] = [
     {
-        id: "exp1",
-        company: "American Eagle Outfitters",
-        role: "Sales Ambassador",
-        date: "May 2023 - Sept 2025",
-        logo: "/images/work/AEOLogo.png",
-        color: "#ffffff", // White
-        whatIDid: "Optimized weekly stock organization and floor sets to improve product visibility and streamline inventory workflows. Assisted roughly 30 to 60 customers per shift, delivered strong customer service, and handled 40 to 80 transactions per shift with consistent accuracy. Maintained professionalism during high tension situations and helped de escalate conflicts to keep store operations smooth.",
-        impact: "Improved purchase conversions and reduced inventory processing time by about 10 percent. Supported strong customer satisfaction through high volume service and reliable checkout accuracy.",
+        id: "exp6",
+        company: "Deloitte",
+        role: "Audit and Assurance Intern",
+        date: "Sept 2026 - Dec 2026",
+        logo: "/images/work/DeloitteLogo.png",
+        color: "#22c55e", // Deloitte green
+        whatIDid: "Support financial statement audits for energy, private equity, and automotive clients, covering both public companies and private companies. Day to day work is substantive testing, internal control testing, confirmations, and audit documentation, plus advising clients on what the testing actually means for their numbers and controls. That includes walking through key processes, picking samples, tying evidence back to the statements, and keeping workpapers clear enough for review. Also join client conversations on findings, open items, and what needs to be cleaned up before sign off.",
+        impact: "Help engagement teams move public and private audits forward across energy, private equity, and automotive. Testing, confirmations, and documentation give the file the evidence it needs, and client advising turns findings into practical next steps instead of open questions sitting in the workpapers.",
         technologies: [],
-        skills: ["Customer Service", "Inventory Management", "Conflict Resolution", "Transaction Processing", "Retail Operations"],
-        location: "Calgary, AB, Canada (On site)"
+        skills: [
+            "Substantive Testing",
+            "Internal Controls Testing",
+            "Confirmations",
+            "Audit Documentation",
+            "Client Advising",
+            "Public and Private Audits"
+        ],
+        location: "Calgary, AB, Canada"
     },
     {
-        id: "exp2",
+        id: "exp7",
         company: "Data Science and Machine Learning Club (DSMLC)",
-        role: "Vice President of Outreach (previously Junior VP of Marketing)",
-        date: "Nov 2023 - Apr 2025",
+        role: "Vice President of Internal",
+        date: "May 2026 - Present",
         logo: "/images/work/DSMLCLogo.png",
         color: "#facc15", // Yellow
-        whatIDid: "Managed club finances, sponsorships, and external partnerships. Built relationships with 30 plus industry professionals and coordinated sponsorship outreach. Organized the club's largest event for student industry networking and showcases. Delivered workshops on SciPy, NumPy, and data visualization. Ran LinkedIn and Instagram campaigns to increase reach and engagement.",
-        impact: "Secured about 5,500 dollars in sponsorships. Produced the club's largest event with 150 plus attendees and 20 plus company participants. Strengthened technical skills for 40 plus students through workshops and expanded campus awareness.",
-        technologies: ["Python", "SciPy", "NumPy", "Power BI"],
+        whatIDid: "Rejoined the club after a year away on exchange and building MIND, this time leading the internal side of the organization. I oversee the marketing, events, and operations departments, set direction and strategy across them, and decide which projects the club takes on and how they get executed. The first big build under my tenure was an end to end data hub for all of the club's data logistics, covering attendance tracking, engagement and conversion across our different platforms, and the reporting that comes out of it, so decisions get made on real numbers instead of guesses. Right now I am putting together the most packed academic year the club has run.",
+        impact: "Gave the club a single place to see how it is actually performing, replacing scattered manual tracking with real attendance and platform conversion data. Currently targeting 15 to 20 events for the year, along with the most industry guests and the most sponsorships the club has ever brought in.",
+        technologies: [
+            "Data Pipelines",
+            "Analytics",
+            "Dashboarding"
+        ],
+        skills: [
+            "Leadership",
+            "Strategy",
+            "Team Management",
+            "Event Operations",
+            "Marketing",
+            "Sponsorship"
+        ],
         location: "University of Calgary, Calgary, AB (Hybrid)"
+    },
+    {
+        id: "exp5",
+        company: "Ovintiv",
+        role: "Software Engineering Intern",
+        date: "May 2026 - Aug 2026",
+        logo: "/images/work/OvintivLogo.png",
+        color: "#ea580c", // Deep orange
+        whatIDid: "Given full freedom to architect my own software solution end to end, and built a platform that lets engineers create, manage, compare, predict, and forecast projected ultimate well costs across the company. Brought together raw data and machine learning models from across the organization, including regression tested variables, well data, and SMS and material data, to generate month over month ultimate cost predictions for every well as variables change over time. Built with Oracle databases, R and R Shiny, and JavaScript. Designed the application architecture, database schema, authentication, and external integrations myself, along with a custom equation editor that works like a lean version of an Excel formula engine. Detailed projection tooling lets engineers adjust assumptions under different scenarios, and results are exported and saved into other internal applications across the company.",
+        impact: "Delivered a fully self architected forecasting platform that became a shared source of projected ultimate cost data for engineering teams, feeding predictions into other internal applications and replacing manual, spreadsheet driven cost projection work with scenario based forecasting. Saves 8 to 11 hours of employee work for every outlook produced on a set of wells. Improved data accuracy and confidence by centralizing everything into a single source of truth that always pulls the latest data, which keeps SMS, engineering and operations, and scheduling teams aligned on the same numbers. Highly flexible projection and comparison tooling also made decision making faster and better informed.",
+        technologies: [
+            "R",
+            "R Shiny",
+            "JavaScript",
+            "Oracle",
+            "SQL",
+            "Regression Modeling",
+            "Software Architecture",
+            "Database Design",
+            "Authentication",
+            "API Integrations"
+        ],
+        location: "Calgary, AB, Canada"
+    },
+    {
+        id: "exp4",
+        company: "Ovintiv",
+        role: "Software Development Student",
+        date: "May 2025 - Dec 2025",
+        logo: "/images/work/OvintivLogo.png",
+        color: "#ea580c", // Deep orange (same as other Ovintiv)
+        whatIDid: "Developed and deployed an Emergency Response Plan app using ReactJS, Python, and Flask, with automated CI and CD through Azure DevOps. Built security access provisioning automations by integrating ServiceNow with Python services hosted on Azure App Services, secured via Azure Key Vault and connected to Oracle databases. Improved risk assessment workflows through permission logic, UI enhancements, and standardized deployment versioning. Led cloud migration work from Oracle to Azure SQL, refactoring SQL logic, updating configurations, and coordinating pre deployment testing and VM transitions. Delivered a mobile Emergency Response Plan experience in Microsoft Power Apps with offline access support.",
+        impact: "Cut incident reporting time by 35 percent and improved emergency response for 100 plus field employees. Reduced access provisioning time by 40 percent and accelerated software provisioning by about 80 percent for multiple teams. Earned an internship extension from 4 months to 8 months based on performance and project needs.",
+        technologies: [
+            "ReactJS",
+            "Python",
+            "Flask",
+            "Azure DevOps",
+            "ServiceNow",
+            "Azure App Services",
+            "Azure Key Vault",
+            "Oracle",
+            "Azure SQL",
+            "Angular",
+            ".NET",
+            "Power Apps",
+            "SQL"
+        ],
+        location: "Calgary, AB, Canada (On site)"
     },
     {
         id: "exp3",
@@ -77,96 +145,29 @@ const workExperiences: WorkExperience[] = [
         location: "University of Calgary, Calgary, AB (Hybrid)"
     },
     {
-        id: "exp4",
-        company: "Ovintiv",
-        role: "Software Development Intern",
-        date: "May 2025 - Dec 2025",
-        logo: "/images/work/OvintivLogo.png",
-        color: "#ea580c", // Deep orange
-        whatIDid: "Developed and deployed an Emergency Response Plan app using ReactJS, Python, and Flask, with automated CI and CD through Azure DevOps. Built security access provisioning automations by integrating ServiceNow with Python services hosted on Azure App Services, secured via Azure Key Vault and connected to Oracle databases. Improved risk assessment workflows through permission logic, UI enhancements, and standardized deployment versioning. Led cloud migration work from Oracle to Azure SQL, refactoring SQL logic, updating configurations, and coordinating pre deployment testing and VM transitions. Delivered a mobile Emergency Response Plan experience in Microsoft Power Apps with offline access support.",
-        impact: "Cut incident reporting time by 35 percent and improved emergency response for 100 plus field employees. Reduced access provisioning time by 40 percent and accelerated software provisioning by about 80 percent for multiple teams. Earned an internship extension from 4 months to 8 months based on performance and project needs.",
-        technologies: [
-            "ReactJS",
-            "Python",
-            "Flask",
-            "Azure DevOps",
-            "ServiceNow",
-            "Azure App Services",
-            "Azure Key Vault",
-            "Oracle",
-            "Azure SQL",
-            "Angular",
-            ".NET",
-            "Power Apps",
-            "SQL"
-        ],
-        location: "Calgary, AB, Canada (On site)"
-    },
-    {
-        id: "exp5",
-        company: "Ovintiv",
-        role: "Software Engineering Intern",
-        date: "May 2026 - Aug 2026",
-        logo: "/images/work/OvintivLogo.png",
-        color: "#ea580c", // Deep orange (same as first Ovintiv)
-        whatIDid: "Given full freedom to architect my own software solution end to end, and built a platform that lets engineers create, manage, compare, predict, and forecast projected ultimate well costs across the company. Brought together raw data and machine learning models from across the organization, including regression tested variables, well data, and SMS and material data, to generate month over month ultimate cost predictions for every well as variables change over time. Built with Oracle databases, R and R Shiny, and JavaScript. Designed the application architecture, database schema, authentication, and external integrations myself, along with a custom equation editor that works like a lean version of an Excel formula engine. Detailed projection tooling lets engineers adjust assumptions under different scenarios, and results are exported and saved into other internal applications across the company.",
-        impact: "Delivered a fully self architected forecasting platform that became a shared source of projected ultimate cost data for engineering teams, feeding predictions into other internal applications and replacing manual, spreadsheet driven cost projection work with scenario based forecasting. Saves 8 to 11 hours of employee work for every outlook produced on a set of wells. Improved data accuracy and confidence by centralizing everything into a single source of truth that always pulls the latest data, which keeps SMS, engineering and operations, and scheduling teams aligned on the same numbers. Highly flexible projection and comparison tooling also made decision making faster and better informed.",
-        technologies: [
-            "R",
-            "R Shiny",
-            "JavaScript",
-            "Oracle",
-            "SQL",
-            "Regression Modeling",
-            "Software Architecture",
-            "Database Design",
-            "Authentication",
-            "API Integrations"
-        ],
-        location: "Calgary, AB, Canada"
-    },
-    {
-        id: "exp7",
+        id: "exp2",
         company: "Data Science and Machine Learning Club (DSMLC)",
-        role: "Vice President of Internal",
-        date: "May 2026 - Present",
+        role: "Vice President of Outreach (previously Junior VP of Marketing)",
+        date: "Nov 2023 - Apr 2025",
         logo: "/images/work/DSMLCLogo.png",
-        color: "#facc15", // Yellow (same as first DSMLC)
-        whatIDid: "Rejoined the club after a year away on exchange and building MIND, this time leading the internal side of the organization. I oversee the marketing, events, and operations departments, set direction and strategy across them, and decide which projects the club takes on and how they get executed. The first big build under my tenure was an end to end data hub for all of the club's data logistics, covering attendance tracking, engagement and conversion across our different platforms, and the reporting that comes out of it, so decisions get made on real numbers instead of guesses. Right now I am putting together the most packed academic year the club has run.",
-        impact: "Gave the club a single place to see how it is actually performing, replacing scattered manual tracking with real attendance and platform conversion data. Currently targeting 15 to 20 events for the year, along with the most industry guests and the most sponsorships the club has ever brought in.",
-        technologies: [
-            "Data Pipelines",
-            "Analytics",
-            "Dashboarding"
-        ],
-        skills: [
-            "Leadership",
-            "Strategy",
-            "Team Management",
-            "Event Operations",
-            "Marketing",
-            "Sponsorship"
-        ],
+        color: "#facc15", // Yellow (same as other DSMLC)
+        whatIDid: "Managed club finances, sponsorships, and external partnerships. Built relationships with 30 plus industry professionals and coordinated sponsorship outreach. Organized the club's largest event for student industry networking and showcases. Delivered workshops on SciPy, NumPy, and data visualization. Ran LinkedIn and Instagram campaigns to increase reach and engagement.",
+        impact: "Secured about 5,500 dollars in sponsorships. Produced the club's largest event with 150 plus attendees and 20 plus company participants. Strengthened technical skills for 40 plus students through workshops and expanded campus awareness.",
+        technologies: ["Python", "SciPy", "NumPy", "Power BI"],
         location: "University of Calgary, Calgary, AB (Hybrid)"
     },
     {
-        id: "exp6",
-        company: "Deloitte",
-        role: "Incoming Audit and Assurance Intern",
-        date: "Sept 2026 - Dec 2026",
-        logo: "/images/work/DeloitteLogo.png",
-        color: "#22c55e", // Deloitte green
-        whatIDid: "Will support financial statement audits, internal controls testing, and compliance reviews for clients across multiple industries. Super excited to get a feel of the professional financial services industry!",
-        impact: "Incoming role focused on building audit, assurance, and client service experience in a professional services environment.",
+        id: "exp1",
+        company: "American Eagle Outfitters",
+        role: "Sales Ambassador",
+        date: "May 2023 - Sept 2025",
+        logo: "/images/work/AEOLogo.png",
+        color: "#ffffff", // White
+        whatIDid: "Optimized weekly stock organization and floor sets to improve product visibility and streamline inventory workflows. Assisted roughly 30 to 60 customers per shift, delivered strong customer service, and handled 40 to 80 transactions per shift with consistent accuracy. Maintained professionalism during high tension situations and helped de escalate conflicts to keep store operations smooth.",
+        impact: "Improved purchase conversions and reduced inventory processing time by about 10 percent. Supported strong customer satisfaction through high volume service and reliable checkout accuracy.",
         technologies: [],
-        skills: [
-            "Audit and Assurance",
-            "Financial Statement Audits",
-            "Internal Controls Testing",
-            "Compliance Reviews",
-            "Client Service"
-        ],
-        location: "Calgary, AB, Canada"
+        skills: ["Customer Service", "Inventory Management", "Conflict Resolution", "Transaction Processing", "Retail Operations"],
+        location: "Calgary, AB, Canada (On site)"
     }
 ];
 
@@ -210,14 +211,14 @@ const workExperiences: WorkExperience[] = [
  *    - Uses: (rowIndex * (100 / workExperiences.length)) + (100 / workExperiences.length / 2)
  *    - Automatically adjusts for any number of experiences
  * 
- * CURRENT PATTERN FOR 7 EXPERIENCES:
- * Row 0 (top):    Slot 1 (left)  - American Eagle
- * Row 1:          Slot 7 (right) - DSMLC (VP Outreach)
- * Row 2:          Slot 3 (left)  - MIND
- * Row 3:          Slot 9 (right) - Ovintiv SDE
- * Row 4:          Slot 5 (left)  - Ovintiv SWE
- * Row 5:          Slot 12 (right) - DSMLC (VP Internal)
- * Row 6 (bottom): Slot 13 (left) - Deloitte
+ * CURRENT PATTERN FOR 7 EXPERIENCES (latest at top):
+ * Row 0 (top):    Slot 1 (left)  - Deloitte
+ * Row 1:          Slot 7 (right) - DSMLC (VP Internal)
+ * Row 2:          Slot 3 (left)  - Ovintiv SWE
+ * Row 3:          Slot 9 (right) - Ovintiv Software Development Student
+ * Row 4:          Slot 5 (left)  - MIND
+ * Row 5:          Slot 12 (right) - DSMLC (VP Outreach)
+ * Row 6 (bottom): Slot 13 (left) - American Eagle
  * ============================================================================
  */
 const getSlotForIndex = (index: number): number => {
