@@ -952,26 +952,128 @@
     }
 }
 
-/* Hide hamburger button on desktop */
-@media screen and (min-width: 769px) and (min-height: 541px) {
+/* Desktop floating glass sidebar.
+   Also covers short-but-wide windows that are not the phone layout.
+   Phone landscape stays in the mobile query (max-width 960px and max-height 540px). */
+@media screen and (min-width: 961px),
+       screen and (min-width: 769px) and (min-height: 541px) {
     .hamburger-button {
         display: none !important;
     }
 
-    /* Ensure sidebar content uses grid layout on desktop */
+    .page-container {
+        display: block !important;
+        position: relative;
+    }
+
+    .sidebar-container {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        width: 0 !important;
+        height: 0 !important;
+        overflow: visible !important;
+        z-index: 40;
+        pointer-events: none;
+    }
+
+    .sidebar {
+        pointer-events: auto !important;
+        position: fixed !important;
+        left: 14px !important;
+        top: 50% !important;
+        transform: translateY(-50%);
+        height: 95vh !important;
+        height: 95dvh !important;
+        width: 58px !important;
+        border-radius: 999px;
+        padding: 22px 0 !important;
+        box-sizing: border-box !important;
+        background-color: rgba(11, 2, 2, 0.72) !important;
+        -webkit-backdrop-filter: blur(18px);
+        backdrop-filter: blur(18px);
+        border: 1px solid rgba(180, 90, 60, 0.22);
+        box-shadow:
+            0 10px 40px rgba(0, 0, 0, 0.35),
+            inset 0 1px 0 rgba(255, 200, 160, 0.08);
+        z-index: 40 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        grid-template-rows: none !important;
+        overflow: visible !important;
+    }
+
+    .sidebar .sidebar-logo {
+        flex-shrink: 0;
+        margin-top: 6px;
+    }
+
+    .content-container {
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    /* Card pages keep a gutter so text clears the pill. Background still paints full width. */
+    .content-container.gradient:not(.home-city) {
+        padding-left: 5.5rem !important;
+        box-sizing: border-box;
+    }
+
     .sidebar-content {
-        display: grid !important;
+        display: flex !important;
+        flex-direction: column !important;
         position: static !important;
-        width: 50px !important;
-        height: 50% !important;
+        width: 100% !important;
+        height: auto !important;
+        flex: 1 1 auto;
         top: auto !important;
         left: auto !important;
-        flex-direction: unset !important;
-        padding: 0 !important;
+        align-items: center !important;
+        justify-content: space-evenly !important;
+        padding: 8px 0 16px !important;
+        background: transparent !important;
+        overflow: visible !important;
     }
 
     .sidebar-content.mobile-open {
-        display: grid !important;
+        display: flex !important;
+    }
+
+    .sidebar-content .nav-home { order: 1; }
+    .sidebar-content .nav-work { order: 2; }
+    .sidebar-content .nav-projects { order: 3; }
+    .sidebar-content .nav-skills { order: 4; }
+    .sidebar-content .nav-me { order: 5; }
+    .sidebar-content .nav-contact { order: 6; }
+    .sidebar-content .nav-room { order: 7; }
+}
+
+/* Short wide desktops: keep every icon inside the pill instead of spilling onto the scene. */
+@media screen and (min-width: 961px) and (max-height: 640px) {
+    .sidebar {
+        padding: 8px 0 !important;
+        overflow: hidden !important;
+    }
+
+    .sidebar .sidebar-logo {
+        margin-top: 2px;
+    }
+
+    .sidebar .sidebar-logo img {
+        width: 28px !important;
+        height: 28px !important;
+    }
+
+    .sidebar-content {
+        min-height: 0;
+        padding: 2px 0 6px !important;
+    }
+
+    .sidebar-item img {
+        width: 22px !important;
+        height: 22px !important;
     }
 }
 

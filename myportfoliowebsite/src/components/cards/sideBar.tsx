@@ -43,7 +43,7 @@ export default function SideBarComponent():JSX.Element {
 
 
             {/* Home */}
-            <Link href= "/" onClick={closeMobileMenu}>
+            <Link href= "/" className="nav-home" onClick={closeMobileMenu}>
                 <div 
                     className={"sidebar-item"} 
                     onMouseEnter={() => setHoveredItem('home')}
@@ -87,7 +87,7 @@ export default function SideBarComponent():JSX.Element {
 
 
             {/* About Me */}
-            <Link href= "/about" onClick={closeMobileMenu}>
+            <Link href= "/about" className="nav-me" onClick={closeMobileMenu}>
                 <div 
                     className={"sidebar-item"} 
                     onMouseEnter={() => setHoveredItem('about')}
@@ -131,7 +131,7 @@ export default function SideBarComponent():JSX.Element {
 
 
             {/* Room */}
-            <Link href= "/room">
+            <Link href= "/room" className="nav-room">
                 <div 
                     className={"sidebar-item room-item"} 
                     onMouseEnter={() => setHoveredItem('room')}
@@ -175,7 +175,7 @@ export default function SideBarComponent():JSX.Element {
 
 
             {/* Skills */}
-            <Link href= "/skills" onClick={closeMobileMenu}>
+            <Link href= "/skills" className="nav-skills" onClick={closeMobileMenu}>
                 <div 
                     className={"sidebar-item"} 
                     onMouseEnter={() => setHoveredItem('skills')}
@@ -221,7 +221,7 @@ export default function SideBarComponent():JSX.Element {
 
 
             {/* Projects */}
-            <Link href= "/projects" onClick={closeMobileMenu}>
+            <Link href= "/projects" className="nav-projects" onClick={closeMobileMenu}>
                 <div 
                     className={"sidebar-item"}
                     onMouseEnter={() => setHoveredItem('projects')}
@@ -267,7 +267,7 @@ export default function SideBarComponent():JSX.Element {
 
 
             {/* Work */}
-            <Link href="/work" onClick={closeMobileMenu}>
+            <Link href="/work" className="nav-work" onClick={closeMobileMenu}>
                 <div 
                     className={"sidebar-item"}
                     onMouseEnter={() => setHoveredItem('work')}
@@ -311,7 +311,7 @@ export default function SideBarComponent():JSX.Element {
 
 
             {/* Contact */}
-            <Link href="/contact" onClick={closeMobileMenu}>
+            <Link href="/contact" className="nav-contact" onClick={closeMobileMenu}>
                 <div 
                     className={"sidebar-item"}
                     onMouseEnter={() => setHoveredItem('contact')}
